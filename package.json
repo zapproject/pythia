@@ -1,0 +1,22 @@
+{
+  "name": "pythia",
+  "version": "1.0.0",
+  "description": "Πυθία",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zapproject/pythia.git"
+  },
+  "keywords": [
+    "oracle"
+  ],
+  "author": "Eric Manganaro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zapproject/pythia/issues"
+  },
+  "homepage": "https://github.com/zapproject/pythia#readme"
+}
