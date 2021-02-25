@@ -1,0 +1,53 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "name": "_symbol",
+          "type": "string"
+        }
+      ],
+      "name": "create",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "networks": {
+    "1": {
+      "events": {},
+      "links": {},
+      "address": "0xe13fef4c8e75c12f9706e8bdf28fe847ce99cb42",
+      "transactionHash": "0x5facbb0440c61ad0ade908876cc079dbf1b85d21ebdd63550539fc16229d9f04"
+    },
+    "42": {
+      "events": {},
+      "links": {},
+      "address": "0x23346f0f4e5be90aa65237c18e402d566689107f",
+      "transactionHash": "0x1cee922d4702b2cca046b894a8a1a085c63a6b8173666502fda11b871ea046d6"
+    },
+    "1547270880032": {
+      "events": {},
+      "links": {},
+      "address": "0x0065b089cfa9f524684c80ae1d045403e155d088",
+      "transactionHash": "0x61b08cdcda5b9c9b8097b88d0123f9aab0a6381c927439d191aa318114f3e5ec"
+    }
+  }
+}
