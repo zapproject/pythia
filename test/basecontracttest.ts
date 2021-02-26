@@ -1,3 +1,6 @@
 import { BaseContract } from '../BaseContract/basecontract';
 
-console.log(BaseContract)
+import { join } from 'path';
+
+import { ZapRegistry } from '../Registry/registry';
+
