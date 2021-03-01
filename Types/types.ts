@@ -46,7 +46,7 @@ export interface BaseContractType {
     contract?: any,
     coordinator?: string,
     address?: string,
-    ethers?: any
+    ethersjs?: any
 }
 
 export interface NetworkProviderOptions {

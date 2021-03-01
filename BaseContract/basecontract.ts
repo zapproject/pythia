@@ -5,7 +5,8 @@ import { BaseContractType } from '../Types/types';
 
 import { Utils } from './utils';
 
-import { ethers } from 'ethers';
+// import { ethers } from 'ethers';
+const ethers = require('ethers')
 
 export class BaseContract {
     provider: any;
@@ -35,7 +36,7 @@ export class BaseContract {
             networkProvider,
             coordinator,
             address,
-            ethers
+            ethersjs
         }: BaseContractType) {
 
         let coorArtifact;
@@ -53,7 +54,9 @@ export class BaseContract {
                 coorArtifact = artifacts['ZAPCOORDINATOR'];
             }
 
-            this.provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+            // this.provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
+            this.provider = ethers.getDefaultProvider('http://localhost:8545')
+            console.log(this.provider)
 
             this.networkId = networkId || 1;
             this.coordinator = new this.provider.Contract(

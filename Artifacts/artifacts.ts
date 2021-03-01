@@ -12,5 +12,3 @@ export const Artifacts: { [index: string]: any } = {
     'ZAPCOORDINATOR': require('./contracts/ZapCoordinator.json'),
     'TOKENDOTFACTORY': require('./contracts/TokenDotFactory.json')
 };
-
-console.log(Artifacts['DISPATCH'])
