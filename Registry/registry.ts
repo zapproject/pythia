@@ -59,17 +59,18 @@ export class ZapRegistry extends BaseContract {
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async initiateProvider({ public_key, title, from, gas = DEFAULT_GAS }: InitProvider, cb?: TransactionCallback): Promise<txid> {
-        const promiEvent = this.contract.methods.initiateProvider(
+    async initiateProvider({ public_key, title, from }: InitProvider, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.initiateProvider(
 
             ethers.BigNumber.from(public_key).toString(),
 
             ethers.utils.formatBytes32String(title))
-            .send({ from, gas });
-        if (cb) {
-            promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
-            promiEvent.on('error', (error: any) => cb(error));
-        }
+
+        // if (cb) {
+        //     promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
+        //     promiEvent.on('error', (error: any) => cb(error));
+        // }
 
         return promiEvent;
     }

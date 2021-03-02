@@ -61,7 +61,7 @@ export class BaseContract {
             this.coordinator = new ethers.Contract(
                 coordinator || coorArtifact.networks[this.networkId].address,
                 coorArtifact.abi,
-                this.provider
+                
             );
 
             this.contract = undefined;
