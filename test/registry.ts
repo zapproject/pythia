@@ -30,11 +30,11 @@ describe('Registry Test', () => {
             networkProvider: HardhatProvider
         };
 
-    it('should be able to create registryWrapper', async () => {
+    // it('should be able to create registryWrapper', async () => {
 
 
-        new ZapRegistry(options)
+    //     test = new ZapRegistry(options)
 
-    })
+    // })
 
 });
