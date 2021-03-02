@@ -44,6 +44,7 @@ export class BaseContract {
         this.name = artifactName;
 
         try {
+
             if (!artifactsDir) {
                 this.artifact = Artifacts[artifactName];
                 coorArtifact = Artifacts['ZAPCOORDINATOR'];
@@ -64,10 +65,10 @@ export class BaseContract {
                 this.provider
             );
 
-            console.log(this.coordinator.db())
-
             this.contract = undefined;
+
             if (address) {
+
                 this.address = address;
             }
             else {
@@ -78,7 +79,8 @@ export class BaseContract {
                     .catch(console.error);
             }
             else {
-                this.contract = new this.provider.Contract(this.artifact.abi, this.address);
+
+                this.contract = new ethers.Contract(this.address, this.artifact.abi);
             }
         } catch (err) {
             throw err;
@@ -87,7 +89,9 @@ export class BaseContract {
 
     async getContract() {
         const contractAddress = await this.coordinator.getContract(this.name.toUpperCase()).call().valueOf();
+       
         this.contract = new this.provider.Contract(this.artifact.abi, contractAddress);
+
         return contractAddress;
     }
 
