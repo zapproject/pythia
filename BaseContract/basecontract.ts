@@ -10,7 +10,7 @@ const ethers = require('ethers')
 
 export class BaseContract {
     provider: any;
-    ethers: any;
+    ethersjs: any;
     contract: any;
     networkId: number;
     coordinator: any;
@@ -54,15 +54,17 @@ export class BaseContract {
                 coorArtifact = artifacts['ZAPCOORDINATOR'];
             }
 
-            // this.provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
-            this.provider = ethers.getDefaultProvider('http://localhost:8545')
-            console.log(this.provider)
+            this.provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
 
             this.networkId = networkId || 1;
-            this.coordinator = new this.provider.Contract(
+
+            this.coordinator = new ethers.Contract(
+                coordinator || coorArtifact.networks[this.networkId].address,
                 coorArtifact.abi,
-                coordinator || coorArtifact.networks[this.networkId].address
+                this.provider
             );
+
+            console.log(this.coordinator.db())
 
             this.contract = undefined;
             if (address) {
