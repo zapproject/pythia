@@ -5,8 +5,7 @@ import { BaseContractType } from '../Types/types';
 
 import { Utils } from './utils';
 
-// import { ethers } from 'ethers';
-const ethers = require('ethers')
+const ethers = require('ethers');
 
 export class BaseContract {
     provider: any;

@@ -32,8 +32,12 @@ describe('Registry Test', () => {
 
     it('Should be able to create registryWrapper', async () => {
 
-        expect(new ZapRegistry(options)).to.be.ok
+        registryWrapper = new ZapRegistry(options);
 
-    })
+        console.log(registryWrapper)
+
+        expect(registryWrapper).to.be.ok;
+
+    });
 
 });
