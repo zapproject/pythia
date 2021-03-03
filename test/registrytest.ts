@@ -19,7 +19,7 @@ describe('Registry Test', () => {
 
     let hardhatHttpProvider: any;
     let hardhatAccounts: any;
-    let signer: any;
+    let signerOne: any
 
     let accounts: Array<string> = [],
         HardhatServer: any,
@@ -34,16 +34,19 @@ describe('Registry Test', () => {
             networkProvider: HardhatProvider
         };
 
+    beforeEach(async () => {
 
-    // beforeEach(async () => {
+        hardhatHttpProvider = new ethers.providers.JsonRpcProvider(options.networkProvider);
 
-    //     hardhatHttpProvider = new ethers.providers.JsonRpcProvider(options.networkProvider);
+        hardhatAccounts = await hardhatHttpProvider.listAccounts();
 
-    //     hardhatAccounts = await hardhatHttpProvider.listAccounts();
+        signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
 
-    //     signer = await hardhatHttpProvider.getSigner(hardhatAccounts[0])
+    })
 
-    // })
+    after(() => {
+        console.log('Done running Registry tests');
+    });
 
     it('Should be able to create registryWrapper', async () => {
 
@@ -55,21 +58,18 @@ describe('Registry Test', () => {
 
     it('Should initiate provider in zap registry contract', async () => {
 
-
-        let provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
-
-        let accounts = await provider.listAccounts();
-
-        let signer = await provider.getSigner(accounts[0])
-
-        registryWrapper = registryWrapper.contract.connect(signer)
+        registryWrapper = registryWrapper.contract.connect(signerOne);
 
         const tx = await registryWrapper.initiateProvider(
             testProvider.pubkey,
             ethers.utils.formatBytes32String(testProvider.title)
         )
-
-
+            .then((txId: object) => {
+                expect(txId).to.be.a('object')
+            })
+            .catch((err: any) => {
+                return err;
+            })
     });
 
 });
