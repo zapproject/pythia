@@ -61,7 +61,7 @@ export class BaseContract {
             this.coordinator = new ethers.Contract(
                 coordinator || coorArtifact.networks[this.networkId].address,
                 coorArtifact.abi,
-                
+                this.provider
             );
 
             this.contract = undefined;
@@ -88,7 +88,7 @@ export class BaseContract {
 
     async getContract() {
         const contractAddress = await this.coordinator.getContract(this.name.toUpperCase()).call().valueOf();
-       
+
         this.contract = new this.provider.Contract(this.artifact.abi, contractAddress);
 
         return contractAddress;
@@ -102,4 +102,3 @@ export class BaseContract {
         return await this.contract.owner().call().valueOf();
     }
 }
-

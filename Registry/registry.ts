@@ -59,7 +59,7 @@ export class ZapRegistry extends BaseContract {
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async initiateProvider({ public_key, title, from }: InitProvider, cb?: TransactionCallback): Promise<txid> {
+    async initiateProvider({ public_key, title }: InitProvider, cb?: TransactionCallback): Promise<txid> {
 
         const promiEvent = this.contract.initiateProvider(
 

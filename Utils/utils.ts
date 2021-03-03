@@ -1,5 +1,7 @@
 import { Curve } from '../Curve/curve';
 
+const ethers = require('ethers');
+
 export const TEST_CURVE = [3, 0, 2, 1, 1000000000000000000];
 
 export const testZapProvider: any = {
