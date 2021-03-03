@@ -9,6 +9,8 @@ import {
     Filter, txid, address, NetworkProviderOptions, DEFAULT_GAS, NULL_ADDRESS, TransactionCallback
 } from '../Types/types';
 
+import web3 from 'web3-utils'
+
 const ethers = require('ethers');
 
 /**
@@ -65,12 +67,13 @@ export class ZapRegistry extends BaseContract {
 
             ethers.BigNumber.from(public_key).toString(),
 
-            ethers.utils.formatBytes32String(title))
+            ethers.utils.formatBytes32String(title)
+        )
 
-        // if (cb) {
-        //     promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
-        //     promiEvent.on('error', (error: any) => cb(error));
-        // }
+        if (cb) {
+            promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
+            promiEvent.on('error', (error: any) => cb(error));
+        }
 
         return promiEvent;
     }

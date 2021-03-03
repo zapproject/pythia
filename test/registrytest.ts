@@ -64,10 +64,11 @@ describe('Registry Test', () => {
 
         registryWrapper = registryWrapper.contract.connect(signer)
 
-        const tx = await registryWrapper.initiateProvider({
-            public_key: testProvider.pubkey,
-            title: testProvider.title,
-        })
+        const tx = await registryWrapper.initiateProvider(
+            testProvider.pubkey,
+            ethers.utils.formatBytes32String(testProvider.title)
+        )
+
 
     });
 
