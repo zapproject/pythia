@@ -12,6 +12,7 @@ import {
     HardhatProvider
 }
     from '../Utils/utils';
+import { sign } from 'crypto';
 
 const expect = require('chai').expect;
 
@@ -57,16 +58,22 @@ describe('Registry Test', () => {
     });
 
     it('Should initiate provider in zap registry contract', async () => {
-
+        let tx: any;
         registryWrapper = registryWrapper.contract.connect(signerOne);
 
-        const tx = await registryWrapper.initiateProvider(
-            testProvider.pubkey,
-            ethers.utils.formatBytes32String(testProvider.title)
-        );
+        try {
+            tx = await registryWrapper.initiateProvider(
+                testProvider.pubkey,
+                ethers.utils.formatBytes32String(testProvider.title)
+            )
 
-        // Check if the initiateProvider transaction returns an object
-        expect(tx).to.be.a('object');
+            // Check if the initiateProvider transaction returns an object
+            expect(tx).to.be.a('object');
+
+        } catch (err) {
+
+            console.log('Provider is already initiated')
+        }
 
         expect(registryWrapper).to.include.keys('filters');
 
@@ -79,11 +86,40 @@ describe('Registry Test', () => {
 
         const title = await registryWrapper.getProviderTitle(signerOne._address);
 
-        expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title))
+        expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title));
 
+        const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
 
+        expect(parseInt(pubkey)).to.be.equal(testProvider.pubkey);
 
     });
 
+    it('Should initiate Provider curve  with 0x0 broker in zap registry contract', async () => {
+
+        let tx: any;
+
+        const thisCurve = testZapProvider.curve;
+
+        try {
+
+            tx = await registryWrapper.initiateProviderCurve(
+                ethers.utils.formatBytes32String(testZapProvider.endpoint),
+                testZapProvider.curve.values,
+                '0x0000000000000000000000000000000000000000'
+            )
+
+        } catch (err) {
+
+            console.log('Provider curve is already initiated')
+        }
+
+        const receipt = await tx.wait();
+
+        expect(receipt).to.include.keys('events');
+
+        expect(receipt.events).to.include.keys('NewCurve');
+
+
+    });
 
 });
