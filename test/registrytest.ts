@@ -98,8 +98,6 @@ describe('Registry Test', () => {
 
         let tx: any;
 
-        const thisCurve = testZapProvider.curve;
-
         try {
 
             tx = await registryWrapper.initiateProviderCurve(
@@ -115,8 +113,6 @@ describe('Registry Test', () => {
 
         const receipt = await tx.wait();
 
-        console.log(receipt)
-
         expect(receipt).to.include.keys('events');
 
         // expect(Object.values(receipt.events[0])).to.include.keys('NewCurve');
@@ -131,7 +127,13 @@ describe('Registry Test', () => {
 
         expect(args.provider).to.equal(signerOne._address);
 
+        const getTxCurve = args.curve.map((num: any) => parseInt(num));
+
+        const testCurve = testProvider.curve.values;
+
         expect(testZapProvider.endpoint).to.equal(ethers.utils.parseBytes32String(args.endpoint));
+
+        expect(testCurve).to.eql(getTxCurve);
 
 
 
