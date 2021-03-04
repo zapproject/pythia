@@ -105,7 +105,7 @@ describe('Registry Test', () => {
             tx = await registryWrapper.initiateProviderCurve(
                 ethers.utils.formatBytes32String(testZapProvider.endpoint),
                 testZapProvider.curve.values,
-                '0x0000000000000000000000000000000000000000'
+                testProvider.broker
             )
 
         } catch (err) {
@@ -127,6 +127,9 @@ describe('Registry Test', () => {
 
         expect(args).to.include.keys('provider', 'endpoint', 'curve', 'broker');
 
+        expect(args.broker).to.equal(testProvider.broker);
+
+        expect(args.provider).to.equal(signerOne._address);
 
 
     });
