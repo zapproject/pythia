@@ -92,7 +92,7 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string>} Returns a Promise that will eventually resolve into a title string
      */
     async getProviderTitle(provider: address): Promise<string> {
-        const title = await this.contract.methods.getProviderTitle(provider).call();
+        const title = await this.contract.getProviderTitle(provider);
         return ethers.utils.parseBytes32String(title);
     }
 

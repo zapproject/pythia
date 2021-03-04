@@ -72,7 +72,15 @@ describe('Registry Test', () => {
 
         expect(registryWrapper.filters).to.include.keys('NewProvider');
 
-        expect(registryWrapper.filters.NewProvider()).to.include.keys('topics');
+        expect(registryWrapper.filters.NewProvider(
+            signerOne._address,
+            ethers.utils.formatBytes32String(testProvider.title)
+        )).to.include.keys('topics');
+
+        const title = await registryWrapper.getProviderTitle(signerOne._address);
+
+        expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title))
+
 
 
     });
