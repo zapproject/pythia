@@ -119,8 +119,14 @@ describe('Registry Test', () => {
 
         expect(receipt).to.include.keys('events');
 
+        // expect(Object.values(receipt.events[0])).to.include.keys('NewCurve');
 
-        // expect(receipt.events).to.include.keys('NewCurve');
+        expect(receipt.events[0]).to.include.keys('args');
+
+        const args = receipt.events[0].args;
+
+        expect(args).to.include.keys('provider', 'endpoint', 'curve', 'broker');
+
 
 
     });
