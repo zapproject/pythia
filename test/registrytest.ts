@@ -12,6 +12,7 @@ import {
     HardhatProvider
 }
     from '../Utils/utils';
+
 import { sign } from 'crypto';
 
 const expect = require('chai').expect;
@@ -21,6 +22,8 @@ describe('Registry Test', () => {
     let hardhatHttpProvider: any;
     let hardhatAccounts: any;
     let signerOne: any
+    let signerTwo: any
+    let signerThree: any
 
     let accounts: Array<string> = [],
         HardhatServer: any,
@@ -43,6 +46,10 @@ describe('Registry Test', () => {
 
         signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
 
+        signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
+
+        signerThree = await hardhatHttpProvider.getSigner(hardhatAccounts[2]);
+
     })
 
     after(() => {
@@ -60,11 +67,9 @@ describe('Registry Test', () => {
 
     it('Should initiate provider in zap registry contract', async () => {
 
-        let tx: any;
-
         registryWrapper = registryWrapper.contract.connect(signerOne);
 
-        tx = await registryWrapper.initiateProvider(
+        const tx = await registryWrapper.initiateProvider(
             testProvider.pubkey,
             ethers.utils.formatBytes32String(testProvider.title)
         )
@@ -146,4 +151,26 @@ describe('Registry Test', () => {
 
     });
 
-});
+
+    it('Should initiate Provider curve with valid broker address in zap registry contract', async () => {
+
+        registryWrapper = registryWrapper.connect(signerTwo)
+
+        const tx = await registryWrapper.initiateProvider(
+            testZapProvider.pubkey,
+            ethers.utils.formatBytes32String(testZapProvider.title),
+        );
+
+        const receipt = await tx.wait();
+
+        const initCurveTx = await registryWrapper.initiateProviderCurve(
+            ethers.utils.formatBytes32String(testZapProvider.endpoint),
+            testZapProvider.curve.values,
+            signerThree._address,
+        )
+
+
+    });
+
+
+})
