@@ -46,6 +46,7 @@ describe('Registry Test', () => {
     })
 
     after(() => {
+
         console.log('Done running Registry tests');
     });
 
@@ -58,22 +59,17 @@ describe('Registry Test', () => {
     });
 
     it('Should initiate provider in zap registry contract', async () => {
+
         let tx: any;
+
         registryWrapper = registryWrapper.contract.connect(signerOne);
 
-        try {
-            tx = await registryWrapper.initiateProvider(
-                testProvider.pubkey,
-                ethers.utils.formatBytes32String(testProvider.title)
-            )
+        tx = await registryWrapper.initiateProvider(
+            testProvider.pubkey,
+            ethers.utils.formatBytes32String(testProvider.title)
+        )
 
-            // Check if the initiateProvider transaction returns an object
-            expect(tx).to.be.a('object');
-
-        } catch (err) {
-
-            console.log('Provider is already initiated')
-        }
+        expect(tx).to.be.a('object');
 
         expect(registryWrapper).to.include.keys('filters');
 
@@ -98,24 +94,17 @@ describe('Registry Test', () => {
 
         let tx: any;
 
-        try {
-
-            tx = await registryWrapper.initiateProviderCurve(
-                ethers.utils.formatBytes32String(testZapProvider.endpoint),
-                testZapProvider.curve.values,
-                testProvider.broker
-            )
-
-        } catch (err) {
-
-            console.log('Provider curve is already initiated')
-        }
+        tx = await registryWrapper.initiateProviderCurve(
+            ethers.utils.formatBytes32String(testZapProvider.endpoint),
+            testZapProvider.curve.values,
+            testProvider.broker
+        );
 
         const receipt = await tx.wait();
 
         expect(receipt).to.include.keys('events');
 
-        // expect(Object.values(receipt.events[0])).to.include.keys('NewCurve');
+        expect(receipt.events[0].event).to.equal('NewCurve');
 
         expect(receipt.events[0]).to.include.keys('args');
 
@@ -135,7 +124,25 @@ describe('Registry Test', () => {
 
         expect(testCurve).to.eql(getTxCurve);
 
+    });
 
+    it('Should get all provider params', async () => {
+
+        const params = await registryWrapper.getAllProviderParams(signerOne._address);
+
+        console.log(params)
+
+    });
+
+    it('Should set new title', async () => {
+
+        const title = ethers.utils.formatBytes32String('NEWTITLE');
+
+        await registryWrapper.setProviderTitle(title);
+
+        const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
+
+        expect(newTitle).to.equal(title);
 
     });
 
