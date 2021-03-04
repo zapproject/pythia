@@ -131,6 +131,9 @@ describe('Registry Test', () => {
 
         expect(args.provider).to.equal(signerOne._address);
 
+        expect(testZapProvider.endpoint).to.equal(ethers.utils.parseBytes32String(args.endpoint));
+
+
 
     });
 
