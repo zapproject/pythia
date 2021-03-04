@@ -63,13 +63,19 @@ describe('Registry Test', () => {
         const tx = await registryWrapper.initiateProvider(
             testProvider.pubkey,
             ethers.utils.formatBytes32String(testProvider.title)
-        )
-            .then((txId: object) => {
-                expect(txId).to.be.a('object')
-            })
-            .catch((err: any) => {
-                return err;
-            })
+        );
+
+        // Check if the initiateProvider transaction returns an object
+        expect(tx).to.be.a('object');
+
+        expect(registryWrapper).to.include.keys('filters');
+
+        expect(registryWrapper.filters).to.include.keys('NewProvider');
+
+        expect(registryWrapper.filters.NewProvider()).to.include.keys('topics');
+
+
     });
+
 
 });

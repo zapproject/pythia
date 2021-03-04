@@ -9,8 +9,6 @@ import {
     Filter, txid, address, NetworkProviderOptions, DEFAULT_GAS, NULL_ADDRESS, TransactionCallback
 } from '../Types/types';
 
-import web3 from 'web3-utils'
-
 const ethers = require('ethers');
 
 /**
