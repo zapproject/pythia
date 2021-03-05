@@ -169,8 +169,30 @@ describe('Registry Test', () => {
             signerThree._address,
         )
 
+    });
+
+    it('Should set endpoint endpointParams in zap registry contract', async () => {
+
+        registryWrapper = registryWrapper.connect(signerOne)
+
+        const result = await registryWrapper.setEndpointParams(
+            ethers.utils.formatBytes32String(testZapProvider.endpoint),
+            testZapProvider.endpoint_params.map((params: string) => ethers.utils.formatBytes32String(params)),
+        )
 
     });
 
+    it('Should clear endpoint', async () => {
+
+        await registryWrapper.clearEndpoint(
+            ethers.utils.formatBytes32String(testZapProvider.endpoint)
+        );
+
+        const clearedEndpoints = await registryWrapper.getProviderEndpoints(signerOne._address);
+
+        clearedEndpoints.forEach((endpoint: any) => expect(endpoint)
+            .to.equal('0x0000000000000000000000000000000000000000000000000000000000000000'));
+
+    });
 
 })
