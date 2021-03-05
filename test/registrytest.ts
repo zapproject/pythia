@@ -50,7 +50,7 @@ describe('Registry Test', () => {
 
         signerThree = await hardhatHttpProvider.getSigner(hardhatAccounts[2]);
 
-    })
+    });
 
     after(() => {
 
@@ -61,73 +61,96 @@ describe('Registry Test', () => {
 
         registryWrapper = new ZapRegistry(options);
 
+        registryWrapper = registryWrapper.contract.connect(signerOne);
+
         expect(registryWrapper).to.be.ok;
 
     });
 
     it('Should initiate provider in zap registry contract', async () => {
 
-        registryWrapper = registryWrapper.contract.connect(signerOne);
+        let initProviderTx: any;
 
-        const tx = await registryWrapper.initiateProvider(
-            testProvider.pubkey,
-            ethers.utils.formatBytes32String(testProvider.title)
-        )
+        try {
 
-        expect(tx).to.be.a('object');
+            initProviderTx = await registryWrapper.initiateProvider(
+                testProvider.pubkey,
+                ethers.utils.formatBytes32String(testProvider.title)
+            );
 
-        expect(registryWrapper).to.include.keys('filters');
+            const initProviderReceipt = await initProviderTx.wait();
 
-        expect(registryWrapper.filters).to.include.keys('NewProvider');
+            expect(initProviderReceipt).to.include.keys('events');
 
-        expect(registryWrapper.filters.NewProvider(
-            signerOne._address,
-            ethers.utils.formatBytes32String(testProvider.title)
-        )).to.include.keys('topics');
+            expect(initProviderReceipt.events[0].event).to.equal('NewProvider');
 
-        const title = await registryWrapper.getProviderTitle(signerOne._address);
+            expect(initProviderReceipt.events[0]).to.include.keys('args');
 
-        expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title));
+            const args = initProviderReceipt.events[0].args;
 
-        const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
+            expect(args).to.include.keys('provider', 'title');
 
-        expect(parseInt(pubkey)).to.be.equal(testProvider.pubkey);
+            expect(testZapProvider.title).to.equal(ethers.utils.parseBytes32String(args.title));
+
+            expect(args.provider).to.equal(signerOne._address);
+
+            const title = await registryWrapper.getProviderTitle(signerOne._address);
+
+            expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title));
+
+            const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
+
+            expect(parseInt(pubkey)).to.be.equal(testProvider.pubkey);
+
+        } catch (err) {
+
+            console.log(signerOne._address + ': ' + 'Is already initiated as a provider');
+
+        }
 
     });
 
     it('Should initiate Provider curve  with 0x0 broker in zap registry contract', async () => {
 
-        let tx: any;
+        let initProviderCurveTx: any;
 
-        tx = await registryWrapper.initiateProviderCurve(
-            ethers.utils.formatBytes32String(testZapProvider.endpoint),
-            testZapProvider.curve.values,
-            testProvider.broker
-        );
+        try {
 
-        const receipt = await tx.wait();
+            initProviderCurveTx = await registryWrapper.initiateProviderCurve(
 
-        expect(receipt).to.include.keys('events');
+                ethers.utils.formatBytes32String(testZapProvider.endpoint),
+                testZapProvider.curve.values,
+                testProvider.broker
+            );
 
-        expect(receipt.events[0].event).to.equal('NewCurve');
+            const receipt = await initProviderCurveTx.wait();
 
-        expect(receipt.events[0]).to.include.keys('args');
+            expect(receipt).to.include.keys('events');
 
-        const args = receipt.events[0].args;
+            expect(receipt.events[0].event).to.equal('NewCurve');
 
-        expect(args).to.include.keys('provider', 'endpoint', 'curve', 'broker');
+            expect(receipt.events[0]).to.include.keys('args');
 
-        expect(args.broker).to.equal(testProvider.broker);
+            const args = receipt.events[0].args;
 
-        expect(args.provider).to.equal(signerOne._address);
+            expect(args).to.include.keys('provider', 'endpoint', 'curve', 'broker');
 
-        const getTxCurve = args.curve.map((num: any) => parseInt(num));
+            expect(args.broker).to.equal(testProvider.broker);
 
-        const testCurve = testProvider.curve.values;
+            expect(args.provider).to.equal(signerOne._address);
 
-        expect(testZapProvider.endpoint).to.equal(ethers.utils.parseBytes32String(args.endpoint));
+            const getTxCurve = args.curve.map((num: any) => parseInt(num));
 
-        expect(testCurve).to.eql(getTxCurve);
+            const testCurve = testProvider.curve.values;
+
+            expect(testZapProvider.endpoint).to.equal(ethers.utils.parseBytes32String(args.endpoint));
+
+            expect(testCurve).to.eql(getTxCurve);
+
+        } catch (err: any) {
+
+            console.log(signerOne._address + ': ' + 'Curve is already initiated');
+        }
 
     });
 
@@ -156,18 +179,27 @@ describe('Registry Test', () => {
 
         registryWrapper = registryWrapper.connect(signerTwo)
 
-        const tx = await registryWrapper.initiateProvider(
-            testZapProvider.pubkey,
-            ethers.utils.formatBytes32String(testZapProvider.title),
-        );
+        let initProviderTwoTx: any
 
-        const receipt = await tx.wait();
+        try {
 
-        const initCurveTx = await registryWrapper.initiateProviderCurve(
-            ethers.utils.formatBytes32String(testZapProvider.endpoint),
-            testZapProvider.curve.values,
-            signerThree._address,
-        )
+            initProviderTwoTx = await registryWrapper.initiateProvider(
+                testZapProvider.pubkey,
+                ethers.utils.formatBytes32String(testZapProvider.title),
+            );
+
+            const receipt = await tx.wait();
+
+            const initCurveTx = await registryWrapper.initiateProviderCurve(
+                ethers.utils.formatBytes32String(testZapProvider.endpoint),
+                testZapProvider.curve.values,
+                signerThree._address,
+            );
+
+        } catch (err) {
+
+            console.log(signerTwo._address + ': ' + 'Provider and Curve is already initiated');
+        }
 
     });
 
