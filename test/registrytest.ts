@@ -188,7 +188,7 @@ describe('Registry Test', () => {
                 ethers.utils.formatBytes32String(testZapProvider.title),
             );
 
-            const receipt = await tx.wait();
+            const receipt = await initProviderTwoTx.wait();
 
             const initCurveTx = await registryWrapper.initiateProviderCurve(
                 ethers.utils.formatBytes32String(testZapProvider.endpoint),
