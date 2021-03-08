@@ -417,6 +417,9 @@
       "address": "0xde5491f774f0cb009abcea7326342e105dbb1b2e",
       "transactionHash": "0xb819d6a20075202ab57fcddee788140cc001ca0eb6f7ed3e6665f3f6991963b4"
     },
+    "31337": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    },
     "development": {
       "events": {},
       "links": {},

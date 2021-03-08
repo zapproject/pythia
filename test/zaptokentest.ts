@@ -13,6 +13,13 @@ const expect = require('chai').expect;
 
 describe('ZapToken Test', () => {
 
+    let hardhatHttpProvider: any;
+    let hardhatAccounts: any;
+    let signerOne: any
+    let signerTwo: any
+    let signerThree: any
+
+
     let accounts: Array<string> = [],
         HardhatServer: any,
         zapTokenWrapper: any,
@@ -25,18 +32,31 @@ describe('ZapToken Test', () => {
 
     const allocateAmount = '1000';
 
+    beforeEach(async () => {
+
+        hardhatHttpProvider = new ethers.providers.JsonRpcProvider(options.networkProvider);
+
+        hardhatAccounts = await hardhatHttpProvider.listAccounts();
+
+        signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+
+        signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
+
+        signerThree = await hardhatHttpProvider.getSigner(hardhatAccounts[2]);
+
+    });
+
     it('Should initiate wrapper', async () => {
 
-        zapTokenWrapper = new ZapToken({
-            networkId: options.network_id,
-            networkProvider: options.networkProvider
-        });
+        zapTokenWrapper = new ZapToken(options);
 
         console.log(zapTokenWrapper)
 
+        // zapTokenWrapper = zapTokenWrapper.contract.connect(signerOne);
+
         expect(zapTokenWrapper).to.be.ok;
 
-        // zapTokenOwner = await zapTokenWrapper.getContractOwner();
+        
     });
 
 
