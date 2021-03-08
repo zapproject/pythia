@@ -1,7 +1,5 @@
 import { ZapRegistry } from '../Registry/registry';
 
-import { BaseContract } from '../BaseContract/basecontract';
-
 import { join } from 'path';
 
 import { ethers } from 'ethers';
@@ -12,8 +10,6 @@ import {
     HardhatProvider
 }
     from '../Utils/utils';
-
-import { sign } from 'crypto';
 
 const expect = require('chai').expect;
 
@@ -28,12 +24,8 @@ describe('Registry Test', () => {
     let accounts: Array<string> = [],
         HardhatServer: any,
         registryWrapper: any,
-        ethersjs,
-        testArtifacts,
         testProvider = testZapProvider,
-        buildDir: string = join(__dirname, 'contracts'),
         options: any = {
-            artifactsDir: '',
             networkId: HardhatServerOptions.network_id,
             networkProvider: HardhatProvider
         };
@@ -61,7 +53,7 @@ describe('Registry Test', () => {
 
         registryWrapper = new ZapRegistry(options);
 
-        registryWrapper = registryWrapper.contract.connect(signerOne);
+        registryWrapper = registryWrapper.contract.connect(signerOne)
 
         expect(registryWrapper).to.be.ok;
 
@@ -151,14 +143,6 @@ describe('Registry Test', () => {
 
             console.log(signerOne._address + ': ' + 'Curve is already initiated');
         }
-
-    });
-
-    it('Should get all provider params', async () => {
-
-        const params = await registryWrapper.getAllProviderParams(signerOne._address);
-
-        console.log(params)
 
     });
 
