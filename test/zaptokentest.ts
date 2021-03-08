@@ -50,13 +50,12 @@ describe('ZapToken Test', () => {
 
         zapTokenWrapper = new ZapToken(options);
 
-        console.log(zapTokenWrapper)
+        zapTokenWrapper = zapTokenWrapper.contract.connect(signerOne);
 
-        // zapTokenWrapper = zapTokenWrapper.contract.connect(signerOne);
+        console.log(zapTokenWrapper)
 
         expect(zapTokenWrapper).to.be.ok;
 
-        
     });
 
 
