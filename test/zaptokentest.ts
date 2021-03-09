@@ -38,6 +38,8 @@ describe('ZapToken Test', () => {
 
         hardhatAccounts = await hardhatHttpProvider.listAccounts();
 
+        console.log(hardhatAccounts)
+
         signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
 
         signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
@@ -78,6 +80,12 @@ describe('ZapToken Test', () => {
 
     });
 
+    it('Should get balance of zapToken from wrapper', async () => {
+
+        const balance = await zapTokenWrapper.balanceOf(signerOne._address);
+
+        expect(balance).to.be.ok;
+    });
 
 });
 
