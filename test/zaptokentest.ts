@@ -48,17 +48,13 @@ describe('ZapToken Test', () => {
 
     it('Should initiate wrapper', async () => {
 
-        zapTokenWrapper = new ZapToken(options);
+        zapTokenWrapper = new ZapToken(options)
 
-        zapTokenWrapper = zapTokenWrapper.contract.connect(signerOne);
-
-        console.log(zapTokenWrapper)
+        zapTokenOwner = await zapTokenWrapper.getContractOwner();
 
         expect(zapTokenWrapper).to.be.ok;
 
     });
-
-
 
 });
 

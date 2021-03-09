@@ -1,4 +1,5 @@
 // Imports the contract JSON files
+import { Console } from 'node:console';
 import { Artifacts } from '../Artifacts/artifacts';
 
 import { BaseContractType } from '../Types/types';
@@ -87,11 +88,17 @@ export class BaseContract {
     }
 
     async getContract() {
-        const contractAddress = await this.coordinator.getContract(this.name.toUpperCase()).call().valueOf();
+        let hardhatHttpProvider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 
-        this.contract = new this.provider.Contract(this.artifact.abi, contractAddress);
+        let hardhatAccounts = await hardhatHttpProvider.listAccounts();
 
-        return contractAddress;
+        let signer = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+
+        let contractAddress = this.artifact.networks[this.networkId];
+
+        this.contract = new ethers.Contract(contractAddress.address, this.artifact.abi, signer);
+
+        return contractAddress.address;
     }
 
     /**
@@ -99,6 +106,17 @@ export class BaseContract {
      * @returns {Promise<string>} Returns a Promise that will eventually resolve into the address of this contract's owner.
      */
     async getContractOwner(): Promise<string> {
-        return await this.contract.owner().call().valueOf();
+
+        let hardhatHttpProvider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+
+        let hardhatAccounts = await hardhatHttpProvider.listAccounts();
+
+        let signer = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+
+        this.contract = this.contract.connect(signer)
+
+        return await this.contract.owner();
+
+        // return await this.contract.owner();
     }
 }
