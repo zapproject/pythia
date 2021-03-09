@@ -70,5 +70,14 @@ describe('ZapToken Test', () => {
 
     });
 
+    it('Should get zapToken owner', async () => {
+
+        const owner = await zapTokenWrapper.getContractOwner();
+
+        expect(owner).to.be.equal(signerOne._address);
+
+    });
+
+
 });
 
