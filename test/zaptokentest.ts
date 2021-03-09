@@ -38,8 +38,6 @@ describe('ZapToken Test', () => {
 
         hardhatAccounts = await hardhatHttpProvider.listAccounts();
 
-        console.log(hardhatAccounts)
-
         signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
 
         signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);

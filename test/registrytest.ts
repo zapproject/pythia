@@ -206,8 +206,7 @@ describe('Registry Test', () => {
 
         const clearedEndpoints = await registryWrapper.getProviderEndpoints(signerOne._address);
 
-        clearedEndpoints.forEach((endpoint: any) => expect(endpoint)
-            .to.equal('0x0000000000000000000000000000000000000000000000000000000000000000'));
+        expect(clearedEndpoints[0]).to.be.equal('0x0000000000000000000000000000000000000000000000000000000000000000');
 
     });
 
