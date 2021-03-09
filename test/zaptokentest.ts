@@ -56,5 +56,19 @@ describe('ZapToken Test', () => {
 
     });
 
+    it('Should initiate wrapper with coordinator ', async () => {
+
+        zapTokenWrapper = new ZapToken({
+            networkId: HardhatServerOptions.network_id,
+            networkProvider: HardhatProvider,
+            coordinator: zapTokenWrapper.coordinator.address
+        });
+
+        zapTokenOwner = await zapTokenWrapper.getContractOwner();
+
+        expect(zapTokenWrapper).to.be.ok;
+
+    });
+
 });
 
