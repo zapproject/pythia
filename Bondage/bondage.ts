@@ -53,8 +53,7 @@ export class ZapBondage extends BaseContract {
         const promiEvent = this.contract.methods.bond(
             provider,
             ethers.utils.formatBytes32String(endpoint),
-            ethers.utils.hexlify(dots))
-            .send({ from, gas, gasPrice }); // not sure if we keep this or not
+            ethers.utils.hexlify(dots));
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
@@ -88,8 +87,7 @@ export class ZapBondage extends BaseContract {
             subscriber,
             provider,
             ethers.utils.formatBytes32String(endpoint),
-            dots)
-            .send({ from, gas, gasPrice }); // not sure if this is neccessary
+            dots);
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
