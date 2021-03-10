@@ -54,8 +54,6 @@ describe('Registry Test', () => {
 
         registryWrapper = new ZapRegistry(options);
 
-        // registryWrapper = registryWrapper.contract.connect(signerOne)
-
         expect(registryWrapper).to.be.ok;
 
     });
@@ -64,48 +62,55 @@ describe('Registry Test', () => {
 
         let initProviderTx: any;
 
-        // try {
+        try {
 
-        initProviderTx = await registryWrapper.initiateProvider({
+            initProviderTx = await registryWrapper.initiateProvider({
 
-            public_key: testProvider.pubkey,
-            title: testProvider.title
+                public_key: testProvider.pubkey,
+                title: testProvider.title
 
-        }, (err: any, newProvider: string) =>
+            }, (err: any, newProvider: string) =>
 
-            expect(newProvider).to.be.a('string')
-        );
+                expect(newProvider).to.be.a('string')
+            );
 
+            const initProviderReceipt = await initProviderTx.wait();
 
-        // const initProviderReceipt = await initProviderTx.wait();
+            expect(initProviderReceipt).to.include.keys('events');
 
-        // expect(initProviderReceipt).to.include.keys('events');
+            expect(initProviderReceipt.events[0].event).to.equal('NewProvider');
 
-        // expect(initProviderReceipt.events[0].event).to.equal('NewProvider');
+            expect(initProviderReceipt.events[0]).to.include.keys('args');
 
-        // expect(initProviderReceipt.events[0]).to.include.keys('args');
+            const args = initProviderReceipt.events[0].args;
 
-        // const args = initProviderReceipt.events[0].args;
+            expect(args).to.include.keys('provider', 'title');
 
-        // expect(args).to.include.keys('provider', 'title');
+            expect(testZapProvider.title).to.equal(ethers.utils.parseBytes32String(args.title));
 
-        // expect(testZapProvider.title).to.equal(ethers.utils.parseBytes32String(args.title));
+            expect(args.provider).to.equal(signerOne._address);
 
-        // expect(args.provider).to.equal(signerOne._address);
+            const title = await registryWrapper.getProviderTitle(signerOne._address);
 
-        // const title = await registryWrapper.getProviderTitle(signerOne._address);
+            expect(title).to.be.equal(testProvider.title);
 
-        // expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title));
+            const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
 
-        // const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
+            expect(pubkey).to.be.equal(testProvider.pubkey);
 
-        // expect(parseInt(pubkey)).to.be.equal(testProvider.pubkey);
+        } catch (err) {
 
-        // } catch (err) {
+            const initStatus = await registryWrapper.isProviderInitiated(signerOne._address);
 
-        //     console.log(signerOne._address + ': ' + 'Is already initiated as a provider');
+            if (initStatus === true) {
 
-        // }
+                console.log(signerOne._address + ': ' + 'Is already initiated as a provider');
+            }
+            else {
+
+                console.log('Error with the initiateProvider function: ' + err);
+            }
+        }
 
     });
 

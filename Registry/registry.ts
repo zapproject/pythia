@@ -94,8 +94,10 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<number>} Returns a Promise that will eventually resolve into public key number
      */
     async getProviderPublicKey(provider: address): Promise<number | string> {
-        const pubKey: string = await this.contract.methods.getProviderPublicKey(provider).call();
-        return pubKey.valueOf(); //string
+
+        const pubKey: string = await this.contract.getProviderPublicKey(provider);
+
+        return parseInt(pubKey);
     }
 
     /**
@@ -104,7 +106,9 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string>} Returns a Promise that will eventually resolve into a title string
      */
     async getProviderTitle(provider: address): Promise<string> {
+
         const title = await this.contract.getProviderTitle(provider);
+
         return ethers.utils.parseBytes32String(title);
     }
 
@@ -138,7 +142,9 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<boolean>} Returns a Promise that will eventually resolve a true/false value.
      */
     async isProviderInitiated(provider: address): Promise<boolean> {
-        const created: boolean = await this.contract.methods.isProviderInitiated(provider);
+
+        const created: boolean = await this.contract.isProviderInitiated(provider);
+
         return created;
     }
 
