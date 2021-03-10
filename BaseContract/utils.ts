@@ -1,4 +1,5 @@
 import { join } from 'path';
+
 export class Utils {
     /**
      * @ignore

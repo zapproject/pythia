@@ -1,4 +1,4 @@
-import { utf8ToHex, toBN, hexToUtf8, bytesToHex, hexToBytes, toHex } from 'web3-utils';
+import { parseBytes32String } from 'ethers/lib/utils';
 
 import { BaseContract } from '../BaseContract/basecontract';
 
@@ -9,9 +9,12 @@ import {
     Filter, txid, address, NetworkProviderOptions, DEFAULT_GAS, NULL_ADDRESS, TransactionCallback
 } from '../Types/types';
 
+const ethers = require('ethers');
+
 /**
  * Manage Providers and Curves registration
  */
+
 export class ZapRegistry extends BaseContract {
 
     /**
@@ -56,11 +59,15 @@ export class ZapRegistry extends BaseContract {
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async initiateProvider({ public_key, title, from, gas = DEFAULT_GAS }: InitProvider, cb?: TransactionCallback): Promise<txid> {
-        const promiEvent = this.contract.methods.initiateProvider(
-            toBN(public_key).toString(),
-            utf8ToHex(title))
-            .send({ from, gas });
+    async initiateProvider({ public_key, title }: InitProvider, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.initiateProvider(
+
+            ethers.BigNumber.from(public_key).toString(),
+
+            ethers.utils.formatBytes32String(title)
+        )
+
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
@@ -85,8 +92,8 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string>} Returns a Promise that will eventually resolve into a title string
      */
     async getProviderTitle(provider: address): Promise<string> {
-        const title = await this.contract.methods.getProviderTitle(provider).call();
-        return hexToUtf8(title);
+        const title = await this.contract.getProviderTitle(provider);
+        return ethers.utils.parseBytes32String(title);
     }
 
     /**
@@ -97,7 +104,13 @@ export class ZapRegistry extends BaseContract {
     * @returns {Promise<string>} Transaction hash
     */
     async setProviderTitle({ from, title, gas = DEFAULT_GAS }: SetProviderTitle, cb?: TransactionCallback): Promise<txid> {
-        const promiEvent = this.contract.methods.setProviderTitle(utf8ToHex(title)).send({ from: from, gas });
+
+        const promiEvent = this.contract.methods.setProviderTitle(
+
+            ethers.utils.formatBytes32String(title)
+        )
+            .send({ from: from, gas });
+
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error, null));
@@ -128,8 +141,8 @@ export class ZapRegistry extends BaseContract {
      */
     async setProviderParameter({ key, value, from, gas = DEFAULT_GAS }: SetProviderParams): Promise<txid> {
         return await this.contract.methods.setProviderParameter(
-            utf8ToHex(key),
-            utf8ToHex(value)
+            ethers.utils.formatBytes32String(key),
+            ethers.utils.formatBytes32String(value)
         ).send({ from, gas });
     }
 
@@ -142,7 +155,7 @@ export class ZapRegistry extends BaseContract {
     async getProviderParam(provider: address, key: string): Promise<string> {
         return await this.contract.methods.getProviderParameter(
             provider,
-            utf8ToHex(key)
+            ethers.utils.formatBytes32String(key)
         ).call();
     }
 
@@ -164,7 +177,7 @@ export class ZapRegistry extends BaseContract {
     async getProviderEndpoints(provider: address): Promise<string[]> {
         let endpoints = await this.contract.methods.getProviderEndpoints(provider).call();
         const validEndpoints = [];
-        endpoints = endpoints.map(hexToUtf8);
+        endpoints = endpoints.map(ethers.utils.parseBytes32String);
         for (const e of endpoints) {
             if (e != '') {
                 validEndpoints.push(e);
@@ -191,9 +204,11 @@ export class ZapRegistry extends BaseContract {
     async initiateProviderCurve({ endpoint, term, broker = NULL_ADDRESS, from, gasPrice, gas = DEFAULT_GAS }: InitCurve, cb?: TransactionCallback): Promise<txid> {
         const hex_term: string[] = [];
         for (const i in term) {
-            hex_term[i] = toHex(term[i]);
+            hex_term[i] = ethers.utils.hexlify(term[i]);
         }
-        const promiEvent = this.contract.methods.initiateProviderCurve(utf8ToHex(endpoint), hex_term, broker)
+        const promiEvent = this.contract.methods.initiateProviderCurve(
+            ethers.utils.formatBytes32String(endpoint), hex_term, broker
+        )
             .send({ from, gas, gasPrice });
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
@@ -211,7 +226,9 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<txid>} Transaction Hash
      */
     async clearEndpoint({ endpoint, from, gasPrice, gas = DEFAULT_GAS }: Endpoint, cb?: TransactionCallback): Promise<txid> {
-        const promiEvent = this.contract.methods.clearEndpoint(utf8ToHex(endpoint)).send({ from, gas, gasPrice });
+        const promiEvent = this.contract.methods.clearEndpoint(
+            ethers.utils.formatBytes32String(endpoint)).send({ from, gas, gasPrice }
+            );
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
@@ -229,7 +246,7 @@ export class ZapRegistry extends BaseContract {
     async getProviderCurve(provider: string, endpoint: string): Promise<Curve> {
         const term: string[] = await this.contract.methods.getProviderCurve(
             provider,
-            utf8ToHex(endpoint)
+            ethers.utils.formatBytes32String(endpoint)
         ).call();
         return new Curve(term.map((i: string) => { return parseInt(i); }));
     }
@@ -247,7 +264,7 @@ export class ZapRegistry extends BaseContract {
     async setEndpointParams({ endpoint, endpoint_params = [], from, gasPrice, gas = DEFAULT_GAS }: EndpointParams, cb?: TransactionCallback): Promise<txid> {
         const params = ZapRegistry.encodeParams(endpoint_params);
         const promiEvent = this.contract.methods.setEndpointParams(
-            utf8ToHex(endpoint),
+            ethers.utils.formatBytes32String(endpoint),
             params
         ).send({ from, gas, gasPrice });
         if (cb) {
@@ -266,8 +283,10 @@ export class ZapRegistry extends BaseContract {
      * no broker for this endpoint
      */
     async getEndpointBroker(provider: address, endpoint: string): Promise<string> {
-        const broker = await this.contract.methods.getEndpointBroker(provider, utf8ToHex(endpoint)).call();
-        return hexToUtf8(broker);
+        const broker = await this.contract.methods.getEndpointBroker(
+            provider, ethers.utils.formatBytes32String(endpoint)
+        ).call();
+        return ethers.utils.parseBytes32String(broker);
     }
 
     /**
@@ -277,7 +296,9 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<boolean>} Returns a Promise of a true/false value.
      */
     async isEndpointSet(provider: address, endpoint: string): Promise<boolean> {
-        const unset: boolean = await this.contract.methods.getCurveUnset(provider, utf8ToHex(endpoint)).call();
+        const unset: boolean = await this.contract.methods.getCurveUnset(
+            provider, ethers.utils.formatBytes32String(endpoint)
+        ).call();
         return !unset;
     }
 
@@ -290,7 +311,7 @@ export class ZapRegistry extends BaseContract {
     async getEndpointParams({ provider, endpoint }: NextEndpoint): Promise<string[]> {
         const params: string[] = await this.contract.methods.getEndpointParams(
             provider,
-            utf8ToHex(endpoint)
+            ethers.utils.formatBytes32String(endpoint)
         ).call();
 
         return ZapRegistry.decodeParams(params);
@@ -302,12 +323,12 @@ export class ZapRegistry extends BaseContract {
      * @param endpointParams
      */
     private static encodeParams(endpointParams: string[] = []): string[] {
-        const hexParams = endpointParams.map(el => el.indexOf('0x') === 0 ? el : utf8ToHex(el));
-        const bytesParams: number[][] = hexParams.map(hexToBytes);
+        const hexParams = endpointParams.map(el => el.indexOf('0x') === 0 ? el : ethers.utils.formatBytes32String(el));
+        const bytesParams: number[][] = hexParams.map(ethers.utils.arrayify);
         const params: string[] = [];
         bytesParams.forEach((el: number[]) => {
             if (el.length <= 32) {
-                params.push(bytesToHex(el));
+                params.push(ethers.utils.hexlify(el));
                 return;
             }
             const chunksLength = Math.ceil((el.length + 2) / 32);
@@ -315,7 +336,7 @@ export class ZapRegistry extends BaseContract {
             for (let i = 0; i < chunksLength; i++) {
                 const start = i * 32;
                 const end = start + 32;
-                params.push(bytesToHex(paramBytesWithLength.slice(start, end)));
+                params.push(ethers.utils.hexlify(paramBytesWithLength.slice(start, end)));
             }
         });
         return params;
@@ -327,7 +348,7 @@ export class ZapRegistry extends BaseContract {
      * @param rawParams
      */
     private static decodeParams(rawParams: string[] = []): string[] {
-        const bytesParams: number[][] = rawParams.map(hexToBytes);
+        const bytesParams: number[][] = rawParams.map(ethers.utils.arrayify);
         const params: string[] = [];
         let i = 0;
         const len = bytesParams.length;
@@ -335,7 +356,7 @@ export class ZapRegistry extends BaseContract {
             // check if the first byte is 0, the second byte is number and is larger than 1 (chuncks count), and the length must be 32 bytes
             const isStartOfChunks = bytesParams[i][0] === 0 && bytesParams[i][1] > 1 && bytesParams[i].length === 32;
             if (!isStartOfChunks) {
-                params.push(bytesToHex(bytesParams[i]));
+                params.push(ethers.utils.hexlify(bytesParams[i]));
                 i++;
                 continue;
             }
@@ -348,11 +369,11 @@ export class ZapRegistry extends BaseContract {
                 bytes = bytes.concat(bytesParams[i]);
                 i++;
             }
-            params.push(bytesToHex(bytes));
+            params.push(ethers.utils.hexlify(bytes));
         }
         return params.map(hex => {
             try {
-                return hexToUtf8(hex);
+                return ethers.utils.parseBytes32String(hex);
             } catch (e) {
                 console.log(e);
             }
