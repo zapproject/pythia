@@ -565,8 +565,8 @@
       "transactionHash": "0x9e913c416007746fb8967fb52558117ec97fd174b9f5368af08c7b951ccbb54e"
     },
     "31337": {
-      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853"
-  
+      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "transactionHash": "0x03d64f6ec292752f17c1a5af297de51e29bb67e1fd8758c44ba2f50b7c6a0bc5"
     }
   }
 }

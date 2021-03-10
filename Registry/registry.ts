@@ -72,16 +72,17 @@ export class ZapRegistry extends BaseContract {
 
         this.contract = this.contract.connect(signer);
 
-        const promiEvent = this.contract.initiateProvider(
+        let promiEvent = await this.contract.initiateProvider(
 
             ethers.BigNumber.from(public_key).toString(),
 
-            ethers.utils.formatBytes32String(title)
-        )
+            ethers.utils.formatBytes32String(title),
+        );
 
         if (cb) {
-            promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
-            promiEvent.on('error', (error: any) => cb(error));
+            this.contract.on('NewProvider', (providerAddress: string) => cb(null, providerAddress));
+            this.contract.on('error', (error: any) => cb(error));
+
         }
 
         return promiEvent;

@@ -64,42 +64,48 @@ describe('Registry Test', () => {
 
         let initProviderTx: any;
 
-        try {
+        // try {
 
-            initProviderTx = await registryWrapper.initiateProvider({
-                public_key: testProvider.pubkey,
-                title: testProvider.title
-            });
+        initProviderTx = await registryWrapper.initiateProvider({
 
-            // const initProviderReceipt = await initProviderTx.wait();
+            public_key: testProvider.pubkey,
+            title: testProvider.title
 
-            // expect(initProviderReceipt).to.include.keys('events');
+        }, (err: any, newProvider: string) =>
 
-            // expect(initProviderReceipt.events[0].event).to.equal('NewProvider');
+            expect(newProvider).to.be.a('string')
+        );
 
-            // expect(initProviderReceipt.events[0]).to.include.keys('args');
 
-            // const args = initProviderReceipt.events[0].args;
+        // const initProviderReceipt = await initProviderTx.wait();
 
-            // expect(args).to.include.keys('provider', 'title');
+        // expect(initProviderReceipt).to.include.keys('events');
 
-            // expect(testZapProvider.title).to.equal(ethers.utils.parseBytes32String(args.title));
+        // expect(initProviderReceipt.events[0].event).to.equal('NewProvider');
 
-            // expect(args.provider).to.equal(signerOne._address);
+        // expect(initProviderReceipt.events[0]).to.include.keys('args');
 
-            // const title = await registryWrapper.getProviderTitle(signerOne._address);
+        // const args = initProviderReceipt.events[0].args;
 
-            // expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title));
+        // expect(args).to.include.keys('provider', 'title');
 
-            // const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
+        // expect(testZapProvider.title).to.equal(ethers.utils.parseBytes32String(args.title));
 
-            // expect(parseInt(pubkey)).to.be.equal(testProvider.pubkey);
+        // expect(args.provider).to.equal(signerOne._address);
 
-        } catch (err) {
+        // const title = await registryWrapper.getProviderTitle(signerOne._address);
 
-            console.log(signerOne._address + ': ' + 'Is already initiated as a provider');
+        // expect(title).to.be.equal(ethers.utils.formatBytes32String(testProvider.title));
 
-        }
+        // const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
+
+        // expect(parseInt(pubkey)).to.be.equal(testProvider.pubkey);
+
+        // } catch (err) {
+
+        //     console.log(signerOne._address + ': ' + 'Is already initiated as a provider');
+
+        // }
 
     });
 
