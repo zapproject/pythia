@@ -219,18 +219,17 @@ export class ZapRegistry extends BaseContract {
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async initiateProviderCurve({ endpoint, term, broker = NULL_ADDRESS, from, gasPrice, gas = DEFAULT_GAS }: InitCurve, cb?: TransactionCallback): Promise<txid> {
-        const hex_term: string[] = [];
-        for (const i in term) {
-            hex_term[i] = ethers.utils.hexlify(term[i]);
-        }
-        const promiEvent = this.contract.methods.initiateProviderCurve(
-            ethers.utils.formatBytes32String(endpoint), hex_term, broker
+    async initiateProviderCurve({ endpoint, term, broker }: InitCurve, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.initiateProviderCurve(
+            ethers.utils.formatBytes32String(endpoint),
+            term,
+            broker
         )
-            .send({ from, gas, gasPrice });
+
         if (cb) {
-            promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
-            promiEvent.on('error', (error: any) => cb(error));
+            this.contract.on('NewCurve', (NewCurve: string) => cb(null, NewCurve));
+            this.contract.on('error', (error: any) => cb(error));
         }
 
         return promiEvent;
