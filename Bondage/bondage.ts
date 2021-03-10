@@ -138,4 +138,28 @@ public async unbond({ provider, endpoint, dots, from, gasPrice, gas = DEFAULT_GA
     async getNumEscrow({ provider, endpoint, subscriber }: BondageArgs): Promise<number | string> {
         return await this.contract.methods.getNumEscrow(subscriber, provider, endpoint).call();
     }
+
+    public listen(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.allEvents(filters, { fromBlock: 0, toBlock: 'latest' }, callback);
+    }
+
+    public listenBound(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Bound(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenUnbound(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Unbond(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenEscrowed(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Escrowed(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenReleased(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Released(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenReturned(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Returned(filters, { toBlock: 'latest' }, callback);
+    }
 }
