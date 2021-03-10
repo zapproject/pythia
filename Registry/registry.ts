@@ -192,14 +192,21 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string[]>} Returns a Promise that will be eventually resolved with the endpoints of the provider.
      */
     async getProviderEndpoints(provider: address): Promise<string[]> {
-        let endpoints = await this.contract.methods.getProviderEndpoints(provider).call();
+
+        let endpoints = await this.contract.getProviderEndpoints(provider);
+
         const validEndpoints = [];
-        endpoints = endpoints.map(ethers.utils.parseBytes32String);
+
         for (const e of endpoints) {
-            if (e != '') {
+
+            if (e.charAt(2) !== '0') {
+
                 validEndpoints.push(e);
             }
         }
+
+        console.log(validEndpoints)
+
         return validEndpoints;
     }
 
@@ -241,10 +248,14 @@ export class ZapRegistry extends BaseContract {
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Transaction Hash
      */
-    async clearEndpoint({ endpoint, from, gasPrice, gas = DEFAULT_GAS }: Endpoint, cb?: TransactionCallback): Promise<txid> {
-        const promiEvent = this.contract.methods.clearEndpoint(
-            ethers.utils.formatBytes32String(endpoint)).send({ from, gas, gasPrice }
-            );
+    async clearEndpoint({ endpoint }: Endpoint, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.clearEndpoint(
+
+            ethers.utils.formatBytes32String(endpoint)
+
+        )
+
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
@@ -277,12 +288,17 @@ export class ZapRegistry extends BaseContract {
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async setEndpointParams({ endpoint, endpoint_params = [], from, gasPrice, gas = DEFAULT_GAS }: EndpointParams, cb?: TransactionCallback): Promise<txid> {
-        const params = ZapRegistry.encodeParams(endpoint_params);
-        const promiEvent = this.contract.methods.setEndpointParams(
-            ethers.utils.formatBytes32String(endpoint),
+    async setEndpointParams({ endpoint, endpoint_params = [] }: EndpointParams, cb?: TransactionCallback): Promise<txid> {
+
+        const params = endpoint_params.map(endpoint => ethers.utils.formatBytes32String(endpoint));
+
+        endpoint = ethers.utils.formatBytes32String(endpoint);
+
+        const promiEvent = this.contract.setEndpointParams(
+            endpoint,
             params
-        ).send({ from, gas, gasPrice });
+        );
+
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
