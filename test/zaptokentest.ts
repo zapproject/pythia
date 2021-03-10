@@ -86,15 +86,6 @@ describe('ZapToken Test', () => {
         expect(balance).to.be.ok;
     });
 
-    it('Should update balance, and get updated balance of zap token', async () => {
-        await zapTokenWrapper.allocate({
-            to: accounts[1],
-            from: zapTokenOwner,
-            amount: allocateAmount
-        }, (err: any, txid: string) => expect(txid).to.be.a('string'));
-        const balance = await zapTokenWrapper.balanceOf(accounts[1]);
-        await expect(balance).to.be.equal(allocateAmount);
-    });
 
 });
 
