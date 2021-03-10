@@ -10,6 +10,7 @@ import {
     HardhatProvider
 }
     from '../Utils/utils';
+import { doesNotReject } from 'node:assert';
 
 const expect = require('chai').expect;
 
@@ -200,14 +201,7 @@ describe('Registry Test', () => {
 
     it('Should clear endpoint', async () => {
 
-        await registryWrapper.clearEndpoint(
-            ethers.utils.formatBytes32String(testZapProvider.endpoint)
-        );
-
-        const clearedEndpoints = await registryWrapper.getProviderEndpoints(signerOne._address);
-
-        clearedEndpoints.forEach((endpoint: any) => expect(endpoint)
-            .to.equal('0x0000000000000000000000000000000000000000000000000000000000000000'));
+        
 
     });
 
