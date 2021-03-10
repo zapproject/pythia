@@ -173,44 +173,34 @@ describe('Registry Test', () => {
     });
 
 
-    // it('Should initiate Provider curve with valid broker address in zap registry contract', async () => {
+    it('Should initiate Provider curve with valid broker address in zap registry contract', async () => {
 
-    //     registryWrapper = registryWrapper.connect(signerTwo)
+        let initProviderTwoTx: any;
+        let newEndpoint: string = 'newEndpoint';
 
-    //     let initProviderTwoTx: any
+        try {
 
-    //     try {
+            const initCurveTwotx = await registryWrapper.initiateProviderCurve({
+                endpoint: newEndpoint,
+                term: testZapProvider.curve.values,
+                broker: signerThree._address,
+            });
 
-    //         initProviderTwoTx = await registryWrapper.initiateProvider(
-    //             testZapProvider.pubkey,
-    //             ethers.utils.formatBytes32String(testZapProvider.title),
-    //         );
+        } catch (err) {
 
-    //         const receipt = await initProviderTwoTx.wait();
+            console.log(signerTwo._address + ': ' + 'Provider and Curve is already initiated');
+        }
 
-    //         const initCurveTx = await registryWrapper.initiateProviderCurve(
-    //             ethers.utils.formatBytes32String(testZapProvider.endpoint),
-    //             testZapProvider.curve.values,
-    //             signerThree._address,
-    //         );
+    });
 
-    //     } catch (err) {
+    it('Should set endpoint endpointParams in zap registry contract', async () => {
 
-    //         console.log(signerTwo._address + ': ' + 'Provider and Curve is already initiated');
-    //     }
+        const result = await registryWrapper.setEndpointParams(
+            ethers.utils.formatBytes32String(testZapProvider.endpoint),
+            testZapProvider.endpoint_params.map((params: string) => ethers.utils.formatBytes32String(params)),
+        )
 
-    // });
-
-    // it('Should set endpoint endpointParams in zap registry contract', async () => {
-
-    //     registryWrapper = registryWrapper.connect(signerOne)
-
-    //     const result = await registryWrapper.setEndpointParams(
-    //         ethers.utils.formatBytes32String(testZapProvider.endpoint),
-    //         testZapProvider.endpoint_params.map((params: string) => ethers.utils.formatBytes32String(params)),
-    //     )
-
-    // });
+    });
 
     // it('Should clear endpoint', async () => {
 
