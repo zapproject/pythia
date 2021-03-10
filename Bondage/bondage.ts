@@ -72,8 +72,8 @@ public async delegateBond({ provider, endpoint, dots, subscriber, from, gasPrice
     
 public async unbond({ provider, endpoint, dots, from, gasPrice, gas = DEFAULT_GAS }: UnbondArgs, cb?: TransactionCallback): Promise<txid> {
         assert(dots && dots > 0, 'Dots to unbond must be greater than 0');
-        dots = toHex(dots);
-        const broker = await this.contract.methods.getEndpointBroker(provider, utf8ToHex(endpoint)).call();
+        dots = ethers.utils.hexlify(dots);
+        const broker = await this.contract.methods.getEndpointBroker(provider, ethers.utils.formatBytes32String(endpoint)).call();
         if (broker != NULL_ADDRESS) {
             if (from !== broker) {
                 throw `Broker address ${broker} needs to call unbonding for this endpoint`;
@@ -104,11 +104,11 @@ public async unbond({ provider, endpoint, dots, from, gasPrice, gas = DEFAULT_GA
         return await this.contract.methods.calcZapForDots(
             provider,
             ethers.utils.formatBytes32String(endpoint),
-            toHex(dots)).call();
+            ethers.utils.hexlify(dots)).call();
     }
 
     public async currentCostOfDot({ provider, endpoint, dots }: BondageArgs): Promise<string | number> {
-        dots = toHex(dots);
+        dots = ethers.utils.hexlify(dots);
         return this.contract.methods.currentCostOfDot(
             provider,
             ethers.utils.formatBytes32String(endpoint),
