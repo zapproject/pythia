@@ -41,7 +41,8 @@ export class ZapToken extends BaseContract {
      * @returns {Promise<number>} Returns a Promise that will eventually resolve into a Zap balance (wei)
      */
     async balanceOf(address: address): Promise<string | number> {
-        return await this.contract.balanceOf(address).call();
+
+        return await this.contract.balanceOf(address);
     }
 
     /**

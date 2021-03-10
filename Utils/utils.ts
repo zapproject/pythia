@@ -1,6 +1,6 @@
 import { Curve } from '../Curve/curve';
 
-export const TEST_CURVE = [3, 0, 2, 1, 1000000000000000000];
+export const TEST_CURVE = [3, 0, 2, 1, 10000];
 
 export const testZapProvider: any = {
     pubkey: 111,

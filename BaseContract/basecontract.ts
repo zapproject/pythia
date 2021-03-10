@@ -1,12 +1,12 @@
 // Imports the contract JSON files
+import { Console } from 'node:console';
 import { Artifacts } from '../Artifacts/artifacts';
 
 import { BaseContractType } from '../Types/types';
 
 import { Utils } from './utils';
 
-// import { ethers } from 'ethers';
-const ethers = require('ethers')
+const ethers = require('ethers');
 
 export class BaseContract {
     provider: any;
@@ -44,6 +44,7 @@ export class BaseContract {
         this.name = artifactName;
 
         try {
+
             if (!artifactsDir) {
                 this.artifact = Artifacts[artifactName];
                 coorArtifact = Artifacts['ZAPCOORDINATOR'];
@@ -64,10 +65,10 @@ export class BaseContract {
                 this.provider
             );
 
-            console.log(this.coordinator.db())
-
             this.contract = undefined;
+
             if (address) {
+
                 this.address = address;
             }
             else {
@@ -78,7 +79,8 @@ export class BaseContract {
                     .catch(console.error);
             }
             else {
-                this.contract = new this.provider.Contract(this.artifact.abi, this.address);
+
+                this.contract = new ethers.Contract(this.address, this.artifact.abi);
             }
         } catch (err) {
             throw err;
@@ -86,9 +88,17 @@ export class BaseContract {
     }
 
     async getContract() {
-        const contractAddress = await this.coordinator.getContract(this.name.toUpperCase()).call().valueOf();
-        this.contract = new this.provider.Contract(this.artifact.abi, contractAddress);
-        return contractAddress;
+        let hardhatHttpProvider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+
+        let hardhatAccounts = await hardhatHttpProvider.listAccounts();
+
+        let signer = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+
+        let contractAddress = this.artifact.networks[this.networkId];
+
+        this.contract = new ethers.Contract(contractAddress.address, this.artifact.abi, signer);
+
+        return contractAddress.address;
     }
 
     /**
@@ -96,7 +106,17 @@ export class BaseContract {
      * @returns {Promise<string>} Returns a Promise that will eventually resolve into the address of this contract's owner.
      */
     async getContractOwner(): Promise<string> {
-        return await this.contract.owner().call().valueOf();
+
+        let hardhatHttpProvider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+
+        let hardhatAccounts = await hardhatHttpProvider.listAccounts();
+
+        let signer = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+
+        this.contract = this.contract.connect(signer)
+
+        return await this.contract.owner();
+
+        // return await this.contract.owner();
     }
 }
-
