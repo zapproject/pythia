@@ -53,8 +53,6 @@ export class ZapBondage extends BaseContract {
         const promiEvent = this.contract.methods.bond(
             provider,
             ethers.utils.formatBytes32String(endpoint),
-            //toHex(dots))
-            // is formatBytes32String the proper function??
             ethers.utils.hexlify(dots))
             .send({ from, gas, gasPrice }); // not sure if we keep this or not
         if (cb) {
@@ -165,3 +163,60 @@ export class ZapBondage extends BaseContract {
             ethers.utils.formatBytes32String(endpoint),
             ethers.utils.hexlify(dots)).call();
     }
+
+    public async currentCostOfDot({ provider, endpoint, dots }: BondageArgs): Promise<string | number> {
+        dots = ethers.utils.hexlify(dots);
+        return this.contract.methods.currentCostOfDot(
+            provider,
+            ethers.utils.formatBytes32String(endpoint),
+            dots
+        ).call();
+    }
+
+    public async getDotsLimit({ provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.dotLimit(provider, ethers.utils.formatBytes32String(endpoint)).call().valueOf();
+    }
+
+    public async getDotsIssued({ provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.getDotsIssued(
+            provider,
+            ethers.utils.formatBytes32String(endpoint)
+        ).call();
+    }
+
+    public async getBrokerAddress({ provider, endpoint }: BondageArgs): Promise<string> {
+        return await this.contract.methods.getEndpointBroker(provider, ethers.utils.formatBytes32String(endpoint)).call();
+    }
+
+    public async getZapBound({ provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.getZapBound(provider, ethers.utils.formatBytes32String(endpoint)).call();
+    }
+
+    async getNumEscrow({ provider, endpoint, subscriber }: BondageArgs): Promise<number | string> {
+        return await this.contract.methods.getNumEscrow(subscriber, provider, endpoint).call();
+    }
+
+    public listen(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.allEvents(filters, { fromBlock: 0, toBlock: 'latest' }, callback);
+    }
+
+    public listenBound(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Bound(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenUnbound(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Unbond(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenEscrowed(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Escrowed(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenReleased(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Released(filters, { toBlock: 'latest' }, callback);
+    }
+
+    public listenReturned(filters: BondFilter = {}, callback: TransactionCallback): void {
+        this.contract.events.Returned(filters, { toBlock: 'latest' }, callback);
+    }
+}
