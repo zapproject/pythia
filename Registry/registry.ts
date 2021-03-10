@@ -4,10 +4,13 @@ import { BaseContract } from '../BaseContract/basecontract';
 
 import { Curve } from '../Curve/curve';
 
+import { HardhatProvider } from '../Utils/utils';
+
 import {
     InitProvider, InitCurve, NextEndpoint, EndpointParams, SetProviderParams, SetProviderTitle, Endpoint,
     Filter, txid, address, NetworkProviderOptions, DEFAULT_GAS, NULL_ADDRESS, TransactionCallback
 } from '../Types/types';
+import { isConstructorDeclaration } from 'typescript';
 
 const ethers = require('ethers');
 
@@ -60,6 +63,14 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
     async initiateProvider({ public_key, title }: InitProvider, cb?: TransactionCallback): Promise<txid> {
+
+        const provider = new ethers.providers.JsonRpcProvider(HardhatProvider);
+
+        const hardhatAccounts = await provider.listAccounts();
+
+        const signer = await provider.getSigner(hardhatAccounts[0]);
+
+        this.contract = this.contract.connect(signer);
 
         const promiEvent = this.contract.initiateProvider(
 
