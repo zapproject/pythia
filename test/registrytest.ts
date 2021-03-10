@@ -117,57 +117,60 @@ describe('Registry Test', () => {
 
         let initProviderCurveTx: any;
 
-        // try {
+        try {
 
-        initProviderCurveTx = await registryWrapper.initiateProviderCurve({
+            initProviderCurveTx = await registryWrapper.initiateProviderCurve({
 
-            endpoint: testZapProvider.endpoint,
-            term: testZapProvider.curve.values,
-            broker: testProvider.broker
-        })
+                endpoint: testZapProvider.endpoint,
+                term: testZapProvider.curve.values,
+                broker: testProvider.broker
+            });
 
-        const curveReceipt = await initProviderCurveTx.wait();
+            const curveReceipt = await initProviderCurveTx.wait();
 
-        expect(curveReceipt).to.include.keys('events');
+            expect(curveReceipt).to.include.keys('events');
 
-        expect(curveReceipt.events[0].event).to.equal('NewCurve');
+            expect(curveReceipt.events[0].event).to.equal('NewCurve');
 
-        // expect(receipt.events[0]).to.include.keys('args');
+            expect(curveReceipt.events[0]).to.include.keys('args');
 
-        // const args = receipt.events[0].args;
+            const args = curveReceipt.events[0].args;
 
-        // expect(args).to.include.keys('provider', 'endpoint', 'curve', 'broker');
+            expect(args).to.include.keys('provider', 'endpoint', 'curve', 'broker');
 
-        // expect(args.broker).to.equal(testProvider.broker);
+            expect(args.broker).to.equal(testProvider.broker);
 
-        // expect(args.provider).to.equal(signerOne._address);
+            expect(args.provider).to.equal(signerOne._address);
 
-        // const getTxCurve = args.curve.map((num: any) => parseInt(num));
+            const getTxCurve = args.curve.map((num: any) => parseInt(num));
 
-        // const testCurve = testProvider.curve.values;
+            const testCurve = testProvider.curve.values;
 
-        // expect(testZapProvider.endpoint).to.equal(ethers.utils.parseBytes32String(args.endpoint));
+            expect(testZapProvider.endpoint).to.equal(ethers.utils.parseBytes32String(args.endpoint));
 
-        // expect(testCurve).to.eql(getTxCurve);
+            expect(testCurve).to.eql(getTxCurve);
 
-        // } catch (err: any) {
+        } catch (err: any) {
 
-        //     console.log(signerOne._address + ': ' + 'Curve is already initiated');
-        // }
+            console.log(signerOne._address + ': ' + 'Curve is already initiated');
+        }
 
     });
 
-    // it('Should set new title', async () => {
+    it('Should set new title', async () => {
 
-    //     const title = ethers.utils.formatBytes32String('NEWTITLE');
+        const title = 'NEWTITLE';
 
-    //     await registryWrapper.setProviderTitle(title);
+        await registryWrapper.setProviderTitle({
 
-    //     const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
+            title: title
+        });
 
-    //     expect(newTitle).to.equal(title);
+        // const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
 
-    // });
+        // expect(newTitle).to.equal(title);
+
+    });
 
 
     // it('Should initiate Provider curve with valid broker address in zap registry contract', async () => {

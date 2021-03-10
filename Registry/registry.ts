@@ -119,13 +119,12 @@ export class ZapRegistry extends BaseContract {
     * @param {()=>void} cb - Callback for transactionHash event
     * @returns {Promise<string>} Transaction hash
     */
-    async setProviderTitle({ from, title, gas = DEFAULT_GAS }: SetProviderTitle, cb?: TransactionCallback): Promise<txid> {
+    async setProviderTitle({ title }: SetProviderTitle, cb?: TransactionCallback): Promise<txid> {
 
-        const promiEvent = this.contract.methods.setProviderTitle(
+        const promiEvent = this.contract.setProviderTitle(
 
             ethers.utils.formatBytes32String(title)
-        )
-            .send({ from: from, gas });
+        );
 
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
