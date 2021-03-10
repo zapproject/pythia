@@ -166,9 +166,9 @@ describe('Registry Test', () => {
             title: title
         });
 
-        // const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
+        const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
 
-        // expect(newTitle).to.equal(title);
+        expect(newTitle).to.equal(title);
 
     });
 
