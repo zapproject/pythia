@@ -81,7 +81,7 @@ public async unbond({ provider, endpoint, dots, from, gasPrice, gas = DEFAULT_GA
         }
         const promiEvent = this.contract.methods.unbond(
             provider,
-            utf8ToHex(endpoint),
+            ethers.utils.formatBytes32String(endpoint),
             dots)
             .send({ from, gas, gasPrice });
         if (cb) {
@@ -91,3 +91,51 @@ public async unbond({ provider, endpoint, dots, from, gasPrice, gas = DEFAULT_GA
 
         return promiEvent;
     }
+
+    public async getBoundDots({ subscriber, provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.getBoundDots(
+            subscriber,
+            provider,
+            ethers.utils.formatBytes32String(endpoint)
+        ).call();
+    }
+
+    public async calcZapForDots({ provider, endpoint, dots }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.calcZapForDots(
+            provider,
+            ethers.utils.formatBytes32String(endpoint),
+            toHex(dots)).call();
+    }
+
+    public async currentCostOfDot({ provider, endpoint, dots }: BondageArgs): Promise<string | number> {
+        dots = toHex(dots);
+        return this.contract.methods.currentCostOfDot(
+            provider,
+            ethers.utils.formatBytes32String(endpoint),
+            dots
+        ).call();
+    }
+
+    public async getDotsLimit({ provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.dotLimit(provider, ethers.utils.formatBytes32String(endpoint)).call().valueOf();
+    }
+
+    public async getDotsIssued({ provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.getDotsIssued(
+            provider,
+            ethers.utils.formatBytes32String(endpoint)
+        ).call();
+    }
+
+    public async getBrokerAddress({ provider, endpoint }: BondageArgs): Promise<string> {
+        return await this.contract.methods.getEndpointBroker(provider, ethers.utils.formatBytes32String(endpoint)).call();
+    }
+
+    public async getZapBound({ provider, endpoint }: BondageArgs): Promise<string | number> {
+        return await this.contract.methods.getZapBound(provider, ethers.utils.formatBytes32String(endpoint)).call();
+    }
+
+    async getNumEscrow({ provider, endpoint, subscriber }: BondageArgs): Promise<number | string> {
+        return await this.contract.methods.getNumEscrow(subscriber, provider, endpoint).call();
+    }
+}
