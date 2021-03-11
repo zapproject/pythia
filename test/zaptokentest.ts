@@ -57,19 +57,19 @@ describe('ZapToken Test', () => {
 
     });
 
-    it('Should initiate wrapper with coordinator ', async () => {
+    // it('Should initiate wrapper with coordinator ', async () => {
 
-        zapTokenWrapper = new ZapToken({
-            networkId: HardhatServerOptions.network_id,
-            networkProvider: HardhatProvider,
-            coordinator: zapTokenWrapper.coordinator.address
-        });
+    //     zapTokenWrapper = new ZapToken({
+    //         networkId: HardhatServerOptions.network_id,
+    //         networkProvider: HardhatProvider,
+    //         coordinator: zapTokenWrapper.coordinator.address
+    //     });
 
-        zapTokenOwner = await zapTokenWrapper.getContractOwner();
+    //     zapTokenOwner = await zapTokenWrapper.getContractOwner();
 
-        expect(zapTokenWrapper).to.be.ok;
+    //     expect(zapTokenWrapper).to.be.ok;
 
-    });
+    // });
 
     it('Should get zapToken owner', async () => {
 

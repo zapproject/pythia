@@ -54,6 +54,16 @@ describe('Registry Test', () => {
 
     });
 
+    it('should be able to create registryWrapper with coordinator', async () => {
+
+        registryWrapper = new ZapRegistry({
+            networkId: HardhatServerOptions.network_id,
+            networkProvider: HardhatProvider,
+            coordinator: registryWrapper.coordinator.address
+        });
+
+    });
+
     it('Should initiate provider in zap registry contract', async () => {
 
         let initProviderTx: any;
@@ -342,19 +352,19 @@ describe('Registry Test', () => {
 
     });
 
-    it('Should clear endpoint', async () => {
+    // it('Should clear endpoint', async () => {
 
-        for (let i = 0; i < testProvider.endpoints.length; i++) {
+    //     for (let i = 0; i < testProvider.endpoints.length; i++) {
 
-            await registryWrapper.clearEndpoint({
-                endpoint: testProvider.endpoints[i]
-            })
-        }
+    //         await registryWrapper.clearEndpoint({
+    //             endpoint: testProvider.endpoints[i]
+    //         })
+    //     }
 
-        const getEndpoints = await registryWrapper.getProviderEndpoints(signerOne._address);
+    //     const getEndpoints = await registryWrapper.getProviderEndpoints(signerOne._address);
 
-        expect(getEndpoints.length).to.equal(0);
+    //     expect(getEndpoints.length).to.equal(0);
 
-    });
+    // });
 
 })
