@@ -261,6 +261,16 @@ describe('Registry Test', () => {
 
     });
 
+    it('Should get the provider param of the first endpoint param', async () => {
+
+        const providerParam = await registryWrapper.getProviderParam(
+            signerOne._address,
+            testProvider.endpoint_params[0]
+        )
+
+        console.log(providerParam)
+    })
+
     it('Should be able to get all providers', async () => {
 
         const getProviderTx = await registryWrapper.getAllProviders();

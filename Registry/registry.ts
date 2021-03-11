@@ -162,8 +162,8 @@ export class ZapRegistry extends BaseContract {
      */
     async setProviderParameter({ key, value }: SetProviderParams): Promise<txid> {
 
-        key = ethers.utils.formatBytes32String(key)
-        
+        key = ethers.utils.formatBytes32String(key);
+
         value = ethers.utils.toUtf8Bytes(value);
 
         value = ethers.utils.hexlify(value);
@@ -181,10 +181,15 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string>} A promise that will be resolved with the value of the key
      */
     async getProviderParam(provider: address, key: string): Promise<string> {
-        return await this.contract.methods.getProviderParameter(
+
+        key = ethers.utils.formatBytes32String(key);
+
+        const getParameter = await this.contract.getProviderParameter(
             provider,
-            ethers.utils.formatBytes32String(key)
-        ).call();
+            key
+        );
+
+        return ethers.utils.toUtf8String(getParameter);
     }
 
     /**
