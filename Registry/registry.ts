@@ -339,12 +339,14 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string>} Returns a Promise of the endpoint's all params
      */
     async getEndpointParams({ provider, endpoint }: NextEndpoint): Promise<string[]> {
-        const params: string[] = await this.contract.methods.getEndpointParams(
+
+        const params: string[] = await this.contract.getEndpointParams(
+
             provider,
             ethers.utils.formatBytes32String(endpoint)
-        ).call();
+        );
 
-        return ZapRegistry.decodeParams(params);
+        return params.map(param => ethers.utils.parseBytes32String(param));
     }
 
     /**

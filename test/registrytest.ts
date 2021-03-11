@@ -202,6 +202,19 @@ describe('Registry Test', () => {
 
     });
 
+    it('Should get the endpoint params in zap registry contract', async () => {
+
+        const endpointParams = await registryWrapper.getEndpointParams({
+            provider: signerOne._address,
+            endpoint: testProvider.endpoint,
+        });
+
+        expect(endpointParams).to.be.ok;
+
+        expect(endpointParams).to.eql(testProvider.endpoint_params);
+
+    });
+
     it('Should clear endpoint', async () => {
 
         const beforeClear = await registryWrapper.getProviderEndpoints(signerOne._address);
