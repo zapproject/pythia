@@ -156,11 +156,12 @@ export class ZapRegistry extends BaseContract {
      * @param {BN} s.gas - The amount of gas to use.
      * @returns {Promise<txid>} Transaction hash
      */
-    async setProviderParameter({ key, value, from, gas = DEFAULT_GAS }: SetProviderParams): Promise<txid> {
-        return await this.contract.methods.setProviderParameter(
+    async setProviderParameter({ key, value }: SetProviderParams): Promise<txid> {
+
+        return await this.contract.setProviderParameter(
             ethers.utils.formatBytes32String(key),
             ethers.utils.formatBytes32String(value)
-        ).send({ from, gas });
+        )
     }
 
     /**
@@ -205,11 +206,8 @@ export class ZapRegistry extends BaseContract {
             }
         }
 
-        console.log(validEndpoints)
-
         return validEndpoints;
     }
-
 
     /**********************PROVIDER'S SPECIFIC ENDPOINT CALLS ***************************/
 

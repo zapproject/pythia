@@ -21,6 +21,7 @@ describe('Registry Test', () => {
     let signerOne: any
     let signerTwo: any
     let signerThree: any
+    let newEndpoint: string = 'newEndpoint';
 
     let account: Array<string> = [],
         registryWrapper: any,
@@ -176,7 +177,6 @@ describe('Registry Test', () => {
     it('Should initiate Provider curve with valid broker address in zap registry contract', async () => {
 
         let initProviderTwoTx: any;
-        let newEndpoint: string = 'newEndpoint';
 
         try {
 
@@ -204,13 +204,18 @@ describe('Registry Test', () => {
 
     it('Should clear endpoint', async () => {
 
+        const beforeClear = await registryWrapper.getProviderEndpoints(signerOne._address);
+
+        const endpntsLength = beforeClear.length;
+
         await registryWrapper.clearEndpoint({
             endpoint: testZapProvider.endpoint
         });
 
-        let x = await registryWrapper.getProviderEndpoints(signerOne._address);
+        const afterClear = await registryWrapper.getProviderEndpoints(signerOne._address);
 
-        console.log(x)
+        expect(afterClear.length).to.equal(endpntsLength - 1);
 
     });
+
 })
