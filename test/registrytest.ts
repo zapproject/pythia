@@ -261,14 +261,36 @@ describe('Registry Test', () => {
 
     });
 
-    it('Should get the markdown param from the first endpoint param', async () => {
+    it('Should get the markdown url from the first endpoint param', async () => {
 
-        const providerParam = await registryWrapper.getProviderParam(
+        const markdownParam = await registryWrapper.getProviderParam(
             signerOne._address,
             testProvider.endpoint_params[0]
         );
 
-    })
+        expect(markdownParam).to.equal(testProvider.markdownUrl);
+
+    });
+
+    it('Should get the json url from the second endpoint param', async () => {
+
+        const jsonParam = await registryWrapper.getProviderParam(
+            signerOne._address,
+            testProvider.endpoint_params[1]
+        );
+
+        expect(jsonParam).to.equal(testProvider.jsonUrl);
+
+    });
+
+
+    it('Should get all provider params', async () => {
+
+        const getProviderParamsTx = await registryWrapper.getAllProviderParams(signerOne._address);
+
+        expect(getProviderParamsTx).to.eql(testProvider.endpoint_params);
+        
+    });
 
     it('Should be able to get all providers', async () => {
 

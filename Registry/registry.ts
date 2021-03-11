@@ -198,8 +198,10 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<string[]>} A promise that will be resolved with all the keys
      */
     async getAllProviderParams(provider: address): Promise<string[]> {
-        const allParams = await this.contract.methods.getAllProviderParams(provider).call();
-        return allParams;
+
+        const allParams = await this.contract.getAllProviderParams(provider);
+
+        return allParams.map((param: string) => ethers.utils.parseBytes32String(param));
     }
 
     /**
