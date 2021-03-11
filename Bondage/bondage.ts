@@ -5,7 +5,7 @@ import {
     Filter, txid, NetworkProviderOptions, NULL_ADDRESS, NumType, TransactionCallback
 } from '../Types/types';
 
-import { Utils } from './utils';
+//import { Utils } from './utils';
 
 const ethers = require('ethers');
 
