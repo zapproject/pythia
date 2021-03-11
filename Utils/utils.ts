@@ -6,7 +6,7 @@ export const testZapProvider: any = {
     pubkey: 111,
     title: 'testProvider',
     endpoint_params: ['p1', 'p2'],
-    endpoint: 'testEndpoint',
+    endpoints: ['testEndpoint', 'newEndpoint'],
     query: 'btcPrice',
     curve: new Curve(TEST_CURVE),
     broker: '0x0000000000000000000000000000000000000000',

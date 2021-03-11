@@ -265,11 +265,11 @@ export class ZapRegistry extends BaseContract {
      */
     async clearEndpoint({ endpoint }: Endpoint, cb?: TransactionCallback): Promise<txid> {
 
+        endpoint = ethers.utils.formatBytes32String(endpoint);
+
         const promiEvent = this.contract.clearEndpoint(
-
-            ethers.utils.formatBytes32String(endpoint)
-
-        )
+            endpoint
+        );
 
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
@@ -350,9 +350,14 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<boolean>} Returns a Promise of a true/false value.
      */
     async isEndpointSet(provider: address, endpoint: string): Promise<boolean> {
-        const unset: boolean = await this.contract.methods.getCurveUnset(
-            provider, ethers.utils.formatBytes32String(endpoint)
-        ).call();
+
+        endpoint = ethers.utils.formatBytes32String(endpoint);
+
+        const unset: boolean = await this.contract.getCurveUnset(
+            provider,
+            endpoint
+        );
+
         return !unset;
     }
 
