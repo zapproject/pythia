@@ -193,6 +193,17 @@ describe('Registry Test', () => {
 
     });
 
+    it('Should get the provider curve', async () => {
+
+        const getCurve = await registryWrapper.getProviderCurve(
+            signerOne._address,
+            testProvider.endpoint
+        );
+
+        expect(getCurve.values).to.eql(testProvider.curve.values);
+
+    });
+
     it('Should set endpoint endpointParams in zap registry contract', async () => {
 
         const setParamsTx = await registryWrapper.setEndpointParams({
@@ -239,20 +250,36 @@ describe('Registry Test', () => {
 
     });
 
-    it('Should clear endpoint', async () => {
+    it('Should check if all providers are initiated', async () => {
 
-        const beforeClear = await registryWrapper.getProviderEndpoints(signerOne._address);
+        const initStatus = [];
 
-        const endpntsLength = beforeClear.length;
+        const allProviders = await registryWrapper.getAllProviders();
 
-        await registryWrapper.clearEndpoint({
-            endpoint: testZapProvider.endpoint
-        });
+        for (let i = 0; i < allProviders.length; i++) {
 
-        const afterClear = await registryWrapper.getProviderEndpoints(signerOne._address);
+            initStatus.push(await registryWrapper.isProviderInitiated(allProviders[i]));
 
-        expect(afterClear.length).to.equal(endpntsLength - 1);
+        };
+
+        expect(initStatus.forEach(bool => bool === true));
 
     });
+
+    // it('Should clear endpoint', async () => {
+
+    //     const beforeClear = await registryWrapper.getProviderEndpoints(signerOne._address);
+
+    //     const endpntsLength = beforeClear.length;
+
+    //     await registryWrapper.clearEndpoint({
+    //         endpoint: testZapProvider.endpoint
+    //     });
+
+    //     const afterClear = await registryWrapper.getProviderEndpoints(signerOne._address);
+
+    //     expect(afterClear.length).to.equal(endpntsLength - 1);
+
+    // });
 
 })

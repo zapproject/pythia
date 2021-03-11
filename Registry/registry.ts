@@ -272,10 +272,12 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<CurveType>} Returns a Promise that will eventually resolve into a Curve object
      */
     async getProviderCurve(provider: string, endpoint: string): Promise<Curve> {
-        const term: string[] = await this.contract.methods.getProviderCurve(
+
+        const term: string[] = await this.contract.getProviderCurve(
             provider,
             ethers.utils.formatBytes32String(endpoint)
-        ).call();
+        );
+
         return new Curve(term.map((i: string) => { return parseInt(i); }));
     }
 
