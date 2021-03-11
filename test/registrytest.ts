@@ -215,6 +215,30 @@ describe('Registry Test', () => {
 
     });
 
+    it('Should be able to get all providers', async () => {
+
+        const getProviderTx = await registryWrapper.getAllProviders();
+
+        expect(getProviderTx).to.be.ok;
+
+    });
+
+    it('Should get provider address by index', async () => {
+
+        const providers = [];
+
+        const allProviders = await registryWrapper.getAllProviders();
+
+        for (let i = 0; i < allProviders.length; i++) {
+
+            providers.push(await registryWrapper.getProviderAddressByIndex(i));
+
+        }
+
+        expect(providers).to.eql(allProviders);
+
+    });
+
     it('Should clear endpoint', async () => {
 
         const beforeClear = await registryWrapper.getProviderEndpoints(signerOne._address);

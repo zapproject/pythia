@@ -38,7 +38,9 @@ export class ZapRegistry extends BaseContract {
      * @returns {Promise<Object>} Returns a Promise that will eventually resolve into list of oracles
      */
     async getAllProviders(): Promise<Record<string, any>> {
-        return await this.contract.methods.getAllOracles().call();
+
+        return await this.contract.getAllOracles();
+
     }
 
     /**
@@ -47,7 +49,8 @@ export class ZapRegistry extends BaseContract {
      * @returns Promise<address> address of indexed provider
      */
     async getProviderAddressByIndex(index: number | string): Promise<address> {
-        return await this.contract.methods.getOracleAddress(index).call();
+
+        return await this.contract.getOracleAddress(index);
     }
 
     /****************** PROVIDER SPECIFIC CALLS **********************/
