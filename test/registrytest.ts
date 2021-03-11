@@ -239,6 +239,15 @@ describe('Registry Test', () => {
 
     });
 
+    it('Should set the provider parameter for the first endpoint param ', async () => {
+
+        const setParametersTx = await registryWrapper.setProviderParameter({
+            key: testProvider.endpoint_params[0],
+            value: 'https://gateway.ipfs.io/ipfs/QmaWPP9HFvWZceV8en2kisWdwZtrTo8ZfamEzkTuFg3PFr'
+        });
+
+    });
+
     it('Should be able to get all providers', async () => {
 
         const getProviderTx = await registryWrapper.getAllProviders();

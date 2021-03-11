@@ -10,6 +10,7 @@ import {
     InitProvider, InitCurve, NextEndpoint, EndpointParams, SetProviderParams, SetProviderTitle, Endpoint,
     Filter, txid, address, NetworkProviderOptions, DEFAULT_GAS, NULL_ADDRESS, TransactionCallback
 } from '../Types/types';
+
 import { isConstructorDeclaration } from 'typescript';
 
 const ethers = require('ethers');
@@ -161,10 +162,16 @@ export class ZapRegistry extends BaseContract {
      */
     async setProviderParameter({ key, value }: SetProviderParams): Promise<txid> {
 
+        key = ethers.utils.formatBytes32String(key)
+        
+        value = ethers.utils.toUtf8Bytes(value);
+
+        value = ethers.utils.hexlify(value);
+
         return await this.contract.setProviderParameter(
-            ethers.utils.formatBytes32String(key),
-            ethers.utils.formatBytes32String(value)
-        )
+            key,
+            value
+        );
     }
 
     /**
