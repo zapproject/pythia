@@ -318,10 +318,15 @@ export class ZapRegistry extends BaseContract {
      * no broker for this endpoint
      */
     async getEndpointBroker(provider: address, endpoint: string): Promise<string> {
-        const broker = await this.contract.methods.getEndpointBroker(
-            provider, ethers.utils.formatBytes32String(endpoint)
-        ).call();
-        return ethers.utils.parseBytes32String(broker);
+
+        endpoint = ethers.utils.formatBytes32String(endpoint);
+
+        const broker = await this.contract.getEndpointBroker(
+            provider,
+            endpoint
+        );
+
+        return broker;
     }
 
     /**

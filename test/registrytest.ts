@@ -200,7 +200,20 @@ describe('Registry Test', () => {
             testProvider.endpoint
         );
 
+        expect(getCurve).to.ok;
         expect(getCurve.values).to.eql(testProvider.curve.values);
+
+    });
+
+    it('Should get endpoint broker', async () => {
+
+        const getBroker = await registryWrapper.getEndpointBroker(
+            signerOne._address,
+            testProvider.endpoint
+        );
+
+        expect(getBroker).to.be.ok;
+        expect(getBroker).to.be.equal(testProvider.broker);
 
     });
 
