@@ -243,7 +243,7 @@ describe('Registry Test', () => {
 
         const setMdTx = await registryWrapper.setProviderParameter({
             key: testProvider.endpoint_params[0],
-            value: 'https://raw.githubusercontent.com/mxstbr/markdown-test-file/master/TEST.md'
+            value: testProvider.markdownUrl
         });
 
         expect(setMdTx).to.be.ok;
@@ -254,21 +254,20 @@ describe('Registry Test', () => {
 
         const setJsonTx = await registryWrapper.setProviderParameter({
             key: testProvider.endpoint_params[1],
-            value: 'https://gateway.ipfs.io/ipfs/QmaWPP9HFvWZceV8en2kisWdwZtrTo8ZfamEzkTuFg3PFr'
+            value: testProvider.jsonUrl
         });
 
         expect(setJsonTx).to.be.ok;
 
     });
 
-    it('Should get the provider param of the first endpoint param', async () => {
+    it('Should get the markdown param from the first endpoint param', async () => {
 
         const providerParam = await registryWrapper.getProviderParam(
             signerOne._address,
             testProvider.endpoint_params[0]
-        )
+        );
 
-        console.log(providerParam)
     })
 
     it('Should be able to get all providers', async () => {

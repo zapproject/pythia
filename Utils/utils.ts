@@ -9,7 +9,9 @@ export const testZapProvider: any = {
     endpoint: 'testEndpoint',
     query: 'btcPrice',
     curve: new Curve(TEST_CURVE),
-    broker: '0x0000000000000000000000000000000000000000'
+    broker: '0x0000000000000000000000000000000000000000',
+    markdownUrl: 'https://raw.githubusercontent.com/mxstbr/markdown-test-file/master/TEST.md',
+    jsonUrl: 'https://gateway.ipfs.io/ipfs/QmaWPP9HFvWZceV8en2kisWdwZtrTo8ZfamEzkTuFg3PFr'
 };
 
 export const HardhatServerOptions = {
