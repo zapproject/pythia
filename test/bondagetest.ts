@@ -55,20 +55,21 @@ describe('Bondage Test', () => {
 
         bondageWrapper = new ZapBondage(options);
 
-        bondageWrapper = bondageWrapper.contract.connect(signerOne)
+        // bondageWrapper = bondageWrapper.contract.connect(signerOne);
 
         expect(bondageWrapper).to.be.ok;
 
     });
 
-    // it('Should initiate bondageWrapper through Coordinator address', async () => {
-
-    //     options.ZapCoordinator = bondageWrapper.ZapCoordinator._address;
-    //     bondageWrapper = new ZapBondage(options);
-    //     //await Utils.delay(3000);
-
-    //     expect(bondageWrapper).to.be.ok;
-    // })
+    it('Should initiate bondageWrapper through Coordinator address', async () => {
+        bondageWrapper = new ZapBondage({
+            networkId: HardhatServerOptions.network_id,
+            networkProvider: HardhatProvider,
+            coordinator: bondageWrapper.coordinator.address
+        });
+        // current way to test coordinator works properly
+        expect(bondageWrapper).to.be.ok;
+    })
 
     // it('A newly created provider should have no bound dots', async () => {
     //     const boundDots = await bondageWrapper.getBoundDots({subscriber: accounts[2], provider: accounts[0], endpoint: testZapProvider.endpoint});
