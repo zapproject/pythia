@@ -58,11 +58,9 @@ export class ZapRegistry extends BaseContract {
 
     /**
      * Initializes a brand endpoint in the Registry contract, creating an Oracle entry if needed.
-     * @param {InitProvider} i. {public_key, title, from, gas=DEFAULT_GAS}
+     * @param {InitProvider} i. {public_key, title}
      * @param {string} i.public_key - A public identifier for this oracle
      * @param {string} i.title - A descriptor describing what data this oracle provides
-     * @param {address} i.from - Ethereum Address of the account that is initializing this provider
-     * @param {BigNumber} i.gas - Sets the gas limit for this transaction (optional)
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
@@ -153,11 +151,9 @@ export class ZapRegistry extends BaseContract {
 
     /**
      * Set the parameter of a provider
-     * @param {SetProviderParams} s. { key, value, from, gas=DEFAULT_GAS }
+     * @param {SetProviderParams} s. { key, value }
      * @param {string} s.key - The key to be set
      * @param {string} s.value - The value to set the key to
-     * @param {address} s.from - The address of the provider
-     * @param {BN} s.gas - The amount of gas to use.
      * @returns {Promise<txid>} Transaction hash
      */
     async setProviderParameter({ key, value }: SetProviderParams): Promise<txid> {
@@ -258,7 +254,6 @@ export class ZapRegistry extends BaseContract {
 
     /**
      * Clear endpoint
-     * @param {string} from The address of this provider
      * @param {string} endpoint Data endpoint of the provider
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Transaction Hash

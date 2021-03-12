@@ -20,4 +20,6 @@ export const HardhatServerOptions = {
     port: 8545,
 };
 
+export const delay = (ms: number) => new Promise(_ => setTimeout(_, ms));
+
 export const HardhatProvider = 'http://127.0.0.1:8545';

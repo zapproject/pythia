@@ -5,6 +5,7 @@ import { join } from 'path';
 import { ethers } from 'ethers';
 
 import {
+    delay,
     testZapProvider,
     HardhatServerOptions,
     HardhatProvider
@@ -45,6 +46,7 @@ describe('Registry Test', () => {
     after(() => {
 
         console.log('Done running Registry tests');
+
     });
 
     it('Should be able to create registryWrapper', async () => {
@@ -62,6 +64,8 @@ describe('Registry Test', () => {
             networkProvider: HardhatProvider,
             coordinator: registryWrapper.coordinator.address
         });
+
+        expect(registryWrapper).to.be.ok;
 
     });
 
@@ -352,11 +356,10 @@ describe('Registry Test', () => {
 
     it('Should clear the first endpoint', async () => {
 
-        const clearFirstEndpnt = await registryWrapper.clearEndpoint(
-            {
-                endpoint: testProvider.endpoints[0]
-            }
-        );
+        const clearFirstEndpnt = await registryWrapper.clearEndpoint({
+
+            endpoint: testProvider.endpoints[0]
+        });
 
         expect(clearFirstEndpnt).to.be.ok;
 
@@ -364,11 +367,11 @@ describe('Registry Test', () => {
 
     it('Should clear the last endpoint', async () => {
 
-        const clearScndEndpnt = await registryWrapper.clearEndpoint(
-            {
-                endpoint: testProvider.endpoints[1]
-            }
-        );
+        const clearScndEndpnt = await registryWrapper.clearEndpoint({
+
+            endpoint: testProvider.endpoints[1]
+
+        });
 
         const getEndpnts = await registryWrapper.getProviderEndpoints(signerOne._address);
 
