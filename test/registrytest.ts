@@ -1,7 +1,5 @@
 import { ZapRegistry } from '../Registry/registry';
 
-import { join } from 'path';
-
 import { ethers } from 'ethers';
 
 import {
@@ -10,8 +8,6 @@ import {
     HardhatProvider
 }
     from '../Utils/utils';
-import { doesNotReject } from 'node:assert';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 const expect = require('chai').expect;
 
@@ -173,28 +169,40 @@ describe('Registry Test', () => {
         const title = 'NEWTITLE';
 
         await registryWrapper.setProviderTitle({
-
             title: title
-        });
+        })
+            .then(async (setTitle: Object) => {
 
-        const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
+                expect(setTitle).to.be.ok;
 
-        expect(newTitle).to.equal(title);
+                const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
 
+                expect(newTitle).to.equal(title);
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
     });
-
 
     it('Should initiate Provider curve with valid broker address in zap registry contract', async () => {
 
-        let initProviderTwoTx: any;
-
         try {
 
-            const initCurveTwotx = await registryWrapper.initiateProviderCurve({
+            await registryWrapper.initiateProviderCurve({
                 endpoint: testProvider.endpoints[1],
                 term: testProvider.curve.values,
                 broker: signerTwo._address,
-            });
+            })
+                .then((initCurveTwoTx: Object) => {
+
+                    expect(initCurveTwoTx).to.be.ok;
+
+                })
+                .catch((err: Object) => {
+
+                    return err;
+                })
 
         } catch (err) {
 
@@ -205,109 +213,157 @@ describe('Registry Test', () => {
 
     it('Should get the provider curve', async () => {
 
-        const getCurve = await registryWrapper.getProviderCurve(
+        await registryWrapper.getProviderCurve(
             signerOne._address,
             testProvider.endpoints[0]
-        );
+        )
+            .then((getCurve: Array<number>) => {
 
-        expect(getCurve).to.ok;
-        expect(getCurve.values).to.eql(testProvider.curve.values);
+                expect(getCurve).to.ok;
+
+                expect(getCurve.values).to.eql(testProvider.curve.values);
+            })
+            .catch((err: Object) => {
+                return err;
+            })
 
     });
 
     it('Should get endpoint broker', async () => {
 
-        const getBroker = await registryWrapper.getEndpointBroker(
+        await registryWrapper.getEndpointBroker(
             signerOne._address,
             testProvider.endpoints[0]
-        );
+        )
+            .then((getBroker: String) => {
 
-        expect(getBroker).to.be.ok;
-        expect(getBroker).to.be.equal(testProvider.broker);
+                expect(getBroker).to.be.ok;
+                expect(getBroker).to.be.equal(testProvider.broker);
+            })
+            .catch((err: Object) => {
 
+                return err;
+            })
     });
 
     it('Should set endpoint endpointParams in zap registry contract', async () => {
 
-        const setParamsTx = await registryWrapper.setEndpointParams({
+        await registryWrapper.setEndpointParams({
             endpoint: testProvider.endpoints[0],
             endpoint_params: testProvider.endpoint_params,
-        });
+        })
+            .then((setParamsTx: Object) => {
+                expect(setParamsTx).to.be.ok
+            })
+            .catch((err: Object) => {
 
+                return err;
+            })
     });
 
     it('Should get the endpoint params in zap registry contract', async () => {
 
-        const endpointParams = await registryWrapper.getEndpointParams({
+        await registryWrapper.getEndpointParams({
             provider: signerOne._address,
             endpoint: testProvider.endpoints[0]
-        });
+        })
+            .then((endpointParams: Array<string>) => {
 
-        expect(endpointParams).to.be.ok;
+                expect(endpointParams).to.be.ok;
+                expect(endpointParams).to.eql(testProvider.endpoint_params);
 
-        expect(endpointParams).to.eql(testProvider.endpoint_params);
-
+            })
+            .catch((err: Object) => {
+                return err;
+            })
     });
 
     it('Should set the markdown url for the first endpoint param ', async () => {
 
-        const setMdTx = await registryWrapper.setProviderParameter({
+        await registryWrapper.setProviderParameter({
             key: testProvider.endpoint_params[0],
             value: testProvider.markdownUrl
-        });
+        })
+            .then((mdTx: Object) => {
 
-        expect(setMdTx).to.be.ok;
-
+                expect(mdTx).to.be.ok;
+            })
+            .catch((err: Object) => {
+                return err;
+            })
     });
 
     it('Should set the json url for the second endpoint param ', async () => {
 
-        const setJsonTx = await registryWrapper.setProviderParameter({
+        await registryWrapper.setProviderParameter({
             key: testProvider.endpoint_params[1],
             value: testProvider.jsonUrl
-        });
+        })
+            .then((jsonTx: Object) => {
 
-        expect(setJsonTx).to.be.ok;
+                expect(jsonTx).to.be.ok;
+            })
+            .catch((err: Object) => {
 
+                return err;
+            })
     });
 
     it('Should get the markdown url from the first endpoint param', async () => {
 
-        const markdownParam = await registryWrapper.getProviderParam(
+        await registryWrapper.getProviderParam(
             signerOne._address,
             testProvider.endpoint_params[0]
-        );
-
-        expect(markdownParam).to.equal(testProvider.markdownUrl);
-
+        )
+            .then((markdownParam: String) => {
+                expect(markdownParam).to.equal(testProvider.markdownUrl);
+            })
+            .catch((err: Object) => {
+                return err;
+            })
     });
 
     it('Should get the json url from the second endpoint param', async () => {
 
-        const jsonParam = await registryWrapper.getProviderParam(
+        await registryWrapper.getProviderParam(
             signerOne._address,
             testProvider.endpoint_params[1]
-        );
+        )
+            .then((jsonParam: String) => {
 
-        expect(jsonParam).to.equal(testProvider.jsonUrl);
-
+                expect(jsonParam).to.equal(testProvider.jsonUrl);
+            })
+            .catch((err: Object) => {
+                return err;
+            })
     });
-
 
     it('Should get all provider params', async () => {
 
-        const getProviderParamsTx = await registryWrapper.getAllProviderParams(signerOne._address);
+        await registryWrapper.getAllProviderParams(signerOne._address)
 
-        expect(getProviderParamsTx).to.eql(testProvider.endpoint_params);
+            .then((getProviderParams: Array<string>) => {
 
+                expect(getProviderParams).to.eql(testProvider.endpoint_params);
+
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
     });
 
     it('Should be able to get all providers', async () => {
 
-        const getProviderTx = await registryWrapper.getAllProviders();
+        await registryWrapper.getAllProviders()
 
-        expect(getProviderTx).to.be.ok;
+            .then((getProviders: Array<string>) => {
 
+                expect(getProviders).to.be.ok;
+            })
+            .catch((err: Object) => {
+                return err;
+            })
     });
 
     it('Should get provider address by index', async () => {
@@ -315,6 +371,8 @@ describe('Registry Test', () => {
         const providers = [];
 
         const allProviders = await registryWrapper.getAllProviders();
+
+        expect(allProviders).to.be.ok;
 
         for (let i = 0; i < allProviders.length; i++) {
 
@@ -330,7 +388,7 @@ describe('Registry Test', () => {
 
         const initStatus = [];
 
-        const allProviders = await registryWrapper.getAllProviders();
+        const allProviders = await registryWrapper.getAllProviders()
 
         for (let i = 0; i < allProviders.length; i++) {
 
@@ -344,42 +402,65 @@ describe('Registry Test', () => {
 
     it('Should check if the endpoint and corresponding curve is set', async () => {
 
-        const unset = await registryWrapper.isEndpointSet(
+        await registryWrapper.isEndpointSet(
             signerOne._address,
             testProvider.endpoints[0]
-        );
-
-        expect(unset).to.be.true;
+        )
+            .then((unset: Boolean) => {
+                expect(unset).to.be.true;
+            })
+            .catch((err: Object) => {
+                return err;
+            })
 
     });
 
     it('Should clear the first endpoint', async () => {
 
-        const clearFirstEndpnt = await registryWrapper.clearEndpoint({
+        await registryWrapper.clearEndpoint({
 
             endpoint: testProvider.endpoints[0]
-        });
+        })
+            .then((clearEndpointTx: Object) => {
 
-        expect(clearFirstEndpnt).to.be.ok;
+                expect(clearEndpointTx).to.be.ok;
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
     });
 
     it('Should clear the last endpoint', async () => {
 
-        const clearScndEndpnt = await registryWrapper.clearEndpoint({
+        await registryWrapper.clearEndpoint({
 
             endpoint: testProvider.endpoints[1]
         })
+            .then((clearEndpointTx: Object) => {
 
-        expect(clearScndEndpnt).to.be.ok;
+                expect(clearEndpointTx).to.be.ok;
 
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
     });
 
     it('Should have an empty array of endpoints after clearing', async () => {
 
-        const getEndpnts = await registryWrapper.getProviderEndpoints(signerOne._address);
+        await registryWrapper.getProviderEndpoints(signerOne._address)
 
-        expect(getEndpnts).to.be.ok;
-        expect(getEndpnts.length).to.equal(0);
-    });
+            .then((getEndpoints: Array<string>) => {
+
+                expect(getEndpoints).to.be.ok;
+                expect(getEndpoints.length).to.equal(0);
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
+    })
 
 })
