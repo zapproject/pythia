@@ -42,7 +42,9 @@ export class ZapToken extends BaseContract {
      */
     async balanceOf(address: address): Promise<string | number> {
 
-        return await this.contract.balanceOf(address);
+        const balance = await this.contract.balanceOf(address);
+
+        return parseInt(balance);
     }
 
     /**

@@ -72,6 +72,7 @@ describe('ZapToken Test', () => {
     it('Should get zapToken owner', async () => {
 
         await zapTokenWrapper.getContractOwner()
+
             .then((owner: String) => {
 
                 expect(owner).to.be.equal(signerOne._address);
@@ -83,12 +84,21 @@ describe('ZapToken Test', () => {
             })
     });
 
-    // it('Should get balance of zapToken from wrapper', async () => {
+    it('Should get balance of zapToken from wrapper', async () => {
 
-    //     const balance = await zapTokenWrapper.balanceOf(signerOne._address);
+        await zapTokenWrapper.balanceOf(signerOne._address)
 
-    //     expect(balance).to.be.ok;
-    // });
+            .then((balance: Number) => {
+
+                expect(balance).to.be.ok;
+                expect(balance).to.be.gt(0);
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
+
+    });
 
 
 });
