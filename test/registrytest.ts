@@ -5,7 +5,6 @@ import { join } from 'path';
 import { ethers } from 'ethers';
 
 import {
-    delay,
     testZapProvider,
     HardhatServerOptions,
     HardhatProvider
@@ -40,8 +39,6 @@ describe('Registry Test', () => {
         signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
 
         signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
-
-        await delay(1500);
 
     });
 
@@ -364,7 +361,6 @@ describe('Registry Test', () => {
         });
 
         expect(clearFirstEndpnt).to.be.ok;
-
     });
 
     it('Should clear the last endpoint', async () => {
