@@ -370,15 +370,18 @@ describe('Registry Test', () => {
         const clearScndEndpnt = await registryWrapper.clearEndpoint({
 
             endpoint: testProvider.endpoints[1]
+        })
 
-        });
+        expect(clearScndEndpnt).to.be.ok;
+
+    });
+
+    it('Should have an empty array of endpoints after clearing', async () => {
 
         const getEndpnts = await registryWrapper.getProviderEndpoints(signerOne._address);
 
-        expect(clearScndEndpnt).to.be.ok;
         expect(getEndpnts).to.be.ok;
         expect(getEndpnts.length).to.equal(0);
-
     });
 
 })

@@ -8,7 +8,7 @@ import { HardhatProvider } from '../Utils/utils';
 
 import {
     InitProvider, InitCurve, NextEndpoint, EndpointParams, SetProviderParams, SetProviderTitle, Endpoint,
-    Filter, txid, address, NetworkProviderOptions, DEFAULT_GAS, NULL_ADDRESS, TransactionCallback
+    Filter, txid, address, NetworkProviderOptions, NULL_ADDRESS, TransactionCallback
 } from '../Types/types';
 
 import { isConstructorDeclaration } from 'typescript';
@@ -26,7 +26,7 @@ export class ZapRegistry extends BaseContract {
      * @param {any} artifactsDir Directory where contract ABIs are located
      * @param {any} networkId Select which network the contract is located on (mainnet, testnet, private)
      * @param {any} networkProvider Ethereum network provider (e.g. Infura)
-     * @example new ZapRegistry({networkId : 42, networkProvider : web3})
+     * @example new ZapRegistry({networkId : 42, networkProvider : http://localhost:8545})
      */
     constructor(obj?: NetworkProviderOptions) {
         super(Object.assign(obj || {}, { artifactName: 'REGISTRY' }));
@@ -227,12 +227,10 @@ export class ZapRegistry extends BaseContract {
 
     /**
      * Initializes a piecewise curve for a given provider's endpoint. Note: curve can only be set once per endpoint.
-     * @param {InitCurve} i. {endpoint, term, broker, from, gas=DEFAULT_GAS}
+     * @param {InitCurve} i. {endpoint, term, broker }
      * @param {string} i.endpoint - Data endpoint of the provider
      * @param {CurveType} i.curve - A curve object representing a piecewise curve
      * @param {address} i.broker - The address allowed to bond/unbond. If 0, any address allowed
-     * @param {address} i.from - The address of the owner of this oracle
-     * @param {BigNumber} i.gas - Sets the gas limit for this transaction (optional)
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
@@ -295,8 +293,6 @@ export class ZapRegistry extends BaseContract {
      * @param {EndpointParams} e. {endpoint, endpoint_params, from, gas=DEFAULT_GAS}••••••••••
      * @param {string} e.endpoint - Data endpoint of the provider
      * @param {string[]} e.endpoint_params - The parameters that this endpoint accepts as query arguments
-     * @param {address} e.from - The address of the owner of this oracle
-     * @param {BigNumber} e.gas - Sets the gas limit for this transaction (optional)
      * @param {()=>void} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
