@@ -71,20 +71,20 @@ describe('ZapToken Test', () => {
 
     // });
 
-    it('Should get zapToken owner', async () => {
+    // it('Should get zapToken owner', async () => {
 
-        const owner = await zapTokenWrapper.getContractOwner();
+    //     const owner = await zapTokenWrapper.getContractOwner();
 
-        expect(owner).to.be.equal(signerOne._address);
+    //     expect(owner).to.be.equal(signerOne._address);
 
-    });
+    // });
 
-    it('Should get balance of zapToken from wrapper', async () => {
+    // it('Should get balance of zapToken from wrapper', async () => {
 
-        const balance = await zapTokenWrapper.balanceOf(signerOne._address);
+    //     const balance = await zapTokenWrapper.balanceOf(signerOne._address);
 
-        expect(balance).to.be.ok;
-    });
+    //     expect(balance).to.be.ok;
+    // });
 
 
 });
