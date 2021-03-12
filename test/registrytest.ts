@@ -41,6 +41,8 @@ describe('Registry Test', () => {
 
         signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
 
+        await delay(1500);
+
     });
 
     after(() => {
