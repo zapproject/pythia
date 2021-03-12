@@ -44,7 +44,6 @@ describe('ZapToken Test', () => {
 
         signerThree = await hardhatHttpProvider.getSigner(hardhatAccounts[2]);
 
-
     });
 
     it('Should initiate wrapper', async () => {
@@ -53,39 +52,40 @@ describe('ZapToken Test', () => {
 
         zapTokenOwner = await zapTokenWrapper.getContractOwner();
 
+        expect(zapTokenOwner).to.be.ok;
         expect(zapTokenWrapper).to.be.ok;
 
     });
 
-    // it('Should initiate wrapper with coordinator ', async () => {
+    it('Should initiate wrapper with coordinator ', async () => {
 
-    //     zapTokenWrapper = new ZapToken({
-    //         networkId: HardhatServerOptions.network_id,
-    //         networkProvider: HardhatProvider,
-    //         coordinator: zapTokenWrapper.coordinator.address
-    //     });
+        zapTokenWrapper = new ZapToken({
+            networkId: HardhatServerOptions.network_id,
+            networkProvider: HardhatProvider,
+            coordinator: zapTokenWrapper.coordinator.address
+        });
 
-    //     zapTokenOwner = await zapTokenWrapper.getContractOwner();
+        //     zapTokenOwner = await zapTokenWrapper.getContractOwner();
 
-    //     expect(zapTokenWrapper).to.be.ok;
+        //     expect(zapTokenWrapper).to.be.ok;
 
-    // });
+        // });
 
-    // it('Should get zapToken owner', async () => {
+        // it('Should get zapToken owner', async () => {
 
-    //     const owner = await zapTokenWrapper.getContractOwner();
+        //     const owner = await zapTokenWrapper.getContractOwner();
 
-    //     expect(owner).to.be.equal(signerOne._address);
+        //     expect(owner).to.be.equal(signerOne._address);
 
-    // });
+        // });
 
-    // it('Should get balance of zapToken from wrapper', async () => {
+        // it('Should get balance of zapToken from wrapper', async () => {
 
-    //     const balance = await zapTokenWrapper.balanceOf(signerOne._address);
+        //     const balance = await zapTokenWrapper.balanceOf(signerOne._address);
 
-    //     expect(balance).to.be.ok;
-    // });
+        //     expect(balance).to.be.ok;
+        // });
 
 
-});
-
+    });
+})
