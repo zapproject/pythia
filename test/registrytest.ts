@@ -11,6 +11,7 @@ import {
 }
     from '../Utils/utils';
 import { doesNotReject } from 'node:assert';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 const expect = require('chai').expect;
 
@@ -192,9 +193,6 @@ describe('Registry Test', () => {
                 broker: signerTwo._address,
             });
 
-
-
-
         } catch (err) {
 
             console.log(signerTwo._address + ': ' + 'Provider and Curve is already initiated');
@@ -352,19 +350,32 @@ describe('Registry Test', () => {
 
     });
 
-    // it('Should clear endpoint', async () => {
+    it('Should clear the first endpoint', async () => {
 
-    //     for (let i = 0; i < testProvider.endpoints.length; i++) {
+        const clearFirstEndpnt = await registryWrapper.clearEndpoint(
+            {
+                endpoint: testProvider.endpoints[0]
+            }
+        );
 
-    //         await registryWrapper.clearEndpoint({
-    //             endpoint: testProvider.endpoints[i]
-    //         })
-    //     }
+        expect(clearFirstEndpnt).to.be.ok;
 
-    //     const getEndpoints = await registryWrapper.getProviderEndpoints(signerOne._address);
+    });
 
-    //     expect(getEndpoints.length).to.equal(0);
+    it('Should clear the last endpoint', async () => {
 
-    // });
+        const clearScndEndpnt = await registryWrapper.clearEndpoint(
+            {
+                endpoint: testProvider.endpoints[1]
+            }
+        );
+
+        const getEndpnts = await registryWrapper.getProviderEndpoints(signerOne._address);
+
+        expect(clearScndEndpnt).to.be.ok;
+        expect(getEndpnts).to.be.ok;
+        expect(getEndpnts.length).to.equal(0);
+
+    });
 
 })
