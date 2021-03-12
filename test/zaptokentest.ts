@@ -97,8 +97,29 @@ describe('ZapToken Test', () => {
 
                 return err;
             })
-
     });
 
+    it('Should update balance, and get updated balance of zap token', async () => {
+
+        const beforeAllocation = await zapTokenWrapper.balanceOf(signerTwo._address);
+
+        await zapTokenWrapper.allocate({
+            to: signerTwo._address,
+            amount: allocateAmount
+        })
+            .then(async (allocateTx: Object) => {
+
+                const afterAllocation = await zapTokenWrapper.balanceOf(signerTwo._address);
+                expect(beforeAllocation).to.be.ok;
+                expect(afterAllocation).to.be.ok;
+                expect(allocateTx).to.be.ok;
+                expect(afterAllocation).to.be.equal(allocateAmount + beforeAllocation);
+
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
+    });
 
 });

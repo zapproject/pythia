@@ -78,9 +78,9 @@ export class ZapToken extends BaseContract {
      * @param {Function} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async allocate({ to, amount, from, gasPrice, gas = Util.DEFAULT_GAS }: TransferType, cb?: TransactionCallback): Promise<txid> {
-        amount = toHex(amount);
-        const promiEvent = this.contract.allocate(to, amount).send({ from, gas, gasPrice });
+    async allocate({ to, amount }: TransferType, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.allocate(to, amount);
 
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
