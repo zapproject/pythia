@@ -4,7 +4,7 @@
   "description": "Πυθία",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register 'test/**/*.ts'"
+    "test": "mocha --timeout 10000 --require ts-node/register 'test/**/*.ts'"
   },
   "repository": {
     "type": "git",
