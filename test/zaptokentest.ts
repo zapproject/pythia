@@ -15,10 +15,8 @@ describe('ZapToken Test', () => {
 
     let hardhatHttpProvider: any;
     let hardhatAccounts: any;
-    let signerOne: any
-    let signerTwo: any
-    let signerThree: any
-
+    let signerOne: any;
+    let signerTwo: any;
 
     let accounts: Array<string> = [],
         HardhatServer: any,
@@ -41,8 +39,6 @@ describe('ZapToken Test', () => {
         signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
 
         signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
-
-        signerThree = await hardhatHttpProvider.getSigner(hardhatAccounts[2]);
 
     });
 
@@ -115,6 +111,44 @@ describe('ZapToken Test', () => {
                 expect(allocateTx).to.be.ok;
                 expect(afterAllocation).to.be.equal(allocateAmount + beforeAllocation);
 
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
+    });
+
+    it('Should make transfer to another account', async () => {
+
+        const beforeTransfer = await zapTokenWrapper.balanceOf(signerTwo._address);
+
+        await zapTokenWrapper.send({
+            to: signerTwo,
+            amount: allocateAmount,
+        })
+            .then(async (transferTx: Object) => {
+
+                const afterTransfer = await zapTokenWrapper.balanceOf(signerTwo._address);
+
+                expect(transferTx).to.be.ok;
+                expect(afterTransfer).to.be.ok;
+                expect(afterTransfer).to.be.equal(allocateAmount + beforeTransfer);
+
+            })
+            .catch((err: Object) => {
+
+                return err;
+            })
+    });
+
+    it('Should approve to transfer from one to the another account', async () => {
+
+        await zapTokenWrapper.approve({
+            to: signerTwo._address,
+            amount: allocateAmount,
+        })
+            .then((approveTx: Object) => {
+                expect(approveTx).to.be.ok;
             })
             .catch((err: Object) => {
 

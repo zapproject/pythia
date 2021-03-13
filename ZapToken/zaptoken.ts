@@ -57,9 +57,9 @@ export class ZapToken extends BaseContract {
      * @param {Function} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async send({ to, amount, from, gasPrice, gas = Util.DEFAULT_GAS }: TransferType, cb?: TransactionCallback): Promise<txid> {
-        amount = toHex(amount);
-        const promiEvent = this.contract.transfer(to, amount).send({ from, gas, gasPrice });
+    async send({ to, amount }: TransferType, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.transfer(to, amount)
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
@@ -100,10 +100,9 @@ export class ZapToken extends BaseContract {
      * @param {Function} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async approve({ to, amount, from, gasPrice, gas = Util.DEFAULT_GAS }: TransferType, cb?: TransactionCallback): Promise<txid> {
-        amount = toHex(amount);
+    async approve({ to, amount }: TransferType, cb?: TransactionCallback): Promise<txid> {
 
-        const _success = this.contract.approve(to, amount).send({ from, gas, gasPrice });
+        const _success = this.contract.approve(to, amount);
 
         if (cb) {
             _success.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
