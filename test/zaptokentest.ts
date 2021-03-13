@@ -42,6 +42,12 @@ describe('ZapToken Test', () => {
 
     });
 
+    after(() => {
+
+        console.log('Done running ZapToken tests');
+
+    });
+
     it('Should initiate wrapper', async () => {
 
         zapTokenWrapper = new ZapToken(options)
