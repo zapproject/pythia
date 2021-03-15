@@ -8,6 +8,7 @@ import {
     HardhatProvider
 }
     from '../Utils/utils';
+import { AnyARecord } from 'node:dns';
 
 const expect = require('chai').expect;
 
@@ -15,10 +16,8 @@ describe('Registry Test', () => {
 
     let hardhatHttpProvider: any;
     let hardhatAccounts: any;
-    let signerOne: any
-    let signerTwo: any
 
-    let account: Array<string> = [],
+    let signers: Array<any> = [],
         registryWrapper: any,
         testProvider = testZapProvider,
         options: any = {
@@ -32,9 +31,10 @@ describe('Registry Test', () => {
 
         hardhatAccounts = await hardhatHttpProvider.listAccounts();
 
-        signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+        for (let i = 0; i < hardhatAccounts.length; i++) {
 
-        signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
+            signers.push(await hardhatHttpProvider.getSigner(hardhatAccounts[i]));
+        }
 
     });
 
@@ -94,23 +94,23 @@ describe('Registry Test', () => {
 
             expect(testProvider.title).to.equal(ethers.utils.parseBytes32String(args.title));
 
-            expect(args.provider).to.equal(signerOne._address);
+            expect(args.provider).to.equal(signers[0]._address);
 
-            const title = await registryWrapper.getProviderTitle(signerOne._address);
+            const title = await registryWrapper.getProviderTitle(signers[0]._address);
 
             expect(title).to.be.equal(testProvider.title);
 
-            const pubkey = await registryWrapper.getProviderPublicKey(signerOne._address);
+            const pubkey = await registryWrapper.getProviderPublicKey(signers[0]._address);
 
             expect(pubkey).to.be.equal(testProvider.pubkey);
 
         } catch (err) {
 
-            const initStatus = await registryWrapper.isProviderInitiated(signerOne._address);
+            const initStatus = await registryWrapper.isProviderInitiated(signers[0]._address);
 
             if (initStatus === true) {
 
-                console.log(signerOne._address + ': ' + 'Is already initiated as a provider');
+                console.log(signers[0]._address + ': ' + 'Is already initiated as a provider');
             }
             else {
 
@@ -147,7 +147,7 @@ describe('Registry Test', () => {
 
             expect(args.broker).to.equal(testProvider.broker);
 
-            expect(args.provider).to.equal(signerOne._address);
+            expect(args.provider).to.equal(signers[0]._address);
 
             const getTxCurve = args.curve.map((num: any) => parseInt(num));
 
@@ -159,7 +159,7 @@ describe('Registry Test', () => {
 
         } catch (err: any) {
 
-            console.log(signerOne._address + ': ' + 'Curve is already initiated');
+            console.log(signers[0]._address + ': ' + 'Curve is already initiated');
         }
 
     });
@@ -175,7 +175,7 @@ describe('Registry Test', () => {
 
                 expect(setTitle).to.be.ok;
 
-                const newTitle = await registryWrapper.getProviderTitle(signerOne._address);
+                const newTitle = await registryWrapper.getProviderTitle(signers[0]._address);
 
                 expect(newTitle).to.equal(title);
             })
@@ -192,7 +192,7 @@ describe('Registry Test', () => {
             await registryWrapper.initiateProviderCurve({
                 endpoint: testProvider.endpoints[1],
                 term: testProvider.curve.values,
-                broker: signerTwo._address,
+                broker: signers[1]._address,
             })
                 .then((initCurveTwoTx: Object) => {
 
@@ -206,7 +206,7 @@ describe('Registry Test', () => {
 
         } catch (err) {
 
-            console.log(signerTwo._address + ': ' + 'Provider and Curve is already initiated');
+            console.log(signers[1]._address + ': ' + 'Provider and Curve is already initiated');
         }
 
     });
@@ -214,7 +214,7 @@ describe('Registry Test', () => {
     it('Should get the provider curve', async () => {
 
         await registryWrapper.getProviderCurve(
-            signerOne._address,
+            signers[1]._address,
             testProvider.endpoints[0]
         )
             .then((getCurve: Array<number>) => {
@@ -232,7 +232,7 @@ describe('Registry Test', () => {
     it('Should get endpoint broker', async () => {
 
         await registryWrapper.getEndpointBroker(
-            signerOne._address,
+            signers[1]._address,
             testProvider.endpoints[0]
         )
             .then((getBroker: String) => {
@@ -264,7 +264,7 @@ describe('Registry Test', () => {
     it('Should get the endpoint params in zap registry contract', async () => {
 
         await registryWrapper.getEndpointParams({
-            provider: signerOne._address,
+            provider: signers[1]._address,
             endpoint: testProvider.endpoints[0]
         })
             .then((endpointParams: Array<string>) => {
@@ -312,7 +312,7 @@ describe('Registry Test', () => {
     it('Should get the markdown url from the first endpoint param', async () => {
 
         await registryWrapper.getProviderParam(
-            signerOne._address,
+            signers[0]._address,
             testProvider.endpoint_params[0]
         )
             .then((markdownParam: String) => {
@@ -326,7 +326,7 @@ describe('Registry Test', () => {
     it('Should get the json url from the second endpoint param', async () => {
 
         await registryWrapper.getProviderParam(
-            signerOne._address,
+            signers[0]._address,
             testProvider.endpoint_params[1]
         )
             .then((jsonParam: String) => {
@@ -340,7 +340,7 @@ describe('Registry Test', () => {
 
     it('Should get all provider params', async () => {
 
-        await registryWrapper.getAllProviderParams(signerOne._address)
+        await registryWrapper.getAllProviderParams(signers[0]._address)
 
             .then((getProviderParams: Array<string>) => {
 
@@ -403,7 +403,7 @@ describe('Registry Test', () => {
     it('Should check if the endpoint and corresponding curve is set', async () => {
 
         await registryWrapper.isEndpointSet(
-            signerOne._address,
+            signers[0]._address,
             testProvider.endpoints[0]
         )
             .then((unset: Boolean) => {
@@ -450,7 +450,7 @@ describe('Registry Test', () => {
 
     it('Should have an empty array of endpoints after clearing', async () => {
 
-        await registryWrapper.getProviderEndpoints(signerOne._address)
+        await registryWrapper.getProviderEndpoints(signers[0]._address)
 
             .then((getEndpoints: Array<string>) => {
 

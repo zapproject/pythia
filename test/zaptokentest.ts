@@ -15,10 +15,8 @@ describe('ZapToken Test', () => {
 
     let hardhatHttpProvider: any;
     let hardhatAccounts: any;
-    let signerOne: any;
-    let signerTwo: any;
 
-    let accounts: Array<string> = [],
+    let signers: Array<any> = [],
         HardhatServer: any,
         zapTokenWrapper: any,
         testProvider = testZapProvider,
@@ -36,9 +34,10 @@ describe('ZapToken Test', () => {
 
         hardhatAccounts = await hardhatHttpProvider.listAccounts();
 
-        signerOne = await hardhatHttpProvider.getSigner(hardhatAccounts[0]);
+        for (let i = 0; i < hardhatAccounts.length; i++) {
 
-        signerTwo = await hardhatHttpProvider.getSigner(hardhatAccounts[1]);
+            signers.push(await hardhatHttpProvider.getSigner(hardhatAccounts[i]));
+        }
 
     });
 
@@ -77,7 +76,7 @@ describe('ZapToken Test', () => {
 
             .then((owner: String) => {
 
-                expect(owner).to.be.equal(signerOne._address);
+                expect(owner).to.be.equal(signers[0]._address);
 
             })
             .catch((err: Object) => {
@@ -88,7 +87,7 @@ describe('ZapToken Test', () => {
 
     it('Should get balance of zapToken from wrapper', async () => {
 
-        await zapTokenWrapper.balanceOf(signerOne._address)
+        await zapTokenWrapper.balanceOf(signers[0]._address)
 
             .then((balance: Number) => {
 
@@ -103,15 +102,15 @@ describe('ZapToken Test', () => {
 
     it('Should update balance, and get updated balance of zap token', async () => {
 
-        const beforeAllocation = await zapTokenWrapper.balanceOf(signerTwo._address);
+        const beforeAllocation = await zapTokenWrapper.balanceOf(signers[1]._address);
 
         await zapTokenWrapper.allocate({
-            to: signerTwo._address,
+            to: signers[1]._address,
             amount: allocateAmount
         })
             .then(async (allocateTx: Object) => {
 
-                const afterAllocation = await zapTokenWrapper.balanceOf(signerTwo._address);
+                const afterAllocation = await zapTokenWrapper.balanceOf(signers[1]._address);
                 expect(beforeAllocation).to.be.ok;
                 expect(afterAllocation).to.be.ok;
                 expect(allocateTx).to.be.ok;
@@ -126,15 +125,15 @@ describe('ZapToken Test', () => {
 
     it('Should make transfer to another account', async () => {
 
-        const beforeTransfer = await zapTokenWrapper.balanceOf(signerTwo._address);
+        const beforeTransfer = await zapTokenWrapper.balanceOf(signers[1]._address);
 
         await zapTokenWrapper.send({
-            to: signerTwo,
+            to: signers[1]._address,
             amount: allocateAmount,
         })
             .then(async (transferTx: Object) => {
 
-                const afterTransfer = await zapTokenWrapper.balanceOf(signerTwo._address);
+                const afterTransfer = await zapTokenWrapper.balanceOf(signers[1]._address);
 
                 expect(transferTx).to.be.ok;
                 expect(afterTransfer).to.be.ok;
@@ -150,7 +149,7 @@ describe('ZapToken Test', () => {
     it('Should approve to transfer from one to the another account', async () => {
 
         await zapTokenWrapper.approve({
-            to: signerTwo._address,
+            to: signers[1]._address,
             amount: allocateAmount,
         })
             .then((approveTx: Object) => {
