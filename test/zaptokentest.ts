@@ -26,7 +26,7 @@ describe('ZapToken Test', () => {
             networkProvider: HardhatProvider
         };
 
-    const allocateAmount = '1000';
+    const allocateAmount: any = 1000;
 
     beforeEach(async () => {
 
@@ -72,93 +72,70 @@ describe('ZapToken Test', () => {
 
     it('Should get zapToken owner', async () => {
 
-        await zapTokenWrapper.getContractOwner()
+        const owner: String = await zapTokenWrapper.getContractOwner();
 
-            .then((owner: String) => {
+        expect(owner).to.be.equal(signers[0]._address);
 
-                expect(owner).to.be.equal(signers[0]._address);
-
-            })
-            .catch((err: Object) => {
-
-                return err;
-            })
     });
 
     it('Should get balance of zapToken from wrapper', async () => {
 
-        await zapTokenWrapper.balanceOf(signers[0]._address)
+        const getBalance: Number = await zapTokenWrapper.balanceOf(signers[0]._address)
 
-            .then((balance: Number) => {
+        expect(getBalance).to.be.ok;
+        expect(getBalance).to.be.gt(0);
 
-                expect(balance).to.be.ok;
-                expect(balance).to.be.gt(0);
-            })
-            .catch((err: Object) => {
-
-                return err;
-            })
     });
 
     it('Should update balance, and get updated balance of zap token', async () => {
 
-        const beforeAllocation = await zapTokenWrapper.balanceOf(signers[1]._address);
+        const beforeAllocation: any = await zapTokenWrapper.balanceOf(signers[1]._address);
 
-        await zapTokenWrapper.allocate({
+        const allocateTx: Object = await zapTokenWrapper.allocate({
             to: signers[1]._address,
             amount: allocateAmount
-        })
-            .then(async (allocateTx: Object) => {
+        });
 
-                const afterAllocation = await zapTokenWrapper.balanceOf(signers[1]._address);
-                expect(beforeAllocation).to.be.ok;
-                expect(afterAllocation).to.be.ok;
-                expect(allocateTx).to.be.ok;
-                expect(afterAllocation).to.be.equal(allocateAmount + beforeAllocation);
+        const afterAllocation: any = await zapTokenWrapper.balanceOf(signers[1]._address);
 
-            })
-            .catch((err: Object) => {
+        expect(beforeAllocation).to.be.ok;
 
-                return err;
-            })
+        expect(afterAllocation).to.be.ok;
+
+        expect(allocateTx).to.be.ok;
+
+        expect(afterAllocation).to.be.equal(beforeAllocation + allocateAmount);
+
     });
 
     it('Should make transfer to another account', async () => {
 
-        const beforeTransfer = await zapTokenWrapper.balanceOf(signers[1]._address);
+        const beforeTransfer: any = await zapTokenWrapper.balanceOf(signers[1]._address);
 
-        await zapTokenWrapper.send({
+        const transferTx: Object = await zapTokenWrapper.send({
             to: signers[1]._address,
             amount: allocateAmount,
         })
-            .then(async (transferTx: Object) => {
 
-                const afterTransfer = await zapTokenWrapper.balanceOf(signers[1]._address);
+        const afterTransfer: any = await zapTokenWrapper.balanceOf(signers[1]._address);
 
-                expect(transferTx).to.be.ok;
-                expect(afterTransfer).to.be.ok;
-                expect(afterTransfer).to.be.equal(allocateAmount + beforeTransfer);
+        expect(transferTx).to.be.ok;
 
-            })
-            .catch((err: Object) => {
+        expect(afterTransfer).to.be.ok;
 
-                return err;
-            })
+        expect(afterTransfer).to.be.equal(allocateAmount + beforeTransfer);
+
     });
 
     it('Should approve to transfer from one to the another account', async () => {
 
-        await zapTokenWrapper.approve({
+        const approveTx: Object = await zapTokenWrapper.approve({
             to: signers[1]._address,
             amount: allocateAmount,
         })
-            .then((approveTx: Object) => {
-                expect(approveTx).to.be.ok;
-            })
-            .catch((err: Object) => {
 
-                return err;
-            })
+        expect(approveTx).to.be.ok;
+
     });
 
 });
