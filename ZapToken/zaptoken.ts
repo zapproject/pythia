@@ -1,7 +1,5 @@
 import { BaseContract } from '../BaseContract/basecontract';
 
-import { Util } from './tokenutils';
-
 import {
     TransferType,
     address,
@@ -11,12 +9,10 @@ import {
     NumType
 } from '../Types/types';
 
-import { toHex } from 'web3-utils';
-
-
 /**
  * @class
- * Provides Represents an interface to the Zap Token ERC20 contract. Enables token transfers, balance lookups, and approvals.
+ * Provides Represents an interface to the Zap Token ERC20 contract. 
+ * Enables token transfers, balance lookups, and approvals.
  */
 
 export class ZapToken extends BaseContract {
@@ -25,15 +21,15 @@ export class ZapToken extends BaseContract {
      * @constructor
      * @param obj
      * @param {string} n.artifactsDir - Directory where contract ABIs are located
-     * @param {number|string} n.networkId - Select which network the contract is located on (mainnet, testnet, private)
+     * @param {number|string} n.networkId - Select which network the contract is located on (mainnet, 
+     * testnet, private)
      * @param {any} n.networkProvider - Ethereum network provider (e.g. Infura)
-     * @example new ZapToken({networkId : 42, networkProvider : web3})
+     * @example new ZapToken({networkId : 42, networkProvider : http://localhost:8545})
      */
 
     constructor(obj?: NetworkProviderOptions) {
         super(Object.assign(obj || {}, { artifactName: 'ZAP_TOKEN' }));
     }
-
 
     /**
      * Get the Zap Token balance of a given address.
@@ -42,7 +38,9 @@ export class ZapToken extends BaseContract {
      */
     async balanceOf(address: address): Promise<string | number> {
 
-        return await this.contract.balanceOf(address);
+        const balance = await this.contract.balanceOf(address);
+
+        return parseInt(balance);
     }
 
     /**
@@ -50,14 +48,12 @@ export class ZapToken extends BaseContract {
      * @param {TransferType} t. {to, amount, from,gas=Util.DEFAULT_GAS}
      * @param {address} t.to - Address of the recipient
      * @param {number} t.amount - Amount of Zap to transfer (wei)
-     * @param {address} t.from - Address of the sender
-     * @param {number} t.gas - Sets the gas limit for this transaction (optional)
      * @param {Function} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async send({ to, amount, from, gasPrice, gas = Util.DEFAULT_GAS }: TransferType, cb?: TransactionCallback): Promise<txid> {
-        amount = toHex(amount);
-        const promiEvent = this.contract.transfer(to, amount).send({ from, gas, gasPrice });
+    async send({ to, amount }: TransferType, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.transfer(to, amount)
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
             promiEvent.on('error', (error: any) => cb(error));
@@ -71,14 +67,12 @@ export class ZapToken extends BaseContract {
      * @param {TransferType} t. {to, amount, from,gas=Util.DEFAULT_GAS}
      * @param {address} t.to - Address of the recipient
      * @param {number} t.amount - Amount of Zap to allocate (wei)
-     * @param {address} t.from - Address of the sender (must be owner of the Zap contract)
-     * @param {number} t.gas - Sets the gas limit for this transaction (optional)
      * @param {Function} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async allocate({ to, amount, from, gasPrice, gas = Util.DEFAULT_GAS }: TransferType, cb?: TransactionCallback): Promise<txid> {
-        amount = toHex(amount);
-        const promiEvent = this.contract.allocate(to, amount).send({ from, gas, gasPrice });
+    async allocate({ to, amount }: TransferType, cb?: TransactionCallback): Promise<txid> {
+
+        const promiEvent = this.contract.allocate(to, amount);
 
         if (cb) {
             promiEvent.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
@@ -93,15 +87,12 @@ export class ZapToken extends BaseContract {
      * @param {TransferType} t. {to, amount, from, gas=Util.DEFAULT_GAS}
      * @param {address} t.to - Address of the recipient
      * @param {number} t.amount - Amount of Zap to approve (wei)
-     * @param {address} t.from - Address of the sender
-     * @param {number} t.gas - Sets the gas limit for this transaction (optional)
      * @param {Function} cb - Callback for transactionHash event
      * @returns {Promise<txid>} Returns a Promise that will eventually resolve into a transaction hash
      */
-    async approve({ to, amount, from, gasPrice, gas = Util.DEFAULT_GAS }: TransferType, cb?: TransactionCallback): Promise<txid> {
-        amount = toHex(amount);
+    async approve({ to, amount }: TransferType, cb?: TransactionCallback): Promise<txid> {
 
-        const _success = this.contract.approve(to, amount).send({ from, gas, gasPrice });
+        const _success = this.contract.approve(to, amount);
 
         if (cb) {
             _success.on('transactionHash', (transactionHash: string) => cb(null, transactionHash));
