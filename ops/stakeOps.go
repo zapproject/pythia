@@ -8,13 +8,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	zap "github.com/zapproject/zap-miner/contracts"
-	zap1 "github.com/zapproject/zap-miner/contracts1"
-	"github.com/zapproject/zap-miner/token"
-	"github.com/zapproject/zap-miner/util"
-	"github.com/zapproject/zap-miner/vault"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	zap "github.com/zapproject/pythia/contracts"
+	zap1 "github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/pythia/token"
+	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/pythia/vault"
 )
 
 /**

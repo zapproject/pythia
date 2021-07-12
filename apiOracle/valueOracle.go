@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 var logger = util.NewLogger("apiOracle", "valueOracle")

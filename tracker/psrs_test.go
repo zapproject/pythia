@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/db"
 )
 
 func TestGetLatest(t *testing.T) {

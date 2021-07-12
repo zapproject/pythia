@@ -12,8 +12,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/math"
 
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/rpc"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/rpc"
 )
 
 func TestRunner(t *testing.T) {

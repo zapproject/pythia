@@ -17,17 +17,17 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	cli "github.com/jawher/mow.cli"
-	ZapCommon "github.com/zapproject/zap-miner/common"
-	config "github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/contracts"
-	"github.com/zapproject/zap-miner/contracts1"
-	"github.com/zapproject/zap-miner/contracts2"
-	db "github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/ops"
-	"github.com/zapproject/zap-miner/rpc"
-	token "github.com/zapproject/zap-miner/token"
-	"github.com/zapproject/zap-miner/util"
-	"github.com/zapproject/zap-miner/vault"
+	ZapCommon "github.com/zapproject/pythia/common"
+	config "github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
+	"github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/pythia/contracts2"
+	db "github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/ops"
+	"github.com/zapproject/pythia/rpc"
+	token "github.com/zapproject/pythia/token"
+	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/pythia/vault"
 )
 
 var ctx context.Context
@@ -137,14 +137,14 @@ var GitTag string
 var GitHash string
 
 const versionMessage = `Zap
-    The official Zap Miner %s (%s)
+    The official Pythia %s (%s)
     -----------------------------------------
 	Website: https://Zap.org
-	Github:  https://github.com/zapproject/zap-miner
+	Github:  https://github.com/zapproject/pythia
 `
 
 func App() *cli.Cli {
-	app := cli.App("ZapMiner", "The Zap.org official miner")
+	app := cli.App("Pythia", "The Zap.org official miner")
 
 	//app wide config options
 	configPath := app.StringOpt("config", "config.json", "Path to the primary JSON config file")

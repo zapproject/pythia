@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 func setup() {

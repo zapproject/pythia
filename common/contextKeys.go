@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/util"
 )
 
 var (

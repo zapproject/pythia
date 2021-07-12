@@ -13,11 +13,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	zap "github.com/zapproject/zap-miner/contracts"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/rpc"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	zap "github.com/zapproject/pythia/contracts"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/rpc"
 )
 
 //TimeOutTracker struct

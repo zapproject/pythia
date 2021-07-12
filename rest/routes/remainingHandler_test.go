@@ -10,13 +10,13 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/common/math"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/contracts"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/rpc"
-	"github.com/zapproject/zap-miner/tracker"
-	"github.com/zapproject/zap-miner/util"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/rpc"
+	"github.com/zapproject/pythia/tracker"
+	"github.com/zapproject/pythia/util"
 )
 
 var DB db.DB

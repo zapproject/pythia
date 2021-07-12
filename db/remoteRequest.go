@@ -8,7 +8,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/util"
 )
 
 type requestType int
