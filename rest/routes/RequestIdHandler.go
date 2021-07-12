@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/db"
 )
 
 //BalanceHandler handles balance requests

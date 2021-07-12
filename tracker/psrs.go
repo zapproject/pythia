@@ -6,8 +6,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/zapproject/pythia/apiOracle"
-	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/zap-miner/apiOracle"
+	"github.com/zapproject/zap-miner/config"
 )
 
 var PSRs = map[int]ValueGenerator{

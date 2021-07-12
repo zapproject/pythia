@@ -3,9 +3,9 @@ package ops
 import (
 	"context"
 
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/db"
-	"github.com/zapproject/pythia/rpc"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/zap-miner/rpc"
 )
 
 //TxnSubmitter just concrete type for txn submitter

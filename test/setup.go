@@ -1,8 +1,8 @@
 package test
 
 import (
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/util"
 )
 
 var configJSON = `{

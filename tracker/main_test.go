@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zapproject/pythia/apiOracle"
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/apiOracle"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/util"
 )
 
 // TODO: Set threshold low and test the  "out of range" failure

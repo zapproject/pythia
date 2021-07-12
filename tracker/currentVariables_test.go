@@ -10,14 +10,14 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/ethereum/go-ethereum/common"
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/config"
-	zap "github.com/zapproject/pythia/contracts"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/config"
+	zap "github.com/zapproject/zap-miner/contracts"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/zapproject/pythia/db"
-	"github.com/zapproject/pythia/rpc"
+	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/zap-miner/rpc"
 )
 
 func TestCurrentVarableString(t *testing.T) {

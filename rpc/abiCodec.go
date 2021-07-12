@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/zap-miner/contracts1"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/zapproject/pythia/contracts"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/contracts"
+	"github.com/zapproject/zap-miner/util"
 )
 
 var abiCodecLog = util.NewLogger("rpc", "ABICodec")

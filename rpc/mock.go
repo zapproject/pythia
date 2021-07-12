@@ -10,8 +10,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/zapproject/pythia/contracts1"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/contracts1"
+	"github.com/zapproject/zap-miner/util"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/common/math"

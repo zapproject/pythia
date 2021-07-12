@@ -1,6 +1,6 @@
 package pow
 
-import "github.com/zapproject/pythia/db"
+import "github.com/zapproject/zap-miner/db"
 
 func deleteFromDB(DB db.DB, keys []string) error {
 	for _, k := range keys {

@@ -5,7 +5,7 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/zap-miner/db"
 )
 
 //TransactionGeneratorFN is a callback function that a TransactionSubmitter uses to actually invoke

@@ -10,8 +10,8 @@ import (
 
 	"fmt"
 
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/util"
 )
 
 type StratumPool struct {
@@ -22,20 +22,20 @@ type StratumPool struct {
 	worker        string
 	group         *MiningGroup
 	stratumClient *StratumClient
-	input         chan *Work
+	input 				chan *Work
 	currChallenge *MiningChallenge
 	currWork      *Work
 	currJobID     string
 }
 
 type MiningNotify struct {
-	JobID             string
-	Challenge         string
-	PoolAddress       string
-	LowDifficulty     *big.Int
-	MedianDifficulty  *big.Int
+	JobID  			string
+	Challenge 	string
+	PoolAddress string
+	LowDifficulty *big.Int
+	MedianDifficulty *big.Int
 	NetworkDifficulty *big.Int
-	CleanJob          bool
+	CleanJob 		bool
 }
 
 type MiningSetDifficulty struct {
@@ -51,7 +51,7 @@ func (n *MiningNotify) UnmarshalJSON(buf []byte) error {
 	wantLen := len(tmp)
 
 	// if we get an error when we try to parse buf into JSON and store it as the value of tmp, return the error
-	// if successful, tmp is updated,
+	// if successful, tmp is updated, 
 	if err := json.Unmarshal(buf, &tmp); err != nil {
 		return err
 	}
@@ -73,10 +73,11 @@ func (n *MiningSetDifficulty) UnmarshalJSON(buf []byte) error {
 	wantLen := len(tmp)
 
 	// if we get an error when we try to parse buf into JSON and store it as the value of tmp, return the error
-	// if successful, tmp is updated,
+	// if successful, tmp is updated, 
 	if err := json.Unmarshal(buf, &tmp); err != nil {
 		return err
 	}
+
 
 	// if the number of interfaces within tmp is no longer equal to the amount we want, return error w/ message
 	// if the number of interfaces within tmp is equal to the amount we want, return nil
@@ -98,13 +99,13 @@ func CreatePool(cfg *config.Config, group *MiningGroup) *StratumPool {
 	}
 }
 
-func (p *StratumPool) GetWork(input chan *Work) (*Work, bool) {
+func (p *StratumPool) GetWork(input chan *Work) (*Work,bool) {
 
-	// if there is a client and the client is already running, log a warning and return nil as *Work and
+	// if there is a client and the client is already running, log a warning and return nil as *Work and 
 	// false as bool
 	if p.stratumClient != nil && p.stratumClient.running {
 		p.log.Warn("stratum client already running")
-		return nil, false
+		return nil,false
 	}
 
 	// set receiver's input to equal input chan
@@ -119,7 +120,7 @@ func (p *StratumPool) GetWork(input chan *Work) (*Work, bool) {
 	stratumClient, err := StratumConnect(p.url, msgChan)
 	if err != nil {
 		p.log.Error("stratum connect error: %s", err.Error())
-		return nil, false
+		return nil,false
 	}
 
 	// set receiver's stratumClient to euqal new client instance
@@ -175,16 +176,16 @@ func (p *StratumPool) GetWork(input chan *Work) (*Work, bool) {
 						Difficulty: miningNotify.MedianDifficulty,
 						// Difficulty: big.NewInt(10000000),
 						// Difficulty: big.NewInt(6377077812),
-						RequestID: big.NewInt(1),
+						RequestID:  big.NewInt(1),
 					}
 
 					p.currChallenge = newChallenge
 					p.currJobID = miningNotify.JobID
 					job := &Work{
-						Challenge:  newChallenge,
+						Challenge: newChallenge,
 						PublicAddr: miningNotify.PoolAddress + nonce1,
-						Start:      uint64(rand.Int63()),
-						N:          math.MaxInt64}
+						Start: uint64(rand.Int63()),
+						N: math.MaxInt64}
 					p.currWork = job
 					input <- job
 					//p.log.Info("send new work to hash %#v", job)
@@ -212,10 +213,10 @@ func (p *StratumPool) GetWork(input chan *Work) (*Work, bool) {
 		}
 	}()
 
-	return nil, false
+	return nil,false
 }
 
-func (p *StratumPool) Submit(ctx context.Context, result *Result) bool {
+func (p *StratumPool) Submit(ctx context.Context, result *Result) bool{
 	nonce := result.Nonce
 	//submission := fmt.Sprintf("%s, %s, %s", p.minerAddress, p.currJobID, nonce)
 	//p.log.Warn("mining.submit: %s", submission)

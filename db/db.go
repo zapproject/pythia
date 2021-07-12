@@ -7,7 +7,7 @@ import (
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"github.com/syndtr/goleveldb/leveldb/filter"
 	"github.com/syndtr/goleveldb/leveldb/opt"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/util"
 )
 
 const (

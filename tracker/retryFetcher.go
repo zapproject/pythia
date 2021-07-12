@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/util"
 )
 
 // Client utilized for all HTTP requests

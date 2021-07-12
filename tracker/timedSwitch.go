@@ -3,7 +3,7 @@ package tracker
 import (
 	"time"
 
-	"github.com/zapproject/pythia/apiOracle"
+	"github.com/zapproject/zap-miner/apiOracle"
 )
 
 type TimedSwitch struct {
