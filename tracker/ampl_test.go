@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"github.com/benbjohnson/clock"
-	"github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/db"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/zap-miner/util"
 )
 
 func TestAmpl(t *testing.T) {

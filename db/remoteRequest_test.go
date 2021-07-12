@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/util"
 )
 
 func setupRemote() (DataServerProxy, DB, error) {

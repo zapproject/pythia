@@ -7,13 +7,13 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/assert"
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/config"
-	zap "github.com/zapproject/pythia/contracts"
-	zap1 "github.com/zapproject/pythia/contracts1"
-	"github.com/zapproject/pythia/ops"
-	"github.com/zapproject/pythia/token"
-	"github.com/zapproject/pythia/vault"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/config"
+	zap "github.com/zapproject/zap-miner/contracts"
+	zap1 "github.com/zapproject/zap-miner/contracts1"
+	"github.com/zapproject/zap-miner/ops"
+	"github.com/zapproject/zap-miner/token"
+	"github.com/zapproject/zap-miner/vault"
 )
 
 func TestStake(t *testing.T) {

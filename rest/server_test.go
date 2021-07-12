@@ -11,10 +11,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/db"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/zap-miner/util"
 )
 
 func setup() {

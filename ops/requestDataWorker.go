@@ -8,10 +8,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/db"
-	"github.com/zapproject/pythia/util"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/zap-miner/util"
 )
 
 //DataRequester responsible for submitting tips to request data periodically if configured to do so

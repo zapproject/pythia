@@ -5,7 +5,7 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/util"
 )
 
 type ZAPAmount struct {

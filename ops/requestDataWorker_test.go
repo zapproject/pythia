@@ -12,14 +12,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/stretchr/testify/assert"
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/contracts"
-	"github.com/zapproject/pythia/contracts1"
-	"github.com/zapproject/pythia/contracts2"
-	"github.com/zapproject/pythia/db"
-	"github.com/zapproject/pythia/rest"
-	"github.com/zapproject/pythia/rpc"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/zap-miner/contracts"
+	"github.com/zapproject/zap-miner/contracts1"
+	"github.com/zapproject/zap-miner/contracts2"
+	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/zap-miner/rest"
+	"github.com/zapproject/zap-miner/rpc"
 )
 
 var requestID *big.Int

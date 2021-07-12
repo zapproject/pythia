@@ -3,7 +3,7 @@ package pow
 import (
 	"fmt"
 
-	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/zap-miner/config"
 )
 
 func SetupMiningGroup(cfg *config.Config) (*MiningGroup, error) {

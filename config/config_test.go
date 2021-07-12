@@ -3,7 +3,7 @@ package config
 import (
 	"testing"
 
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/util"
 )
 
 func setup() error {

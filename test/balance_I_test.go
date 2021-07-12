@@ -5,9 +5,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/assert"
-	zapCommon "github.com/zapproject/pythia/common"
-	zap "github.com/zapproject/pythia/contracts"
-	"github.com/zapproject/pythia/util"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	zap "github.com/zapproject/zap-miner/contracts"
+	"github.com/zapproject/zap-miner/util"
 )
 
 func TestBalance(t *testing.T) {

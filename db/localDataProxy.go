@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/util"
 )
 
 type localProxy struct {

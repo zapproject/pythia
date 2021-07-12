@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/zapproject/pythia/dataServer"
-	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/zap-miner/dataServer"
+	"github.com/zapproject/zap-miner/util"
 )
 
 /**

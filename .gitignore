@@ -39,7 +39,7 @@ lerna-debug.log*
 bin
 pkg/darwin_amd64
 */vendor
-pythia
+zap-miner
 
 # Test binary, build with `go test -c`
 *.test

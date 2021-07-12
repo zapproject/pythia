@@ -8,8 +8,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/rpc"
+	zapCommon "github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/zap-miner/rpc"
 )
 
 func PrepareEthTransaction(ctx context.Context) (*bind.TransactOpts, error) {
