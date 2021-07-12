@@ -1,0 +1,86 @@
+### vscode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Temporary folders
+tmp/
+temp/
+
+# dotenv environment variables file
+.env
+.env.test
+.env*.local
+
+# Dependency directories
+node_modules/
+
+### Node ###
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+
+### Go ###
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.vscode
+bin
+pkg/darwin_amd64
+*/vendor
+zap-miner
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Generated txt files pertaining to possible dispute warning logs
+*possible-dispute-*
+
+/myconfig.json
+*/myconfig.json
+/myconfig2.json
+*/myconfig2.json
+config.json
+
+/dist
+
+node_modules
+
+./GPUMiner2
+
+OpenCL.def
+saved.json
+*/saved.json
+/saved.json
+libOpenCL.a
+./tracker/possible-dispute*
+
+.env
+/.env
+ZapDB*
+logs/
+
+# Test binary, built with `go test -c`
+*.test
+
+cache/
+.DS_Store
+
+# hardhat
+/hardhat/typechain/
+/hardhat/artifacts/
+
