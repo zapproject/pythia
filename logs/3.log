@@ -1,0 +1,503 @@
+[36mINFO[0m[0000] Created Remote data proxy connector for localhost:5001  [36mcomponent[0m=RemoteDB [36mpackage[0m=db
+No GPUs enabled, falling back to CPU mining, using 2 threads
+dataRequester created
+[36mINFO[0m[0000] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0000] Request ID is zero                            [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0015] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0015] Request ID is zero                            [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0030] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0030] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0030] Request ID is zero                            [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0030] Submitting tip for requestID: 1               [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+TX SENT CLIENT &{{0 c0001242c0 3d0900 c00011e540 c0001242a0 752d49a100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000 c0001243a0 c000124360 c000124380 0} {<nil>} {<nil>} {<nil>}}
+RequestData tx sent: 0x5b41cd867673c45ba1fb458eb57255e6101e58ec6380682753363a0702083cd6
+[36mINFO[0m[0030] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0045] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+Total hashrate 0  H/s
+	  0  H/s ( NaN%): CPU 0 
+	  0  H/s ( NaN%): CPU 1 
+[36mINFO[0m[0045] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+TX SENT CLIENT &{{1 c000124680 3d0900 c00011e720 c000124660 68c180d5000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000790a6035000000000000000000000000000000000000000000000000000000000000000133535373730303637393139343737393934313000000000000000000000000000 c000124740 c000124700 c000124720 0} {<nil>} {<nil>} {<nil>}}
+submitSolution tx sent: 0x4c77f7d92e7a851a89886281107a5ec9ca8bd80b13454ea6556f7d667bf6e9a1
+[36mINFO[0m[0045] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0045] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0060] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0060] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0060] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0060] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0075] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0090] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0090] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0090] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0090] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0105] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0120] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0120] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0120] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0120] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0135] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0150] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0150] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0150] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0150] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0165] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0180] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0180] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0180] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0180] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0195] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0210] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0210] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0210] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0210] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0225] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0240] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0240] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0240] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0240] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0255] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0270] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0270] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0270] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0270] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0285] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0300] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0300] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0300] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0300] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0315] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0330] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0330] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0330] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0330] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0345] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0360] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0360] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0360] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0360] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0375] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0390] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0390] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0390] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0390] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0405] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0420] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0420] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0420] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0420] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0435] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0450] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0450] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0450] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0450] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0465] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0480] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0480] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0480] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0480] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0495] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0510] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0510] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0510] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0510] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0525] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0540] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0540] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0540] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0540] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0555] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0570] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0570] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0570] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0570] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0585] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0600] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0600] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0600] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0600] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0615] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0630] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0630] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0630] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0630] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0645] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0660] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0660] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0660] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0660] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0675] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0690] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0690] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0690] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0690] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0705] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0720] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0720] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0720] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0720] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0735] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0750] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0750] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0750] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0750] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0765] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0780] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0780] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0780] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0780] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0795] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0810] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0810] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0810] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0810] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0825] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0840] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0840] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0840] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0840] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0855] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0870] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0870] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0870] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0870] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0885] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0900] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0900] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0900] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0900] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0915] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0930] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0930] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0930] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0930] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0945] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0960] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0960] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0960] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0960] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0975] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[0990] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0990] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[0990] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[0990] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1005] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1020] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1020] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1020] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1020] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1035] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1050] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1050] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1050] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1050] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1065] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1080] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1080] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1080] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1080] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1095] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1110] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1110] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1110] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1110] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1125] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1140] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1140] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1140] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1140] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1155] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1170] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1170] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1170] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1170] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1185] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1200] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1200] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1200] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1200] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1215] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1230] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1230] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1230] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1230] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1245] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1260] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1260] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1260] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1260] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1275] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1290] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1290] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1290] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1290] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1305] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1320] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1320] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1320] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1320] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1335] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1350] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1350] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1350] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1350] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1365] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1380] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1380] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1380] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1380] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1395] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1410] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1410] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1410] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1410] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1425] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1440] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1440] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1440] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1440] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1455] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1470] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1470] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1470] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1470] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1485] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1500] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1500] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1500] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1500] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1515] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1530] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1530] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1530] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1530] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1545] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1560] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1560] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1560] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1560] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1575] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1590] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1590] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1590] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1590] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1605] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1620] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1620] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1620] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1620] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1635] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1650] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1650] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1650] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1650] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1665] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1680] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1680] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1680] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1680] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1695] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1710] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1710] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1710] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1710] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1725] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1740] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1740] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1740] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1740] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1755] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1770] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1770] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1770] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1770] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1785] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1800] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1800] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1800] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1800] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1815] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1830] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1830] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1830] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1830] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1845] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1860] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1860] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1860] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1860] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1875] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+[36mINFO[0m[1890] Checking whether to submit data request...    [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1890] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 8000000000
+[36mINFO[0m[1890] There is a challenge being mined right now so will not request data  [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[36mINFO[0m[1890] Finished checking whether to submit data      [36mcomponent[0m=DataRequester [36mpackage[0m=ops
+[33mWARN[0m[1905] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1905] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1905] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1906] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1906] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1906] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1906] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1907] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1907] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1907] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1907] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1908] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1908] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1908] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1908] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1909] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1909] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1909] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1909] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1910] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1910] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1910] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1910] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1911] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1911] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1911] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1911] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1912] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1912] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1912] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1912] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1913] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1913] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1913] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1913] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1914] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1914] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1914] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1914] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1915] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[1915] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[31mERRO[0m[1915] Timeout expired, not retrying query and passing error up  [31mcomponent[0m=HTTPFetchWithRetries [31mpackage[0m=util
+2021/07/08 10:23:48 Could not retrieve data after retries. Cannot do anything without access to data server: Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused
