@@ -11,9 +11,9 @@ import (
 	"strings"
 
 	"github.com/benbjohnson/clock"
-	"github.com/zapproject/zap-miner/apiOracle"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/apiOracle"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 var clck clock.Clock

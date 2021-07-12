@@ -7,11 +7,11 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/pythia/config"
 )
 
 type HashSettings struct {
-	prefix []byte
+	prefix     []byte
 	difficulty *big.Int
 }
 
@@ -20,7 +20,7 @@ type Hasher interface {
 	//base is a 52 byte slice containing the challenge and public address
 	// the guessed nonce is appended to this slice and used as input to the first hash fn
 	// returns a valid nonce, or empty string if none was found
-	CheckRange(hash *HashSettings,  start uint64, n uint64) (string, uint64, error)
+	CheckRange(hash *HashSettings, start uint64, n uint64) (string, uint64, error)
 
 	//number of hashes this backend checks at a time
 	StepSize() uint64
@@ -28,11 +28,10 @@ type Hasher interface {
 	Name() string
 }
 
-
 type Backend struct {
 	Hasher
-	TotalHashes uint64
-	HashSincePrint uint64
+	TotalHashes      uint64
+	HashSincePrint   uint64
 	HashRateEstimate float64
 }
 
@@ -62,7 +61,7 @@ const targetChunkTime = 200 * time.Millisecond
 const rateInitialGuess = 100e3
 
 type MiningGroup struct {
-	Backends []*Backend
+	Backends    []*Backend
 	LastPrinted time.Time
 }
 
@@ -70,27 +69,27 @@ func NewMiningGroup(hashers []Hasher) *MiningGroup {
 	group := &MiningGroup{
 		Backends: make([]*Backend, len(hashers), len(hashers)),
 	}
-	for i,hasher := range hashers {
+	for i, hasher := range hashers {
 		//start with a small estimate for hash rate, much faster to increase the gusses rather than decrease
-		group.Backends[i] = &Backend{Hasher:hasher, HashRateEstimate:rateInitialGuess}
+		group.Backends[i] = &Backend{Hasher: hasher, HashRateEstimate: rateInitialGuess}
 	}
 
 	return group
 }
 
-// 
+//
 type backendResult struct {
-	hash *HashSettings
-	nonce string
-	err error
-	started time.Time
+	hash     *HashSettings
+	nonce    string
+	err      error
+	started  time.Time
 	finished time.Time
-	n uint64
-	backend *Backend
+	n        uint64
+	backend  *Backend
 }
 
 // do some work and write the result back to a channel
-func (b *Backend)doWork(hash *HashSettings, start uint64, n uint64, resultCh chan *backendResult) {
+func (b *Backend) doWork(hash *HashSettings, start uint64, n uint64, resultCh chan *backendResult) {
 	timeStarted := time.Now()
 	sol, nchecked, err := b.CheckRange(hash, start, n)
 	if err != nil {
@@ -98,15 +97,14 @@ func (b *Backend)doWork(hash *HashSettings, start uint64, n uint64, resultCh cha
 		return
 	}
 	resultCh <- &backendResult{
-		hash: hash,
-		nonce: sol,
-		started: timeStarted,
+		hash:     hash,
+		nonce:    sol,
+		started:  timeStarted,
 		finished: time.Now(),
-		n: nchecked,
-		backend: b,
+		n:        nchecked,
+		backend:  b,
 	}
 }
-
 
 func formatHashRate(rate float64) string {
 	letters := " KMGTQ"
@@ -121,17 +119,17 @@ func formatHashRate(rate float64) string {
 	return fmt.Sprintf("%.0f %cH/s", rate, letters[i])
 }
 
-func (g *MiningGroup)HashRateEstimate() float64 {
+func (g *MiningGroup) HashRateEstimate() float64 {
 	totalHashrate := 0.0
-	for _,b := range g.Backends {
+	for _, b := range g.Backends {
 		totalHashrate += b.HashRateEstimate
 	}
 	return totalHashrate
 }
 
-func (g *MiningGroup)PreferredWorkMultiple() uint64 {
+func (g *MiningGroup) PreferredWorkMultiple() uint64 {
 	largest := uint64(0)
-	for _,b := range g.Backends {
+	for _, b := range g.Backends {
 		if b.StepSize() > largest {
 			largest = b.StepSize()
 		}
@@ -139,40 +137,40 @@ func (g *MiningGroup)PreferredWorkMultiple() uint64 {
 	return largest
 }
 
-func (g *MiningGroup)PrintHashRateSummary() {
+func (g *MiningGroup) PrintHashRateSummary() {
 	totalHashes := uint64(0)
-	for _,b := range g.Backends {
+	for _, b := range g.Backends {
 		totalHashes += b.HashSincePrint
 	}
 	now := time.Now()
 	delta := now.Sub(g.LastPrinted).Seconds()
-	totalHashrate := float64(totalHashes)/delta
+	totalHashrate := float64(totalHashes) / delta
 	fmt.Printf("Total hashrate %s\n", formatHashRate(totalHashrate))
-	for _,b := range g.Backends {
-		hashRate := float64(b.HashSincePrint)/delta
-		fmt.Printf("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100,b.Name())
+	for _, b := range g.Backends {
+		hashRate := float64(b.HashSincePrint) / delta
+		fmt.Printf("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100, b.Name())
 		b.HashSincePrint = 0
 	}
 	g.LastPrinted = now
 }
 
 type Work struct {
-	Challenge *MiningChallenge
+	Challenge  *MiningChallenge
 	PublicAddr string
-	Start uint64
-	N uint64
+	Start      uint64
+	N          uint64
 }
 
 type Result struct {
-	Work *Work
+	Work  *Work
 	Nonce string
 }
 
 //dispatches a chunk and returns the number of hashes chosen
-func (b *Backend)dispatchWork(hash *HashSettings, start uint64, resultCh chan *backendResult) uint64 {
+func (b *Backend) dispatchWork(hash *HashSettings, start uint64, resultCh chan *backendResult) uint64 {
 	target := b.HashRateEstimate * targetChunkTime.Seconds()
 	step := b.StepSize()
-	nsteps := uint64(math.Round(target /float64(step)))
+	nsteps := uint64(math.Round(target / float64(step)))
 	if nsteps == 0 {
 		nsteps = 1
 	}
@@ -181,8 +179,7 @@ func (b *Backend)dispatchWork(hash *HashSettings, start uint64, resultCh chan *b
 	return n
 }
 
-
-func (g *MiningGroup)Mine(input chan *Work, output chan *Result) {
+func (g *MiningGroup) Mine(input chan *Work, output chan *Result) {
 	sent := uint64(0)
 	recv := uint64(0)
 	timeStarted := time.Now()
@@ -194,7 +191,7 @@ func (g *MiningGroup)Mine(input chan *Work, output chan *Result) {
 	idleWorkers := make(chan *Backend, len(g.Backends))
 
 	//add all available miners to the idleWorkers queue
-	for _,b := range g.Backends {
+	for _, b := range g.Backends {
 		//dispatch work
 		idleWorkers <- b
 	}
@@ -243,13 +240,13 @@ func (g *MiningGroup)Mine(input chan *Work, output chan *Result) {
 			//only update the hashRateEstimate if we didn't find a solution - otherwise the rate could be wrong
 			// due to returning early
 			if result.nonce == "" {
-				newEst := float64(result.n)/(result.finished.Sub(result.started).Seconds())
+				newEst := float64(result.n) / (result.finished.Sub(result.started).Seconds())
 				if result.backend.HashRateEstimate == rateInitialGuess {
 					result.backend.HashRateEstimate = newEst
 				} else {
 					memory := 0.2
-					result.backend.HashRateEstimate *= 1-memory
-					result.backend.HashRateEstimate += memory*newEst
+					result.backend.HashRateEstimate *= 1 - memory
+					result.backend.HashRateEstimate += memory * newEst
 				}
 			}
 
@@ -261,7 +258,7 @@ func (g *MiningGroup)Mine(input chan *Work, output chan *Result) {
 			//did we finish the job?
 			recv += result.n
 			if result.nonce != "" || recv >= currWork.N {
-				output <- &Result{Work:currWork, Nonce:result.nonce}
+				output <- &Result{Work: currWork, Nonce: result.nonce}
 				currWork = nil
 				currHashSettings = nil
 			}
@@ -269,7 +266,7 @@ func (g *MiningGroup)Mine(input chan *Work, output chan *Result) {
 		if currWork != nil {
 			for sent < currWork.N && len(idleWorkers) > 0 {
 				worker := <-idleWorkers
-				sent += worker.dispatchWork(currHashSettings, currWork.Start + sent, resultChannel)
+				sent += worker.dispatchWork(currHashSettings, currWork.Start+sent, resultChannel)
 			}
 		}
 	}

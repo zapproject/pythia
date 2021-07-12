@@ -1,4 +1,4 @@
-module github.com/zapproject/zap-miner
+module github.com/zapproject/pythia
 
 go 1.12
 

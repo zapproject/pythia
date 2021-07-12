@@ -11,13 +11,13 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/assert"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	zap "github.com/zapproject/zap-miner/contracts"
-	zap1 "github.com/zapproject/zap-miner/contracts1"
-	"github.com/zapproject/zap-miner/ops"
-	"github.com/zapproject/zap-miner/rpc"
-	token "github.com/zapproject/zap-miner/token"
-	"github.com/zapproject/zap-miner/vault"
+	zapCommon "github.com/zapproject/pythia/common"
+	zap "github.com/zapproject/pythia/contracts"
+	zap1 "github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/pythia/ops"
+	"github.com/zapproject/pythia/rpc"
+	token "github.com/zapproject/pythia/token"
+	"github.com/zapproject/pythia/vault"
 )
 
 func TestDispute(t *testing.T) {

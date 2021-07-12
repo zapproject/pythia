@@ -1,5 +1,5 @@
 
-# Zap-Miner
+# Pythia
 <!-- Insert summary -->
 
 Currently only supports Linux and OSX systems.
@@ -11,11 +11,11 @@ Currently only supports Linux and OSX systems.
 
 
 ## Supported Commands
-**ZapMiner Flags**
-   - `--config` (path to your config file, default is `config.json` in same ZapMiner root directory)
-   - `--logConfig` (location of logging config file; default path is ZapMiner root directory)
+**Pythia Flags**
+   - `--config` (path to your config file, default is `config.json` in same Pythia root directory)
+   - `--logConfig` (location of logging config file; default path is Pythia root directory)
 
-**ZapMiner Commands**
+**Pythia Commands**
    - `mine` (indicates to run the miner)
    - `mine -r` (indicates to mine utilizing a remote server)
    - `dataserver` (indicates to run the dataServer (no mining))
@@ -34,7 +34,7 @@ Currently only supports Linux and OSX systems.
 Be sure to edit the `config.json` file to add your `publicAddress` and `privateKey` before running the following commands.
 
 1) `release_build.sh`
-2) `./zap-miner [cmd]`
+2) `./pythia [cmd]`
 
 ### Remote Mining/Multiple Miners
 (If running on local, have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/)
@@ -43,15 +43,15 @@ Be sure to edit the configs found in `local_cfg` before running the follwing com
 
 1) `release_build.sh`
 2) `./start_local.sh`
-3) Check the logs/ for failing miners. Manually run: `nohup ./zap-miner --config=local_cfgs/config{miner # 1-5}.json mine -r > logs/{miner # 1-5}.log &` for failing miners.
+3) Check the logs/ for failing miners. Manually run: `nohup ./pythia --config=local_cfgs/config{miner # 1-5}.json mine -r > logs/{miner # 1-5}.log &` for failing miners.
 
 In order to run dispute commands:
 ### from cli
 4) Locate `TimeStamp: %!(EXTRA *big.Int=XXX)` in the terminal running the dataserver.
 5) Copy the big.Int value `XXX`. (ex: For "TimeStamp: %!(EXTRA *big.Int=168473848)", we only need 168473848.)
-6) Then run: ```./zap-miner dispute new 1 {TimeStamp value `XXX` copied from step above} 4```
+6) Then run: ```./pythia dispute new 1 {TimeStamp value `XXX` copied from step above} 4```
 
-**Please reference CLI commands by using "./zap-miner" and the --help flag**
+**Please reference CLI commands by using "./pythia" and the --help flag**
 
 ## Subgraph
 
@@ -171,7 +171,7 @@ If you wish to use environmental variables instead of config.json for some or al
 `DELETE`    - unset $VARIABLE_NAME  
 
 ## Testing
-You have a few options when you want to test zap-miner
+You have a few options when you want to test pythia
 ### Test Scripts
 In the root of this project, run:
 
@@ -198,7 +198,7 @@ go test -v -cover  # Test with increased verbosity and give a coverage analysis
 
 You can also run individual test just like when running the `./runTest.sh` script
 ```bash
-cd zap-miner # while in the root of the project...
+cd pythia # while in the root of the project...
 go test -v [test flags...] [PACKAGE_NAME] -run [TEST_NAME]
 ```
 
@@ -214,8 +214,8 @@ go help testflag
 Delve is a debugger for the Go programming language. Follow the steps in this [repo](https://github.com/go-delve/delve) to install onto your machine.
 
 *For debugging, we needed to take out the -s and -w flags in the ./release-build.sh script.*
-1) Follow the steps above up until Execute - 1. Don't run the ```./zap-miner``` command.
-2) Instead run ```dlv exec ./zap-miner [command]```. This allows the debugger to run the script.
+1) Follow the steps above up until Execute - 1. Don't run the ```./pythia``` command.
+2) Instead run ```dlv exec ./pythia [command]```. This allows the debugger to run the script.
 3) Set breakpoint(s).
 4) Enter ```continue``` command to allow the program to run till breakpoint.
 5) Check variables using ```locals``` and/or ```print```.

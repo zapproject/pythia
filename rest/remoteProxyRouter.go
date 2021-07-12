@@ -6,10 +6,10 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/util"
 
-	"github.com/zapproject/zap-miner/common"
+	"github.com/zapproject/pythia/common"
 )
 
 //RemoteProxyRouter handles incoming http requests

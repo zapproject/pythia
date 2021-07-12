@@ -6,11 +6,11 @@ import (
 	"os"
 	"time"
 
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/pow"
-	"github.com/zapproject/zap-miner/util"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/pow"
+	"github.com/zapproject/pythia/util"
 )
 
 type WorkSource interface {

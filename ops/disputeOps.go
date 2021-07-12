@@ -12,14 +12,14 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/zapproject/zap-miner/apiOracle"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	zap "github.com/zapproject/zap-miner/contracts"
-	zap1 "github.com/zapproject/zap-miner/contracts1"
-	"github.com/zapproject/zap-miner/rpc"
-	"github.com/zapproject/zap-miner/tracker"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/apiOracle"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	zap "github.com/zapproject/pythia/contracts"
+	zap1 "github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/pythia/rpc"
+	"github.com/zapproject/pythia/tracker"
+	"github.com/zapproject/pythia/util"
 )
 
 /**

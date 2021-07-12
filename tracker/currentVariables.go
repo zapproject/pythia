@@ -7,11 +7,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/contracts"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/util"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/util"
 )
 
 var currentVarsLog = util.NewLogger("tracker", "CurrentVarsTracker")

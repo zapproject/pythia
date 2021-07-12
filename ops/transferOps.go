@@ -8,12 +8,12 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	zap "github.com/zapproject/zap-miner/contracts"
+	zapCommon "github.com/zapproject/pythia/common"
+	zap "github.com/zapproject/pythia/contracts"
 
-	"github.com/zapproject/zap-miner/rpc"
-	token "github.com/zapproject/zap-miner/token"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/rpc"
+	token "github.com/zapproject/pythia/token"
+	"github.com/zapproject/pythia/util"
 )
 
 /**

@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/syndtr/goleveldb/leveldb"
-	"github.com/zapproject/zap-miner/config"
+	"github.com/zapproject/pythia/config"
 )
 
 func OpenTestDB(cfg *config.Config) (DB, func() error, error) {

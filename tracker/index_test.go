@@ -10,8 +10,8 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/db"
 )
 
 //./runTest.sh TestPSR tracker
