@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/util"
 )
 
 var serverLog = util.NewLogger("rest", "Server")

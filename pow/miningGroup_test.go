@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 
 	"github.com/ethereum/go-ethereum/common/math"
 )

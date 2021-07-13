@@ -4,9 +4,9 @@ import (
 	"context"
 	"os"
 
-	"github.com/zapproject/zap-miner/ops"
-	"github.com/zapproject/zap-miner/pow"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/ops"
+	"github.com/zapproject/pythia/pow"
+	"github.com/zapproject/pythia/util"
 )
 
 type WorkSource interface {

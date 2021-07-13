@@ -14,8 +14,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 //ETHClient is the main abstraction interface for client operations

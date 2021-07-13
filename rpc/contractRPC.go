@@ -14,13 +14,13 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/contracts"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
 
-	zap1 "github.com/zapproject/zap-miner/contracts1"
-	zap2 "github.com/zapproject/zap-miner/contracts2"
-	"github.com/zapproject/zap-miner/db"
+	zap1 "github.com/zapproject/pythia/contracts1"
+	zap2 "github.com/zapproject/pythia/contracts2"
+	"github.com/zapproject/pythia/db"
 )
 
 var (

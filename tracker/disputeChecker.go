@@ -13,11 +13,11 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/contracts1"
-	"github.com/zapproject/zap-miner/rpc"
-	"github.com/zapproject/zap-miner/util"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/pythia/rpc"
+	"github.com/zapproject/pythia/util"
 )
 
 var disputeLogger = util.NewLogger("tracker", "disputeChecker")

@@ -12,8 +12,8 @@ import (
 	"unsafe"
 
 	"github.com/charliehorse55/go-opencl/cl"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 //the constant needs have a width of hash + divisor
@@ -23,7 +23,7 @@ import (
 //right now its 2 which makes the max difficulty 2^64-1
 //if this is exceeded, just increase it to 3!
 const (
-	numDivisorWords = 2
+	numDivisorWords      = 2
 	divisorConstantWords = 8 + numDivisorWords
 	divisorConstantBytes = divisorConstantWords * 4
 )
@@ -35,8 +35,8 @@ type GpuMiner struct {
 
 	//opencl driver state
 	context *cl.Context
-	queue *cl.CommandQueue
-	kernel *cl.Kernel
+	queue   *cl.CommandQueue
+	kernel  *cl.Kernel
 
 	name string
 
@@ -58,7 +58,7 @@ func GetOpenCLGPUs() ([]*cl.Device, error) {
 		return nil, err
 	}
 	gpus := []*cl.Device{}
-	for _,platform := range platforms {
+	for _, platform := range platforms {
 		devices, err := platform.GetDevices(cl.DeviceTypeGPU)
 		if err != nil {
 			if err.Error() == "cl: Device Not Found" {
@@ -129,12 +129,12 @@ func NewGpuMiner(device *cl.Device, config *config.GPUConfig, poolEnabled bool) 
 	return &g, nil
 }
 
-func (g *GpuMiner)Name() string {
+func (g *GpuMiner) Name() string {
 	return g.name
 }
 
-func (g *GpuMiner)CheckRange(hash *HashSettings,  start uint64, n uint64) (string, uint64, error) {
-	if n % g.StepSize() != 0 {
+func (g *GpuMiner) CheckRange(hash *HashSettings, start uint64, n uint64) (string, uint64, error) {
+	if n%g.StepSize() != 0 {
 		return "", 0, fmt.Errorf("n (%d) must be a multiple of GPU step size (%d)", n, g.StepSize())
 	}
 	mulDivisorBytes := createDivisorByteArray(hash.difficulty)
@@ -155,7 +155,7 @@ func (g *GpuMiner)CheckRange(hash *HashSettings,  start uint64, n uint64) (strin
 		}
 
 		kernelStarted := time.Now()
-		_, err := g.queue.EnqueueNDRangeKernel(g.kernel, nil, []int{g.Groups*g.GroupSize}, []int{g.GroupSize}, nil)
+		_, err := g.queue.EnqueueNDRangeKernel(g.kernel, nil, []int{g.Groups * g.GroupSize}, []int{g.GroupSize}, nil)
 		if err != nil {
 			return "", done, fmt.Errorf("EnqueueNDRangeKernel failed: %+v", err)
 		}
@@ -175,7 +175,7 @@ func (g *GpuMiner)CheckRange(hash *HashSettings,  start uint64, n uint64) (strin
 		end := time.Now()
 		totalTime := end.Sub(kernelStarted)
 		readTime := end.Sub(readStarted)
-		readTarget := (totalTime * 10)/100
+		readTarget := (totalTime * 10) / 100
 		g.sleepTime += readTime - readTarget
 
 		start += g.StepSize()
@@ -188,8 +188,8 @@ func (g *GpuMiner)CheckRange(hash *HashSettings,  start uint64, n uint64) (strin
 }
 
 //number of hashes this backend checks at a time
-func (g *GpuMiner)StepSize() uint64 {
-	return uint64(g.Groups)*uint64(g.GroupSize)*uint64(g.Count)
+func (g *GpuMiner) StepSize() uint64 {
+	return uint64(g.Groups) * uint64(g.GroupSize) * uint64(g.Count)
 }
 
 func fullBigInt(n int) *big.Int {

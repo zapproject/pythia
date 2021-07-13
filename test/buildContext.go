@@ -8,14 +8,14 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	ZapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/contracts"
-	"github.com/zapproject/zap-miner/contracts1"
-	"github.com/zapproject/zap-miner/contracts2"
-	"github.com/zapproject/zap-miner/rpc"
-	"github.com/zapproject/zap-miner/token"
-	"github.com/zapproject/zap-miner/vault"
+	ZapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
+	"github.com/zapproject/pythia/contracts1"
+	"github.com/zapproject/pythia/contracts2"
+	"github.com/zapproject/pythia/rpc"
+	"github.com/zapproject/pythia/token"
+	"github.com/zapproject/pythia/vault"
 )
 
 var ctx context.Context

@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/rpc"
+	"github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/rpc"
 )
 
 func TestTokenBalance(t *testing.T) {

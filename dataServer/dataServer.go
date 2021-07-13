@@ -4,13 +4,13 @@ import (
 	"context"
 	"log"
 
-	"github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/config"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/rest"
-	"github.com/zapproject/zap-miner/rpc"
-	"github.com/zapproject/zap-miner/tracker"
-	"github.com/zapproject/zap-miner/util"
+	"github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/rest"
+	"github.com/zapproject/pythia/rpc"
+	"github.com/zapproject/pythia/tracker"
+	"github.com/zapproject/pythia/util"
 )
 
 // This package starts the rest server, db and runner for handling

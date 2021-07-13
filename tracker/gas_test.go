@@ -9,9 +9,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/stretchr/testify/assert"
-	zapCommon "github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/db"
-	"github.com/zapproject/zap-miner/rpc"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/rpc"
 )
 
 func TestETHGasStation(t *testing.T) {

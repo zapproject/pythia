@@ -3,7 +3,7 @@ package tracker
 import (
 	"time"
 
-	"github.com/zapproject/zap-miner/apiOracle"
+	"github.com/zapproject/pythia/apiOracle"
 )
 
 type SingleSymbol struct {

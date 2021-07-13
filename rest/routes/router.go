@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/zapproject/zap-miner/common"
-	"github.com/zapproject/zap-miner/db"
+	"github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/db"
 )
 
 //Handler handle incoming http requests and produces a response code and JSON payload string
