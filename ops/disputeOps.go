@@ -37,32 +37,32 @@ func Dispute(requestId *big.Int, timestamp *big.Int, minerIndex *big.Int, ctx co
 
 	balance, err := instance.BalanceOf(nil, addr)
 	if err != nil {
-		return fmt.Errorf("failed to fetch balance: %s", err.Error())
+		return fmt.Errorf("\U0001F6AB failed to fetch balance: %s", err.Error())
 	}
 	var asBytes32 [32]byte
 	copy(asBytes32[:], "0x8b75eb45d88e80f0e4ec77d23936268694c0e7ac2e0c9085c5c6bdfcfbc49239") //keccak256(disputeFee)
 	disputeCost, err := instance.GetUintVar(nil, asBytes32)
 	if err != nil {
-		return fmt.Errorf("failed to get dispute cost: %s", err)
+		return fmt.Errorf("\U0001F6AB failed to get dispute cost: %s", err)
 	}
 
 	if balance.Cmp(disputeCost) < 0 {
-		return fmt.Errorf("insufficient balance (%s ZAP) disputes require (%s ZAP)",
+		return fmt.Errorf("\U0001F6AB insufficient balance (%s ZAP) disputes require (%s ZAP)",
 			util.FormatERC20Balance(balance),
 			util.FormatERC20Balance(disputeCost))
 	}
 
 	auth, err := PrepareEthTransaction(ctx)
 	if err != nil {
-		return fmt.Errorf("failed to prepare ethereum transaction: %s", err.Error())
+		return fmt.Errorf("\U0001F6AB failed to prepare ethereum transaction: %s", err.Error())
 	}
 
 	instance2 := ctx.Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
 	tx, err := instance2.BeginDispute(auth, requestId, timestamp, minerIndex)
 	if err != nil {
-		return fmt.Errorf("failed to send dispute txn: %s", err.Error())
+		return fmt.Errorf("\U0001F6AB failed to send dispute txn: %s", err.Error())
 	}
-	fmt.Printf("dispute started with txn: %s\n", tx.Hash().Hex())
+	fmt.Printf("\U0001F468 dispute started with txn: %s \U0001F469\n", tx.Hash().Hex())
 	return nil
 }
 
@@ -72,10 +72,10 @@ func Vote(_disputeId *big.Int, _supportsDispute bool, ctx context.Context) error
 	addr := ctx.Value(zapCommon.PublicAddress).(common.Address)
 	voted, err := instance.DidVote(nil, _disputeId, addr)
 	if err != nil {
-		return fmt.Errorf("failed to check if you've already voted: %v", err)
+		return fmt.Errorf("\U0001F6AB failed to check if you've already voted: %v", err)
 	}
 	if voted {
-		fmt.Printf("You have already voted on this dispute\n")
+		fmt.Printf("\U00002696 You have already voted on this dispute \U00002696\n")
 		return nil
 	}
 
@@ -83,14 +83,14 @@ func Vote(_disputeId *big.Int, _supportsDispute bool, ctx context.Context) error
 
 	auth, err := PrepareEthTransaction(ctx)
 	if err != nil {
-		return fmt.Errorf("failed to prepare ethereum transaction: %s", err.Error())
+		return fmt.Errorf("\U0001F6AB failed to prepare ethereum transaction: %s", err.Error())
 	}
 	tx, err := instance2.Vote(auth, _disputeId, _supportsDispute)
 	if err != nil {
-		return fmt.Errorf("failed to submit vote transaction: %s", err.Error())
+		return fmt.Errorf("\U0001F6AB failed to submit vote transaction: %s", err.Error())
 	}
 
-	fmt.Printf("Vote submitted with transaction %s\n", tx.Hash().Hex())
+	fmt.Printf("\U00002696 Vote submitted with transaction %s \U00002696\n", tx.Hash().Hex())
 	return nil
 }
 
@@ -98,7 +98,7 @@ func getNonceSubmissions(ctx context.Context, valueBlock *big.Int, dispute *zap1
 	instance := ctx.Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
 	tokenAbi, err := abi.JSON(strings.NewReader(zap1.ZapLibraryABI))
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse abi: %v", err)
+		return nil, fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
 	}
 	contractAddress := ctx.Value(zapCommon.ContractAddress).(common.Address)
 	client := ctx.Value(zapCommon.ClientContextKey).(rpc.ETHClient)
@@ -108,12 +108,12 @@ func getNonceSubmissions(ctx context.Context, valueBlock *big.Int, dispute *zap1
 
 	allVals, err := instance.GetSubmissionsByTimestamp(nil, dispute.RequestId, dispute.Timestamp)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get other submitted values for dispute: %v", err)
+		return nil, fmt.Errorf("\U0001F6AB failed to get other submitted values for dispute: %v", err)
 	}
 
 	allAddrs, err := instance.GetMinersByRequestIdAndTimestamp(nil, dispute.RequestId, dispute.Timestamp)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get miner addresses for dispute: %v", err)
+		return nil, fmt.Errorf("\U0001F6AB failed to get miner addresses for dispute: %v", err)
 	}
 
 	const blockStep = 67
@@ -133,18 +133,18 @@ func getNonceSubmissions(ctx context.Context, valueBlock *big.Int, dispute *zap1
 
 		logs, err := client.FilterLogs(ctx, query)
 		if err != nil {
-			return nil, fmt.Errorf("failed to get nonce logs: %v", err)
+			return nil, fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 		}
 
 		for _, l := range logs {
 			nonceSubmit := zap1.ZapLibraryNonceSubmitted{}
 			err := bar.UnpackLog(&nonceSubmit, "NonceSubmitted", l)
 			if err != nil {
-				return nil, fmt.Errorf("failed to unpack into object: %v", err)
+				return nil, fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 			}
 			header, err := client.HeaderByNumber(ctx, big.NewInt(int64(l.BlockNumber)))
 			if err != nil {
-				return nil, fmt.Errorf("failed to get nonce block header: %v", err)
+				return nil, fmt.Errorf("\U0001F6AB failed to get nonce block header: %v", err)
 			}
 			for i := 0; i < 5; i++ {
 				if nonceSubmit.Miner == allAddrs[i] {
@@ -174,7 +174,7 @@ func List(ctx context.Context) error {
 
 	tokenAbi, err := abi.JSON(strings.NewReader(zap1.ZapDisputeABI))
 	if err != nil {
-		return fmt.Errorf("failed to parse abi: %v", err)
+		return fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
 	}
 	contractAddress := ctx.Value(zapCommon.ContractAddress).(common.Address)
 	client := ctx.Value(zapCommon.ClientContextKey).(rpc.ETHClient)
@@ -184,7 +184,7 @@ func List(ctx context.Context) error {
 
 	header, err := client.HeaderByNumber(ctx, nil)
 	if err != nil {
-		return fmt.Errorf("failed to get latest eth block header: %v", err)
+		return fmt.Errorf("\U0001F6AB failed to get latest eth block header: %v", err)
 	}
 
 	startBlock := big.NewInt(54) //big.NewInt(10e3 * 14)
@@ -199,22 +199,22 @@ func List(ctx context.Context) error {
 
 	logs, err := client.FilterLogs(ctx, query)
 	if err != nil {
-		return fmt.Errorf("failed to filter eth logs: %v", err)
+		return fmt.Errorf("\U0001F6AB failed to filter eth logs: %v", err)
 	}
 
 	instance := ctx.Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
 
-	fmt.Printf("There are currently %d open disputes\n", len(logs))
+	fmt.Printf("\U0001F50E There are currently %d open disputes \U0001F50E\n", len(logs))
 	fmt.Printf("-------------------------------------\n")
 	for _, rawDispute := range logs {
 		dispute := zap1.ZapDisputeNewDispute{}
 		err := bar.UnpackLog(&dispute, "NewDispute", rawDispute)
 		if err != nil {
-			return fmt.Errorf("failed to unpack dispute event from logs: %v", err)
+			return fmt.Errorf("\U0001F6AB failed to unpack dispute event from logs: %v", err)
 		}
 		_, executed, votePassed, _, reportedAddr, reportingMiner, _, uintVars, currTally, err := instance.GetAllDisputeVars(nil, dispute.DisputeId)
 		if err != nil {
-			return fmt.Errorf("failed to get dispute details: %v", err)
+			return fmt.Errorf("\U0001F6AB failed to get dispute details: %v", err)
 		}
 
 		votingEnds := time.Unix(uintVars[3].Int64(), 0)
@@ -242,7 +242,7 @@ func List(ctx context.Context) error {
 
 		allSubmitted, err := getNonceSubmissions(ctx, uintVars[5], &dispute)
 		if err != nil {
-			return fmt.Errorf("failed to get the values submitted by other miners for the disputed block: %v", err)
+			return fmt.Errorf("\U0001F6AB failed to get the values submitted by other miners for the disputed block: %v", err)
 		}
 		disputedValTime := allSubmitted[uintVars[6].Uint64()].Created
 

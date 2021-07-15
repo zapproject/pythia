@@ -20,11 +20,6 @@ func TestStake(t *testing.T) {
 	setup()
 	setupOwner()
 
-	// tmaster := ctx.Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
-	// publicAddress := ctx.Value(zapCommon.PublicAddress).(common.Address)
-	// status, _, _ := tmaster.GetStakerInfo(nil, publicAddress)
-
-	// assert.Equal(t, big.NewInt(1).Uint64(), status.Uint64(), "Staker status should be staked a inital miner 0 - status should be 1")
 	RequestWithdraw(t)
 	Withdraw(t)
 	Deposit(t)
@@ -37,22 +32,20 @@ func Deposit(t *testing.T) {
 
 	tmaster := ctx.Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
 	publicAddress := ctx.Value(zapCommon.PublicAddress).(common.Address)
-	balance, _ := tmaster.BalanceOf(nil, publicAddress)
 	status, _, _ := tmaster.GetStakerInfo(nil, publicAddress)
 	assert.Equal(t, big.NewInt(0).Uint64(), status.Uint64(), "Staker status does not match - status should be 0")
-
-	dat := crypto.Keccak256([]byte("stakeAmount"))
-	var dat32 [32]byte
-	copy(dat32[:], dat)
-	stakeAmt, _ := tmaster.GetUintVar(nil, dat32)
-	assert.Greater(t, balance.Cmp(stakeAmt), 0, "Account 0 does not have enough Zap to stake")
 
 	// allocate stake funds to this account
 	auth, _ := ops.PrepareEthTransaction(minerCtx[5])
 	instanceT := minerCtx[5].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
 	instanceT.Allocate(auth, publicAddress, big.NewInt(100000000000))
 
-	balance, _ = tmaster.BalanceOf(nil, publicAddress)
+	balance, _ := tmaster.BalanceOf(nil, publicAddress)
+	dat := crypto.Keccak256([]byte("stakeAmount"))
+	var dat32 [32]byte
+	copy(dat32[:], dat)
+	stakeAmt, _ := tmaster.GetUintVar(nil, dat32)
+	assert.Greater(t, balance.Cmp(stakeAmt), 0, "Account 0 does not have enough Zap to stake")
 
 	// call vault locksmith
 	instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
@@ -99,6 +92,7 @@ func Withdraw(t *testing.T) {
 	stakeAmt, _ := tmaster.GetUintVar(nil, dat32)
 
 	balance = balance.Sub(balance, stakeAmt)
+	balance = balance.Add(balance, big.NewInt(5))
 	assert.Equal(t, newBalance, balance.Add(balance, big.NewInt(1000000)), "Stake amount was not transfered from vault to user")
 }
 

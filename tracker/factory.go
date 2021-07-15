@@ -39,6 +39,10 @@ func createTracker(name string) ([]Tracker, error) {
 		}
 	case "disputeChecker":
 		return []Tracker{&disputeChecker{}}, nil
+	case "tallyVotes":
+		{
+			return []Tracker{&TallyVotesTracker{}}, nil
+		}
 	default:
 		return nil, fmt.Errorf("no tracker with the name %s", name)
 	}
