@@ -41,7 +41,6 @@ func ErrorHandler(err error, operation string) {
 
 func buildContext() error {
 	cfg := config.GetConfig()
-
 	if !cfg.EnablePoolWorker {
 		//create an rpc client
 		client, err := rpc.NewClient(cfg.NodeURL)
@@ -53,16 +52,12 @@ func buildContext() error {
 		tokenAddress := common.HexToAddress(cfg.TokenAddress)
 		contractAddress := common.HexToAddress(cfg.ContractAddress)
 		vaultAddress := common.HexToAddress(cfg.VaultAddress)
-		masterInstance, err := contracts.NewZapMaster(contractAddress, client)
-		transactorInstance, err := contracts1.NewZapTransactor(contractAddress, client)
-		newZapInstance, err := contracts2.NewZap(contractAddress, client)
-		newTransactorInstance, err := contracts2.NewZapTransactor(contractAddress, client)
-		tokenInstance, err := token.NewZapTokenBSCTransactor(tokenAddress, client)
-		// tokenListener, err := token.NewZapTokenBSCFilterer(tokenAddress, client)
+		masterInstance, _ := contracts.NewZapMaster(contractAddress, client)
+		transactorInstance, _ := contracts1.NewZapTransactor(contractAddress, client)
+		newZapInstance, _ := contracts2.NewZap(contractAddress, client)
+		newTransactorInstance, _ := contracts2.NewZapTransactor(contractAddress, client)
+		tokenInstance, _ := token.NewZapTokenBSCTransactor(tokenAddress, client)
 		vaultInstance, _ := vault.NewVaultTransactor(vaultAddress, client)
-		if err != nil {
-			log.Fatal(err)
-		}
 
 		ctx = context.WithValue(context.Background(), ZapCommon.ClientContextKey, client)
 		ctx = context.WithValue(ctx, ZapCommon.ContractAddress, contractAddress)
@@ -71,12 +66,7 @@ func buildContext() error {
 		ctx = context.WithValue(ctx, ZapCommon.TokenTransactorContractContextKey, tokenInstance)
 		ctx = context.WithValue(ctx, ZapCommon.NewZapContractContextKey, newZapInstance)
 		ctx = context.WithValue(ctx, ZapCommon.NewTransactorContractContextKey, newTransactorInstance)
-		// ctx = context.WithValue(ctx, ZapCommon.TokenFilterContextKey, tokenListener)
 		ctx = context.WithValue(ctx, ZapCommon.VaultTransactorContractContextKey, vaultInstance)
-
-		// start event listener
-		// tokenListener.ParseTransfer()
-		// go listenTransfers(client, cfg)
 
 		privateKey, err := crypto.HexToECDSA(cfg.PrivateKey)
 		if err != nil {
@@ -93,7 +83,6 @@ func buildContext() error {
 		publicAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
 		ctx = context.WithValue(ctx, ZapCommon.PublicAddress, publicAddress)
 
-		//Issue #55, halt if client is still syncing with Ethereum network
 		s, err := client.IsSyncing(ctx)
 		if err != nil {
 			return fmt.Errorf("could not determine if Ethereum client is syncing: %v\n", err)
@@ -136,12 +125,12 @@ func AddDBToCtx(remote bool) error {
 var GitTag string
 var GitHash string
 
-const versionMessage = `Zap
-    The official Pythia %s (%s)
-    -----------------------------------------
+const versionMessage = `
+	The official Pythia %s (%s)
+	-----------------------------------------
 	Website: https://Zap.org
 	Github:  https://github.com/zapproject/pythia
-`
+	`
 
 func App() *cli.Cli {
 	app := cli.App("Pythia", "The Zap.org official miner")
@@ -160,21 +149,21 @@ func App() *cli.Cli {
 	versionMessage := fmt.Sprintf(versionMessage, GitTag, GitHash)
 	app.Version("version", versionMessage)
 
-	app.Command("stake", "staking operations", stakeCmd)
-	app.Command("transfer", "send ZAP to address", moveCmd(ops.Transfer))
-	app.Command("approve", "approve ZAP to address", moveCmd(ops.Approve))
-	app.Command("balance", "check balance of address", balanceCmd)
-	app.Command("dispute", "dispute operations", disputeCmd)
-	app.Command("mine", "mine for ZAP", mineCmd)
-	app.Command("dataserver", "start an independent dataserver", dataserverCmd)
+	app.Command("stake", "\U0001F510 staking operations", stakeCmd)
+	app.Command("transfer", "\U0001F381 send ZAP to address", moveCmd(ops.Transfer))
+	app.Command("approve", "\U00002705 approve ZAP to address", moveCmd(ops.Approve))
+	app.Command("balance", "\U0001F440 check balance of address", balanceCmd)
+	app.Command("dispute", "\U00002696 dispute operations", disputeCmd)
+	app.Command("mine", "\U000026CF  mine for ZAP", mineCmd)
+	app.Command("dataserver", "\U0001F5C4  start an independent dataserver", dataserverCmd)
 	return app
 }
 
 func stakeCmd(cmd *cli.Cmd) {
-	cmd.Command("deposit", "deposit ZAP stake", simpleCmd(ops.Deposit))
-	cmd.Command("withdraw", "withdraw ZAP stake", simpleCmd(ops.WithdrawStake))
-	cmd.Command("request", "request to withdraw ZAP stake", simpleCmd(ops.RequestStakingWithdraw))
-	cmd.Command("status", "show current staking status", simpleCmd(ops.ShowStatus))
+	cmd.Command("deposit", "\U0001F512 deposit ZAP stake", simpleCmd(ops.Deposit))
+	cmd.Command("withdraw", "\U0001F511 withdraw ZAP stake", simpleCmd(ops.WithdrawStake))
+	cmd.Command("request", "\U000023F2 request to withdraw ZAP stake", simpleCmd(ops.RequestStakingWithdraw))
+	cmd.Command("status", "\U0001F52E show current staking status", simpleCmd(ops.ShowStatus))
 }
 
 func simpleCmd(f func(context.Context) error) func(*cli.Cmd) {
@@ -199,7 +188,7 @@ func moveCmd(f func(common.Address, *big.Int, context.Context) error) func(*cli.
 
 func balanceCmd(cmd *cli.Cmd) {
 	addr := ETHAddress{}
-	cmd.VarArg("ADDRESS", &addr, "ethereum public address")
+	cmd.VarArg("ADDRESS", &addr, "binance public address")
 	cmd.Spec = "[ADDRESS]"
 	cmd.Action = func() {
 		var zero [20]byte
@@ -211,9 +200,9 @@ func balanceCmd(cmd *cli.Cmd) {
 }
 
 func disputeCmd(cmd *cli.Cmd) {
-	cmd.Command("vote", "vote on an active dispute", voteCmd)
-	cmd.Command("new", "start a new dispute", newDisputeCmd)
-	cmd.Command("show", "show existing disputes", simpleCmd(ops.List))
+	cmd.Command("vote", "\U00002696 vote on an active dispute", voteCmd)
+	cmd.Command("new", "\U0001F4C4 start a new dispute", newDisputeCmd)
+	cmd.Command("show", "\U0001F4CA show existing disputes", simpleCmd(ops.List))
 }
 
 func voteCmd(cmd *cli.Cmd) {
@@ -248,7 +237,7 @@ func mineCmd(cmd *cli.Cmd) {
 		cfg := config.GetConfig()
 		var ds *ops.DataServerOps
 		if !cfg.EnablePoolWorker {
-			ErrorHandler(AddDBToCtx(*remoteDS), "initializing database")
+			ErrorHandler(AddDBToCtx(*remoteDS), "\U0001F5C4 initializing database \U0001F5C4")
 			if !*remoteDS {
 				ch := make(chan os.Signal)
 				exitChannels = append(exitChannels, &ch)
@@ -272,7 +261,7 @@ func mineCmd(cmd *cli.Cmd) {
 		}
 		status, _ := hexutil.DecodeBig(string(v))
 		if status.Cmp(big.NewInt(1)) != 0 {
-			log.Fatalf("Miner is not able to mine with status %v. Stopping all mining immediately", status)
+			log.Fatalf("\U0001F6AB Miner is not able to mine with status %v. Stopping all mining immediately \U00002622", status)
 		}
 		ch := make(chan os.Signal)
 		exitChannels = append(exitChannels, &ch)
@@ -308,13 +297,13 @@ func mineCmd(cmd *cli.Cmd) {
 			}
 
 			if !dsStopped && !minerStopped && cnt > 60 {
-				fmt.Printf("Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
+				fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
 			} else if dsStopped && minerStopped {
 				break
 			}
 			time.Sleep(500 * time.Millisecond)
 		}
-		fmt.Printf("Main shutdown complete\n")
+		fmt.Printf("Main shutdown complete \U00002622\n")
 	}
 }
 
@@ -325,7 +314,7 @@ func dataserverCmd(cmd *cli.Cmd) {
 		signal.Notify(c, os.Interrupt)
 
 		var ds *ops.DataServerOps
-		ErrorHandler(AddDBToCtx(true), "initializing database")
+		ErrorHandler(AddDBToCtx(true), "\U0001F5C4 initializing database \U0001F5C4")
 		ch := make(chan os.Signal)
 		var err error
 		ds, err = ops.CreateDataServerOps(ctx, ch)
@@ -354,13 +343,13 @@ func dataserverCmd(cmd *cli.Cmd) {
 			}
 
 			if !dsStopped && cnt > 60 {
-				fmt.Printf("Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
+				fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
 			} else if dsStopped {
 				break
 			}
 			time.Sleep(500 * time.Millisecond)
 		}
-		fmt.Printf("Main shutdown complete\n")
+		fmt.Printf("Main shutdown complete \U00002622\n")
 	}
 
 }
@@ -392,6 +381,6 @@ func main() {
 	app := App()
 	err := app.Run(os.Args)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "app.Run failed: %v\n", err)
+		fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	}
 }

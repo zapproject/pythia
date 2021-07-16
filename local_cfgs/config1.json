@@ -8,7 +8,7 @@
     "serverHost": "localhost",
     "serverPort": 5001,
     "ethClientTimeout": 3000,
-    "trackerCycle": 100,
+    "trackerCycle": 10,
     "serverWhitelist": ["0xcd3B766CCDd6AE721141F452C550Ca635964ce71"],
     "gasMultiplier": 1,
     "gasMax":30,
@@ -20,7 +20,9 @@
         "tokenBalance",
         "indexers",
         "newCurrentVariables",
-        "currentVariables"
+        "currentVariables",
+        "disputeChecker",
+        "tallyVotes"
     ],
     "indexFolder": "indexes",
     "dbFile": "zapDB",
