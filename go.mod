@@ -24,8 +24,6 @@ require (
 	github.com/huin/goupnp v1.0.0 // indirect
 	github.com/influxdata/influxdb v1.7.9 // indirect
 	github.com/jackpal/go-nat-pmp v1.0.1 // indirect
-	github.com/jawher/mow.cli v1.1.0
-	github.com/joho/godotenv v1.3.0
 	github.com/karalabe/usb v0.0.0-20190819132248-550797b1cad8 // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.11 // indirect
@@ -35,7 +33,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.1 // indirect
 	github.com/oschwald/maxminddb-golang v1.5.0 // indirect
 	github.com/pborman/uuid v1.2.0 // indirect
-	github.com/prometheus/tsdb v0.10.0 // indirect
+	github.com/prometheus/tsdb v0.10.0
 	github.com/rjeczalik/notify v0.9.2 // indirect
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/sirupsen/logrus v1.4.2
@@ -44,6 +42,8 @@ require (
 	github.com/steakknife/hamming v0.0.0-20180906055917-c99c65617cd3 // indirect
 	github.com/stretchr/testify v1.7.0
 	github.com/syndtr/goleveldb v1.0.0
+	github.com/therecipe/qt v0.0.0-20200904063919-c0c124a5770d
+	github.com/therecipe/qt/internal/binding/files/docs/5.12.0 v0.0.0-20200904063919-c0c124a5770d // indirect
 	github.com/tyler-smith/go-bip39 v1.0.2 // indirect
 	github.com/wsddn/go-ecdh v0.0.0-20161211032359-48726bab9208 // indirect
 	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586
