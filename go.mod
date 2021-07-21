@@ -44,6 +44,7 @@ require (
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/therecipe/qt v0.0.0-20200904063919-c0c124a5770d
 	github.com/therecipe/qt/internal/binding/files/docs/5.12.0 v0.0.0-20200904063919-c0c124a5770d // indirect
+	github.com/therecipe/qt/internal/binding/files/docs/5.13.0 v0.0.0-20200904063919-c0c124a5770d // indirect
 	github.com/tyler-smith/go-bip39 v1.0.2 // indirect
 	github.com/wsddn/go-ecdh v0.0.0-20161211032359-48726bab9208 // indirect
 	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586

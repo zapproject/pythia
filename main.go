@@ -388,6 +388,18 @@ func main() {
 
 	// widget := widgets.NewQWidget(nil, 0)
 
+	LoginRadioGroup := widgets.NewQGroupBox2("Choose Login Type", nil)
+	LoginTypeNames := [3]string{"Public/Private Key Pair", "Key File", "Mneomonic Phrase"}
+	LoginRadioVBox := widgets.NewQVBoxLayout2(nil)
+
+	for i, name := range LoginTypeNames {
+		LoginRadioVBox.AddWidget(widgets.NewQRadioButton2(name,nil),i,0)
+	}
+
+	LoginRadioGroup.SetLayout(LoginRadioVBox)
+ 
+
+
 	// group box for configuration
 	widget := widgets.NewQGroupBox2("Configuration", nil)
 	pubAddLabel := widgets.NewQLabel2("Public Address", nil, 0)
@@ -412,6 +424,7 @@ func main() {
 	layout.AddWidget(masterBox, 3, 1, 0)
 	layout.AddWidget(vaultLabel, 4, 0, 0)
 	layout.AddWidget(vaultBox, 4, 1, 0)
+	layout.AddWidget(LoginRadioGroup, 5,0,0)
 
 	widget.SetLayout(layout)
 
