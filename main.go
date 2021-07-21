@@ -378,7 +378,7 @@ func main() {
 	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	// }
 
-	appp := widgets.NewQApplication(len(os.Args), os.Args)
+	app := widgets.NewQApplication(len(os.Args), os.Args)
 
 	window := widgets.NewQMainWindow(nil, 0)
 
@@ -390,7 +390,19 @@ func main() {
 
 	window.SetCentralWidget(widget)
 
+	// set up File menu bar
+	fileMenu := window.MenuBar().AddMenu2("&File")
+	fileMenu.AddAction("File Option")
+
+	// set up settings menu bar
+	settingsMenu := window.MenuBar().AddMenu2("&Settings")
+	settingsMenu.AddAction("Settings Option")
+
+	// set up help menu bar
+	helpMenu := window.MenuBar().AddMenu2("&Help")
+	helpMenu.AddAction("Help Option")
+
 	window.Show()
 
-	appp.Exec()
+	app.Exec()
 }
