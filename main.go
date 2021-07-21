@@ -386,7 +386,34 @@ func main() {
 
 	window.SetWindowTitle("Pythia")
 
-	widget := widgets.NewQWidget(nil, 0)
+	// widget := widgets.NewQWidget(nil, 0)
+
+	// group box for configuration
+	widget := widgets.NewQGroupBox2("Configuration", nil)
+	pubAddLabel := widgets.NewQLabel2("Public Address", nil, 0)
+	pubAddBox := widgets.NewQLineEdit(nil)
+	privKeyLabel := widgets.NewQLabel2("Private Key", nil, 0)
+	privKeyBox := widgets.NewQLineEdit(nil)
+	tokenLabel := widgets.NewQLabel2("ZapToken Address", nil, 0)
+	tokenBox := widgets.NewQLineEdit(nil)
+	masterLabel := widgets.NewQLabel2("ZapMaster Address", nil, 0)
+	masterBox := widgets.NewQLineEdit(nil)
+	vaultLabel := widgets.NewQLabel2("Vault Address", nil, 0)
+	vaultBox := widgets.NewQLineEdit(nil)
+
+	layout := widgets.NewQGridLayout2()
+	layout.AddWidget(pubAddLabel, 0, 0, 0)
+	layout.AddWidget(pubAddBox, 0, 1, 0)
+	layout.AddWidget(privKeyLabel, 1, 0, 0)
+	layout.AddWidget(privKeyBox, 1, 1, 0)
+	layout.AddWidget(tokenLabel, 2, 0, 0)
+	layout.AddWidget(tokenBox, 2, 1, 0)
+	layout.AddWidget(masterLabel, 3, 0, 0)
+	layout.AddWidget(masterBox, 3, 1, 0)
+	layout.AddWidget(vaultLabel, 4, 0, 0)
+	layout.AddWidget(vaultBox, 4, 1, 0)
+
+	widget.SetLayout(layout)
 
 	window.SetCentralWidget(widget)
 
