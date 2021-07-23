@@ -41,6 +41,7 @@ type ETHClient interface {
 	PendingNonceAt(ctx context.Context, address common.Address) (uint64, error)
 	EstimateGas(ctx context.Context, call ethereum.CallMsg) (gas uint64, err error)
 	SuggestGasPrice(ctx context.Context) (*big.Int, error)
+	SuggestGasTipCap(ctx context.Context) (*big.Int, error)
 
 	FilterLogs(ctx context.Context, query ethereum.FilterQuery) ([]types.Log, error)
 	SubscribeFilterLogs(ctx context.Context, query ethereum.FilterQuery, ch chan<- types.Log) (ethereum.Subscription, error)
@@ -228,6 +229,19 @@ func (c *clientInstance) SuggestGasPrice(ctx context.Context) (*big.Int, error) 
 	var res *big.Int
 	_err := c.withTimeout(ctx, func(_ctx *context.Context) error {
 		r, e := c.ethClient.SuggestGasPrice(*_ctx)
+		res = r
+		return e
+	})
+	if _err != nil {
+		return nil, _err
+	}
+	return res, _err
+}
+
+func (c *clientInstance) SuggestGasTipCap(ctx context.Context) (*big.Int, error) {
+	var res *big.Int
+	_err := c.withTimeout(ctx, func(_ctx *context.Context) error {
+		r, e := c.ethClient.SuggestGasTipCap(*_ctx)
 		res = r
 		return e
 	})
