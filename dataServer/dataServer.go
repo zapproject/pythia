@@ -7,6 +7,7 @@ import (
 	"github.com/zapproject/pythia/common"
 	"github.com/zapproject/pythia/config"
 	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/local"
 	"github.com/zapproject/pythia/rest"
 	"github.com/zapproject/pythia/rpc"
 	"github.com/zapproject/pythia/tracker"
@@ -19,6 +20,7 @@ import (
 //DataServer holds refs to primary stack of utilities for data retrieval and serving
 type DataServer struct {
 	server       *rest.Server
+	localserver  *local.LocalServer
 	DB           db.DB
 	runner       *tracker.Runner
 	ethClient    rpc.ETHClient
@@ -43,6 +45,7 @@ func CreateServer(ctx context.Context) (*DataServer, error) {
 	serverPort := cfg.ServerPort
 
 	srv, err := rest.Create(ctx, cfg.ServerHost, serverPort)
+	localsrv := local.CreateLocal(ctx)
 
 	if err != nil {
 		log.Fatalf("Error in creating remote proxy: %s", err)
@@ -52,6 +55,7 @@ func CreateServer(ctx context.Context) (*DataServer, error) {
 	//would be listening to the channel
 	ready := make(chan bool, 1)
 	return &DataServer{server: srv,
+		localserver:  localsrv,
 		DB:           DB,
 		runner:       run,
 		ethClient:    client,
@@ -72,6 +76,7 @@ func (ds *DataServer) Start(ctx context.Context, exitCh chan int) error {
 		return err
 	}
 
+	ds.localserver.Start()
 	ds.server.Start()
 	go func() {
 		<-ds.runner.Ready()
@@ -98,6 +103,7 @@ func (ds *DataServer) stop(ctx context.Context) error {
 	ds.runnerExitCh <- 1
 
 	//stop REST erver
+	ds.localserver.Stop()
 	ds.server.Stop()
 	// ds.server.Shutdown(ctx)
 
