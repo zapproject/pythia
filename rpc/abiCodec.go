@@ -28,8 +28,7 @@ func BuildCodec() (*ABICodec, error) {
 		contracts.ZapDisputeABI,
 		contracts.ZapGettersABI,
 		contracts.ZapGettersLibraryABI,
-		contracts.ZapStakeABI,
-		contracts.ZapTransferABI}
+		contracts.ZapStakeABI}
 
 	parsed := make([]interface{}, 0)
 	for _, abi := range all {
@@ -77,7 +76,6 @@ func AllEvents() (map[[32]byte]abi.Event, error) {
 		contracts.ZapMasterABI,
 		contracts.ZapStakeABI,
 		contracts.ZapStorageABI,
-		contracts.ZapTransferABI,
 	}
 
 	parsed := make([]interface{}, 0)
