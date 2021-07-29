@@ -41,6 +41,9 @@ func PrepareEthTransaction(ctx context.Context) (*bind.TransactOpts, error) {
 
 	privateKey := ctx.Value(zapCommon.PrivateKey).(*ecdsa.PrivateKey)
 	auth := bind.NewKeyedTransactor(privateKey)
+	// The above statement will be deprecated soon, the following will be supported thereafter
+	// may need to add a config for chain id in which case or a conditional based on the nodeURL
+	// auth, err := bind.NewKeyedTransactorWithChainID(privateKey, big.NewInt(31337))
 	auth.Nonce = big.NewInt(int64(nonce))
 	auth.Value = big.NewInt(0)      // in wei
 	auth.GasLimit = uint64(4000000) // in units
