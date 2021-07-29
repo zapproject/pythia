@@ -7,6 +7,8 @@ RUN apt -y install ocl-icd-opencl-dev
 
 COPY . .
 
+RUN echo {} > config.json
+
 RUN chmod +x serve.sh
 RUN chmod +x mine.sh
 RUN chmod +x release_build.sh
