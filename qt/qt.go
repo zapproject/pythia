@@ -31,14 +31,29 @@ func App() *widgets.QApplication {
 	Login Group Box
 	*/
 	LoginRadioGroup := widgets.NewQGroupBox2("Choose Login Type", nil)
+	LoginButtonGroup := widgets.NewQButtonGroup(nil)
 	LoginTypeNames := [3]string{"Public/Private Key Pair", "Key File", "Mneomonic Phrase"}
-	LoginRadioVBox := widgets.NewQGridLayout2()
+	LoginRadioGrid := widgets.NewQGridLayout2()
 
 	for i, name := range LoginTypeNames {
-		LoginRadioVBox.AddWidget(widgets.NewQRadioButton2(name, nil), i, 0, 0)
+		button := widgets.NewQRadioButton2(name, nil)
+		LoginButtonGroup.AddButton(button, i)
+		LoginRadioGrid.AddWidget(button, i, 0, 0)
 	}
+	LoginRadioGroup.SetLayout(LoginRadioGrid)
 
-	LoginRadioGroup.SetLayout(LoginRadioVBox)
+	LoginButtonGroup.ConnectButtonToggled2(func(id int,checked bool){
+
+
+		
+		if(id == 1 && checked){
+			// LoginRadioGrid.AddWidget2(button, i, 1)
+		}
+
+
+	})
+
+
 
 	/**
 	ENV Config Group Box
@@ -117,6 +132,8 @@ func App() *widgets.QApplication {
 	layout.AddWidget(trackerWidget, 2, 0, 0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
+
+
 
 	// set up File menu bar
 	fileMenu := window.MenuBar().AddMenu2("&File")
