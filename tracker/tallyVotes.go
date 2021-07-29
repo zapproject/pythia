@@ -45,8 +45,8 @@ func (b *TallyVotesTracker) Exec(ctx context.Context) error {
 	bar1 := bind.NewBoundContract(contractAddress, zapAbi, nil, nil, nil)
 	bar2 := bind.NewBoundContract(contractAddress, disputeAbi, nil, nil, nil)
 
-	newDisputeID := zapAbi.Events["NewDispute"].ID()
-	disputeVoteTalliedId := disputeAbi.Events["DisputeVoteTallied"].ID()
+	newDisputeID := zapAbi.Events["NewDispute"].ID
+	disputeVoteTalliedId := disputeAbi.Events["DisputeVoteTallied"].ID
 
 	client := ctx.Value(zapCommon.ClientContextKey).(rpc.ETHClient)
 	header, err := client.HeaderByNumber(ctx, nil)
