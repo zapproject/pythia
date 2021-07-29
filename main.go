@@ -20,8 +20,7 @@ import (
 	"github.com/zapproject/pythia/rpc"
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/vault"
-
-	"github.com/therecipe/qt/widgets"
+	"github.com/zapproject/pythia/qt"
 )
 
 var ctx context.Context
@@ -378,71 +377,8 @@ func main() {
 	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	// }
 
-	app := widgets.NewQApplication(len(os.Args), os.Args)
-
-	window := widgets.NewQMainWindow(nil, 0)
-
-	window.SetMinimumSize2(980, 800)
-
-	window.SetWindowTitle("Pythia")
-
-	// widget := widgets.NewQWidget(nil, 0)
-
-	LoginRadioGroup := widgets.NewQGroupBox2("Choose Login Type", nil)
-	LoginTypeNames := [3]string{"Public/Private Key Pair", "Key File", "Mneomonic Phrase"}
-	LoginRadioVBox := widgets.NewQVBoxLayout2(nil)
-
-	for i, name := range LoginTypeNames {
-		LoginRadioVBox.AddWidget(widgets.NewQRadioButton2(name,nil),i,0)
-	}
-
-	LoginRadioGroup.SetLayout(LoginRadioVBox)
- 
-
-
 	// group box for configuration
-	widget := widgets.NewQGroupBox2("Configuration", nil)
-	pubAddLabel := widgets.NewQLabel2("Public Address", nil, 0)
-	pubAddBox := widgets.NewQLineEdit(nil)
-	privKeyLabel := widgets.NewQLabel2("Private Key", nil, 0)
-	privKeyBox := widgets.NewQLineEdit(nil)
-	tokenLabel := widgets.NewQLabel2("ZapToken Address", nil, 0)
-	tokenBox := widgets.NewQLineEdit(nil)
-	masterLabel := widgets.NewQLabel2("ZapMaster Address", nil, 0)
-	masterBox := widgets.NewQLineEdit(nil)
-	vaultLabel := widgets.NewQLabel2("Vault Address", nil, 0)
-	vaultBox := widgets.NewQLineEdit(nil)
-
-	layout := widgets.NewQGridLayout2()
-	layout.AddWidget(pubAddLabel, 0, 0, 0)
-	layout.AddWidget(pubAddBox, 0, 1, 0)
-	layout.AddWidget(privKeyLabel, 1, 0, 0)
-	layout.AddWidget(privKeyBox, 1, 1, 0)
-	layout.AddWidget(tokenLabel, 2, 0, 0)
-	layout.AddWidget(tokenBox, 2, 1, 0)
-	layout.AddWidget(masterLabel, 3, 0, 0)
-	layout.AddWidget(masterBox, 3, 1, 0)
-	layout.AddWidget(vaultLabel, 4, 0, 0)
-	layout.AddWidget(vaultBox, 4, 1, 0)
-	layout.AddWidget(LoginRadioGroup, 5,0,0)
-
-	widget.SetLayout(layout)
-
-	window.SetCentralWidget(widget)
-
-	// set up File menu bar
-	fileMenu := window.MenuBar().AddMenu2("&File")
-	fileMenu.AddAction("File Option")
-
-	// set up settings menu bar
-	settingsMenu := window.MenuBar().AddMenu2("&Settings")
-	settingsMenu.AddAction("Settings Option")
-
-	// set up help menu bar
-	helpMenu := window.MenuBar().AddMenu2("&Help")
-	helpMenu.AddAction("Help Option")
-
-	window.Show()
+	app:= qt.App()
 
 	app.Exec()
 }
