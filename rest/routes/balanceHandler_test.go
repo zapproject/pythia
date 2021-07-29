@@ -2,7 +2,6 @@ package routes
 
 import (
 	"encoding/json"
-	"errors"
 	"math/big"
 	"net/http"
 	"os"
@@ -47,13 +46,14 @@ func TestBalanceHandler(t *testing.T) {
 		t.Fatalf("Error getting balance from endpoint: %v", err)
 	}
 	defer resp.Body.Close()
+	time.Sleep(30 * time.Second)
 
 	var bal BalResult
 	t.Logf("Balance from response: %v", resp.Body)
 	dec := json.NewDecoder(resp.Body)
 	err = dec.Decode(&bal)
 	if !strings.Contains(bal.Balance, "0x") {
-		testutil.Ok(t, errors.New("Missing balance in response"))
+		testutil.Ok(t, err)
 	} else {
 		t.Logf("Retrieved balance from server: %+v\n", bal)
 	}
