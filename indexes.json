@@ -16,6 +16,14 @@
 		["json(http://localhost:5002/bsd).value"],
 	"KYD/USD":
 		["json(http://localhost:5002/kyd).value"],
+	"BZD/USD":
+		["json(http://localhost:5002/bzd).value"],
+	"HTG/USD":
+		["json(http://localhost:5002/htg).value"],
+	"SRD/USD":
+		["json(http://localhost:5002/srd).value"],
+	"BMD/USD":
+		["json(http://localhost:5002/bmd).value"],
 	"BTC/USD": [
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
 		"json(https://api.pro.coinbase.com/products/BTC-USD/ticker).price",
