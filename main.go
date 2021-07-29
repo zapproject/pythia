@@ -377,8 +377,7 @@ func main() {
 	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	// }
 
-	// group box for configuration
-	app:= qt.App()
+	app := qt.App()
 
 	app.Exec()
 }
