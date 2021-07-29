@@ -128,6 +128,10 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/bbd", handler)
 	router.AddRoute("/bsd", handler)
 	router.AddRoute("/kyd", handler)
+	router.AddRoute("/bzd", handler)
+	router.AddRoute("/htg", handler)
+	router.AddRoute("/srd", handler)
+	router.AddRoute("/bmd", handler)
 }
 
 //Incoming implementation for  handler

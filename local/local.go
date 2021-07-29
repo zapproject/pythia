@@ -34,12 +34,7 @@ func CreateLocal(ctx context.Context) *LocalServer {
 //Start the Server listening for incoming requests
 func (s *LocalServer) Start() {
 	h := &routes.IndexHandler{}
-	s.Router.AddRoute("/xcd", h)
-	s.Router.AddRoute("/ttd", h)
-	s.Router.AddRoute("/jmd", h)
-	s.Router.AddRoute("/bbd", h)
-	s.Router.AddRoute("/bsd", h)
-	s.Router.AddRoute("/kyd", h)
+	routes.BuildEndpoints(s.Router, h)
 	go func() {
 		serverLog.Info("Starting Local Server on %+v\n", s.Server.Addr)
 		// returns ErrServerClosed on graceful close
