@@ -5,25 +5,25 @@
 		"json(https://cex.io/api/ticker/ZAP/USD).last"
 	],
 	"XCD/USD":
-		["json(http://localhost:5002/xcd).value"],
+		["json(http://127.0.0.1:5002/xcd).value"],
 	"TTD/USD":
-		["json(http://localhost:5002/ttd).value"],
+		["json(http://127.0.0.1:5002/ttd).value"],
 	"JMD/USD":
-		["json(http://localhost:5002/jmd).value"],
+		["json(http://127.0.0.1:5002/jmd).value"],
 	"BBD/USD":
-		["json(http://localhost:5002/bbd).value"],
+		["json(http://127.0.0.1:5002/bbd).value"],
 	"BSD/USD":
-		["json(http://localhost:5002/bsd).value"],
+		["json(http://127.0.0.1:5002/bsd).value"],
 	"KYD/USD":
-		["json(http://localhost:5002/kyd).value"],
+		["json(http://127.0.0.1:5002/kyd).value"],
 	"BZD/USD":
-		["json(http://localhost:5002/bzd).value"],
+		["json(http://127.0.0.1:5002/bzd).value"],
 	"HTG/USD":
-		["json(http://localhost:5002/htg).value"],
+		["json(http://127.0.0.1:5002/htg).value"],
 	"SRD/USD":
-		["json(http://localhost:5002/srd).value"],
+		["json(http://127.0.0.1:5002/srd).value"],
 	"BMD/USD":
-		["json(http://localhost:5002/bmd).value"],
+		["json(http://127.0.0.1:5002/bmd).value"],
 	"BTC/USD": [
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
 		"json(https://api.pro.coinbase.com/products/BTC-USD/ticker).price",
