@@ -12,8 +12,12 @@ import (
 
 var cfg *config.Config
 
+var trackers map[string]int
+
 func App() *widgets.QApplication {
 	config.NewConfig()
+
+	trackers = map[string]int{}
 
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 
@@ -41,15 +45,13 @@ func App() *widgets.QApplication {
 	}
 	LoginRadioGroup.SetLayout(LoginRadioGrid)
 
-
 	var PrivatePublicGroup *widgets.QGroupBox = nil
 	var KeyFileGroup *widgets.QGroupBox = nil
 	var MnemonicGroup *widgets.QGroupBox = nil
 
-	
-	LoginButtonGroup.ConnectButtonToggled2(func(id int,checked bool){
+	LoginButtonGroup.ConnectButtonToggled2(func(id int, checked bool) {
 
-		if(id == 0 && checked){
+		if id == 0 && checked {
 
 			if MnemonicGroup != nil {
 				LoginRadioGrid.RemoveWidget(MnemonicGroup)
@@ -63,7 +65,7 @@ func App() *widgets.QApplication {
 
 			PrivatePublicGroup = newPrivatePublicKeyWidget()
 
-			LoginRadioGrid.AddWidget(PrivatePublicGroup, id, 1,0)
+			LoginRadioGrid.AddWidget(PrivatePublicGroup, id, 1, 0)
 		}
 
 		if(id == 1 && checked){
@@ -99,9 +101,8 @@ func App() *widgets.QApplication {
 
 			MnemonicGroup = newMnemonicWidget()
 
-			LoginRadioGrid.AddWidget(MnemonicGroup, id, 1,0)
+			LoginRadioGrid.AddWidget(MnemonicGroup, id, 1, 0)
 
-			
 		}
 
 		window.Show()
@@ -120,9 +121,11 @@ func App() *widgets.QApplication {
 	trackerCycleBox := widgets.NewQComboBox(nil)
 
 	// add on editing finished signals to update configs
-	clientTimeoutBox.ConnectEditingFinished(func() { clientTimeoutChanged(clientTimeoutBox, clientTimeoutLabel) })
+	nodeURLBox.ConnectCurrentIndexChanged(func(index int) { nodeURLChanged(index) })
+	clientTimeoutBox.ConnectEditingFinished(func() { clientTimeoutChanged(clientTimeoutBox) })
+	trackerCycleBox.ConnectCurrentIndexChanged(func(index int) { trackerCycleChanged(index) })
 
-	nodeURLBox.AddItems([]string{"Ethereum Mainnet", "Ethereum Testnet", "Binance Mainnet", "Binance Testnet"})
+	nodeURLBox.AddItems([]string{"Binance Mainnet", "Binance Testnet", "Local"})
 	trackerCycleBox.AddItems([]string{"10s", "30s", "90s", "120s"})
 	envLayout := widgets.NewQGridLayout2()
 	envLayout.AddWidget(nodeURLLabel, 1, 0, 0)
@@ -157,6 +160,17 @@ func App() *widgets.QApplication {
 	tallyVotesLabel := widgets.NewQLabel2("Tally Votes", nil, 0)
 	tallyVotesBox := widgets.NewQCheckBox(nil)
 
+	// tracker signal & slot
+	balanceBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "balance") })
+	disputeStatusBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "disputeStatus") })
+	gasBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "gas") })
+	tokenBalanceBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "tokenBalance") })
+	indexersBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "indexers") })
+	newCurVarsBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "newCurrentVariables") })
+	curVarsBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "currentVariables") })
+	disputeCheckerBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "disputeChecker") })
+	tallyVotesBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "tallyVotes") })
+
 	trackerLayout := widgets.NewQGridLayout2()
 	trackerLayout.AddWidget(balanceLabel, 0, 0, 0)
 	trackerLayout.AddWidget(balanceBox, 0, 1, 0)
@@ -180,17 +194,11 @@ func App() *widgets.QApplication {
 	trackerWidget.SetLayout(trackerLayout)
 
 	/**
-	Save Button
-	*/
-	// saveButton := widgets.NewQPushButton2("Save", nil)
-
-	/**
 	Add grid box layouts to window
 	*/
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
-	// layout.AddWidget(saveButton, 5, 3, 0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
 
@@ -211,7 +219,7 @@ func App() *widgets.QApplication {
 	return app
 }
 
-func newPrivatePublicKeyWidget() *widgets.QGroupBox{
+func newPrivatePublicKeyWidget() *widgets.QGroupBox {
 	PrivatePublicLayout := widgets.NewQVBoxLayout2(nil)
 	PrivatePublicGroup := widgets.NewQGroupBox2("Enter Private Public Keys", nil)
 	PublicKeyLabel := widgets.NewQLabel2("Public Key", nil, 0)
@@ -272,23 +280,112 @@ func newMnemonicWidget() *widgets.QGroupBox{
 	MnemonicLabel := widgets.NewQLabel2("Mnemonic Phrase", nil, 0)
 	MnemonicText := widgets.NewQLineEdit(nil)
 
-	MnemonicLayout.AddWidget(MnemonicLabel,0,0)
-	MnemonicLayout.AddWidget(MnemonicText,0,0)
-
+	MnemonicLayout.AddWidget(MnemonicLabel, 0, 0)
+	MnemonicLayout.AddWidget(MnemonicText, 0, 0)
 
 	MnemonicGroup.SetLayout(MnemonicLayout)
 
 	return MnemonicGroup
 }
-
-
-
-func clientTimeoutChanged(line *widgets.QLineEdit, label *widgets.QLabel) {
+func clientTimeoutChanged(line *widgets.QLineEdit) {
 	value, err := strconv.ParseUint(line.Text(), 10, 0)
 	if err != nil {
 
 	}
-	// label.SetText(line.Text())
+
 	config.SetEthClientTimeout(uint(value))
 	cfg = config.GetConfig()
+}
+
+func trackerCycleChanged(index int) {
+	switch index {
+	case 0:
+		{
+			config.SetTrackerSleepCycle(uint(10))
+		}
+	case 1:
+		{
+			config.SetTrackerSleepCycle(uint(30))
+		}
+	case 2:
+		{
+			config.SetTrackerSleepCycle(uint(90))
+		}
+	case 3:
+		{
+			config.SetTrackerSleepCycle(uint(120))
+		}
+	}
+
+	cfg = config.GetConfig()
+}
+
+func nodeURLChanged(index int) {
+	switch index {
+	case 0:
+		{
+			config.SetNodeURL("https://bsc-dataseed1.ninicoin.io")
+		}
+	case 1:
+		{
+			config.SetNodeURL("https://data-seed-prebsc-1-s1.binance.org:8545/")
+		}
+	case 2:
+		{
+			config.SetNodeURL("http://127.0.0.1:8545/")
+		}
+	}
+
+	cfg = config.GetConfig()
+}
+
+func trackersBoxChanged(state int, tracker string) {
+	switch state {
+	case 0:
+		{
+			trackers["balance"] = 0
+			tracks := buildTracker()
+			config.SetTrackers(tracks)
+		}
+	case 2:
+		{
+			trackers["balance"] = 2
+			tracks := buildTracker()
+			config.SetTrackers(tracks)
+		}
+	}
+}
+
+func buildTracker() []string {
+	var tracks []string
+
+	if trackers["balance"] == 2 {
+		tracks = append(tracks, "balance")
+	}
+	if trackers["disputeStatus"] == 2 {
+		tracks = append(tracks, "disputeStatus")
+	}
+	if trackers["gas"] == 2 {
+		tracks = append(tracks, "gas")
+	}
+	if trackers["tokenBalance"] == 2 {
+		tracks = append(tracks, "tokenBalance")
+	}
+	if trackers["indexers"] == 2 {
+		tracks = append(tracks, "indexers")
+	}
+	if trackers["newCurrentVariables"] == 2 {
+		tracks = append(tracks, "newCurrentVariables")
+	}
+	if trackers["currentVariables"] == 2 {
+		tracks = append(tracks, "currentVariables")
+	}
+	if trackers["disputeChecker"] == 2 {
+		tracks = append(tracks, "disputeChecker")
+	}
+	if trackers["tallyVotes"] == 2 {
+		tracks = append(tracks, "tallyVotes")
+	}
+
+	return tracks
 }
