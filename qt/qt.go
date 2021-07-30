@@ -43,11 +43,49 @@ func App() *widgets.QApplication {
 	}
 	LoginRadioGroup.SetLayout(LoginRadioGrid)
 
+	var PrivatePublicGroup *widgets.QGroupBox = nil
+	var MnemonicGroup *widgets.QGroupBox = nil
+
 	LoginButtonGroup.ConnectButtonToggled2(func(id int, checked bool) {
 
-		if id == 1 && checked {
-			// LoginRadioGrid.AddWidget2(button, i, 1)
+		if id == 0 && checked {
+
+			if MnemonicGroup != nil {
+				LoginRadioGrid.RemoveWidget(MnemonicGroup)
+				MnemonicGroup.DeleteLater()
+			}
+
+			PrivatePublicGroup = newPrivatePublicKeyWidget()
+
+			LoginRadioGrid.AddWidget(PrivatePublicGroup, id, 1, 0)
 		}
+		if id == 1 && checked {
+
+			if PrivatePublicGroup != nil {
+				LoginRadioGrid.RemoveWidget(PrivatePublicGroup)
+				PrivatePublicGroup.DeleteLater()
+			}
+
+			if MnemonicGroup != nil {
+				LoginRadioGrid.RemoveWidget(MnemonicGroup)
+				MnemonicGroup.DeleteLater()
+			}
+
+		}
+		if id == 2 && checked {
+
+			if PrivatePublicGroup != nil {
+				LoginRadioGrid.RemoveWidget(PrivatePublicGroup)
+				PrivatePublicGroup.DeleteLater()
+			}
+
+			MnemonicGroup = newMnemonicWidget()
+
+			LoginRadioGrid.AddWidget(MnemonicGroup, id, 1, 0)
+
+		}
+
+		window.Show()
 
 	})
 
@@ -161,6 +199,37 @@ func App() *widgets.QApplication {
 	return app
 }
 
+func newPrivatePublicKeyWidget() *widgets.QGroupBox {
+	PrivatePublicLayout := widgets.NewQVBoxLayout2(nil)
+	PrivatePublicGroup := widgets.NewQGroupBox2("Enter Private Public Keys", nil)
+	PublicKeyLabel := widgets.NewQLabel2("Public Key", nil, 0)
+	PublicText := widgets.NewQLineEdit(nil)
+	PrivateKeyLabel := widgets.NewQLabel2("Private Key", nil, 0)
+	PrivateText := widgets.NewQLineEdit(nil)
+
+	PrivatePublicLayout.AddWidget(PublicKeyLabel, 0, 0)
+	PrivatePublicLayout.AddWidget(PublicText, 0, 0)
+	PrivatePublicLayout.AddWidget(PrivateKeyLabel, 0, 0)
+	PrivatePublicLayout.AddWidget(PrivateText, 0, 0)
+
+	PrivatePublicGroup.SetLayout(PrivatePublicLayout)
+
+	return PrivatePublicGroup
+}
+
+func newMnemonicWidget() *widgets.QGroupBox {
+	MnemonicLayout := widgets.NewQVBoxLayout2(nil)
+	MnemonicGroup := widgets.NewQGroupBox2("Enter Mnemonic Phrase", nil)
+	MnemonicLabel := widgets.NewQLabel2("Mnemonic Phrase", nil, 0)
+	MnemonicText := widgets.NewQLineEdit(nil)
+
+	MnemonicLayout.AddWidget(MnemonicLabel, 0, 0)
+	MnemonicLayout.AddWidget(MnemonicText, 0, 0)
+
+	MnemonicGroup.SetLayout(MnemonicLayout)
+
+	return MnemonicGroup
+}
 func clientTimeoutChanged(line *widgets.QLineEdit) {
 	value, err := strconv.ParseUint(line.Text(), 10, 0)
 	if err != nil {
