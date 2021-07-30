@@ -269,6 +269,9 @@ func mineCmd(cmd *cli.Cmd) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		if *remoteDS {
+			time.Sleep(cfg.TrackerSleepCycle.Duration)
+		}
 		miner.Start(ctx)
 
 		//now we wait for kill sig
