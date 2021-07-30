@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -21,10 +22,13 @@ import (
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/vault"
 
+	"github.com/therecipe/qt/gui"
 	"github.com/therecipe/qt/widgets"
 )
 
 var ctx context.Context
+
+var cfg *config.Config
 
 // func ErrorHandler(err error, operation string) {
 // 	if err != nil {
@@ -34,7 +38,7 @@ var ctx context.Context
 // }
 
 func buildContext() error {
-	cfg := config.GetConfig()
+	cfg = config.GetConfig()
 	if !cfg.EnablePoolWorker {
 		//create an rpc client
 		client, err := rpc.NewClient(cfg.NodeURL)
@@ -89,7 +93,7 @@ func buildContext() error {
 }
 
 func AddDBToCtx(remote bool) error {
-	cfg := config.GetConfig()
+	cfg = config.GetConfig()
 	//create a db instance
 	os.RemoveAll(cfg.DBFile)
 	DB, err := db.Open(cfg.DBFile)
@@ -378,6 +382,10 @@ func main() {
 	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	// }
 
+	// cfg = config.GetConfig()
+
+	config.NewConfig()
+
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 
 	window := widgets.NewQMainWindow(nil, 0)
@@ -395,9 +403,19 @@ func main() {
 	LoginRadioGroup := widgets.NewQGroupBox2("Choose Login Type", nil)
 	LoginTypeNames := [3]string{"Public/Private Key Pair", "Key File", "Mneomonic Phrase"}
 	LoginRadioVBox := widgets.NewQGridLayout2()
+	var loginRadioButton [3]*widgets.QRadioButton
 
 	for i, name := range LoginTypeNames {
-		LoginRadioVBox.AddWidget(widgets.NewQRadioButton2(name, nil), i, 0, 0)
+		loginRadioButton[i] = widgets.NewQRadioButton2(name, nil)
+	}
+
+	loginRadioButton[0].ConnectMousePressEvent(func(ev *gui.QMouseEvent) {
+		// println(qmlBridge.SendToGo("hello from qml"))
+
+	})
+
+	for i := range LoginTypeNames {
+		LoginRadioVBox.AddWidget(loginRadioButton[i], i, 0, 0)
 	}
 
 	LoginRadioGroup.SetLayout(LoginRadioVBox)
@@ -413,9 +431,11 @@ func main() {
 	trackerCycleLabel := widgets.NewQLabel2("Tracker Cycle", nil, 0)
 	trackerCycleBox := widgets.NewQComboBox(nil)
 
+	// add on editing finished signals to update configs
+	clientTimeoutBox.ConnectEditingFinished(func() { clientTimeoutChanged(clientTimeoutBox, clientTimeoutLabel) })
+
 	nodeURLBox.AddItems([]string{"Ethereum Mainnet", "Ethereum Testnet", "Binance Mainnet", "Binance Testnet"})
 	trackerCycleBox.AddItems([]string{"10s", "30s", "90s", "120s"})
-
 	envLayout := widgets.NewQGridLayout2()
 	envLayout.AddWidget(nodeURLLabel, 1, 0, 0)
 	envLayout.AddWidget(nodeURLBox, 1, 1, 0)
@@ -472,11 +492,17 @@ func main() {
 	trackerWidget.SetLayout(trackerLayout)
 
 	/**
+	Save Button
+	*/
+	// saveButton := widgets.NewQPushButton2("Save", nil)
+
+	/**
 	Add grid box layouts to window
 	*/
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
+	// layout.AddWidget(saveButton, 5, 3, 0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
 
@@ -495,4 +521,14 @@ func main() {
 	window.Show()
 
 	app.Exec()
+}
+
+func clientTimeoutChanged(line *widgets.QLineEdit, label *widgets.QLabel) {
+	value, err := strconv.ParseUint(line.Text(), 10, 0)
+	if err != nil {
+
+	}
+	// label.SetText(line.Text())
+	config.SetEthClientTimeout(uint(value))
+	cfg = config.GetConfig()
 }
