@@ -9,4 +9,6 @@ if [[ "$status" == "$not_staked" ]]; then
     ./pythia stake deposit
 fi
 
+sleep $TRACKER_CYCLE
+
 ./pythia mine -r
