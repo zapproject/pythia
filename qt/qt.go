@@ -1,20 +1,17 @@
 package qt
 
 import (
-
 	"os"
+	"strconv"
 
 	"github.com/therecipe/qt/widgets"
+	"github.com/zapproject/pythia/config"
 )
 
-func App() *widgets.QApplication {
-	//see, programming is easy. Just create an App() and run it!!!!!
-	// app := App()
-	// err := app.Run(os.Args)
-	// if err != nil {
-	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
-	// }
+var cfg *config.Config
 
+func App() *widgets.QApplication {
+	config.NewConfig()
 
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 
@@ -92,8 +89,6 @@ func App() *widgets.QApplication {
 
 	})
 
-
-
 	/**
 	ENV Config Group Box
 	*/
@@ -105,9 +100,11 @@ func App() *widgets.QApplication {
 	trackerCycleLabel := widgets.NewQLabel2("Tracker Cycle", nil, 0)
 	trackerCycleBox := widgets.NewQComboBox(nil)
 
+	// add on editing finished signals to update configs
+	clientTimeoutBox.ConnectEditingFinished(func() { clientTimeoutChanged(clientTimeoutBox, clientTimeoutLabel) })
+
 	nodeURLBox.AddItems([]string{"Ethereum Mainnet", "Ethereum Testnet", "Binance Mainnet", "Binance Testnet"})
 	trackerCycleBox.AddItems([]string{"10s", "30s", "90s", "120s"})
-
 	envLayout := widgets.NewQGridLayout2()
 	envLayout.AddWidget(nodeURLLabel, 1, 0, 0)
 	envLayout.AddWidget(nodeURLBox, 1, 1, 0)
@@ -164,15 +161,19 @@ func App() *widgets.QApplication {
 	trackerWidget.SetLayout(trackerLayout)
 
 	/**
+	Save Button
+	*/
+	// saveButton := widgets.NewQPushButton2("Save", nil)
+
+	/**
 	Add grid box layouts to window
 	*/
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
+	// layout.AddWidget(saveButton, 5, 3, 0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
-
-
 
 	// set up File menu bar
 	fileMenu := window.MenuBar().AddMenu2("&File")
@@ -223,4 +224,13 @@ func newMnemonicWidget() *widgets.QGroupBox{
 	MnemonicGroup.SetLayout(MnemonicLayout)
 
 	return MnemonicGroup
+}
+func clientTimeoutChanged(line *widgets.QLineEdit, label *widgets.QLabel) {
+	value, err := strconv.ParseUint(line.Text(), 10, 0)
+	if err != nil {
+
+	}
+	// label.SetText(line.Text())
+	config.SetEthClientTimeout(uint(value))
+	cfg = config.GetConfig()
 }

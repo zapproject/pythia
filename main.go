@@ -17,13 +17,15 @@ import (
 	"github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/contracts2"
 	db "github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/qt"
 	"github.com/zapproject/pythia/rpc"
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/vault"
-	"github.com/zapproject/pythia/qt"
 )
 
 var ctx context.Context
+
+var cfg *config.Config
 
 // func ErrorHandler(err error, operation string) {
 // 	if err != nil {
@@ -33,7 +35,7 @@ var ctx context.Context
 // }
 
 func buildContext() error {
-	cfg := config.GetConfig()
+	cfg = config.GetConfig()
 	if !cfg.EnablePoolWorker {
 		//create an rpc client
 		client, err := rpc.NewClient(cfg.NodeURL)
@@ -88,7 +90,7 @@ func buildContext() error {
 }
 
 func AddDBToCtx(remote bool) error {
-	cfg := config.GetConfig()
+	cfg = config.GetConfig()
 	//create a db instance
 	os.RemoveAll(cfg.DBFile)
 	DB, err := db.Open(cfg.DBFile)
