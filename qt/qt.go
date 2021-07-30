@@ -59,9 +59,11 @@ func App() *widgets.QApplication {
 	trackerCycleBox := widgets.NewQComboBox(nil)
 
 	// add on editing finished signals to update configs
-	clientTimeoutBox.ConnectEditingFinished(func() { clientTimeoutChanged(clientTimeoutBox, clientTimeoutLabel) })
+	nodeURLBox.ConnectCurrentIndexChanged(func(index int) { nodeURLChanged(index) })
+	clientTimeoutBox.ConnectEditingFinished(func() { clientTimeoutChanged(clientTimeoutBox) })
+	trackerCycleBox.ConnectCurrentIndexChanged(func(index int) { trackerCycleChanged(index) })
 
-	nodeURLBox.AddItems([]string{"Ethereum Mainnet", "Ethereum Testnet", "Binance Mainnet", "Binance Testnet"})
+	nodeURLBox.AddItems([]string{"Binance Mainnet", "Binance Testnet", "Local"})
 	trackerCycleBox.AddItems([]string{"10s", "30s", "90s", "120s"})
 	envLayout := widgets.NewQGridLayout2()
 	envLayout.AddWidget(nodeURLLabel, 1, 0, 0)
@@ -129,7 +131,6 @@ func App() *widgets.QApplication {
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
-	// layout.AddWidget(saveButton, 5, 3, 0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
 
@@ -150,12 +151,54 @@ func App() *widgets.QApplication {
 	return app
 }
 
-func clientTimeoutChanged(line *widgets.QLineEdit, label *widgets.QLabel) {
+func clientTimeoutChanged(line *widgets.QLineEdit) {
 	value, err := strconv.ParseUint(line.Text(), 10, 0)
 	if err != nil {
 
 	}
-	// label.SetText(line.Text())
+
 	config.SetEthClientTimeout(uint(value))
+	cfg = config.GetConfig()
+}
+
+func trackerCycleChanged(index int) {
+	switch index {
+	case 0:
+		{
+			config.SetTrackerSleepCycle(uint(10))
+		}
+	case 1:
+		{
+			config.SetTrackerSleepCycle(uint(30))
+		}
+	case 2:
+		{
+			config.SetTrackerSleepCycle(uint(90))
+		}
+	case 3:
+		{
+			config.SetTrackerSleepCycle(uint(120))
+		}
+	}
+
+	cfg = config.GetConfig()
+}
+
+func nodeURLChanged(index int) {
+	switch index {
+	case 0:
+		{
+			config.SetNodeURL("https://bsc-dataseed1.ninicoin.io")
+		}
+	case 1:
+		{
+			config.SetNodeURL("https://data-seed-prebsc-1-s1.binance.org:8545/")
+		}
+	case 2:
+		{
+			config.SetNodeURL("http://127.0.0.1:8545/")
+		}
+	}
+
 	cfg = config.GetConfig()
 }
