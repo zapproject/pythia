@@ -10,8 +10,12 @@ import (
 
 var cfg *config.Config
 
+var trackers map[string]int
+
 func App() *widgets.QApplication {
 	config.NewConfig()
+
+	trackers = map[string]int{}
 
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 
@@ -98,6 +102,17 @@ func App() *widgets.QApplication {
 	tallyVotesLabel := widgets.NewQLabel2("Tally Votes", nil, 0)
 	tallyVotesBox := widgets.NewQCheckBox(nil)
 
+	// tracker signal & slot
+	balanceBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "balance") })
+	disputeStatusBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "disputeStatus") })
+	gasBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "gas") })
+	tokenBalanceBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "tokenBalance") })
+	indexersBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "indexers") })
+	newCurVarsBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "newCurrentVariables") })
+	curVarsBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "currentVariables") })
+	disputeCheckerBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "disputeChecker") })
+	tallyVotesBox.ConnectStateChanged(func(state int) { trackersBoxChanged(state, "tallyVotes") })
+
 	trackerLayout := widgets.NewQGridLayout2()
 	trackerLayout.AddWidget(balanceLabel, 0, 0, 0)
 	trackerLayout.AddWidget(balanceBox, 0, 1, 0)
@@ -119,11 +134,6 @@ func App() *widgets.QApplication {
 	trackerLayout.AddWidget(tallyVotesBox, 4, 1, 0)
 
 	trackerWidget.SetLayout(trackerLayout)
-
-	/**
-	Save Button
-	*/
-	// saveButton := widgets.NewQPushButton2("Save", nil)
 
 	/**
 	Add grid box layouts to window
@@ -201,4 +211,55 @@ func nodeURLChanged(index int) {
 	}
 
 	cfg = config.GetConfig()
+}
+
+func trackersBoxChanged(state int, tracker string) {
+	switch state {
+	case 0:
+		{
+			trackers["balance"] = 0
+			tracks := buildTracker()
+			config.SetTrackers(tracks)
+		}
+	case 2:
+		{
+			trackers["balance"] = 2
+			tracks := buildTracker()
+			config.SetTrackers(tracks)
+		}
+	}
+}
+
+func buildTracker() []string {
+	var tracks []string
+
+	if trackers["balance"] == 2 {
+		tracks = append(tracks, "balance")
+	}
+	if trackers["disputeStatus"] == 2 {
+		tracks = append(tracks, "disputeStatus")
+	}
+	if trackers["gas"] == 2 {
+		tracks = append(tracks, "gas")
+	}
+	if trackers["tokenBalance"] == 2 {
+		tracks = append(tracks, "tokenBalance")
+	}
+	if trackers["indexers"] == 2 {
+		tracks = append(tracks, "indexers")
+	}
+	if trackers["newCurrentVariables"] == 2 {
+		tracks = append(tracks, "newCurrentVariables")
+	}
+	if trackers["currentVariables"] == 2 {
+		tracks = append(tracks, "currentVariables")
+	}
+	if trackers["disputeChecker"] == 2 {
+		tracks = append(tracks, "disputeChecker")
+	}
+	if trackers["tallyVotes"] == 2 {
+		tracks = append(tracks, "tallyVotes")
+	}
+
+	return tracks
 }
