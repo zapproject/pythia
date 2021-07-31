@@ -12,4 +12,4 @@ fi
 # should remove in favor of sleeping before mine comand is ran
 # sleep $TRACKER_CYCLE
 
-./pythia mine
+./pythia mine -r
