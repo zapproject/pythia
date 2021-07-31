@@ -255,6 +255,10 @@ func mineCmd(cmd *cli.Cmd) {
 		//start miner
 		DB := ctx.Value(ZapCommon.DataProxyKey).(db.DataServerProxy)
 		//DB := ctx.Value(ZapCommon.DBContextKey).(db.DB)
+		// needs to be tested out further
+		if *remoteDS {
+			time.Sleep(cfg.TrackerSleepCycle.Duration * 7)
+		}
 		v, err := DB.Get(db.DisputeStatusKey)
 		if err != nil {
 			fmt.Println("ignoring --- could not get dispute status.  Check if staked")
@@ -268,10 +272,6 @@ func mineCmd(cmd *cli.Cmd) {
 		miner, err := ops.CreateMiningManager(ctx, ch, ops.NewSubmitter())
 		if err != nil {
 			log.Fatal(err)
-		}
-		// needs to be tested out further
-		if *remoteDS {
-			time.Sleep(cfg.TrackerSleepCycle.Duration * 6)
 		}
 		miner.Start(ctx)
 
