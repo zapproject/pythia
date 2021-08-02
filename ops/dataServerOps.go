@@ -2,10 +2,17 @@ package ops
 
 import (
 	"context"
+	// "fmt"
 	"os"
 	"time"
 
+	"math/big"
+
+	// "github.com/ethereum/go-ethereum/common"
+	zapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/dataServer"
+	// "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
 )
 
@@ -25,6 +32,50 @@ type DataServerOps struct {
 
 //CreateDataServerOps creates a data server instance for runtime
 func CreateDataServerOps(ctx context.Context, exitCh chan os.Signal) (*DataServerOps, error) {
+	// // temp. running requestData
+	// n := new(big.Int)
+	// n, ok := n.SetString("89999998000000000000000000", 10)
+	// if !ok {
+	// 	fmt.Println("TEST TIP SetString: error")
+	// }
+
+	// tokenInstance := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+	// auth, _ := PrepareEthTransaction(ctx)
+	// tokenInstance.Approve(auth, ctx.Value(zapCommon.ContractAddress).(common.Address), 0)
+
+	instance := ctx.Value(zapCommon.TransactorContractContextKey).(*contracts1.ZapTransactor)
+	auth, _ := PrepareEthTransaction(ctx)
+	instance.RequestData(
+		auth,
+		"json(https://api.coingecko.com/api/v3/simple/price?ids=zap&vs_currencies=usd).zap.usd",
+		"ZAP/USD",
+		new(big.Int).SetInt64(1000000),
+		new(big.Int).SetInt64(0),
+	)
+
+	// auth, _ = PrepareEthTransaction(ctx)
+	// instance.RequestData(
+	// 	auth,
+	// 	"json(https://api.coingecko.com/api/v3/simple/price?ids=zap&vs_currencies=usd).zap.usd",
+	// 	"ZAP/USD",
+	// 	new(big.Int).SetInt64(1000000),
+	// 	new(big.Int).SetInt64(17))
+	// auth, _ = PrepareEthTransaction(ctx)
+	// instance.RequestData(
+	// 	auth,
+	// 	"json(https://api.coingecko.com/api/v3/simple/price?ids=zap&vs_currencies=usd).zap.usd",
+	// 	"ZAP/USD",
+	// 	new(big.Int).SetInt64(1000000),
+	// 	new(big.Int).SetInt64(18))
+	// auth, _ = PrepareEthTransaction(ctx)
+	// instance.RequestData(
+	// 	auth,
+	// 	"json(https://api.coingecko.com/api/v3/simple/price?ids=zap&vs_currencies=usd).zap.usd",
+	// 	"ZAP/USD",
+	// 	new(big.Int).SetInt64(1000000),
+	// 	new(big.Int).SetInt64(19))
+	// // end temp
+
 	ds, err := dataServer.CreateServer(ctx)
 	if err != nil {
 		return nil, err
