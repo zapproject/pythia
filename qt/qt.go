@@ -3,6 +3,7 @@ package qt
 import (
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
@@ -194,9 +195,23 @@ func App() *widgets.QApplication {
 	trackerWidget.SetLayout(trackerLayout)
 
 
+	//Start Mining
+	StartButton := widgets.NewQPushButton2("Start Mining",nil)
+
+
 	//Setup Status Bar
 	StatusBar := widgets.NewQStatusBar(nil)
-	StatusBar.ShowMessage("NOT MINING",10000)
+	StatusBar.ShowMessage("Fill out configuration to begin mining",10000)
+
+	StartButton.ConnectClicked(func(checked bool){
+		setupConfig()
+		if configStatus() == false{
+			StatusBar.ShowMessage("Config is invalid",5000)
+
+		}else{
+			StatusBar.ShowMessage("Starting Mining",5000)
+		}
+	})
 
 
 	
@@ -207,7 +222,8 @@ func App() *widgets.QApplication {
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
-	layout.AddWidget3(StatusBar, 3, 0,1, 0,0)
+	layout.AddWidget(StartButton, 3, 0, 0)
+	layout.AddWidget3(StatusBar, 4, 0, 1, 0,0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
 	window.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
@@ -312,7 +328,13 @@ func changeStringField(line *widgets.QLineEdit, field string) {
 
 	switch field {
 	case "public_key": {
-		config.SetPublicAddress(value)
+
+			config.SetPublicAddress(value)
+
+
+			whitelist := []string{value}
+			config.SetServerWhiteList(whitelist)
+
 		}
 	case "private_key":
 		{
@@ -357,6 +379,9 @@ func nodeURLChanged(index int) {
 		}
 	case 2:
 		{
+			config.SetTokenAddress("0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8")
+			config.SetVaultAddress("0x88f2bF033d43DFaF72f1660DaC4625d39C2828EB")
+			config.SetContractAddress("0xA2C32d373D6d4d5572CaC38A9fF3CAa20a29eB05")
 			config.SetNodeURL("http://127.0.0.1:8545/")
 		}
 	}
@@ -420,7 +445,7 @@ func configStatus() bool{
 
 	parsedNilDuration, _ := time.ParseDuration("0")
 
-	nilDuration := Duration{parsedNilDuration}
+	nilDuration := config.Duration{parsedNilDuration}
 
 	conf := config.GetConfig()
 
@@ -476,6 +501,25 @@ func configStatus() bool{
 		return false
 	}
 	return true
+}
+
+
+func setupConfig(){
+
+	config.SetServerHost("localhost")
+	config.SetServerPort(5001)
+	config.SetUseGPU(false)
+	config.SetGasMax(30)
+	config.SetGasMultiplier(1)
+	config.SetDBFile("zapDB")
+	config.SetDisputeTimeDelta(6)
+
+}
+
+func setupMiner(statusBar *widgets.QStatusBar){
+	// setupConfig()
+	//configStatus()
+	return
 }
 
 // func createStatusWidget(){
