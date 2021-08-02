@@ -193,12 +193,20 @@ func App() *widgets.QApplication {
 
 	trackerWidget.SetLayout(trackerLayout)
 
+
+	//Setup Status Bar
+	StatusBar := widgets.NewQStatusBar(nil)
+	StatusBar.ShowMessage("NOT MINING",10000)
+
+	
+
 	/**
 	Add grid box layouts to window
 	*/
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
+	layout.AddWidget3(StatusBar, 3, 0,1, 0,0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
 
@@ -227,7 +235,8 @@ func newPrivatePublicKeyWidget() *widgets.QGroupBox {
 	PrivateKeyLabel := widgets.NewQLabel2("Private Key", nil, 0)
 	PrivateText := widgets.NewQLineEdit(nil)
 
-
+	PublicText.ConnectEditingFinished(func() { changeStringField(PublicText,"public_key") })
+	PrivateText.ConnectEditingFinished(func() { changeStringField(PrivateText,"private_key") })
 
 	PrivatePublicLayout.AddWidget(PublicKeyLabel,0,0)
 	PrivatePublicLayout.AddWidget(PublicText,0,0)
@@ -287,6 +296,7 @@ func newMnemonicWidget() *widgets.QGroupBox{
 
 	return MnemonicGroup
 }
+
 func clientTimeoutChanged(line *widgets.QLineEdit) {
 	value, err := strconv.ParseUint(line.Text(), 10, 0)
 	if err != nil {
@@ -294,6 +304,23 @@ func clientTimeoutChanged(line *widgets.QLineEdit) {
 	}
 
 	config.SetEthClientTimeout(uint(value))
+	cfg = config.GetConfig()
+}
+
+
+//Used to change config field if it's a string type
+func changeStringField(line *widgets.QLineEdit, field string) {
+	value:= line.Text()
+
+	switch field {
+	case "public_key": {
+		config.SetPublicAddress(value)
+		}
+	case "private_key":
+		{
+			config.SetPrivateKey(value)
+		}
+	}
 	cfg = config.GetConfig()
 }
 
@@ -389,3 +416,67 @@ func buildTracker() []string {
 
 	return tracks
 }
+
+
+func configStatus() bool{
+
+
+	conf := config.GetConfig()
+
+	if conf.TokenAddress == nil{
+		return false
+	}                
+	if conf.ContractAddress == nil{
+		return false
+	}             
+	if conf.VaultAddress == nil{
+		return false
+	}                
+	if conf.NodeURL == nil{
+		return false
+	}                     
+	if conf.PublicAddress == nil{
+		return false
+	}               
+	if conf.EthClientTimeout == nil{
+		return false
+	}            
+	if conf.TrackerSleepCycle == nil{
+		return false
+	}           
+	if conf.Trackers == nil{
+		return false
+	}                    
+	if conf.DBFile == nil{
+		return false
+	}                      
+	if conf.ServerHost == nil{
+		return false
+	}                  
+	if conf.ServerPort == nil{
+		return false
+	}                                          
+	if conf.GasMultiplier == nil{
+		return false
+	}               
+	if conf.GasMax == nil{
+		return false
+	}                                    
+	if conf.ServerWhitelist == nil{
+		return false
+	}             
+	if conf.DisputeTimeDelta == nil{
+		return false
+	}            
+	if conf.UseGPU == nil{
+		return false
+	}                      
+	if conf.PrivateKey == nil{
+		return false
+	}
+	return true
+}
+
+// func createStatusWidget(){
+// 	return
+// }

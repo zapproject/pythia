@@ -604,6 +604,10 @@ func SetPublicAddress(address string) {
 	config.PublicAddress = address
 }
 
+func SetPrivateKey(address string) {
+	config.PrivateKey = address
+}
+
 func SetEthClientTimeout(timeout uint) {
 	fmt.Println(config)
 	config.EthClientTimeout = timeout
