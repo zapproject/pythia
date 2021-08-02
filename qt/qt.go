@@ -4,7 +4,9 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
+
 	// "github.com/therecipe/qt/core"
 
 	"github.com/zapproject/pythia/config"
@@ -29,7 +31,7 @@ func App() *widgets.QApplication {
 
 	widget := widgets.NewQGroupBox2("Configuration", nil)
 	layout := widgets.NewQGridLayout2()
-
+	toolbar := startUp()
 	/**
 	Login Group Box
 	*/
@@ -68,8 +70,8 @@ func App() *widgets.QApplication {
 			LoginRadioGrid.AddWidget(PrivatePublicGroup, id, 1, 0)
 		}
 
-		if(id == 1 && checked){
-			
+		if id == 1 && checked {
+
 			if PrivatePublicGroup != nil {
 				LoginRadioGrid.RemoveWidget(PrivatePublicGroup)
 				PrivatePublicGroup.DeleteLater()
@@ -80,14 +82,13 @@ func App() *widgets.QApplication {
 				MnemonicGroup.DeleteLater()
 			}
 
-			
 			KeyFileGroup = newKeyFileWidget()
 
-			LoginRadioGrid.AddWidget(KeyFileGroup, id, 1,0)
+			LoginRadioGrid.AddWidget(KeyFileGroup, id, 1, 0)
 
 		}
-		 
-		if(id == 2 && checked){
+
+		if id == 2 && checked {
 
 			if PrivatePublicGroup != nil {
 				LoginRadioGrid.RemoveWidget(PrivatePublicGroup)
@@ -198,6 +199,7 @@ func App() *widgets.QApplication {
 	StatusBar := widgets.NewQStatusBar(nil)
 	StatusBar.ShowMessage("NOT MINING",10000)
 
+
 	
 
 	/**
@@ -209,6 +211,7 @@ func App() *widgets.QApplication {
 	layout.AddWidget3(StatusBar, 3, 0,1, 0,0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
+	window.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
 
 	// set up File menu bar
 	fileMenu := window.MenuBar().AddMenu2("&File")
@@ -248,20 +251,17 @@ func newPrivatePublicKeyWidget() *widgets.QGroupBox {
 	return PrivatePublicGroup
 }
 
-func newKeyFileWidget() *widgets.QGroupBox{
+func newKeyFileWidget() *widgets.QGroupBox {
 	KeyFileLayout := widgets.NewQHBoxLayout2(nil)
 	KeyFileGroup := widgets.NewQGroupBox2("Enter KeyFile Phrase", nil)
 
 	KeyFileLabel := widgets.NewQLabel2("KeyFile Directory", nil, 0)
 	KeyFileText := widgets.NewQLineEdit(nil)
-	KeyFileButton := widgets.NewQPushButton2("Browse File",nil)
-
+	KeyFileButton := widgets.NewQPushButton2("Browse File", nil)
 
 	fileDialog := widgets.NewQFileDialog2(nil, "Open File...", "", "")
 
-
-
-	KeyFileButton.ConnectClicked(func(checked bool){
+	KeyFileButton.ConnectClicked(func(checked bool) {
 		fileDialog.SetAcceptMode(widgets.QFileDialog__AcceptOpen)
 		fileDialog.SetFileMode(widgets.QFileDialog__ExistingFile)
 		if fileDialog.Exec() != int(widgets.QDialog__Accepted) {
@@ -270,20 +270,19 @@ func newKeyFileWidget() *widgets.QGroupBox{
 		fn := fileDialog.SelectedFiles()[0]
 
 		KeyFileText.SetText(fn)
-		
+
 	})
 
-	KeyFileLayout.AddWidget(KeyFileLabel,0,0)
-	KeyFileLayout.AddWidget(KeyFileText,0,0)
-	KeyFileLayout.AddWidget(KeyFileButton,0,0)
-
+	KeyFileLayout.AddWidget(KeyFileLabel, 0, 0)
+	KeyFileLayout.AddWidget(KeyFileText, 0, 0)
+	KeyFileLayout.AddWidget(KeyFileButton, 0, 0)
 
 	KeyFileGroup.SetLayout(KeyFileLayout)
 
 	return KeyFileGroup
 }
 
-func newMnemonicWidget() *widgets.QGroupBox{
+func newMnemonicWidget() *widgets.QGroupBox {
 	MnemonicLayout := widgets.NewQVBoxLayout2(nil)
 	MnemonicGroup := widgets.NewQGroupBox2("Enter Mnemonic Phrase", nil)
 	MnemonicLabel := widgets.NewQLabel2("Mnemonic Phrase", nil, 0)
@@ -420,58 +419,61 @@ func buildTracker() []string {
 
 func configStatus() bool{
 
+	parsedNilDuration, _ := time.ParseDuration("0")
+
+	nilDuration := Duration{parsedNilDuration}
 
 	conf := config.GetConfig()
 
-	if conf.TokenAddress == nil{
+	if conf.TokenAddress == ""{
 		return false
 	}                
-	if conf.ContractAddress == nil{
+	if conf.ContractAddress == ""{
 		return false
 	}             
-	if conf.VaultAddress == nil{
+	if conf.VaultAddress == ""{
 		return false
 	}                
-	if conf.NodeURL == nil{
+	if conf.NodeURL == ""{
 		return false
 	}                     
-	if conf.PublicAddress == nil{
+	if conf.PublicAddress == ""{
 		return false
 	}               
-	if conf.EthClientTimeout == nil{
+	if conf.EthClientTimeout == 0{
 		return false
 	}            
-	if conf.TrackerSleepCycle == nil{
+	if conf.TrackerSleepCycle == nilDuration{
 		return false
 	}           
-	if conf.Trackers == nil{
+	if len(config.Trackers) == 0 {
 		return false
 	}                    
-	if conf.DBFile == nil{
+	if conf.DBFile == ""{
 		return false
 	}                      
-	if conf.ServerHost == nil{
+	if conf.ServerHost == "" {
 		return false
 	}                  
-	if conf.ServerPort == nil{
+	if conf.ServerPort == 0 {
 		return false
 	}                                          
-	if conf.GasMultiplier == nil{
+	if conf.GasMultiplier == 0{
 		return false
 	}               
-	if conf.GasMax == nil{
+	if conf.GasMax == 0{
 		return false
 	}                                    
-	if conf.ServerWhitelist == nil{
+	if len(conf.ServerWhitelist) == 0{
 		return false
 	}             
-	if conf.DisputeTimeDelta == nil{
+	if conf.DisputeTimeDelta == nilDuration{
 		return false
 	}            
-	if conf.UseGPU == nil{
+	if conf.UseGPU == true{
 		return false
 	}                      
-	if conf.PrivateKey == nil{
+	if conf.PrivateKey == ""{
 		return false
 	}
 	return true
