@@ -7,8 +7,6 @@ import (
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
 
-	// "github.com/therecipe/qt/core"
-
 	"github.com/zapproject/pythia/config"
 )
 
@@ -29,9 +27,10 @@ func App() *widgets.QApplication {
 
 	window.SetWindowTitle("Pythia")
 
+	toolbar := startUp()
 	widget := widgets.NewQGroupBox2("Configuration", nil)
 	layout := widgets.NewQGridLayout2()
-	toolbar := startUp()
+
 	/**
 	Login Group Box
 	*/
