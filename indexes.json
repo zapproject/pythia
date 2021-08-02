@@ -25,6 +25,7 @@
 	"BMD/USD":
 		["json(http://127.0.0.1:5002/bmd).value"],
 	"BTC/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
 		"json(https://api.pro.coinbase.com/products/BTC-USD/ticker).price",
 		"json(https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=1d&limit=1).0.4",
@@ -32,6 +33,7 @@
 		"json(https://www.bitstamp.net/api/v2/ticker/btcusd).last"
 	],
 	"ETH/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=ETHUSD).result.XETHZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd).ethereum.usd",
 		"json(https://api.pro.coinbase.com/products/ETH-USD/ticker).price,.volume",
 		"json(https://api.binance.com/api/v1/klines?symbol=ETHUSDT&interval=1d&limit=1).0.4",
@@ -39,12 +41,14 @@
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=ethusdt).tick.close"
 	],
 	"LTC/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=LTCUSD).result.XLTCZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd).litecoin.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=LTCUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=ltcusdt).tick.close",
 		"json(https://www.bitstamp.net/api/v2/ticker/ltcusd).last"
 	],
 	"XRP/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=XRPUSD).result.XXRPZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd).ripple.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=XRPUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=xrpusdt).tick.close",
@@ -57,18 +61,21 @@
 		"json(https://data.gateapi.io/api2/1/ticker/bnb_usdt).last"
 	],
 	"DOGE/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=DOGEUSD).result.XDGUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd).dogecoin.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=DOGEUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=dogeusdt).tick.close",
 		"json(https://data.gateapi.io/api2/1/ticker/doge_usdt).last"
 	],
 	"BCH/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=BCHUSD).result.BCHUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd).bitcoin-cash.usd",
 		"json(https://ftx.com/api/markets/BCH/USD).result.last",
 		"json(https://api.binance.com/api/v1/klines?symbol=BCHUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=bchusdt).tick.close"
 	],
 	"ADA/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=ADAUSD).result.ADAUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd).cardano.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=ADAUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=adausdt).tick.close",
@@ -80,6 +87,7 @@
 		"json(https://data.gateapi.io/api2/1/ticker/bsv_usdt).last"
 	],
 	"EOS/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=EOSUSD).result.EOSUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=eos&vs_currencies=usd).eos.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=EOSUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=eosusdt).tick.close",
@@ -92,18 +100,21 @@
 		"json(https://data.gateapi.io/api2/1/ticker/dot_usdt).last"
 	],
 	"UNI/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=UNIUSD).result.UNIUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=uniswap&vs_currencies=usd).uniswap.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=UNIUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=uniusdt).tick.close",
 		"json(https://api.pro.coinbase.com/products/UNI-USD/ticker).price"
 	],
 	"LINK/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=LINKUSD).result.LINKUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=chainlink&vs_currencies=usd).chainlink.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=LINKUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=linkusdt).tick.close",
 		"json(https://api.pro.coinbase.com/products/LINK-USD/ticker).price"
 	],
 	"ETC/USD": [
+		"json(https://api.kraken.com/0/public/Ticker?pair=ETCUSD).result.XETCZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=ethereum-classic&vs_currencies=usd).ethereum-classic.usd",
 		"json(https://api.binance.com/api/v1/klines?symbol=ETCUSDT&interval=1d&limit=1).0.4",
 		"json(https://api.huobi.de.com/market/detail/merged?symbol=etcusdt).tick.close",

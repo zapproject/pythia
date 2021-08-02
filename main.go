@@ -13,7 +13,6 @@ import (
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	cli "github.com/jawher/mow.cli"
@@ -253,16 +252,20 @@ func mineCmd(cmd *cli.Cmd) {
 			}
 		}
 		//start miner
-		DB := ctx.Value(ZapCommon.DataProxyKey).(db.DataServerProxy)
+		// DB := ctx.Value(ZapCommon.DataProxyKey).(db.DataServerProxy)
 		//DB := ctx.Value(ZapCommon.DBContextKey).(db.DB)
-		v, err := DB.Get(db.DisputeStatusKey)
-		if err != nil {
-			fmt.Println("ignoring --- could not get dispute status.  Check if staked")
+		// needs to be tested out further
+		if *remoteDS {
+			time.Sleep(cfg.TrackerSleepCycle.Duration * 7)
 		}
-		status, _ := hexutil.DecodeBig(string(v))
-		if status.Cmp(big.NewInt(1)) != 0 {
-			log.Fatalf("\U0001F6AB Miner is not able to mine with status %v. Stopping all mining immediately \U00002622", status)
-		}
+		// v, err := DB.Get(db.DisputeStatusKey)
+		// if err != nil {
+		// 	fmt.Println("ignoring --- could not get dispute status.  Check if staked")
+		// }
+		// status, _ := hexutil.DecodeBig(string(v))
+		// if status.Cmp(big.NewInt(1)) != 0 {
+		// 	log.Printf("\U0001F6AB Miner is not able to mine with status %v. Stopping all mining immediately \U00002622", status)
+		// }
 		ch := make(chan os.Signal)
 		exitChannels = append(exitChannels, &ch)
 		miner, err := ops.CreateMiningManager(ctx, ch, ops.NewSubmitter())
