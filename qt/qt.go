@@ -4,7 +4,9 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
+
 	// "github.com/therecipe/qt/core"
 
 	"github.com/zapproject/pythia/config"
@@ -29,7 +31,7 @@ func App() *widgets.QApplication {
 
 	widget := widgets.NewQGroupBox2("Configuration", nil)
 	layout := widgets.NewQGridLayout2()
-
+	toolbar := startUp()
 	/**
 	Login Group Box
 	*/
@@ -68,8 +70,8 @@ func App() *widgets.QApplication {
 			LoginRadioGrid.AddWidget(PrivatePublicGroup, id, 1, 0)
 		}
 
-		if(id == 1 && checked){
-			
+		if id == 1 && checked {
+
 			if PrivatePublicGroup != nil {
 				LoginRadioGrid.RemoveWidget(PrivatePublicGroup)
 				PrivatePublicGroup.DeleteLater()
@@ -80,14 +82,13 @@ func App() *widgets.QApplication {
 				MnemonicGroup.DeleteLater()
 			}
 
-			
 			KeyFileGroup = newKeyFileWidget()
 
-			LoginRadioGrid.AddWidget(KeyFileGroup, id, 1,0)
+			LoginRadioGrid.AddWidget(KeyFileGroup, id, 1, 0)
 
 		}
-		 
-		if(id == 2 && checked){
+
+		if id == 2 && checked {
 
 			if PrivatePublicGroup != nil {
 				LoginRadioGrid.RemoveWidget(PrivatePublicGroup)
@@ -199,8 +200,12 @@ func App() *widgets.QApplication {
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
+	// layout.AddLayout(toolbar, 0, 0, 0)
+	// layout.AddLayout(widgetLayout, 0, 1, 0)
+
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
+	window.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
 
 	// set up File menu bar
 	fileMenu := window.MenuBar().AddMenu2("&File")
@@ -227,32 +232,27 @@ func newPrivatePublicKeyWidget() *widgets.QGroupBox {
 	PrivateKeyLabel := widgets.NewQLabel2("Private Key", nil, 0)
 	PrivateText := widgets.NewQLineEdit(nil)
 
-
-
-	PrivatePublicLayout.AddWidget(PublicKeyLabel,0,0)
-	PrivatePublicLayout.AddWidget(PublicText,0,0)
-	PrivatePublicLayout.AddWidget(PrivateKeyLabel,0,0)
-	PrivatePublicLayout.AddWidget(PrivateText,0,0)
+	PrivatePublicLayout.AddWidget(PublicKeyLabel, 0, 0)
+	PrivatePublicLayout.AddWidget(PublicText, 0, 0)
+	PrivatePublicLayout.AddWidget(PrivateKeyLabel, 0, 0)
+	PrivatePublicLayout.AddWidget(PrivateText, 0, 0)
 
 	PrivatePublicGroup.SetLayout(PrivatePublicLayout)
 
 	return PrivatePublicGroup
 }
 
-func newKeyFileWidget() *widgets.QGroupBox{
+func newKeyFileWidget() *widgets.QGroupBox {
 	KeyFileLayout := widgets.NewQHBoxLayout2(nil)
 	KeyFileGroup := widgets.NewQGroupBox2("Enter KeyFile Phrase", nil)
 
 	KeyFileLabel := widgets.NewQLabel2("KeyFile Directory", nil, 0)
 	KeyFileText := widgets.NewQLineEdit(nil)
-	KeyFileButton := widgets.NewQPushButton2("Browse File",nil)
-
+	KeyFileButton := widgets.NewQPushButton2("Browse File", nil)
 
 	fileDialog := widgets.NewQFileDialog2(nil, "Open File...", "", "")
 
-
-
-	KeyFileButton.ConnectClicked(func(checked bool){
+	KeyFileButton.ConnectClicked(func(checked bool) {
 		fileDialog.SetAcceptMode(widgets.QFileDialog__AcceptOpen)
 		fileDialog.SetFileMode(widgets.QFileDialog__ExistingFile)
 		if fileDialog.Exec() != int(widgets.QDialog__Accepted) {
@@ -261,20 +261,19 @@ func newKeyFileWidget() *widgets.QGroupBox{
 		fn := fileDialog.SelectedFiles()[0]
 
 		KeyFileText.SetText(fn)
-		
+
 	})
 
-	KeyFileLayout.AddWidget(KeyFileLabel,0,0)
-	KeyFileLayout.AddWidget(KeyFileText,0,0)
-	KeyFileLayout.AddWidget(KeyFileButton,0,0)
-
+	KeyFileLayout.AddWidget(KeyFileLabel, 0, 0)
+	KeyFileLayout.AddWidget(KeyFileText, 0, 0)
+	KeyFileLayout.AddWidget(KeyFileButton, 0, 0)
 
 	KeyFileGroup.SetLayout(KeyFileLayout)
 
 	return KeyFileGroup
 }
 
-func newMnemonicWidget() *widgets.QGroupBox{
+func newMnemonicWidget() *widgets.QGroupBox {
 	MnemonicLayout := widgets.NewQVBoxLayout2(nil)
 	MnemonicGroup := widgets.NewQGroupBox2("Enter Mnemonic Phrase", nil)
 	MnemonicLabel := widgets.NewQLabel2("Mnemonic Phrase", nil, 0)
