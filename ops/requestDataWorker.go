@@ -121,7 +121,7 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 
 func (r *DataRequester) maybeRequestData(ctx context.Context) {
 	r.log.Info("Checking whether to submit data request...")
-	err := r.submitter.PrepareTransaction(ctx, r.proxy, "RequestData", r.reqDataCallback)
+	err := r.submitter.PrepareTransaction(ctx, r.proxy, "AddTip", r.reqDataCallback)
 	if err != nil {
 		r.log.Error("Problem preparing contract transaction: %v\n", err)
 	}
