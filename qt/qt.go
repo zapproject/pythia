@@ -3,6 +3,8 @@ package qt
 import (
 	"os"
 	"strconv"
+	"time"
+	"context"
 
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
@@ -11,6 +13,7 @@ import (
 )
 
 var cfg *config.Config
+var ctx context.Context
 
 var trackers map[string]int
 
@@ -195,15 +198,36 @@ func App() *widgets.QApplication {
 
 	trackerWidget.SetLayout(trackerLayout)
 
+
+	//Start Mining
+	StartButton := widgets.NewQPushButton2("Start Mining",nil)
+
+
+	//Setup Status Bar
+	StatusBar := widgets.NewQStatusBar(nil)
+	StatusBar.ShowMessage("Fill out configuration to begin mining",10000)
+
+	StartButton.ConnectClicked(func(checked bool){
+		setupConfig()
+		if configStatus() == false{
+			StatusBar.ShowMessage("Config is invalid",5000)
+
+		}else{
+			StatusBar.ShowMessage("Starting Mining",5000)
+		}
+	})
+
+
+	
+
 	/**
 	Add grid box layouts to window
 	*/
 	layout.AddWidget(LoginRadioGroup, 0, 0, 0)
 	layout.AddWidget(envWidget, 1, 0, 0)
 	layout.AddWidget(trackerWidget, 2, 0, 0)
-	// layout.AddLayout(toolbar, 0, 0, 0)
-	// layout.AddLayout(widgetLayout, 0, 1, 0)
-
+	layout.AddWidget(StartButton, 3, 0, 0)
+	layout.AddWidget3(StatusBar, 4, 0, 1, 0,0)
 	widget.SetLayout(layout)
 	window.SetCentralWidget(widget)
 	window.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
@@ -233,10 +257,13 @@ func newPrivatePublicKeyWidget() *widgets.QGroupBox {
 	PrivateKeyLabel := widgets.NewQLabel2("Private Key", nil, 0)
 	PrivateText := widgets.NewQLineEdit(nil)
 
-	PrivatePublicLayout.AddWidget(PublicKeyLabel, 0, 0)
-	PrivatePublicLayout.AddWidget(PublicText, 0, 0)
-	PrivatePublicLayout.AddWidget(PrivateKeyLabel, 0, 0)
-	PrivatePublicLayout.AddWidget(PrivateText, 0, 0)
+	PublicText.ConnectEditingFinished(func() { changeStringField(PublicText,"public_key") })
+	PrivateText.ConnectEditingFinished(func() { changeStringField(PrivateText,"private_key") })
+
+	PrivatePublicLayout.AddWidget(PublicKeyLabel,0,0)
+	PrivatePublicLayout.AddWidget(PublicText,0,0)
+	PrivatePublicLayout.AddWidget(PrivateKeyLabel,0,0)
+	PrivatePublicLayout.AddWidget(PrivateText,0,0)
 
 	PrivatePublicGroup.SetLayout(PrivatePublicLayout)
 
@@ -287,6 +314,7 @@ func newMnemonicWidget() *widgets.QGroupBox {
 
 	return MnemonicGroup
 }
+
 func clientTimeoutChanged(line *widgets.QLineEdit) {
 	value, err := strconv.ParseUint(line.Text(), 10, 0)
 	if err != nil {
@@ -294,6 +322,29 @@ func clientTimeoutChanged(line *widgets.QLineEdit) {
 	}
 
 	config.SetEthClientTimeout(uint(value))
+	cfg = config.GetConfig()
+}
+
+
+//Used to change config field if it's a string type
+func changeStringField(line *widgets.QLineEdit, field string) {
+	value:= line.Text()
+
+	switch field {
+	case "public_key": {
+
+			config.SetPublicAddress(value)
+
+
+			whitelist := []string{value}
+			config.SetServerWhiteList(whitelist)
+
+		}
+	case "private_key":
+		{
+			config.SetPrivateKey(value)
+		}
+	}
 	cfg = config.GetConfig()
 }
 
@@ -332,6 +383,9 @@ func nodeURLChanged(index int) {
 		}
 	case 2:
 		{
+			config.SetTokenAddress("0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8")
+			config.SetVaultAddress("0x88f2bF033d43DFaF72f1660DaC4625d39C2828EB")
+			config.SetContractAddress("0xA2C32d373D6d4d5572CaC38A9fF3CAa20a29eB05")
 			config.SetNodeURL("http://127.0.0.1:8545/")
 		}
 	}
@@ -389,3 +443,89 @@ func buildTracker() []string {
 
 	return tracks
 }
+
+
+func configStatus() bool{
+
+	parsedNilDuration, _ := time.ParseDuration("0")
+
+	nilDuration := config.Duration{parsedNilDuration}
+
+	conf := config.GetConfig()
+
+	if conf.TokenAddress == ""{
+		return false
+	}                
+	if conf.ContractAddress == ""{
+		return false
+	}             
+	if conf.VaultAddress == ""{
+		return false
+	}                
+	if conf.NodeURL == ""{
+		return false
+	}                     
+	if conf.PublicAddress == ""{
+		return false
+	}               
+	if conf.EthClientTimeout == 0{
+		return false
+	}            
+	if conf.TrackerSleepCycle == nilDuration{
+		return false
+	}           
+	if len(config.Trackers) == 0 {
+		return false
+	}                    
+	if conf.DBFile == ""{
+		return false
+	}                      
+	if conf.ServerHost == "" {
+		return false
+	}                  
+	if conf.ServerPort == 0 {
+		return false
+	}                                          
+	if conf.GasMultiplier == 0{
+		return false
+	}               
+	if conf.GasMax == 0{
+		return false
+	}                                    
+	if len(conf.ServerWhitelist) == 0{
+		return false
+	}             
+	if conf.DisputeTimeDelta == nilDuration{
+		return false
+	}            
+	if conf.UseGPU == true{
+		return false
+	}                      
+	if conf.PrivateKey == ""{
+		return false
+	}
+	return true
+}
+
+
+func setupConfig(){
+
+	config.SetServerHost("localhost")
+	config.SetServerPort(5001)
+	config.SetUseGPU(false)
+	config.SetGasMax(30)
+	config.SetGasMultiplier(1)
+	config.SetDBFile("zapDB")
+	config.SetDisputeTimeDelta(6)
+
+}
+
+func setupMiner(statusBar *widgets.QStatusBar){
+	// setupConfig()
+	//configStatus()
+	return
+}
+
+// func createStatusWidget(){
+// 	return
+// }
