@@ -4,6 +4,7 @@ import (
 	"os"
 	"strconv"
 	"time"
+	"context"
 
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
@@ -12,6 +13,7 @@ import (
 )
 
 var cfg *config.Config
+var ctx context.Context
 
 var trackers map[string]int
 

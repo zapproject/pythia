@@ -19,7 +19,6 @@ import (
 	"github.com/zapproject/pythia/vault"
 )
 
-var ctx context.Context
 
 func showWallet() {
 	// cfg = config.GetConfig()
