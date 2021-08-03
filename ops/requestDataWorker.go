@@ -133,7 +133,7 @@ func (r *DataRequester) maybeRequestData(ctx context.Context) {
 
 	r.log.Info("Approving this miner to tip for requestID: %v\n", cfg.RequestData)
 	auth, _ := PrepareEthTransaction(ctx)
-	token.Approve(auth, common.HexToAddress(cfg.PublicAddress), tipAmount)
+	token.Approve(auth, common.HexToAddress(cfg.ContractAddress), tipAmount)
 
 	r.log.Info("Checking whether to submit data request...")
 	err := r.submitter.PrepareTransaction(ctx, r.proxy, "AddTip", r.reqDataCallback)
