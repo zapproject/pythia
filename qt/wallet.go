@@ -8,7 +8,6 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/widgets"
 	ZapCommon "github.com/zapproject/pythia/common"
 	"github.com/zapproject/pythia/contracts"
@@ -19,55 +18,54 @@ import (
 	"github.com/zapproject/pythia/vault"
 )
 
-
-func showWallet() {
+func showWallet() *widgets.QGroupBox {
 	// cfg = config.GetConfig()
-	buildContext()
+	// buildContext()
 
-	newWindow := widgets.NewQMainWindow(nil, 0)
+	// newWindow := widgets.NewQMainWindow(nil, 0)
 
-	newWindow.SetMinimumSize2(980, 800)
+	// newWindow.SetMinimumSize2(980, 800)
 
-	newWindow.SetWindowTitle("Pythia")
+	// newWindow.SetWindowTitle("Pythia")
 
-	toolbar := startUp()
+	// toolbar := startUp()
 	widget := widgets.NewQGroupBox2("Wallet", nil)
 	layout := widgets.NewQGridLayout2()
 
 	// for an option to add balances of different tokens, create group
-	balanceLabel := widgets.NewQLabel2("Balance: ", nil, 0)
-	addr := ctx.Value(ZapCommon.PublicAddress).(common.Address)
-	instance := ctx.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
-	zapBalance, err := instance.BalanceOf(nil, addr)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// balanceLabel := widgets.NewQLabel2("Balance: ", nil, 0)
+	// addr := ctx.Value(ZapCommon.PublicAddress).(common.Address)
+	// instance := ctx.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
+	// zapBalance, err := instance.BalanceOf(nil, addr)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	balanceBox := widgets.NewQLabel2(zapBalance.String(), nil, 0)
+	// balanceBox := widgets.NewQLabel2(zapBalance.String(), nil, 0)
 
-	layout.AddWidget(balanceLabel, 0, 0, 0)
-	layout.AddWidget(balanceBox, 1, 0, 0)
+	// layout.AddWidget(balanceLabel, 0, 0, 0)
+	// layout.AddWidget(balanceBox, 1, 0, 0)
 
 	widget.SetLayout(layout)
-	newWindow.SetCentralWidget(widget)
-	newWindow.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
+	// newWindow.SetCentralWidget(widget)
+	// newWindow.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
 
-	// set up File menu bar
-	fileMenu := newWindow.MenuBar().AddMenu2("&File")
-	fileMenu.AddAction("File Option")
+	// // set up File menu bar
+	// fileMenu := newWindow.MenuBar().AddMenu2("&File")
+	// fileMenu.AddAction("File Option")
 
-	// set up settings menu bar
-	settingsMenu := newWindow.MenuBar().AddMenu2("&Settings")
-	settingsMenu.AddAction("Settings Option")
+	// // set up settings menu bar
+	// settingsMenu := newWindow.MenuBar().AddMenu2("&Settings")
+	// settingsMenu.AddAction("Settings Option")
 
-	// set up help menu bar
-	helpMenu := newWindow.MenuBar().AddMenu2("&Help")
-	helpMenu.AddAction("Help Option")
+	// // set up help menu bar
+	// helpMenu := newWindow.MenuBar().AddMenu2("&Help")
+	// helpMenu.AddAction("Help Option")
 
-	window.Hide()
-	newWindow.Show()
+	// window.Hide()
+	// newWindow.Show()
 
-	// window.ActivateWindow()
+	return widget
 }
 
 func buildContext() error {

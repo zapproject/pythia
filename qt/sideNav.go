@@ -14,7 +14,7 @@ func startUp() *widgets.QToolBar {
 	mineButton := widgets.NewQPushButton2("Mine", nil)
 	disputeButton := widgets.NewQPushButton2("Dispute", nil)
 
-	walletButton.ConnectPressed(func() { showWallet() })
+	walletButton.ConnectClicked(func(click bool) { showWallet() })
 
 	layout.AddWidget(walletButton)
 	layout.AddWidget(configButton)
