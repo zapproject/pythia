@@ -108,7 +108,7 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 	c := big.NewInt(0).Sub(zapBalance, b)
 
 	if c.Cmp(big.NewInt(cfg.RequestTips)) < 0 {
-		r.log.Info("Not enough tokens to requestData with this tip")
+		r.log.Info("Not enough tokens to requestData with this tip: ", cfg.RequestTips, c)
 		return nil, nil
 	}
 	if reqID.Cmp(big.NewInt(0)) != 0 {
