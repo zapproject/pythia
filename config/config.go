@@ -92,7 +92,7 @@ type Config struct {
 
 const defaultTimeout = 30 * time.Second //30 second fetch timeout
 
-const defaultRequestInterval = 30 * time.Second //30 seconds between data requests (0-value tipping)
+const defaultRequestInterval = 45 * time.Second //30 seconds between data requests (0-value tipping)
 const defaultMiningInterrupt = 15 * time.Second //every 15 seconds, check for new challenges that could interrupt current mining
 const defaultCores = 2
 
@@ -145,6 +145,8 @@ const ServerWhiteList = "SERVER_WHITELIST"
 const Trackers = "TRACKERS"
 
 const RequestData = "REQUEST_DATA"
+
+const RequestTips = "REQUEST_TIPS"
 
 const NumProcessors = "NUM_PROCESSORS"
 
@@ -362,23 +364,39 @@ func ParseConfigBytes(data []byte) error {
 
 	}
 
-	// RequestDataEnv := os.Getenv(RequestData)
+	RequestDataEnv := os.Getenv(RequestData)
 
-	// if RequestDataEnv == "" {
+	if RequestDataEnv == "" {
 
-	// 	if config.RequestData == 0 {
+		if config.RequestData == 0 {
 
-	// 		return fmt.Errorf(
-	// 			"missing the eth client timeout environment variable '%s'", EthClientTimeout)
-	// 	}
+			fmt.Println("RequestData flag not set, continuing without tipping for a set interval...")
+		}
 
-	// } else {
-	// 	parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
-	// 	if err != nil {
-	// 		return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
-	// 	}
-	// 	config.RequestData = uint(parsedUint)
-	// }
+	} else {
+		parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
+		if err != nil {
+			return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
+		}
+		config.RequestData = uint(parsedUint)
+	}
+
+	RequestTipsEnv := os.Getenv(RequestTips)
+
+	if RequestTipsEnv == "" {
+		if config.RequestTips == 0 && config.RequestData != 0 {
+			fmt.Println("Tip amount was not set, defaulting to 1 Zap per tip")
+			config.RequestTips = 1
+		} else if config.RequestData == 0 {
+			fmt.Println("Not going to set a tip amount because this miner is not configured to tip requests")
+		}
+	} else {
+		parsedUint, err := strconv.ParseUint(RequestTipsEnv, 10, 32)
+		if err != nil {
+			return fmt.Errorf("error parsing RequestTips from os.env: %s", err)
+		}
+		config.RequestTips = int64(parsedUint * 1e18)
+	}
 
 	UseGpuEnv := os.Getenv(UseGPU)
 
