@@ -18,22 +18,12 @@ import (
 	"github.com/zapproject/pythia/vault"
 )
 
-func showWallet() *widgets.QGroupBox {
-	// cfg = config.GetConfig()
-	// buildContext()
-
-	// newWindow := widgets.NewQMainWindow(nil, 0)
-
-	// newWindow.SetMinimumSize2(980, 800)
-
-	// newWindow.SetWindowTitle("Pythia")
-
-	// toolbar := startUp()
-	widget := widgets.NewQGroupBox2("Wallet", nil)
-	layout := widgets.NewQGridLayout2()
+func showWallet() {
+	walletWidget := widgets.NewQGroupBox2("Wallet", nil)
+	walletLayout := widgets.NewQGridLayout2()
 
 	// for an option to add balances of different tokens, create group
-	// balanceLabel := widgets.NewQLabel2("Balance: ", nil, 0)
+	balanceLabel := widgets.NewQLabel2("Balance: ", nil, 0)
 	// addr := ctx.Value(ZapCommon.PublicAddress).(common.Address)
 	// instance := ctx.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	// zapBalance, err := instance.BalanceOf(nil, addr)
@@ -43,29 +33,14 @@ func showWallet() *widgets.QGroupBox {
 
 	// balanceBox := widgets.NewQLabel2(zapBalance.String(), nil, 0)
 
-	// layout.AddWidget(balanceLabel, 0, 0, 0)
-	// layout.AddWidget(balanceBox, 1, 0, 0)
+	walletLayout.AddWidget(balanceLabel, 0, 0, 0)
+	// walletLayout.AddWidget(balanceBox, 1, 0, 0)
 
-	widget.SetLayout(layout)
-	// newWindow.SetCentralWidget(widget)
-	// newWindow.AddToolBar(core.Qt__LeftToolBarArea, toolbar)
+	walletWidget.SetLayout(walletLayout)
 
-	// // set up File menu bar
-	// fileMenu := newWindow.MenuBar().AddMenu2("&File")
-	// fileMenu.AddAction("File Option")
-
-	// // set up settings menu bar
-	// settingsMenu := newWindow.MenuBar().AddMenu2("&Settings")
-	// settingsMenu.AddAction("Settings Option")
-
-	// // set up help menu bar
-	// helpMenu := newWindow.MenuBar().AddMenu2("&Help")
-	// helpMenu.AddAction("Help Option")
-
-	// window.Hide()
-	// newWindow.Show()
-
-	return widget
+	widget = walletWidget
+	window.SetCentralWidget(widget)
+	widget.Update()
 }
 
 func buildContext() error {
