@@ -87,7 +87,6 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 	}
 
 	masterInstance := ctx.Value(zapCommon.MasterContractContextKey).(*contracts.ZapMaster)
-	token := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
 
 	keys := []string{
 		db.RequestIdKey,
@@ -123,15 +122,19 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 
 	tipAmount := big.NewInt(cfg.RequestTips * int64(1e18))
 
-	r.log.Info("Approving this miner to tip for requestID: %v\n", cfg.RequestData)
-	auth, _ := PrepareEthTransaction(ctx)
-	token.Approve(auth, common.HexToAddress(cfg.PublicAddress), tipAmount)
-
 	r.log.Info("Submitting tip for requestID: %v\n", cfg.RequestData)
 	return contract.AddTip(big.NewInt(int64(cfg.RequestData)), tipAmount)
 }
 
 func (r *DataRequester) maybeRequestData(ctx context.Context) {
+	cfg := config.GetConfig()
+	token := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+	tipAmount := big.NewInt(cfg.RequestTips * int64(1e18))
+
+	r.log.Info("Approving this miner to tip for requestID: %v\n", cfg.RequestData)
+	auth, _ := PrepareEthTransaction(ctx)
+	token.Approve(auth, common.HexToAddress(cfg.PublicAddress), tipAmount)
+
 	r.log.Info("Checking whether to submit data request...")
 	err := r.submitter.PrepareTransaction(ctx, r.proxy, "AddTip", r.reqDataCallback)
 	if err != nil {
