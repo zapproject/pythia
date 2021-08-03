@@ -6,10 +6,12 @@ import (
 	"os"
 	"time"
 
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	zapCommon "github.com/zapproject/pythia/common"
 	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
 	"github.com/zapproject/pythia/db"
 	"github.com/zapproject/pythia/util"
 )
@@ -83,9 +85,10 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 		return nil, nil
 	}
 
+	masterInstance := ctx.Value(zapCommon.MasterContractContextKey).(*contracts.ZapMaster)
+
 	keys := []string{
 		db.RequestIdKey,
-		db.TokenBalanceKey,
 	}
 
 	m, err := r.proxy.BatchGet(keys)
@@ -99,9 +102,9 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 	if stat == statusWaitNext || stat == statusFailure {
 		return nil, nil
 	}
-	zapBalance, stat := r.getInt(m[db.TokenBalanceKey])
-	if stat == statusWaitNext || stat == statusFailure {
-		return nil, nil
+	zapBalance, err := masterInstance.BalanceOf(nil, common.HexToAddress(cfg.PublicAddress))
+	if err != nil {
+		r.log.Error("Error in getting balance to add tip from: ", err)
 	}
 
 	b, _ := new(big.Int).SetString("1000", 10)
