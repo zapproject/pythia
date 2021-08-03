@@ -110,7 +110,7 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 	b, _ := new(big.Int).SetString("1000", 10)
 	c := big.NewInt(0).Sub(zapBalance, b)
 
-	if c.Cmp(big.NewInt(cfg.RequestTips)) < 0 {
+	if c.Cmp(big.NewInt(cfg.RequestTips*int64(1e18))) < 0 {
 		r.log.Info("Not enough tokens to requestData with this tip: ", cfg.RequestTips, c)
 		return nil, nil
 	}
@@ -119,7 +119,7 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 		return nil, nil
 	}
 	r.log.Info("Submitting tip for requestID: %v\n", cfg.RequestData)
-	return contract.AddTip(big.NewInt(int64(cfg.RequestData)), big.NewInt(cfg.RequestTips))
+	return contract.AddTip(big.NewInt(int64(cfg.RequestData)), big.NewInt(cfg.RequestTips*int64(1e18)))
 }
 
 func (r *DataRequester) maybeRequestData(ctx context.Context) {
