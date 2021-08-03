@@ -395,7 +395,7 @@ func ParseConfigBytes(data []byte) error {
 		if err != nil {
 			return fmt.Errorf("error parsing RequestTips from os.env: %s", err)
 		}
-		config.RequestTips = int64(parsedUint * 1e18)
+		config.RequestTips = int64(parsedUint)
 	}
 
 	UseGpuEnv := os.Getenv(UseGPU)
