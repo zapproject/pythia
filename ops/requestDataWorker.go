@@ -121,11 +121,11 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 		return nil, nil
 	}
 
-	tipAmount := big.NewInt(cfg.RequestTips)
+	tipAmount := big.NewInt(cfg.RequestTips * int64(1e18))
 
 	r.log.Info("Approving this miner to tip for requestID: %v\n", cfg.RequestData)
 	auth, _ := PrepareEthTransaction(ctx)
-	token.Approve(auth, common.HexToAddress(cfg.ContractAddress), tipAmount)
+	token.Approve(auth, common.HexToAddress(cfg.PublicAddress), tipAmount)
 
 	r.log.Info("Submitting tip for requestID: %v\n", cfg.RequestData)
 	return contract.AddTip(big.NewInt(int64(cfg.RequestData)), tipAmount)
