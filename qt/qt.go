@@ -14,6 +14,8 @@ var cfg *config.Config
 
 var trackers map[string]int
 
+var window *widgets.QMainWindow
+
 func App() *widgets.QApplication {
 	config.NewConfig()
 
@@ -21,7 +23,7 @@ func App() *widgets.QApplication {
 
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 
-	window := widgets.NewQMainWindow(nil, 0)
+	window = widgets.NewQMainWindow(nil, 0)
 
 	window.SetMinimumSize2(980, 800)
 
