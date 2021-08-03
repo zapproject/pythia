@@ -33,7 +33,7 @@ const (
 //CreateDataRequester creates a requester instance
 func CreateDataRequester(exitCh chan os.Signal, submitter zapCommon.TransactionSubmitter, checkIntervalSeconds time.Duration, proxy db.DataServerProxy) *DataRequester {
 	if checkIntervalSeconds == 0 {
-		checkIntervalSeconds = 30
+		checkIntervalSeconds = 300
 	}
 	return &DataRequester{exitCh: exitCh, submitter: submitter, proxy: proxy, checkInterval: checkIntervalSeconds, log: util.NewLogger("ops", "DataRequester")}
 }

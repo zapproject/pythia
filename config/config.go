@@ -92,8 +92,8 @@ type Config struct {
 
 const defaultTimeout = 30 * time.Second //30 second fetch timeout
 
-const defaultRequestInterval = 45 * time.Second //30 seconds between data requests (0-value tipping)
-const defaultMiningInterrupt = 15 * time.Second //every 15 seconds, check for new challenges that could interrupt current mining
+const defaultRequestInterval = 300 * time.Second //300 seconds between data requests (0-value tipping)
+const defaultMiningInterrupt = 15 * time.Second  //every 15 seconds, check for new challenges that could interrupt current mining
 const defaultCores = 2
 
 const defaultHeartbeat = 15 * time.Second //check miner speed every 10 ^ 8 cycles
