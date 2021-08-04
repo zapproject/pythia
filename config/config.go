@@ -369,12 +369,9 @@ func ParseConfigBytes(data []byte) error {
 	RequestDataEnv := os.Getenv(RequestData)
 
 	if RequestDataEnv == "" {
-
 		if config.RequestData == 0 {
 
-			fmt.Println("RequestData flag not set, continuing without tipping for a set interval...")
 		}
-
 	} else {
 		parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
 		if err != nil {
@@ -390,7 +387,6 @@ func ParseConfigBytes(data []byte) error {
 			fmt.Println("Tip amount was not set, defaulting to 1 Zap per tip")
 			config.RequestTips = 1
 		} else if config.RequestData == 0 {
-			fmt.Println("Not going to set a tip amount because this miner is not configured to tip requests")
 		}
 	} else {
 		parsedUint, err := strconv.ParseUint(RequestTipsEnv, 10, 32)
@@ -404,7 +400,6 @@ func ParseConfigBytes(data []byte) error {
 
 	if RequestDataIntervalEnv == "" {
 		if config.RequestDataInterval == nilDuration {
-			fmt.Println("RequestDataInterval not set, it will still be set to 5 min")
 		}
 	} else {
 		parsedDuration, err := time.ParseDuration(RequestDataIntervalEnv)
