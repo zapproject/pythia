@@ -148,6 +148,8 @@ const RequestData = "REQUEST_DATA"
 
 const RequestTips = "REQUEST_TIPS"
 
+const RequestDataInterval = "REQUEST_INTERVAL"
+
 const NumProcessors = "NUM_PROCESSORS"
 
 //ParseConfig and set a shared config entry
@@ -396,6 +398,20 @@ func ParseConfigBytes(data []byte) error {
 			return fmt.Errorf("error parsing RequestTips from os.env: %s", err)
 		}
 		config.RequestTips = int64(parsedUint)
+	}
+
+	RequestDataIntervalEnv := os.Getenv(RequestDataInterval)
+
+	if RequestDataIntervalEnv == "" {
+		if config.RequestDataInterval == nilDuration {
+			fmt.Println("RequestDataInterval not set, it will still be set to 5 min")
+		}
+	} else {
+		parsedDuration, err := time.ParseDuration(RequestDataIntervalEnv)
+		if err != nil {
+			return fmt.Errorf("error parsing requestDataInterval from os.env: %s", err)
+		}
+		config.RequestDataInterval = Duration{parsedDuration}
 	}
 
 	UseGpuEnv := os.Getenv(UseGPU)
