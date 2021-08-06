@@ -384,7 +384,6 @@ func ParseConfigBytes(data []byte) error {
 
 	if RequestTipsEnv == "" {
 		if config.RequestTips == 0 && config.RequestData != 0 {
-			fmt.Println("Tip amount was not set, defaulting to 1 Zap per tip")
 			config.RequestTips = 1
 		} else if config.RequestData == 0 {
 		}
