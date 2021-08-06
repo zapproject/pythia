@@ -30,66 +30,64 @@ func collect(symbol string) (string, string) {
 
 	switch symbol {
 	case "XCD":
-		c.OnHTML("div.rate-list:nth-child(18) > div:nth-child(2)", func(e *colly.HTMLElement) {
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)", func(e *colly.HTMLElement) {
 			pair = "XCD/USD: "
 			value = e.Text
 		})
 
-		c.Visit("https://www.eccb-centralbank.org/")
+		c.Visit("https://www.exchangerates.org.uk/East-Caribbean-Dollar-XCD-currency-table.html")
 
 	case "JMD":
-		c.OnHTML(".row-2 > td:nth-child(3)", func(e *colly.HTMLElement) {
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)", func(e *colly.HTMLElement) {
 			pair = "JMD/USD: "
 			value = e.Text
 		})
 
-		c.Visit("https://boj.org.jm/")
+		c.Visit("https://www.exchangerates.org.uk/Jamaican-Dollar-JMD-currency-table.html")
 
 	case "BSD":
-		c.OnHTML("ul.d-flex > li:nth-child(2) > div:nth-child(2) > span:nth-child(1)",
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
 				pair = "BSD/USD: "
 				value = e.Text
 			})
 
-		c.Visit("https://www.centralbankbahamas.com/exchange_rates.php")
+		c.Visit("https://www.exchangerates.org.uk/Bahamian-Dollar-BSD-currency-table.html")
 
 	case "BBD":
-		c.OnHTML("#exchange_rate_notes > div:nth-child(4) > div:nth-child(2)", func(e *colly.HTMLElement) {
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)", func(e *colly.HTMLElement) {
 			pair = "BBD/USD: "
 			value = e.Text
 		})
 
-		c.Visit("http://www.centralbank.org.bb/")
+		c.Visit("https://www.exchangerates.org.uk/Bermuda-Dollar-BMD-currency-table.html")
 
 	case "TTD":
-		c.OnHTML(".borderless_tr > td:nth-child(1)",
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				resp := e.Text
-				start := strings.Index(resp, "USD") + 3
 				pair = "TTD/USD: "
-				value = resp[start:]
+				value = e.Text
 			})
 
-		c.Visit("https://www.central-bank.org.tt")
+		c.Visit("https://www.exchangerates.org.uk/Trinidad-Tobago-Dollar-TTD-currency-table.html")
 
 	case "BZD":
-		c.OnHTML("#currency-notes > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)",
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
 				pair = "BZD/USD: "
 				value = e.Text
 			})
 
-		c.Visit("https://www.centralbank.org.bz/")
+		c.Visit("https://www.exchangerates.org.uk/Belize-Dollar-BZD-currency-table.html")
 
 	case "HTG":
-		c.OnHTML(".contenu > em:nth-child(2) > em:nth-child(1) > em:nth-child(1) > section:nth-child(1) > table:nth-child(7) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)",
+		c.OnHTML("tr.colone:nth-child(14) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
 				pair = "HTG/USD: "
 				value = e.Text
 			})
 
-		c.Visit("http://www.mef.gouv.ht/index.php?page=Accueil")
+		c.Visit("https://www.exchangerates.org.uk/Haiti-Gourde-HTG-currency-table.html")
 
 	case "SRD":
 		c.OnHTML("#currency-notes > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)",
@@ -127,11 +125,11 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/jmd", handler)
 	router.AddRoute("/bbd", handler)
 	router.AddRoute("/bsd", handler)
-	router.AddRoute("/kyd", handler)
 	router.AddRoute("/bzd", handler)
 	router.AddRoute("/htg", handler)
 	router.AddRoute("/srd", handler)
 	router.AddRoute("/bmd", handler)
+	router.AddRoute("/kyd", handler)
 }
 
 //Incoming implementation for  handler
