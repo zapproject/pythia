@@ -84,3 +84,7 @@ cache/
 /hardhat/typechain/
 /hardhat/artifacts/
 
+# local config files
+./local_testnet_miners
+./local_testnet_miners/*
+./start_local_testnet_miners.sh

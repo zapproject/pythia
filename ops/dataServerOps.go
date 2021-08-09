@@ -3,17 +3,15 @@ package ops
 import (
 	"context"
 	// "fmt"
+	"github.com/zapproject/pythia/dataServer"
+	"github.com/zapproject/pythia/util"
 	"os"
 	"time"
-
-	"math/big"
-
+	// "math/big"
 	// "github.com/ethereum/go-ethereum/common"
-	zapCommon "github.com/zapproject/pythia/common"
-	"github.com/zapproject/pythia/contracts1"
-	"github.com/zapproject/pythia/dataServer"
+	// zapCommon "github.com/zapproject/pythia/common"
+	// "github.com/zapproject/pythia/contracts1"
 	// "github.com/zapproject/pythia/token"
-	"github.com/zapproject/pythia/util"
 )
 
 /**
@@ -43,15 +41,15 @@ func CreateDataServerOps(ctx context.Context, exitCh chan os.Signal) (*DataServe
 	// auth, _ := PrepareEthTransaction(ctx)
 	// tokenInstance.Approve(auth, ctx.Value(zapCommon.ContractAddress).(common.Address), 0)
 
-	instance := ctx.Value(zapCommon.TransactorContractContextKey).(*contracts1.ZapTransactor)
-	auth, _ := PrepareEthTransaction(ctx)
-	instance.RequestData(
-		auth,
-		"json(https://api.coingecko.com/api/v3/simple/price?ids=zap&vs_currencies=usd).zap.usd",
-		"ZAP/USD",
-		new(big.Int).SetInt64(1000000),
-		new(big.Int).SetInt64(0),
-	)
+	// instance := ctx.Value(zapCommon.TransactorContractContextKey).(*contracts1.ZapTransactor)
+	// auth, _ := PrepareEthTransaction(ctx)
+	// instance.RequestData(
+	// 	auth,
+	// 	"json(https://api.coingecko.com/api/v3/simple/price?ids=zap&vs_currencies=usd).zap.usd",
+	// 	"ZAP/USD",
+	// 	new(big.Int).SetInt64(1000000),
+	// 	new(big.Int).SetInt64(0),
+	// )
 
 	// auth, _ = PrepareEthTransaction(ctx)
 	// instance.RequestData(

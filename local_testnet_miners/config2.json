@@ -1,0 +1,30 @@
+{
+    "zapTokenAddress": "0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8",
+    "contractAddress": "0xC73cF8058a2171013a28F40C04EAEC6f4c01501d",
+    "vaultAddress": "0x6b0240a91dB0a759BD02B1C6C7DD792A24e6FCB4",
+    "nodeURL": "https://data-seed-prebsc-1-s1.binance.org:8545/",
+    "publicAddress": "57Cb0CC75E4f97EC30F6461d153d695D7a7da8cC",
+    "privateKey": "94e2f5ad97aac7ce5a78038c137e5bea485a3eccaca962aa39d5fb43b1b3f035",
+    "serverHost": "localhost",
+    "serverPort": 5001,
+    "ethClientTimeout": 3000,
+    "trackerCycle": 100,
+    "serverWhitelist": [
+        "0x57Cb0CC75E4f97EC30F6461d153d695D7a7da8cC"
+    ],
+    "gasMultiplier": 1,
+    "gasMax": 30,
+    "useGPU": false,
+    "trackers": [
+        "balance",
+        "disputeStatus",
+        "gas",
+        "tokenBalance",
+        "indexers",
+        "newCurrentVariables",
+        "currentVariables"
+    ],
+    "indexFolder": "indexes",
+    "dbFile": "zapDB",
+    "disputeTimeDelta": "600s"
+}
