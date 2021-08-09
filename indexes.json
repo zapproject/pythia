@@ -4,26 +4,96 @@
 		"json(https://www.bitrue.com/api/v1/ticker/price?symbol=ZAPUSDT).price",
 		"json(https://cex.io/api/ticker/ZAP/USD).last"
 	],
-	"XCD/USD":
-		["json(http://127.0.0.1:5002/xcd).value"],
-	"TTD/USD":
-		["json(http://127.0.0.1:5002/ttd).value"],
-	"JMD/USD":
-		["json(http://127.0.0.1:5002/jmd).value"],
-	"BBD/USD":
-		["json(http://127.0.0.1:5002/bbd).value"],
-	"BSD/USD":
-		["json(http://127.0.0.1:5002/bsd).value"],
-	"KYD/USD":
-		["json(http://127.0.0.1:5002/kyd).value"],
-	"BZD/USD":
-		["json(http://127.0.0.1:5002/bzd).value"],
-	"HTG/USD":
-		["json(http://127.0.0.1:5002/htg).value"],
-	"SRD/USD":
-		["json(http://127.0.0.1:5002/srd).value"],
-	"BMD/USD":
-		["json(http://127.0.0.1:5002/bmd).value"],
+	"XCD/USD": [
+		"json(http://127.0.0.1:5002/xcd).value"
+	],
+	"TTD/USD": [
+		"json(http://127.0.0.1:5002/ttd).value"
+	],
+	"JMD/USD": [
+		"json(http://127.0.0.1:5002/jmd).value"
+	],
+	"BBD/USD": [
+		"json(http://127.0.0.1:5002/bbd).value"
+	],
+	"BSD/USD": [
+		"json(http://127.0.0.1:5002/bsd).value"
+	],
+	"KYD/USD": [
+		"json(http://127.0.0.1:5002/kyd).value"
+	],
+	"BZD/USD": [
+		"json(http://127.0.0.1:5002/bzd).value"
+	],
+	"HTG/USD": [
+		"json(http://127.0.0.1:5002/htg).value"
+	],
+	"SRD/USD": [
+		"json(http://127.0.0.1:5002/srd).value"
+	],
+	"BMD/USD": [
+		"json(http://127.0.0.1:5002/bmd).value"
+	],
+	"AUD/USD": [
+		"json(http://127.0.0.1:5002/aud).value"
+	],
+	"GBP/USD": [
+		"json(http://127.0.0.1:5002/gbp).value"
+	],
+	"CAD/USD": [
+		"json(http://127.0.0.1:5002/cad).value"
+	],
+	"DKK/USD": [
+		"json(http://127.0.0.1:5002/dkk).value"
+	],
+	"EUR/USD": [
+		"json(http://127.0.0.1:5002/eur).value"
+	],
+	"HKD/USD": [
+		"json(http://127.0.0.1:5002/hkd).value"
+	],
+	"JPY/USD": [
+		"json(http://127.0.0.1:5002/jpy).value"
+	],
+	"NZD/USD": [
+		"json(http://127.0.0.1:5002/nzd).value"
+	],
+	"NOK/USD": [
+		"json(http://127.0.0.1:5002/nok).value"
+	],
+	"ZAR/USD": [
+		"json(http://127.0.0.1:5002/zar).value"
+	],
+	"SEK/USD": [
+		"json(http://127.0.0.1:5002/sek).value"
+	],
+	"CHF/USD": [
+		"json(http://127.0.0.1:5002/chf).value"
+	],
+	"TRY/USD": [
+		"json(http://127.0.0.1:5002/try).value"
+	],
+	"AED/USD": [
+		"json(http://127.0.0.1:5002/aed).value"
+	],
+	"CNY/USD": [
+		"json(http://127.0.0.1:5002/cny).value"
+	],
+	"THB/USD": [
+		"json(http://127.0.0.1:5002/thb).value"
+	],
+	"INR/USD": [
+		"json(http://127.0.0.1:5002/inr).value"
+	],
+	"SGD/USD": [
+		"json(http://127.0.0.1:5002/sgd).value"
+	],
+	"RUB/USD": [
+		"json(http://127.0.0.1:5002/rub).value"
+	],
+	"KRW/USD": [
+		"json(http://127.0.0.1:5002/krw).value"
+	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
