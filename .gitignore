@@ -33,6 +33,7 @@ lerna-debug.log*
 *.exe
 *.exe~
 *.dll
+!**/*webview*.dll
 *.so
 *.dylib
 *.vscode
