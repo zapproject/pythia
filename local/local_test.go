@@ -86,6 +86,20 @@ func TestIndexHander(t *testing.T) {
 		"/srd",
 		"/bmd",
 		"/kyd",
+		"/aud",
+		"/gbp",
+		"/cad",
+		"/dkk",
+		"/eur",
+		"/hkd",
+		"/jpy",
+		"/nzd",
+		"/nok",
+		"/zar",
+		"/sek",
+		"/chf",
+		"/try",
+		"/aed",
 	}
 
 	for _, pair := range pairs {
