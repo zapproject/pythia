@@ -100,6 +100,12 @@ func TestIndexHander(t *testing.T) {
 		"/chf",
 		"/try",
 		"/aed",
+		"/cny",
+		"/thb",
+		"/inr",
+		"/sgd",
+		"/rub",
+		"/krw",
 	}
 
 	for _, pair := range pairs {
