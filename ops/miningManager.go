@@ -66,8 +66,8 @@ func CreateMiningManager(ctx context.Context, exitCh chan os.Signal, submitter z
 		mng.tasker = pow.CreateTasker(cfg, proxy)
 		mng.solHandler = pow.CreateSolutionHandler(cfg, submitter, proxy)
 		if cfg.RequestData > 0 {
-			fmt.Println("dataRequester created")
 			mng.dataRequester = CreateDataRequester(exitCh, submitter, cfg.RequestDataInterval.Duration, proxy)
+			fmt.Println("dataRequester created")
 		}
 	}
 	return mng, nil

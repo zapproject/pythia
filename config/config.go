@@ -92,8 +92,8 @@ type Config struct {
 
 const defaultTimeout = 30 * time.Second //30 second fetch timeout
 
-const defaultRequestInterval = 30 * time.Second //30 seconds between data requests (0-value tipping)
-const defaultMiningInterrupt = 15 * time.Second //every 15 seconds, check for new challenges that could interrupt current mining
+const defaultRequestInterval = 300 * time.Second //300 seconds between data requests (0-value tipping)
+const defaultMiningInterrupt = 15 * time.Second  //every 15 seconds, check for new challenges that could interrupt current mining
 const defaultCores = 2
 
 const defaultHeartbeat = 15 * time.Second //check miner speed every 10 ^ 8 cycles
@@ -145,6 +145,10 @@ const ServerWhiteList = "SERVER_WHITELIST"
 const Trackers = "TRACKERS"
 
 const RequestData = "REQUEST_DATA"
+
+const RequestTips = "REQUEST_TIPS"
+
+const RequestDataInterval = "REQUEST_INTERVAL"
 
 const NumProcessors = "NUM_PROCESSORS"
 
@@ -362,23 +366,47 @@ func ParseConfigBytes(data []byte) error {
 
 	}
 
-	// RequestDataEnv := os.Getenv(RequestData)
+	RequestDataEnv := os.Getenv(RequestData)
 
-	// if RequestDataEnv == "" {
+	if RequestDataEnv == "" {
+		if config.RequestData == 0 {
 
-	// 	if config.RequestData == 0 {
+		}
+	} else {
+		parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
+		if err != nil {
+			return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
+		}
+		config.RequestData = uint(parsedUint)
+	}
 
-	// 		return fmt.Errorf(
-	// 			"missing the eth client timeout environment variable '%s'", EthClientTimeout)
-	// 	}
+	RequestTipsEnv := os.Getenv(RequestTips)
 
-	// } else {
-	// 	parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
-	// 	if err != nil {
-	// 		return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
-	// 	}
-	// 	config.RequestData = uint(parsedUint)
-	// }
+	if RequestTipsEnv == "" {
+		if config.RequestTips == 0 && config.RequestData != 0 {
+			config.RequestTips = 1
+		} else if config.RequestData == 0 {
+		}
+	} else {
+		parsedUint, err := strconv.ParseUint(RequestTipsEnv, 10, 32)
+		if err != nil {
+			return fmt.Errorf("error parsing RequestTips from os.env: %s", err)
+		}
+		config.RequestTips = int64(parsedUint)
+	}
+
+	RequestDataIntervalEnv := os.Getenv(RequestDataInterval)
+
+	if RequestDataIntervalEnv == "" {
+		if config.RequestDataInterval == nilDuration {
+		}
+	} else {
+		parsedDuration, err := time.ParseDuration(RequestDataIntervalEnv)
+		if err != nil {
+			return fmt.Errorf("error parsing requestDataInterval from os.env: %s", err)
+		}
+		config.RequestDataInterval = Duration{parsedDuration}
+	}
 
 	UseGpuEnv := os.Getenv(UseGPU)
 

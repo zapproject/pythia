@@ -6,11 +6,14 @@ import (
 	"os"
 	"time"
 
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	zapCommon "github.com/zapproject/pythia/common"
 	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
 	"github.com/zapproject/pythia/db"
+	"github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
 )
 
@@ -33,7 +36,7 @@ const (
 //CreateDataRequester creates a requester instance
 func CreateDataRequester(exitCh chan os.Signal, submitter zapCommon.TransactionSubmitter, checkIntervalSeconds time.Duration, proxy db.DataServerProxy) *DataRequester {
 	if checkIntervalSeconds == 0 {
-		checkIntervalSeconds = 30
+		checkIntervalSeconds = 300
 	}
 	return &DataRequester{exitCh: exitCh, submitter: submitter, proxy: proxy, checkInterval: checkIntervalSeconds, log: util.NewLogger("ops", "DataRequester")}
 }
@@ -83,9 +86,10 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 		return nil, nil
 	}
 
+	masterInstance := ctx.Value(zapCommon.MasterContractContextKey).(*contracts.ZapMaster)
+
 	keys := []string{
 		db.RequestIdKey,
-		db.TokenBalanceKey,
 	}
 
 	m, err := r.proxy.BatchGet(keys)
@@ -99,29 +103,40 @@ func (r *DataRequester) reqDataCallback(ctx context.Context, contract zapCommon.
 	if stat == statusWaitNext || stat == statusFailure {
 		return nil, nil
 	}
-	zapBalance, stat := r.getInt(m[db.TokenBalanceKey])
-	if stat == statusWaitNext || stat == statusFailure {
-		return nil, nil
+	zapBalance, err := masterInstance.BalanceOf(nil, common.HexToAddress(cfg.PublicAddress))
+	if err != nil {
+		r.log.Error("Error in getting balance to add tip from: ", err)
 	}
 
 	b, _ := new(big.Int).SetString("1000", 10)
 	c := big.NewInt(0).Sub(zapBalance, b)
 
-	if c.Cmp(big.NewInt(cfg.RequestTips)) < 0 {
-		r.log.Info("Not enough tokens to requestData with this tip")
+	if c.Cmp(big.NewInt(cfg.RequestTips*int64(1e18))) < 0 {
+		r.log.Info("Not enough tokens to requestData with this tip: ", cfg.RequestTips, c)
 		return nil, nil
 	}
 	if reqID.Cmp(big.NewInt(0)) != 0 {
 		r.log.Info("There is a challenge being mined right now so will not request data")
 		return nil, nil
 	}
+
+	tipAmount := big.NewInt(cfg.RequestTips * int64(1e18))
+
 	r.log.Info("Submitting tip for requestID: %v\n", cfg.RequestData)
-	return contract.AddTip(big.NewInt(int64(cfg.RequestData)), big.NewInt(cfg.RequestTips))
+	return contract.AddTip(big.NewInt(int64(cfg.RequestData)), tipAmount)
 }
 
 func (r *DataRequester) maybeRequestData(ctx context.Context) {
+	cfg := config.GetConfig()
+	token := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+	tipAmount := big.NewInt(cfg.RequestTips * int64(1e18))
+
+	r.log.Info("Approving this miner to tip for requestID: %v\n", cfg.RequestData)
+	auth, _ := PrepareEthTransaction(ctx)
+	token.Approve(auth, common.HexToAddress(cfg.ContractAddress), tipAmount)
+
 	r.log.Info("Checking whether to submit data request...")
-	err := r.submitter.PrepareTransaction(ctx, r.proxy, "RequestData", r.reqDataCallback)
+	err := r.submitter.PrepareTransaction(ctx, r.proxy, "AddTip", r.reqDataCallback)
 	if err != nil {
 		r.log.Error("Problem preparing contract transaction: %v\n", err)
 	}
