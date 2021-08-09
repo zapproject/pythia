@@ -56,7 +56,8 @@ func TestKeys(t *testing.T) {
 	if db == nil {
 		setup(t)
 	}
-	if !isKnownKey("Top50Key") {
+	defer db.Close()
+	if !isKnownKey("top_50_requestIds") {
 		t.Error("Error with getting known keys")
 	}
 

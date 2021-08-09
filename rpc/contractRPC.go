@@ -55,6 +55,7 @@ func (c contractWrapper) DidMine(challenge [32]byte) (bool, error) {
 func PrepareContractTxn(ctx context.Context, proxy db.DataServerProxy, ctxName string, callback zapCommon.TransactionGeneratorFN) error {
 	cfg := config.GetConfig()
 	client := ctx.Value(zapCommon.ClientContextKey).(ETHClient)
+	masterInstance := ctx.Value(zapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 
 	privateKey, err := crypto.HexToECDSA(cfg.PrivateKey)
 	if err != nil {
@@ -106,7 +107,7 @@ func PrepareContractTxn(ctx context.Context, proxy db.DataServerProxy, ctxName s
 			return err
 		}
 
-		balance, err := client.BalanceAt(context.Background(), fromAddress, nil)
+		balance, err := masterInstance.BalanceOf(nil, fromAddress)
 		if err != nil {
 			return err
 		}
@@ -115,7 +116,7 @@ func PrepareContractTxn(ctx context.Context, proxy db.DataServerProxy, ctxName s
 		cost = cost.Mul(gasPrice, big.NewInt(200000))
 		if balance.Cmp(cost) < 0 {
 			//FIXME: notify someone that we're out of funds!
-			return fmt.Errorf("Insufficient funds to send transaction: %v < %v", balance, cost)
+			return fmt.Errorf("insufficient funds to send transaction: %v < %v", balance, cost)
 		}
 
 		auth := bind.NewKeyedTransactor(privateKey)
@@ -134,7 +135,7 @@ func PrepareContractTxn(ctx context.Context, proxy db.DataServerProxy, ctxName s
 			auth.GasPrice = gasPrice
 		}
 
-		max, err := strconv.ParseInt(config.GasMax, 10, 32)
+		max, _ := strconv.ParseInt(config.GasMax, 10, 32)
 
 		var maxGasPrice *big.Int
 
@@ -161,6 +162,7 @@ func PrepareContractTxn(ctx context.Context, proxy db.DataServerProxy, ctxName s
 
 		if err != nil {
 			if strings.Contains(err.Error(), "nonce too low") {
+				fmt.Println("Nonce too low, attempting to increase...")
 				IntNonce = IntNonce + 1
 			} else if strings.Contains(err.Error(), "replacement transaction underpriced") {
 				fmt.Println("replacement transaction underpriced")

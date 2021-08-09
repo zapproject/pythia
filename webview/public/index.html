@@ -1,0 +1,12 @@
+<script  type='text/javascript' src="/alpinejs/packages/alpinejs/builds/cdn.js" defer></script>
+
+<body>
+<div x-data="{ open: false }">
+    <button @click="open = !open">Expand</button>
+ 
+    <span x-show="open">
+      Content...
+    </span>
+
+</div>  
+</body>

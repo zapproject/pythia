@@ -119,7 +119,7 @@ func (c *disputeChecker) Exec(ctx context.Context) error {
 	bar := bind.NewBoundContract(contractAddress, tokenAbi, nil, nil, nil)
 
 	checkUntil := toCheck - blockDelay
-	nonceSubmitID := tokenAbi.Events["NonceSubmitted"].ID()
+	nonceSubmitID := tokenAbi.Events["NonceSubmitted"].ID
 	query := ethereum.FilterQuery{
 		FromBlock: big.NewInt(int64(c.lastCheckedBlock)),
 		ToBlock:   big.NewInt(int64(checkUntil)),

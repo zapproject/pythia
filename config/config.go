@@ -92,8 +92,8 @@ type Config struct {
 
 const defaultTimeout = 30 * time.Second //30 second fetch timeout
 
-const defaultRequestInterval = 30 * time.Second //30 seconds between data requests (0-value tipping)
-const defaultMiningInterrupt = 15 * time.Second //every 15 seconds, check for new challenges that could interrupt current mining
+const defaultRequestInterval = 300 * time.Second //300 seconds between data requests (0-value tipping)
+const defaultMiningInterrupt = 15 * time.Second  //every 15 seconds, check for new challenges that could interrupt current mining
 const defaultCores = 2
 
 const defaultHeartbeat = 15 * time.Second //check miner speed every 10 ^ 8 cycles
@@ -145,6 +145,10 @@ const ServerWhiteList = "SERVER_WHITELIST"
 const Trackers = "TRACKERS"
 
 const RequestData = "REQUEST_DATA"
+
+const RequestTips = "REQUEST_TIPS"
+
+const RequestDataInterval = "REQUEST_INTERVAL"
 
 const NumProcessors = "NUM_PROCESSORS"
 
@@ -362,23 +366,48 @@ func ParseConfigBytes(data []byte) error {
 
 	}
 
-	// RequestDataEnv := os.Getenv(RequestData)
+	RequestDataEnv := os.Getenv(RequestData)
 
-	// if RequestDataEnv == "" {
+	if RequestDataEnv == "" {
+		if config.RequestData == 0 {
 
-	// 	if config.RequestData == 0 {
+		}
+	} else {
+		parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
+		if err != nil {
+			return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
+		}
+		config.RequestData = uint(parsedUint)
+	}
 
-	// 		return fmt.Errorf(
-	// 			"missing the eth client timeout environment variable '%s'", EthClientTimeout)
-	// 	}
+	RequestTipsEnv := os.Getenv(RequestTips)
 
-	// } else {
-	// 	parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
-	// 	if err != nil {
-	// 		return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
-	// 	}
-	// 	config.RequestData = uint(parsedUint)
-	// }
+	if RequestTipsEnv == "" {
+		if config.RequestTips == 0 && config.RequestData != 0 {
+			fmt.Println("Tip amount was not set, defaulting to 1 Zap per tip")
+			config.RequestTips = 1
+		} else if config.RequestData == 0 {
+		}
+	} else {
+		parsedUint, err := strconv.ParseUint(RequestTipsEnv, 10, 32)
+		if err != nil {
+			return fmt.Errorf("error parsing RequestTips from os.env: %s", err)
+		}
+		config.RequestTips = int64(parsedUint)
+	}
+
+	RequestDataIntervalEnv := os.Getenv(RequestDataInterval)
+
+	if RequestDataIntervalEnv == "" {
+		if config.RequestDataInterval == nilDuration {
+		}
+	} else {
+		parsedDuration, err := time.ParseDuration(RequestDataIntervalEnv)
+		if err != nil {
+			return fmt.Errorf("error parsing requestDataInterval from os.env: %s", err)
+		}
+		config.RequestDataInterval = Duration{parsedDuration}
+	}
 
 	UseGpuEnv := os.Getenv(UseGPU)
 
@@ -578,141 +607,4 @@ func validateConfig(cfg *Config) error {
 //GetConfig returns a shared instance of config
 func GetConfig() *Config {
 	return config
-}
-
-func SetTokenAddress(address string) {
-	config.TokenAddress = address
-}
-
-func SetContractAddress(address string) {
-	config.ContractAddress = address
-}
-
-func SetVaultAddress(address string) {
-	config.VaultAddress = address
-}
-
-func SetNodeURL(url string) {
-	config.NodeURL = url
-}
-
-func SetDatabaseURL(url string) {
-	config.DatabaseURL = url
-}
-
-func SetPublicAddress(address string) {
-	config.PublicAddress = address
-}
-
-func SetPrivateKey(address string) {
-	config.PrivateKey = address
-}
-
-func SetEthClientTimeout(timeout uint) {
-	fmt.Println(config)
-	config.EthClientTimeout = timeout
-}
-
-func SetTrackerSleepCycle(cycle uint) {
-	config.TrackerSleepCycle.Duration = time.Duration(cycle) * time.Second
-}
-
-func SetTrackers(trackers []string) {
-	config.Trackers = trackers
-}
-
-func SetDBFile(file string) {
-	config.DBFile = file
-}
-
-func SetServerHost(host string) {
-	config.ServerHost = host
-}
-
-func SetServerPort(port uint) {
-	config.ServerPort = port
-}
-
-func SetFetchTimeout(timeout uint) {
-	config.FetchTimeout.Duration = time.Duration(timeout) * time.Second
-}
-
-func SetRequestData(data uint) {
-	config.RequestData = data
-}
-
-func SetMinConfidence(conf float64) {
-	config.MinConfidence = conf
-}
-
-func SetRequestDataInterval(inter uint) {
-	config.RequestDataInterval.Duration = time.Duration(inter) * time.Second
-}
-
-func SetRequestTips(tips int64) {
-	config.RequestTips = tips
-}
-
-func SetMiningInterruptCheckInterval(inter uint) {
-	config.MiningInterruptCheckInterval.Duration = time.Duration(inter) * time.Second
-}
-
-func SetGasMultiplier(mult float32) {
-	config.GasMultiplier = mult
-}
-
-func SetGasMax(max uint) {
-	config.GasMax = max
-}
-
-func SetNumProcessors(num int) {
-	config.NumProcessors = num
-}
-
-func SetHeartBeat(beat uint) {
-	config.Heartbeat.Duration = time.Duration(beat) * time.Second
-}
-
-func SetServerWhiteList(list []string) {
-	config.ServerWhitelist = list
-}
-
-func SetGPUConfig(configs map[string]*GPUConfig) {
-	config.GPUConfig = configs
-}
-
-func SetEnablePoolWorker(enable bool) {
-	config.EnablePoolWorker = enable
-}
-
-func SetWorker(worker string) {
-	config.Worker = worker
-}
-
-func SetPassword(pass string) {
-	config.Password = pass
-}
-
-func SetPoolURL(url string) {
-	config.PoolURL = url
-}
-
-func SetIndexFolder(path string) {
-	config.IndexFolder = path
-}
-
-func SetDisputeTimeDelta(timeD uint) {
-	config.DisputeTimeDelta.Duration = time.Duration(timeD) * time.Second
-}
-
-func SetDisputeThreshold(thres float64) {
-	config.DisputeThreshold = thres
-}
-
-func SetUseGPU(use bool) {
-	config.UseGPU = use
-}
-
-func NewConfig() {
-	config = new(Config)
 }

@@ -37,6 +37,7 @@ func TestRequestDataOps(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error with opening DB: %v", err)
 	}
+	defer DB.Close()
 
 	//delete any request id
 	DB.Delete(db.RequestIdKey)
@@ -75,6 +76,7 @@ func TestRequestDataOps(t *testing.T) {
 
 	}
 	server.Start()
+	defer server.Stop()
 
 	//it should not request data if not configured to do it
 	cfg.RequestData = 0
@@ -102,6 +104,4 @@ func TestRequestDataOps(t *testing.T) {
 	exitCh <- os.Kill
 	time.Sleep(300 * time.Millisecond)
 	assert.False(t, reqData.submittingRequests, "Should not be submitting requests after exit sig")
-
-	server.Stop()
 }

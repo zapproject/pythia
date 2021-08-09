@@ -89,62 +89,62 @@ func TestCpuMiner(t *testing.T) {
 	DoCompleteMiningLoop(t, impl, 100)
 }
 
-// func TestGpuMiner(t *testing.T) {
-// 	gpus, err := GetOpenCLGPUs()
-// 	if err != nil {
-// 		fmt.Println(gpus)
-// 		t.Fatal(err)
-// 	}
-// 	cfg := config.GetConfig()
+func TestGpuMiner(t *testing.T) {
+	gpus, err := GetOpenCLGPUs()
+	if err != nil {
+		fmt.Println(gpus)
+		t.Fatal(err)
+	}
+	cfg := config.GetConfig()
 
-// 	impl, err := NewGpuMiner(gpus[0], cfg.GPUConfig[gpus[0].Name()], false)
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	DoCompleteMiningLoop(t, impl, 1000)
-// }
+	impl, err := NewGpuMiner(gpus[0], cfg.GPUConfig[gpus[0].Name()], false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	DoCompleteMiningLoop(t, impl, 1000)
+}
 
-// func TestMulti(t *testing.T) {
-// 	if testing.Short() {
-// 		t.Skip()
-// 	}
-// 	cfg := config.GetConfig()
+func TestMulti(t *testing.T) {
+	if testing.Short() {
+		t.Skip()
+	}
+	cfg := config.GetConfig()
 
-// 	var hashers []Hasher
-// 	for i := 0; i < 4; i++ {
-// 		hashers = append(hashers, NewCpuMiner(int64(i)))
-// 	}
-// 	gpus, err := GetOpenCLGPUs()
-// 	if err != nil {
-// 		fmt.Println(gpus)
-// 		t.Fatal(err)
-// 	}
-// 	for _, gpu := range gpus {
-// 		impl, err := NewGpuMiner(gpu, cfg.GPUConfig[gpu.Name()], true)
-// 		if err != nil {
-// 			t.Fatal(err)
-// 		}
-// 		hashers = append(hashers, impl)
-// 	}
-// 	fmt.Printf("Using %d hashers\n", len(hashers))
+	var hashers []Hasher
+	for i := 0; i < 4; i++ {
+		hashers = append(hashers, NewCpuMiner(int64(i)))
+	}
+	gpus, err := GetOpenCLGPUs()
+	if err != nil {
+		fmt.Println(gpus)
+		t.Fatal(err)
+	}
+	for _, gpu := range gpus {
+		impl, err := NewGpuMiner(gpu, cfg.GPUConfig[gpu.Name()], true)
+		if err != nil {
+			t.Fatal(err)
+		}
+		hashers = append(hashers, impl)
+	}
+	fmt.Printf("Using %d hashers\n", len(hashers))
 
-// 	group := NewMiningGroup(hashers)
-// 	input := make(chan *Work)
-// 	output := make(chan *Result)
-// 	go group.Mine(input, output)
+	group := NewMiningGroup(hashers)
+	input := make(chan *Work)
+	output := make(chan *Result)
+	go group.Mine(input, output)
 
-// 	challenge := createChallenge(0, math.MaxInt64)
-// 	input <- &Work{Challenge: challenge, Start: 0, PublicAddr: cfg.PublicAddress, N: math.MaxInt64}
-// 	time.Sleep(1 * time.Second)
-// 	input <- nil
-// 	timeout := 200 * time.Millisecond
-// 	select {
-// 	case _ = <-output:
-// 		group.PrintHashRateSummary()
-// 	case _ = <-time.After(timeout):
-// 		t.Fatalf("mining group didn't quit before %s", timeout.String())
-// 	}
-// }
+	challenge := createChallenge(0, math.MaxInt64)
+	input <- &Work{Challenge: challenge, Start: 0, PublicAddr: cfg.PublicAddress, N: math.MaxInt64}
+	time.Sleep(1 * time.Second)
+	input <- nil
+	timeout := 200 * time.Millisecond
+	select {
+	case _ = <-output:
+		group.PrintHashRateSummary()
+	case _ = <-time.After(timeout):
+		t.Fatalf("mining group didn't quit before %s", timeout.String())
+	}
+}
 
 func TestHashFunction(t *testing.T) {
 

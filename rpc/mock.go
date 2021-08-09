@@ -66,6 +66,7 @@ type mockClient struct {
 	nonce            uint64
 	miningStatus     bool
 	gasPrice         *big.Int
+	gasTip           *big.Int
 	tokenBalance     *big.Int
 	top50Requests    []*big.Int
 	currentChallenge *CurrentChallenge
@@ -320,6 +321,9 @@ func (c *mockClient) EstimateGas(ctx context.Context, call ethereum.CallMsg) (ui
 func (c *mockClient) SuggestGasPrice(ctx context.Context) (*big.Int, error) {
 	return c.gasPrice, nil
 }
+func (c *mockClient) SuggestGasTipCap(ctx context.Context) (*big.Int, error) {
+	return c.gasTip, nil
+}
 
 func (c *mockClient) BalanceAt(ctx context.Context, address common.Address, block *big.Int) (*big.Int, error) {
 	if c.balance.Cmp(big.NewInt(0)) < 0 {
@@ -345,7 +349,7 @@ func (c *mockClient) FilterLogs(ctx context.Context, query ethereum.FilterQuery)
 
 	log := types.Log{
 		Address:     common.Address{0},
-		Topics:      []common.Hash{ev.ID(), common.BigToHash(common.Big0), common.BigToHash(common.Big1)},
+		Topics:      []common.Hash{ev.ID, common.BigToHash(common.Big0), common.BigToHash(common.Big1)},
 		Data:        test,
 		BlockNumber: 9,
 	}

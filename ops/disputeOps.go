@@ -119,7 +119,7 @@ func getNonceSubmissions(ctx context.Context, valueBlock *big.Int, dispute *zap1
 	const blockStep = 67
 	high := int64(valueBlock.Uint64())
 	low := high - blockStep
-	nonceSubmitID := tokenAbi.Events["NonceSubmitted"].ID()
+	nonceSubmitID := tokenAbi.Events["NonceSubmitted"].ID
 	var timedValues [5]*apiOracle.PriceStamp
 	// timedValues := make([]*apiOracle.PriceStamp, 5)
 	found := 0
@@ -189,7 +189,7 @@ func List(ctx context.Context) error {
 
 	startBlock := big.NewInt(54) //big.NewInt(10e3 * 14)
 	startBlock.Sub(header.Number, startBlock)
-	newDisputeID := tokenAbi.Events["NewDispute"].ID()
+	newDisputeID := tokenAbi.Events["NewDispute"].ID
 	query := ethereum.FilterQuery{
 		FromBlock: startBlock,
 		ToBlock:   nil,

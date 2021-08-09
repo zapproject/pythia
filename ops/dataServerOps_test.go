@@ -50,6 +50,7 @@ func TestDataServerOps(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer DB.Close()
 	client, err := rpc.NewClient(cfg.NodeURL)
 	if err != nil {
 		log.Fatal(err)

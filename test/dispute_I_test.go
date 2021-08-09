@@ -95,7 +95,7 @@ func Show() int {
 	header, _ := client.HeaderByNumber(ctx, nil)
 	startBlock := big.NewInt(54) //big.NewInt(10e3 * 14)
 	startBlock.Sub(header.Number, startBlock)
-	newDisputeID := tokenAbi.Events["NewDispute"].ID()
+	newDisputeID := tokenAbi.Events["NewDispute"].ID
 	query := ethereum.FilterQuery{
 		FromBlock: startBlock,
 		ToBlock:   nil,
