@@ -3,10 +3,6 @@ package main
 import(
 	"github.com/webview/webview"
 	// "io/ioutil"
-	"fmt"
-	"log"
-	"net"
-	"net/http"
 	"path/filepath"
 	"os"
 )
