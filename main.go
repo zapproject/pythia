@@ -31,7 +31,7 @@ import (
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
 	"github.com/zapproject/pythia/vault"
-
+    "path/filepath"
 )
 
 var ctx context.Context
@@ -399,7 +399,7 @@ func main() {
 
 	var err error
 
-	clientApp :=  exec.Command("./client/pythia.exe")
+	clientApp :=  exec.Command(filepath.FromSlash("webview/webview.exe"))
 	//cmd","/C","start","
 	//  exec.Command("./pythia.exe", "")
 
@@ -435,7 +435,5 @@ func main() {
 	
 	fmt.Printf("Adder has been called %d times and is now: %d\n", no, *m)
 
-
-	
 
 }

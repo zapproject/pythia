@@ -2,16 +2,18 @@ package main
 
 import(
 	"github.com/webview/webview"
-	"io/ioutil"
+	// "io/ioutil"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
+	"path/filepath"
+	"os"
 )
 
 func main(){
 	debug := true
-	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	ln, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -21,10 +23,10 @@ func main(){
 	   http.HandleFunc("/", serveFiles)
 	   log.Fatal(http.Serve(ln, nil))
    }()
-	index, err := ioutil.ReadFile("./public/index.html")
-	if(err != nil){
-		fmt.Println("Alpine not found")
-	}
+	// index, err := ioutil.ReadFile("./public/index.html")
+	// if(err != nil){
+	// 	fmt.Println("Alpine not found")
+	// }
 	// alpine, err := ioutil.ReadFile("./public/alpinejs/cdn.js")
 	// if(err != nil){
 	// 	fmt.Println("Alpine not found")
@@ -35,7 +37,7 @@ func main(){
 	defer w.Destroy()
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
-	fmt.Println(string(index))
+	// fmt.Println(string(index))
 
 	// w.Init(string(alpine))
 	w.Navigate("http://"+ln.Addr().String())
@@ -45,8 +47,16 @@ func main(){
 func serveFiles(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r.URL.Path)
     p := "." + r.URL.Path
+	fmt.Println(p)
     if p == "./" {
-        p = "./public/"
+		ex, err := os.Executable()
+		if err != nil {
+			panic(err)
+		}
+		p = filepath.Join(filepath.Dir(ex),"public")
+		fmt.Println("FINAL PATH",p)
+
+
     }
     http.ServeFile(w, r, p)
 }

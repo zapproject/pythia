@@ -1,14 +1,15 @@
-<html>
-<script  type='text/javascript' src="./alpinejs/cdn.js" defer></script>
+<!DOCTYPE html>
+<!-- <html> -->
+<script  type='text/javascript' src="alpinejs/cdn.js"></script>
 
 <body>
-<div>
-    <button @click="open = !open">Expand</button>
- 
-    <span x-show="open">
+<div x-data={open:false}> 
+    <button  @click="open = !open"> Expand</button>
+    <!-- @click="open = !open"/ -->
+    <span x-show="open" >
       Content...
     </span>
-
+    <!-- x-show="open" -->
 </div>  
 </body>
-</html>
+<!-- </html> -->
