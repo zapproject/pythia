@@ -40,7 +40,15 @@ func main(){
 	// fmt.Println(string(index))
 
 	// w.Init(string(alpine))
-	w.Navigate("http://"+ln.Addr().String())
+
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	p := filepath.Join(filepath.Dir(ex),"public/index.html")
+
+	w.Navigate(p)
+	// w.Navigate("http://"+ln.Addr().String())
 	w.Run()
 }
 
