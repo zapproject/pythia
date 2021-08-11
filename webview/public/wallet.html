@@ -1,4 +1,3 @@
-`data:text/html, 
 <!doctype html>
 <html>
 
@@ -9,8 +8,8 @@
     </body>
 
     <script>
-        window.onload = function (){
-            document.body.innerText = balance()
-        }
+        window.onload = async function (){
+            document.body.innerText = await balance();
+        };
     </script>
-</html>`
+</html>
