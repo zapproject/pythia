@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <!-- <html> -->
-<script  type='text/javascript' src="alpinejs/cdn.js"></script>
-
+<include></include>
+<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
 <body>
+  <div id="sideNav" name="sideNav">
+    <a href="javascript:void(0)" class="sideNavButton" onclick="balance()">Wallet</a>
+    <a href="#" class="sideNavButton">Config</a>
+    <a href="#" class="sideNavButton">Mine</a>
+    <a href="#" class="sideNavButton">Dispute</a>
+  </div>
+  
   <div x-data="{ open: false }">
     <button @click="open = true">Expand</button>
     <button @click="open = false">Retract</button>

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 
@@ -18,14 +17,13 @@ func showWallet(w webview.WebView) {
 	// debug := true
 	// w := webview.New(debug)
 
-	defer w.Destroy()
+	// defer w.Destroy()
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
 
 	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
 	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	zapBalance, _ := instance.BalanceOf(nil, addr)
-	fmt.Println(zapBalance)
 
 	w.Bind("balance", func() string {
 		return zapBalance.String()
