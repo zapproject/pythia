@@ -1,13 +1,14 @@
-package main 
+package main
 
-import(
-	"github.com/webview/webview"
-	// "io/ioutil"
-	"path/filepath"
+import (
+	"fmt"
 	"os"
+	"path/filepath"
+
+	"github.com/webview/webview"
 )
 
-func main(){
+func main() {
 	debug := true
 	w := webview.New(debug)
 
@@ -15,14 +16,22 @@ func main(){
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
 
+	w.Bind("showWallet", func() {
+		showWallet(w)
+	})
 
 	ex, err := os.Executable()
 	if err != nil {
 		panic(err)
 	}
-	p := filepath.Join(filepath.Dir(ex),"public/index.html")
-
+	p := filepath.Join(filepath.Dir(ex), "public/index.html")
+	p = "file://" + p
+	fmt.Println(p)
 	w.Navigate(p)
+
+	// content, _ := ioutil.ReadFile("./public/wallet.html")
+	// w.Navigate(string(content))
+
+	// w.Navigate("./public/wallet.html")
 	w.Run()
 }
-

@@ -5,15 +5,15 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
+	"io"
 	"log"
 	"math/big"
-	"os"
-	"os/signal"
-	"time"
-	"io"
-	jrpc "net/rpc"
 	"net/rpc/jsonrpc"
+	"os"
 	"os/exec"
+	"os/signal"
+	"path/filepath"
+	"time"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -31,7 +31,6 @@ import (
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
 	"github.com/zapproject/pythia/vault"
-    "path/filepath"
 )
 
 var ctx context.Context
@@ -140,15 +139,15 @@ func App() *cli.Cli {
 	app := cli.App("Pythia", "The Zap.org official miner")
 
 	//app wide config options
-	configPath := app.StringOpt("config", "config.json", "Path to the primary JSON config file")
-	logPath := app.StringOpt("logConfig", "loggingConfig.json", "Path to a JSON logging config file")
+	// configPath := app.StringOpt("config", "config.json", "Path to the primary JSON config file")
+	// logPath := app.StringOpt("logConfig", "loggingConfig.json", "Path to a JSON logging config file")
 
 	//this will get run before any of the commands
-	app.Before = func() {
-		ErrorHandler(config.ParseConfig(*configPath), "parsing config file")
-		ErrorHandler(util.ParseLoggingConfig(*logPath), "parsing log file")
-		ErrorHandler(buildContext(), "building context")
-	}
+	// app.Before = func() {
+	ErrorHandler(config.ParseConfig("./config.json"), "parsing config file")
+	ErrorHandler(util.ParseLoggingConfig("./loggingConfig.json"), "parsing log file")
+	ErrorHandler(buildContext(), "building context")
+	// }
 
 	versionMessage := fmt.Sprintf(versionMessage, GitTag, GitHash)
 	app.Version("version", versionMessage)
@@ -399,7 +398,7 @@ func main() {
 
 	var err error
 
-	clientApp :=  exec.Command(filepath.FromSlash("webview/webview.exe"))
+	clientApp := exec.Command(filepath.FromSlash("webview/webview"))
 	//cmd","/C","start","
 	//  exec.Command("./pythia.exe", "")
 
@@ -427,13 +426,46 @@ func main() {
 		log.Fatal(err)
 	}
 
-	
 	go serv.ServeCodec(codec)
 
 	clientApp.Wait()
-	
-	
+
 	fmt.Printf("Adder has been called %d times and is now: %d\n", no, *m)
 
+	// App()
+
+	// debug := true
+	// w := webview.New(debug)
+
+	// defer w.Destroy()
+	// w.SetTitle("Minimal webview example")
+	// w.SetSize(800, 600, webview.HintMin)
+
+	// addr := ctx.Value(ZapCommon.PublicAddress).(common.Address)
+	// instance := ctx.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
+	// zapBalance, _ := instance.BalanceOf(nil, addr)
+	// fmt.Println(zapBalance)
+
+	// w.Bind("balance", func() string {
+	// 	return zapBalance.String()
+	// })
+
+	// w.Navigate(`data:text/html,
+	// <!doctype html>
+	// <html>
+
+	// 	<body>
+	// 		<h3>Balance: </h3>
+
+	// 		<h4>Not hello</h4>
+	// 	</body>
+
+	// 	<script>
+	// 		window.onload = function (){
+	// 			document.body.innerText = await balance();
+	// 		};
+	// 	</script>
+	// </html>`)
+	// w.Run()
 
 }
