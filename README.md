@@ -7,7 +7,7 @@ Currently only supports Linux and OSX systems.
 ## Installation
 
 1) Install go-lang https://golang.org/doc/install
-2) You should now be able to run the commands in the [execute section](#Execute)
+2) You should now be able to run the commands in the [execute section](#Execute) 
 
 
 ## Supported Commands
