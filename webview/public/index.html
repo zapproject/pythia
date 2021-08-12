@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- <html> -->
+
+<script  type='text/javascript' src="alpinejs/cdn.js" defer></script>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" >
+  
+  <title>Zap Wallet</title>
+</head>
+
+
+
+<include></include>
+<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
+<body>
+
+  <!-- <div id="sideNav" name="sideNav">
+    <a href="javascript:void(0)" class="sideNavButton" onclick="balance()">Wallet</a>
+    <a href="#" class="sideNavButton">Config</a>
+    <a href="#" class="sideNavButton">Mine</a>
+    <a href="#" class="sideNavButton">Dispute</a>
+  </div>
+   -->
+  <body>
+    
+    <script src="bootstrap/js/bootstrap.bundle.js" ></script>
+  
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          Zap
+        </a>
+      </div>
+    </nav>
+  
+    <form x-data="minerConfig()" @submit.prevent="submitData">
+      <div class="container">
+        <div class="mb-3">
+          <label for="publicKey" class="form-label">Public Key</label>
+          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp">
+          <!-- <div id="publicKeyHelp" class="form-text">We'll never share your public key with anyone else.</div> -->
+        </div>
+        <div class="mb-3">
+          <label for="privateKey" class="form-label">Private Key</label>
+          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp">
+          <!-- <div id="privateKeyHelp" class="form-text">We'll never share your private key with anyone else.</div> -->
+        </div>
+  
+        <button type="submit" class="btn btn-primary">Connect</button>
+      </div>
+    </form>
+    
+  
+    <script>
+      function minerConfig() {
+        return {
+          configData: {
+            publickey: '',
+            privatekey: '',
+            chain: '',
+          },
+          submitData(){
+
+          }
+        }
+      }
+
+      var chains = ["Mainnet", "Testnet", "Local"]
+
+      var localConfig = {"CONTRACT_ADDRESS":	0xDe0151BC25867D8Bf163f60cffce7E44eC2da8d6,
+                        "DB_FILE":	zapDB,
+                        "DISPUTE_TIME_DELTA":	"600s",
+                        "ETH_CLIENT_TIMEOUT":	3000,
+                        "GAS_MAX":	30,
+                        "GAS_MULTIPLIER":	1,
+                        "NODE_URL":	"https://localhost:8545/",
+                        "PUBLIC_ADDRESS":	"0x0B0af840d8FC3fdBA2f127533909398E18D7e23b",
+                        "SERVER_HOST":	"internal-testNetALB-875749922.us-east-2.elb.amazonaws.com",
+                        "SERVER_PORT":	"5007",
+                        "SERVER_WHITELIST":["0x0B0af840d8FC3fdBA2f127533909398E18D7e23b"],
+                        "TRACKER_CYCLE":	"100s",
+                        "TRACKERS": ["balance","disputeStatus","gas","tokenBalance","indexers","newCurrentVariables","currentVariables"],
+                        "USE_GPU":	false,
+                        "VAULT_ADDRESS":	"0xAF2d3caf27B17009e10eeb2D81348997c1D28680",
+                        "ZAP_TOKEN_ADDRESS":	"0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8"
+                      }  
+
+
+
+  </script>
+
+    </body>
+    
+</div>
+</body>
+
+<!-- </html> -->
