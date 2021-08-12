@@ -1,7 +1,6 @@
 package webview
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 
@@ -26,7 +25,7 @@ func Start() {
 	}
 	p := filepath.Join(filepath.Dir(ex), "webview/public/index.html")
 	p = "file://" + p
-	fmt.Println(p)
+
 	w.Navigate(p)
 	w.Run()
 }
