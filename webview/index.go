@@ -23,7 +23,7 @@ func Start() {
 	if err != nil {
 		panic(err)
 	}
-	p := filepath.Join(filepath.Dir(ex), "webview/public/index.html")
+	p := filepath.Join(filepath.Dir(ex), "webview/public/config.html")
 	p = "file://" + p
 
 	w.Navigate(p)
