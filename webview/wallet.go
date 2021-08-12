@@ -1,5 +1,4 @@
-
-package webview 
+package webview
 
 import (
 	"os"
@@ -15,10 +14,6 @@ import (
 func showWallet(w webview.WebView) {
 	setup.App()
 
-	// debug := true
-	// w := webview.New(debug)
-
-	// defer w.Destroy()
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
 
@@ -34,7 +29,7 @@ func showWallet(w webview.WebView) {
 	if err != nil {
 		panic(err)
 	}
-	p := filepath.Join(filepath.Dir(ex), "public/wallet.html")
+	p := filepath.Join(filepath.Dir(ex), "webview/public/wallet.html")
 	p = "file://" + p
 	w.Navigate(p)
 	w.Run()
