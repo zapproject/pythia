@@ -4,8 +4,8 @@ LDFLAGS="-X main.GitHash=$(git rev-parse --short HEAD)"
 
 
 #linux
-go run ./pow/generate_opencl.go
-mv kernelSource.go pow/
+# go run ./pow/generate_opencl.go
+# mv kernelSource.go pow/
 go build -ldflags "$LDFLAGS"
 
 #windows

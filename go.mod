@@ -30,6 +30,7 @@ require (
 	github.com/syndtr/goleveldb v1.0.1-0.20210305035536-64b5b1c73954
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	github.com/tyler-smith/go-bip39 v1.0.2 // indirect
+	github.com/webview/webview v0.0.0-20210330151455-f540d88dde4e
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
 	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
 )

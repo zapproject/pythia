@@ -27,6 +27,7 @@ import (
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
 	"github.com/zapproject/pythia/vault"
+	"github.com/zapproject/pythia/webview"
 )
 
 var ctx context.Context
@@ -155,6 +156,7 @@ func App() *cli.Cli {
 	app.Command("dispute", "\U00002696 dispute operations", disputeCmd)
 	app.Command("mine", "\U000026CF  mine for ZAP", mineCmd)
 	app.Command("dataserver", "\U0001F5C4  start an independent dataserver", dataserverCmd)
+	app.Command("gui", "launch a GUI for this platform", guiCmd)
 	return app
 }
 
@@ -183,6 +185,10 @@ func moveCmd(f func(common.Address, *big.Int, context.Context) error) func(*cli.
 			ErrorHandler(f(addr.addr, amt.Int, ctx), "move")
 		}
 	}
+}
+
+func guiCmd(cmd *cli.Cmd) {
+	webview.Start()
 }
 
 func balanceCmd(cmd *cli.Cmd) {
