@@ -1,5 +1,6 @@
-package main 
+package main
 
+<<<<<<< HEAD
 import(
 	"github.com/webview/webview"
 	// "io/ioutil"
@@ -42,6 +43,17 @@ func (rw *ReadWriteCloser) Close() error {
 type Adder int
 
 func main(){
+=======
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+
+	"github.com/webview/webview"
+)
+
+func main() {
+>>>>>>> cc92b2bc326ef6ebff96ed74a173db300734cb3f
 	debug := true
 	w := webview.New(debug)
 
@@ -49,11 +61,15 @@ func main(){
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
 
+	w.Bind("showWallet", func() {
+		showWallet(w)
+	})
 
 	ex, err := os.Executable()
 	if err != nil {
 		panic(err)
 	}
+<<<<<<< HEAD
 	p := filepath.Join(filepath.Dir(ex),"public/index.html")
 
 	adder := Adder(1)
@@ -72,6 +88,20 @@ func main(){
 		return a + b
 	})
 
+=======
+	p := filepath.Join(filepath.Dir(ex), "public/index.html")
+	p = "file://" + p
+	fmt.Println(p)
+>>>>>>> cc92b2bc326ef6ebff96ed74a173db300734cb3f
 	w.Navigate(p)
+
+	// content, _ := ioutil.ReadFile("./public/wallet.html")
+	// w.Navigate(string(content))
+
+	// w.Navigate("./public/wallet.html")
 	w.Run()
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cc92b2bc326ef6ebff96ed74a173db300734cb3f

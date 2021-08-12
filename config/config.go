@@ -158,6 +158,7 @@ func ParseConfig(path string) error {
 	if err != nil {
 		return fmt.Errorf("failed to open config file %s: %v", path, err)
 	}
+	fmt.Println(data)
 	return ParseConfigBytes(data)
 }
 
@@ -217,21 +218,21 @@ func ParseConfigBytes(data []byte) error {
 		config.VaultAddress = VaultAddressEnv
 	}
 
-	NodeUrlEnv := os.Getenv(NodeURLEnvName)
+	// NodeUrlEnv := os.Getenv(NodeURLEnvName)
 
-	if NodeUrlEnv == "" {
+	// if NodeUrlEnv == "" {
 
-		if config.NodeURL == "" {
+	// 	if config.NodeURL == "" {
 
-			return fmt.Errorf("missing the node url environment variable '%s'",
-				NodeURLEnvName)
+	// 		return fmt.Errorf("missing the node url environment variable '%s'",
+	// 			NodeURLEnvName)
 
-		}
+	// 	}
 
-	} else {
+	// } else {
 
-		config.NodeURL = NodeUrlEnv
-	}
+	// 	config.NodeURL = NodeUrlEnv
+	// }
 
 	PublicAddressEnv := os.Getenv(PublicAddress)
 

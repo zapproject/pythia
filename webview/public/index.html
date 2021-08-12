@@ -14,36 +14,52 @@
 </head>
 
 
+
+<include></include>
+<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
 <body>
+  <div id="sideNav" name="sideNav">
+    <a href="javascript:void(0)" class="sideNavButton" onclick="balance()">Wallet</a>
+    <a href="#" class="sideNavButton">Config</a>
+    <a href="#" class="sideNavButton">Mine</a>
+    <a href="#" class="sideNavButton">Dispute</a>
+  </div>
+  
+  <body>
     
-  <script src="bootstrap/js/bootstrap.bundle.js" ></script>
-
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        Zap
-      </a>
-    </div>
-  </nav>
-
-  <form>
-    <div class="container">
-      <div class="mb-3">
-        <label for="publicKey" class="form-label">Public Key</label>
-        <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp">
-        <!-- <div id="publicKeyHelp" class="form-text">We'll never share your public key with anyone else.</div> -->
+    <script src="bootstrap/js/bootstrap.bundle.js" ></script>
+  
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          Zap
+        </a>
       </div>
-      <div class="mb-3">
-        <label for="privateKey" class="form-label">Private Key</label>
-        <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp">
-        <!-- <div id="privateKeyHelp" class="form-text">We'll never share your private key with anyone else.</div> -->
+    </nav>
+  
+    <form>
+      <div class="container">
+        <div class="mb-3">
+          <label for="publicKey" class="form-label">Public Key</label>
+          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp">
+          <!-- <div id="publicKeyHelp" class="form-text">We'll never share your public key with anyone else.</div> -->
+        </div>
+        <div class="mb-3">
+          <label for="privateKey" class="form-label">Private Key</label>
+          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp">
+          <!-- <div id="privateKeyHelp" class="form-text">We'll never share your private key with anyone else.</div> -->
+        </div>
+  
+        <button type="submit" class="btn btn-primary">Connect</button>
+  
       </div>
+    
+    </form>
+    
+    
+    </body>
+    
+</div>
+</body>
 
-      <button type="submit" class="btn btn-primary">Connect</button>
-
-    </div>
-  
-  </form>
-  
-  
-  </body>
+<!-- </html> -->
