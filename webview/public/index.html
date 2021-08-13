@@ -18,14 +18,6 @@
 <include></include>
 <script type='text/javascript' src="alpinejs/cdn.js" defer></script>
 <body>
-
-  <!-- <div id="sideNav" name="sideNav">
-    <a href="javascript:void(0)" class="sideNavButton" onclick="balance()">Wallet</a>
-    <a href="#" class="sideNavButton">Config</a>
-    <a href="#" class="sideNavButton">Mine</a>
-    <a href="#" class="sideNavButton">Dispute</a>
-  </div>
-   -->
   <body>
     
     <script src="bootstrap/js/bootstrap.bundle.js" ></script>
@@ -42,15 +34,23 @@
       <div class="container">
         <div class="mb-3">
           <label for="publicKey" class="form-label">Public Key</label>
-          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp">
+          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.publickey">
           <!-- <div id="publicKeyHelp" class="form-text">We'll never share your public key with anyone else.</div> -->
         </div>
         <div class="mb-3">
           <label for="privateKey" class="form-label">Private Key</label>
-          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp">
+          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.privatekey">
           <!-- <div id="privateKeyHelp" class="form-text">We'll never share your private key with anyone else.</div> -->
         </div>
-  
+
+        <div class="mb-3">
+          <select class="form-select" aria-label="Default select example" x-model="configData.chain">
+            <option selected value="mainnet">Mainnet</option>
+            <option value="testnet">Testnet</option>
+            <option value="local">Local</option>
+          </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Connect</button>
       </div>
     </form>
@@ -65,7 +65,7 @@
             chain: '',
           },
           submitData(){
-
+            console.log(this.configData)
           }
         }
       }
@@ -73,7 +73,7 @@
       var chains = ["Mainnet", "Testnet", "Local"]
 
       var localConfig = {"CONTRACT_ADDRESS":	0xDe0151BC25867D8Bf163f60cffce7E44eC2da8d6,
-                        "DB_FILE":	zapDB,
+                        "DB_FILE":	"zapDB",
                         "DISPUTE_TIME_DELTA":	"600s",
                         "ETH_CLIENT_TIMEOUT":	3000,
                         "GAS_MAX":	30,
