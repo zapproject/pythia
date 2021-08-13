@@ -38,7 +38,7 @@ var PSRs = map[int]ValueGenerator{
 	21: &SingleSymbol{symbol: "CAD/USD", granularity: 1000000, transform: MedianAt},
 	22: &SingleSymbol{symbol: "RUB/USD", granularity: 1000000, transform: MedianAt},
 	23: &SingleSymbol{symbol: "KRW/USD", granularity: 1000000, transform: MedianAt},
-	24: &SingleSymbol{symbol: "AUS/USD", granularity: 1000000, transform: MedianAt},
+	24: &SingleSymbol{symbol: "AUD/USD", granularity: 1000000, transform: MedianAt},
 
 	25: &SingleSymbol{symbol: "TRY/USD", granularity: 1000000, transform: MedianAt},
 	26: &SingleSymbol{symbol: "CHF/USD", granularity: 1000000, transform: MedianAt},
