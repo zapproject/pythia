@@ -63,7 +63,7 @@ func collect(symbol string) (string, string) {
 				value = e.Text
 			})
 
-		c.Visit("https://www.exchangerates.org.uk/Bermuda-Dollar-BMD-currency-table.html")
+		c.Visit("https://www.exchangerates.org.uk/Barbadian-Dollar-BBD-currency-table.html")
 
 	case "TTD":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
