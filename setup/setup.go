@@ -126,217 +126,23 @@ const versionMessage = `
 	Github:  https://github.com/zapproject/pythia
 	`
 
-func App() {
-	// app := cli.App("Pythia", "The Zap.org official miner")
+func App() (bool,error) {
 
-	//app wide config options
-	// configPath := app.StringOpt("config", "config.json", "Path to the primary JSON config file")
-	// logPath := app.StringOpt("logConfig", "loggingConfig.json", "Path to a JSON logging config file")
+	err := util.ParseLoggingConfig("./loggingConfig.json")
+	if err != nil{
+		log.Fatal(err) 
+		return false,err
+	}
+	err = buildContext()
+	if err != nil{
+		log.Fatal(err) 
+		return false,err
+	}
 
-	//this will get run before any of the commands
-	// app.Before = func() {
-	ErrorHandler(config.ParseConfig("./config.json"), "parsing config file")
-	ErrorHandler(util.ParseLoggingConfig("./loggingConfig.json"), "parsing log file")
-	ErrorHandler(buildContext(), "building context")
-	// }
+	return true,nil
 
-	// versionMessage := fmt.Sprintf(versionMessage, GitTag, GitHash)
-	// app.Version("version", versionMessage)
-
-	// app.Command("stake", "\U0001F510 staking operations", stakeCmd)
-	// app.Command("transfer", "\U0001F381 send ZAP to address", moveCmd(ops.Transfer))
-	// app.Command("approve", "\U00002705 approve ZAP to address", moveCmd(ops.Approve))
-	// app.Command("balance", "\U0001F440 check balance of address", balanceCmd)
-	// app.Command("dispute", "\U00002696 dispute operations", disputeCmd)
-	// app.Command("mine", "\U000026CF  mine for ZAP", mineCmd)
-	// app.Command("dataserver", "\U0001F5C4  start an independent dataserver", dataserverCmd)
-	// return app
 }
 
-// func stakeCmd(cmd *cli.Cmd) {
-// 	cmd.Command("deposit", "\U0001F512 deposit ZAP stake", simpleCmd(ops.Deposit))
-// 	cmd.Command("withdraw", "\U0001F511 withdraw ZAP stake", simpleCmd(ops.WithdrawStake))
-// 	cmd.Command("request", "\U000023F2 request to withdraw ZAP stake", simpleCmd(ops.RequestStakingWithdraw))
-// 	cmd.Command("status", "\U0001F52E show current staking status", simpleCmd(ops.ShowStatus))
-// }
-
-// func simpleCmd(f func(context.Context) error) func(*cli.Cmd) {
-// 	return func(cmd *cli.Cmd) {
-// 		cmd.Action = func() {
-// 			ErrorHandler(f(CTX), "")
-// 		}
-// 	}
-// }
-
-// func moveCmd(f func(common.Address, *big.Int, context.Context) error) func(*cli.Cmd) {
-// 	return func(cmd *cli.Cmd) {
-// 		amt := ZAPAmount{}
-// 		addr := ETHAddress{}
-// 		cmd.VarArg("AMOUNT", &amt, "amount to transfer")
-// 		cmd.VarArg("ADDRESS", &addr, "ethereum public address")
-// 		cmd.Action = func() {
-// 			ErrorHandler(f(addr.addr, amt.Int, CTX), "move")
-// 		}
-// 	}
-// }
-
-// func balanceCmd(cmd *cli.Cmd) {
-// 	addr := ETHAddress{}
-// 	cmd.VarArg("ADDRESS", &addr, "binance public address")
-// 	cmd.Spec = "[ADDRESS]"
-// 	cmd.Action = func() {
-// 		var zero [20]byte
-// 		if bytes.Compare(addr.addr.Bytes(), zero[:]) == 0 {
-// 			addr.addr = CTX.Value(ZapCommon.PublicAddress).(common.Address)
-// 		}
-// 		ErrorHandler(ops.Balance(CTX, addr.addr), "checking balance")
-// 	}
-// }
-
-// func disputeCmd(cmd *cli.Cmd) {
-// 	cmd.Command("vote", "\U00002696 vote on an active dispute", voteCmd)
-// 	cmd.Command("new", "\U0001F4C4 start a new dispute", newDisputeCmd)
-// 	cmd.Command("show", "\U0001F4CA show existing disputes", simpleCmd(ops.List))
-// }
-
-// func voteCmd(cmd *cli.Cmd) {
-// 	disputeID := EthereumInt{}
-// 	cmd.VarArg("DISPUTE_ID", &disputeID, "dispute id")
-// 	supports := cmd.BoolArg("SUPPORT", false, "do you support the dispute? (true|false)")
-// 	cmd.Action = func() {
-// 		ErrorHandler(ops.Vote(disputeID.Int, *supports, CTX), "vote")
-// 	}
-// }
-
-// func newDisputeCmd(cmd *cli.Cmd) {
-// 	requestID := EthereumInt{}
-// 	timestamp := EthereumInt{}
-// 	minerIndex := EthereumInt{}
-// 	cmd.VarArg("REQUEST_ID", &requestID, "request id")
-// 	cmd.VarArg("TIMESTAMP", &timestamp, "timestamp")
-// 	cmd.VarArg("MINER_INDEX", &minerIndex, "miner to dispute (0-4)")
-// 	cmd.Action = func() {
-// 		ErrorHandler(ops.Dispute(requestID.Int, timestamp.Int, minerIndex.Int, CTX), "new dispute")
-// 	}
-// }
-
-// func mineCmd(cmd *cli.Cmd) {
-// 	remoteDS := cmd.BoolOpt("remote r", false, "connect to remote dataserver")
-// 	cmd.Action = func() {
-// 		//create os kill sig listener
-// 		c := make(chan os.Signal)
-// 		signal.Notify(c, os.Interrupt)
-// 		exitChannels := make([]*chan os.Signal, 0)
-
-// 		cfg := config.GetConfig()
-// 		var ds *ops.DataServerOps
-// 		if !cfg.EnablePoolWorker {
-// 			ErrorHandler(AddDBToCtx(*remoteDS), "\U0001F5C4 initializing database \U0001F5C4")
-// 			if !*remoteDS {
-// 				ch := make(chan os.Signal)
-// 				exitChannels = append(exitChannels, &ch)
-
-// 				var err error
-// 				ds, err = ops.CreateDataServerOps(CTX, ch)
-// 				if err != nil {
-// 					log.Fatal(err)
-// 				}
-// 				//start and wait for it to be ready
-// 				ds.Start(CTX)
-// 				<-ds.Ready()
-// 			}
-// 		}
-// 		//start miner
-// 		ch := make(chan os.Signal)
-// 		exitChannels = append(exitChannels, &ch)
-// 		miner, err := ops.CreateMiningManager(CTX, ch, ops.NewSubmitter())
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-// 		miner.Start(CTX)
-
-// 		//now we wait for kill sig
-// 		<-c
-// 		//and then notify exit channels
-// 		for _, ch := range exitChannels {
-// 			*ch <- os.Interrupt
-// 		}
-// 		cnt := 0
-// 		start := time.Now()
-// 		for {
-// 			cnt++
-// 			dsStopped := false
-// 			minerStopped := false
-
-// 			if ds != nil {
-// 				dsStopped = !ds.Running
-// 			} else {
-// 				dsStopped = true
-// 			}
-
-// 			if miner != nil {
-// 				minerStopped = !miner.Running
-// 			} else {
-// 				minerStopped = true
-// 			}
-
-// 			if !dsStopped && !minerStopped && cnt > 60 {
-// 				fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
-// 			} else if dsStopped && minerStopped {
-// 				break
-// 			}
-// 			time.Sleep(500 * time.Millisecond)
-// 		}
-// 		fmt.Printf("Main shutdown complete \U00002622\n")
-// 	}
-// }
-
-// func dataserverCmd(cmd *cli.Cmd) {
-// 	cmd.Action = func() {
-// 		//create os kill sig listener
-// 		c := make(chan os.Signal)
-// 		signal.Notify(c, os.Interrupt)
-
-// 		var ds *ops.DataServerOps
-// 		ErrorHandler(AddDBToCtx(true), "\U0001F5C4 initializing database \U0001F5C4")
-// 		ch := make(chan os.Signal)
-// 		var err error
-// 		ds, err = ops.CreateDataServerOps(CTX, ch)
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-// 		//start and wait for it to be ready
-// 		ds.Start(CTX)
-// 		<-ds.Ready()
-
-// 		//now we wait for kill sig
-// 		<-c
-// 		//and then notify exit channels
-// 		ch <- os.Interrupt
-
-// 		cnt := 0
-// 		start := time.Now()
-// 		for {
-// 			cnt++
-// 			dsStopped := false
-
-// 			if ds != nil {
-// 				dsStopped = !ds.Running
-// 			} else {
-// 				dsStopped = true
-// 			}
-
-// 			if !dsStopped && cnt > 60 {
-// 				fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
-// 			} else if dsStopped {
-// 				break
-// 			}
-// 			time.Sleep(500 * time.Millisecond)
-// 		}
-// 		fmt.Printf("Main shutdown complete \U00002622\n")
-// 	}
-
-// }
 
 func listenTransfers(client rpc.ETHClient, cfg *config.Config) {
 	tokenAddress := common.HexToAddress(cfg.TokenAddress)

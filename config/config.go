@@ -607,3 +607,140 @@ func validateConfig(cfg *Config) error {
 func GetConfig() *Config {
 	return config
 }
+
+func SetTokenAddress(address string) {
+	config.TokenAddress = address
+}
+
+func SetContractAddress(address string) {
+	config.ContractAddress = address
+}
+
+func SetVaultAddress(address string) {
+	config.VaultAddress = address
+}
+
+func SetNodeURL(url string) {
+	config.NodeURL = url
+}
+
+func SetDatabaseURL(url string) {
+	config.DatabaseURL = url
+}
+
+func SetPublicAddress(address string) {
+	config.PublicAddress = address
+}
+
+func SetPrivateKey(address string) {
+	config.PrivateKey = address
+}
+
+func SetEthClientTimeout(timeout uint) {
+	fmt.Println(config)
+	config.EthClientTimeout = timeout
+}
+
+func SetTrackerSleepCycle(cycle uint) {
+	config.TrackerSleepCycle.Duration = time.Duration(cycle) * time.Second
+}
+
+func SetTrackers(trackers []string) {
+	config.Trackers = trackers
+}
+
+func SetDBFile(file string) {
+	config.DBFile = file
+}
+
+func SetServerHost(host string) {
+	config.ServerHost = host
+}
+
+func SetServerPort(port uint) {
+	config.ServerPort = port
+}
+
+func SetFetchTimeout(timeout uint) {
+	config.FetchTimeout.Duration = time.Duration(timeout) * time.Second
+}
+
+func SetRequestData(data uint) {
+	config.RequestData = data
+}
+
+func SetMinConfidence(conf float64) {
+	config.MinConfidence = conf
+}
+
+func SetRequestDataInterval(inter uint) {
+	config.RequestDataInterval.Duration = time.Duration(inter) * time.Second
+}
+
+func SetRequestTips(tips int64) {
+	config.RequestTips = tips
+}
+
+func SetMiningInterruptCheckInterval(inter uint) {
+	config.MiningInterruptCheckInterval.Duration = time.Duration(inter) * time.Second
+}
+
+func SetGasMultiplier(mult float32) {
+	config.GasMultiplier = mult
+}
+
+func SetGasMax(max uint) {
+	config.GasMax = max
+}
+
+func SetNumProcessors(num int) {
+	config.NumProcessors = num
+}
+
+func SetHeartBeat(beat uint) {
+	config.Heartbeat.Duration = time.Duration(beat) * time.Second
+}
+
+func SetServerWhiteList(list []string) {
+	config.ServerWhitelist = list
+}
+
+func SetGPUConfig(configs map[string]*GPUConfig) {
+	config.GPUConfig = configs
+}
+
+func SetEnablePoolWorker(enable bool) {
+	config.EnablePoolWorker = enable
+}
+
+func SetWorker(worker string) {
+	config.Worker = worker
+}
+
+func SetPassword(pass string) {
+	config.Password = pass
+}
+
+func SetPoolURL(url string) {
+	config.PoolURL = url
+}
+
+func SetIndexFolder(path string) {
+	config.IndexFolder = path
+}
+
+func SetDisputeTimeDelta(timeD uint) {
+	config.DisputeTimeDelta.Duration = time.Duration(timeD) * time.Second
+}
+
+func SetDisputeThreshold(thres float64) {
+	config.DisputeThreshold = thres
+}
+
+func SetUseGPU(use bool) {
+	config.UseGPU = use
+}
+
+func NewConfig() {
+	config = new(Config)
+}

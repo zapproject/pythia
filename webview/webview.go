@@ -22,7 +22,7 @@ func LoadWebview(){
 		showWallet(w)
 	})
 
-	w.Bind("applyConfig",applyConfig)
+	w.Bind("configWallet",configWallet)
 
 	ex, err := os.Executable()
 	if err != nil {

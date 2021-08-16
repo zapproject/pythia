@@ -1,105 +1,114 @@
 <!DOCTYPE html>
 <!-- <html> -->
 
-<script  type='text/javascript' src="alpinejs/cdn.js" defer></script>
+<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" >
-  
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+
   <title>Zap Wallet</title>
+
 </head>
 
-
-
-<include></include>
-<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
 <body>
-  <body>
-    
-    <script src="bootstrap/js/bootstrap.bundle.js" ></script>
-  
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          Zap
-        </a>
-      </div>
-    </nav>
-  
-    <form x-data="minerConfig()" @submit.prevent="submitData">
-      <div class="container">
-        <div class="mb-3">
-          <label for="publicKey" class="form-label">Public Key</label>
-          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.PublicAddress">
-          <!-- <div id="publicKeyHelp" class="form-text">We'll never share your public key with anyone else.</div> -->
-        </div>
-        <div class="mb-3">
-          <label for="privateKey" class="form-label">Private Key</label>
-          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.PrivateKey">
-          <!-- <div id="privateKeyHelp" class="form-text">We'll never share your private key with anyone else.</div> -->
-        </div>
+  <script src="bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="https://unpkg.com/browse/@webcomponents/webcomponentsjs@2.6.0/webcomponents-bundle.js"></script>
 
-        <div class="mb-3">
-          <select class="form-select" aria-label="Default select example" x-model="configData.chain">
-            <option value="mainnet">Mainnet</option>
-            <option value="testnet">Testnet</option>
-            <option selected value="local">Local</option>
-          </select>
-        </div>
 
-        <button type="submit" class="btn btn-primary">Connect</button>
-      </div>
-    </form>
-    
+  <div x-data="Components()">
+
+    <div x-html="nav"></div>
+    <div x-html="app"></div>
+
+
+  </div>
   
     <script>
-      function minerConfig() {
+      function App() {
 
-        var localConfig = {"ContractAddress":	"0xDe0151BC25867D8Bf163f60cffce7E44eC2da8d6",
+        var localConfig = {"ContractAddress":	"0xc582Bc0317dbb0908203541971a358c44b1F3766",
                         "DBFile":	"zapDB",
                         "DisputeTimeDelta":	"600s",
                         "EthClientTimeout":	3000,
                         "GasMax":	30,
                         "GasMultiplier":	1,
-                        "NodeURL":	"https://localhost:8545/",
+                        "NodeURL":	"http://localhost:8545/",
                         "ServerHost":	"0.0.0.0",
                         "ServerPort":	5001,
-                        "ServerWhitelist":["0x0B0af840d8FC3fdBA2f127533909398E18D7e23b"],
+                        "ServerWhitelist":["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
                         "TrackerCycle":	"100s",
                         "Trackers": ["balance","disputeStatus","gas","tokenBalance","indexers","newCurrentVariables","currentVariables"],
                         "UseGPU":	false,
-                        "VaultAddress":	"0xAF2d3caf27B17009e10eeb2D81348997c1D28680",
-                        "zapTokenAddress":	"0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8",
+                        "VaultAddress":	"0xB2b580ce436E6F77A5713D80887e14788Ef49c9A",
+                        "zapTokenAddress":	"0x07882ae1ecb7429a84f1d53048d35c4bb2056877",
                       }  
 
         return {
           configData: {
-            PublicAddress: '',
-            PrivateKey: '',
+            PublicAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+            PrivateKey: 'ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
             chain: 'local',
           },
           submitData(){
-            console.log(this.configData,JSON.parse(JSON.stringify(this.configData)))
-            applyConfig(JSON.stringify({...localConfig,...JSON.parse(JSON.stringify(this.configData))}))
-            .then(console.log)
+            // console.log(this.configData,JSON.parse(JSON.stringify(this.configData)))
+            configWallet(JSON.stringify({...localConfig,...JSON.parse(JSON.stringify(this.configData))}))
+            .then(res => this.connected = res )
             .catch(console.log)
-          }
+          },
+          connected: false
         }
       }
 
-      
+      function Components(){
+        return {nav: `<nav class="navbar navbar-light bg-light">
+                  <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                      Zap
+                    </a>
+                  </div>
+                </nav>`,
 
+                app: `<div x-data="App()">
+                        <div x-html="form"></div>
+                        <div x-html="stake"></div>
+                      </div>`,
 
+              form: `<form @submit.prevent="submitData" x-show="!connected">
+                      <div class="container">
+
+                        <div class="mb-3">
+                          <label for="publicKey" class="form-label">Public Key</label>
+                          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.PublicAddress">
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="privateKey" class="form-label">Private Key</label>
+                          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.PrivateKey">
+                        </div>
+
+                        <div class="mb-3">
+                          <select class="form-select" aria-label="Default select example" x-model="configData.chain">
+                            <option value="mainnet">Mainnet</option>
+                            <option value="testnet">Testnet</option>
+                            <option selected value="local">Local</option>
+                          </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Connect</button>
+                      </div>
+                      </form>`,
+
+                      stake: `<div x-show="connected">Hola</div>`
+                    
+                    }
+    }
 
   </script>
-
-    </body>
-    
-</div>
+  <!-- <script src="nav.js"></script> -->
 </body>
 
 <!-- </html> -->

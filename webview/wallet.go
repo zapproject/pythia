@@ -1,6 +1,7 @@
 package webview
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -14,7 +15,7 @@ import (
 func showWallet(w webview.WebView) {
 	setup.App()
 
-	w.SetTitle("Minimal webview example")
+	w.SetTitle("Wallet")
 	w.SetSize(800, 600, webview.HintMin)
 
 	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
@@ -31,6 +32,7 @@ func showWallet(w webview.WebView) {
 	}
 	p := filepath.Join(filepath.Dir(ex), "webview/public/wallet.html")
 	p = "file://" + p
+	fmt.Println(p)
 	w.Navigate(p)
 	w.Run()
 }
