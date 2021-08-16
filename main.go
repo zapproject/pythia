@@ -28,7 +28,6 @@ import (
 	token "github.com/zapproject/pythia/token"
 	// "github.com/zapproject/pythia/util"
 	"github.com/zapproject/pythia/vault"
-	"github.com/zapproject/pythia/webview"
 )
 
 var ctx context.Context
@@ -383,7 +382,7 @@ func main() {
 	// }
 
 
-	webview.Start()
+	webview.LoadWebview()
 
 
 }

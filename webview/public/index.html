@@ -34,20 +34,20 @@
       <div class="container">
         <div class="mb-3">
           <label for="publicKey" class="form-label">Public Key</label>
-          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.publickey">
+          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.PublicAddress">
           <!-- <div id="publicKeyHelp" class="form-text">We'll never share your public key with anyone else.</div> -->
         </div>
         <div class="mb-3">
           <label for="privateKey" class="form-label">Private Key</label>
-          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.privatekey">
+          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.PrivateKey">
           <!-- <div id="privateKeyHelp" class="form-text">We'll never share your private key with anyone else.</div> -->
         </div>
 
         <div class="mb-3">
           <select class="form-select" aria-label="Default select example" x-model="configData.chain">
-            <option selected value="mainnet">Mainnet</option>
+            <option value="mainnet">Mainnet</option>
             <option value="testnet">Testnet</option>
-            <option value="local">Local</option>
+            <option selected value="local">Local</option>
           </select>
         </div>
 
@@ -58,37 +58,40 @@
   
     <script>
       function minerConfig() {
+
+        var localConfig = {"ContractAddress":	"0xDe0151BC25867D8Bf163f60cffce7E44eC2da8d6",
+                        "DBFile":	"zapDB",
+                        "DisputeTimeDelta":	"600s",
+                        "EthClientTimeout":	3000,
+                        "GasMax":	30,
+                        "GasMultiplier":	1,
+                        "NodeURL":	"https://localhost:8545/",
+                        "ServerHost":	"0.0.0.0",
+                        "ServerPort":	5001,
+                        "ServerWhitelist":["0x0B0af840d8FC3fdBA2f127533909398E18D7e23b"],
+                        "TrackerCycle":	"100s",
+                        "Trackers": ["balance","disputeStatus","gas","tokenBalance","indexers","newCurrentVariables","currentVariables"],
+                        "UseGPU":	false,
+                        "VaultAddress":	"0xAF2d3caf27B17009e10eeb2D81348997c1D28680",
+                        "zapTokenAddress":	"0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8",
+                      }  
+
         return {
           configData: {
-            publickey: '',
-            privatekey: '',
-            chain: '',
+            PublicAddress: '',
+            PrivateKey: '',
+            chain: 'local',
           },
           submitData(){
-            console.log(this.configData)
+            console.log(this.configData,JSON.parse(JSON.stringify(this.configData)))
+            applyConfig(JSON.stringify({...localConfig,...JSON.parse(JSON.stringify(this.configData))}))
+            .then(console.log)
+            .catch(console.log)
           }
         }
       }
 
-      var chains = ["Mainnet", "Testnet", "Local"]
-
-      var localConfig = {"CONTRACT_ADDRESS":	0xDe0151BC25867D8Bf163f60cffce7E44eC2da8d6,
-                        "DB_FILE":	"zapDB",
-                        "DISPUTE_TIME_DELTA":	"600s",
-                        "ETH_CLIENT_TIMEOUT":	3000,
-                        "GAS_MAX":	30,
-                        "GAS_MULTIPLIER":	1,
-                        "NODE_URL":	"https://localhost:8545/",
-                        "PUBLIC_ADDRESS":	"0x0B0af840d8FC3fdBA2f127533909398E18D7e23b",
-                        "SERVER_HOST":	"internal-testNetALB-875749922.us-east-2.elb.amazonaws.com",
-                        "SERVER_PORT":	"5007",
-                        "SERVER_WHITELIST":["0x0B0af840d8FC3fdBA2f127533909398E18D7e23b"],
-                        "TRACKER_CYCLE":	"100s",
-                        "TRACKERS": ["balance","disputeStatus","gas","tokenBalance","indexers","newCurrentVariables","currentVariables"],
-                        "USE_GPU":	false,
-                        "VAULT_ADDRESS":	"0xAF2d3caf27B17009e10eeb2D81348997c1D28680",
-                        "ZAP_TOKEN_ADDRESS":	"0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8"
-                      }  
+      
 
 
 

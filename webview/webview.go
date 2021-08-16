@@ -22,6 +22,8 @@ func LoadWebview(){
 		showWallet(w)
 	})
 
+	w.Bind("applyConfig",applyConfig)
+
 	ex, err := os.Executable()
 	if err != nil {
 		panic(err)
