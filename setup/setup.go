@@ -135,7 +135,7 @@ func App() {
 
 	//this will get run before any of the commands
 	// app.Before = func() {
-	ErrorHandler(config.ParseConfig("./config.json"), "parsing config file")
+	// ErrorHandler(config.ParseConfig("./config.json"), "parsing config file")
 	ErrorHandler(util.ParseLoggingConfig("./loggingConfig.json"), "parsing log file")
 	ErrorHandler(buildContext(), "building context")
 	// }
