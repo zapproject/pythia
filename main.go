@@ -6,6 +6,7 @@ import (
 	"crypto/ecdsa"
 	"fmt"
 	"log"
+
 	// "math/big"
 	"os"
 	// "os/signal"
@@ -22,10 +23,11 @@ import (
 	"github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/contracts2"
 	db "github.com/zapproject/pythia/db"
+
 	// "github.com/zapproject/pythia/ops"
-	"github.com/zapproject/pythia/webview"
 	"github.com/zapproject/pythia/rpc"
 	token "github.com/zapproject/pythia/token"
+
 	// "github.com/zapproject/pythia/util"
 	"github.com/zapproject/pythia/vault"
 	"github.com/zapproject/pythia/webview"
@@ -382,8 +384,6 @@ func main() {
 	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	// }
 
-
 	webview.Start()
-
 
 }
