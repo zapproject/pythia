@@ -1,6 +1,16 @@
 # Pythia
 
-Currently only supports Linux and OSX systems.
+**Currently only supports Linux and OSX systems.**
+
+On windows, you can use the cli-client using WSL2.
+
+[This is a great guide for installing WSL2 on Windows 10+ by OMG!Ubuntu](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10).
+
+**If you're running on Linux or WSL2**, be sure that you have OpenCL installed using these commands before proceeding:
+```bash
+sudo apt update
+sudo apt install ocl-icd-opencl-dev
+```
 
 ## Installation
 
