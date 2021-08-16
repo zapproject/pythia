@@ -1,6 +1,4 @@
-
 # Pythia
-<!-- Insert summary -->
 
 Currently only supports Linux and OSX systems.
 
@@ -28,30 +26,138 @@ Currently only supports Linux and OSX systems.
    - `balance` (shows your balance)
 
 ## Execute
+
+### Configuring your miner
+Before running the miner, edit your `config.json` file so that you can add your publicAddress, privateKey and **Contract Addresses**:
+
+1) Open a text editor (nano, VSCode, vim, or your OS's **text editor**) and create a new document/file.
+2) paste this template in the file:
+```json
+    {
+        "zapTokenAddress": "0x09d8af358636d9bcc9a3e177b66eb30381a4b1a8",
+        "contractAddress": "",
+        "nodeURL": "https://data-seed-prebsc-1-s2.binance.org:8545",
+        "vaultAddress": "",
+        "publicAddress": "",
+        "privateKey": "",
+        "serverHost": "0.0.0.0",
+        "serverPort": 5001,
+        "ethClientTimeout": 3000,
+        "trackerCycle": 100,
+        "gasMultiplier": 1,
+        "gasMax":30,
+        "serverWhitelist": [
+        ],
+        "useGPU":false,
+        "trackers": [
+            "balance",
+            "disputeStatus",
+            "gas",
+            "tokenBalance",
+            "indexers",
+            "newCurrentVariables",
+            "currentVariables"
+        ],
+        "dbFile": "zapDB",
+        "disputeTimeDelta": "600s"
+    }
+```
+
+You can find an explanation of each field [here](#configjson).
+
+3) Pay special attention to the `contractAddress` and `vaultAddress` fields, update them with the ones in [this file](contracts.md).
+
+4) Be sure to also add your `publicAddress` and `privateKey` to the new file as well. **Remember, this public address is the BSC wallet address that should contain Testnet BNB and BSC ZAP**.
+
+5) Add the same `publicAddress` to the `serverWhitelist` field like this
+```json
+{
+    ...
+    serverWhitelist: [
+        YOUR_PUBLIC_ADDRESS_HERE,
+    ],
+    ...
+}
+```
+
+6) Save this file in the **root of this project's folder** as **config.json**. Meaning, it should be in the same folder as [main.go](main.go).
+
+**If you would like to test on a localhost BSC Testnet node**, be sure have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/.
+
+Then, replace the `nodeURL` in the config.json with `http://localhost:8545`.
+
 ### Single Miner/Thread
-(If running on local, have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/)
 
-Be sure to edit the `config.json` file to add your `publicAddress` and `privateKey` before running the following commands.
-
-1) `release_build.sh`
+**Running the commands**
+1) `./release_build.sh`
 2) `./pythia [cmd]`
 
+replace `[cmd]` with one of the [supported commands](#supported-commands) based on what you would like to do, for example:
+
+```bash
+./pythia mine
+```
+
+Will get your miner running.
+
+In this setup, your client will act as a datasever, getting blockchain information, and a miner, solving problems and writing data to blockchain.
+
 ### Remote Mining/Multiple Miners
-(If running on local, have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/)
+**This setup will allow you to run multiple miners on a single host address.**
 
-Be sure to edit the configs found in `local_cfg` before running the follwing commands.
+The Zap oracle network enables users to have a single data server provide data for multiple miner clients.
 
-1) `release_build.sh`
-2) `./start_local.sh`
-3) Check the logs/ for failing miners. Manually run: `nohup ./pythia --config=local_cfgs/config{miner # 1-5}.json mine -r > logs/{miner # 1-5}.log &` for failing miners.
+This data server will get data on the latest challenge to mine and provide it to every miner client you want it to be connected to.
 
-In order to run dispute commands:
+Here is an idea of how your setup can be (note that you can have more or less miner clients than this):
+
+```
+Client A: Data Server
+
+Client B: Miner Client
+Client C: Miner Client
+Client D: Miner Client
+Client E: Miner Client
+Client F: Miner Client
+```
+
+Your data server, Client A, can have the same `config.json` [you configured in this step](#configuring-your-miner).
+
+On Clients B to F, change the serverAddress in `config.json` to the IP address or host address of Client A. **This may not be the same as the `0.0.0.0` address set for Client A.**
+
+On Clients B to F, change their serverPort in `config.json` to the serverPort set in Client A's `config.json`. So by default, you can set it to `5001`.
+
+Next, go on Client A's `config.json` and update the `serverWhitelist` field with the `publicAddresses` of Clients B to F. **Remember, these public addresses are the BSC wallet addresses that should contain Testnet BNB and BSC ZAP**.
+
+Here is an example of how your `serverWhitelist` should look like:
+```json
+{
+    ...
+    serverWhitelist: [
+        PUBLIC_ADDRESS_B_HERE,
+        PUBLIC_ADDRESS_C_HERE,
+        PUBLIC_ADDRESS_D_HERE,
+        PUBLIC_ADDRESS_E_HERE,
+        PUBLIC_ADDRESS_F_HERE
+    ],
+    ...
+}
+```
+
+Now, follow these steps to get your miners running.
+
+1) Go on Client A and run the following commands `./release_build.sh` then `./pythia dataserver`
+2) Go on Clients B to F and run `./release_build.sh` then `./pythia mine -r`
+
+Your miners should now be running.
+
+## Running Disputes
 ### from cli
 4) Locate `TimeStamp: %!(EXTRA *big.Int=XXX)` in the terminal running the dataserver.
 5) Copy the big.Int value `XXX`. (ex: For "TimeStamp: %!(EXTRA *big.Int=168473848)", we only need 168473848.)
 6) Then run: ```./pythia dispute new 1 {TimeStamp value `XXX` copied from step above} 4```
 
-**Please reference CLI commands by using "./pythia" and the --help flag**
+**Please reference CLI commands by running `./pythia --help`**.
 
 ## Subgraph
 
@@ -130,39 +236,6 @@ disputeTimeDelta (required) - how far back to store values for min/max range - d
 disputeThreshold            - percentage of acceptable range outside min/max for dispute checking -
 ```
 
-
-### Exmple config.json
-```
-{
-    "zapTokenAddress": "0x4hj34jk53k4nk3434kh53k45hk3j45k3j4h5k43jl",
-    "contractAddress": "0x3k4j53kj4h5k345kj345k3h45k3jh45k3h5k3b3k4",
-    "vaultAddress": "0xk4j5nohgh43nio34hr4nr34ihjrl34jro34t34nl34t3lk",
-    "nodeURL": "http://localhost:8545",
-    "publicAddress": "0x123ABC123ABC123ABC123ABC123ABC123ABC",
-    "privateKey": "123ABC123ABC123ABC123ABC123ABC123ABC123ABC123ABC123ABC123ABC123ABC123ABC",
-    "serverHost": "0.0.0.0",
-    "serverPort": 5001,
-    "ethClientTimeout": 3000,
-    "trackerCycle": 100,
-    "gasMultiplier": 1,
-    "gasMax": 30,
-    "serverWhitelist": [
-        "0x123ABC123ABC123ABC123ABC123ABC123ABC",
-    ],
-    "trackers": [
-        "balance",
-        "disputeStatus",
-        "gas",
-        "tokenBalance",
-        "indexers",
-        "newCurrentVariables",
-        "currentVariables"
-    ],
-    "dbFile": "zapDB",
-    "disputeTimeDelta": "600s"
-}
-```
-
 ## ENV Variables
 If you wish to use environmental variables instead of config.json for some or all of your config fields, use 
 
@@ -236,4 +309,3 @@ Delve is a debugger for the Go programming language. Follow the steps in this [r
 
 
 More commands here ```$GOPATH/src/github.com/go-delve/delve/tree/master/Documentation/cli/locspec.md``` or type ```help``` when in debug mode.
-
