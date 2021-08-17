@@ -6,9 +6,9 @@ import (
 )
 
 var configJSON = `{
-	"zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+	"zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "70997970C51812dc3A010C7d01b50e0d17dc79C8",
     "privateKey": "59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",

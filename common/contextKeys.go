@@ -22,6 +22,8 @@ var (
 	//TransactorContractContextKey is the shared context key to get shared transactor zap contract instance
 	TransactorContractContextKey = util.NewKey("common", "transactorContract")
 
+	TokenAddress = util.NewKey("common", "tokenAddress")
+
 	TokenTransactorContractContextKey = util.NewKey("common", "tokenTransactorContract")
 
 	NewTransactorContractContextKey = util.NewKey("common", "newTransactorContract")

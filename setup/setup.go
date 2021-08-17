@@ -50,17 +50,18 @@ func buildContext() error {
 		transactorInstance, _ := contracts1.NewZapTransactor(contractAddress, client)
 		newZapInstance, _ := contracts2.NewZap(contractAddress, client)
 		newTransactorInstance, _ := contracts2.NewZapTransactor(contractAddress, client)
-		tokenInstance, _ := token.NewZapTokenBSCTransactor(tokenAddress, client)
+		tokenTransactorInstance, _ := token.NewZapTokenBSCTransactor(tokenAddress, client)
 		vaultInstance, _ := vault.NewVaultTransactor(vaultAddress, client)
 
 		CTX = context.WithValue(context.Background(), ZapCommon.ClientContextKey, client)
 		CTX = context.WithValue(CTX, ZapCommon.ContractAddress, contractAddress)
 		CTX = context.WithValue(CTX, ZapCommon.MasterContractContextKey, masterInstance)
 		CTX = context.WithValue(CTX, ZapCommon.TransactorContractContextKey, transactorInstance)
-		CTX = context.WithValue(CTX, ZapCommon.TokenTransactorContractContextKey, tokenInstance)
+		CTX = context.WithValue(CTX, ZapCommon.TokenTransactorContractContextKey, tokenTransactorInstance)
 		CTX = context.WithValue(CTX, ZapCommon.NewZapContractContextKey, newZapInstance)
 		CTX = context.WithValue(CTX, ZapCommon.NewTransactorContractContextKey, newTransactorInstance)
 		CTX = context.WithValue(CTX, ZapCommon.VaultTransactorContractContextKey, vaultInstance)
+		CTX = context.WithValue(CTX, ZapCommon.TokenAddress, tokenAddress)
 
 		privateKey, err := crypto.HexToECDSA(cfg.PrivateKey)
 		if err != nil {

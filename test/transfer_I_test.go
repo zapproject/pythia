@@ -15,7 +15,7 @@ import (
 func TestTransfer(t *testing.T) {
 	setup()
 	auth, _ := ops.PrepareEthTransaction(ctx)
-	addr1 := common.HexToAddress("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")
+	addr1 := common.HexToAddress("70997970C51812dc3A010C7d01b50e0d17dc79C8")
 	amt1 := big.NewInt(1000)
 
 	master := ctx.Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
