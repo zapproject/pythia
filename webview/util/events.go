@@ -38,10 +38,8 @@ func GetTransferLogs() []token.ZapTokenBSCTransfer {
 		FromBlock: big.NewInt(0),
 		ToBlock:   header.Number,
 		// ToBlock: nil,
-		// setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.TokenAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{transferID}},
 	}
@@ -61,7 +59,10 @@ func GetTransferLogs() []token.ZapTokenBSCTransfer {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		transfers = append(transfers, transfer)
+		if transfer.From.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() ||
+			transfer.To.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			transfers = append(transfers, transfer)
+		}
 	}
 
 	return transfers
@@ -90,7 +91,6 @@ func GetApprovalLogs() []token.ZapTokenBSCApproval {
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.TokenAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{approvalID}},
 	}
@@ -107,7 +107,10 @@ func GetApprovalLogs() []token.ZapTokenBSCApproval {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		approvals = append(approvals, approval)
+		if approval.Owner.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() ||
+			approval.Spender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			approvals = append(approvals, approval)
+		}
 	}
 
 	return approvals
@@ -136,7 +139,6 @@ func GetNewStakeLogs() []contracts1.ZapStakeNewStake {
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.ContractAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{stakeID}},
 	}
@@ -153,7 +155,9 @@ func GetNewStakeLogs() []contracts1.ZapStakeNewStake {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		stakes = append(stakes, stake)
+		if stake.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			stakes = append(stakes, stake)
+		}
 	}
 
 	return stakes
@@ -182,7 +186,6 @@ func GetStakeRequestedLogs() []contracts1.ZapStakeStakeWithdrawRequested {
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.ContractAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{requestedID}},
 	}
@@ -199,7 +202,9 @@ func GetStakeRequestedLogs() []contracts1.ZapStakeStakeWithdrawRequested {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		requests = append(requests, request)
+		if request.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			requests = append(requests, request)
+		}
 	}
 
 	return requests
@@ -222,17 +227,17 @@ func GetStakeWithdawLogs() []contracts1.ZapStakeStakeWithdrawn {
 
 	withdrawID := withdrawABI.Events["StakeWithdrawn"].ID
 
+	// fmt.Println("Before filter query")
 	withdrawQuery := ethereum.FilterQuery{
 		FromBlock: big.NewInt(0),
 		// ToBlock:   header.Number,
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.ContractAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{withdrawID}},
 	}
-
+	// fmt.Println("Before filter logs")
 	logs, err := client.FilterLogs(setup.CTX, withdrawQuery)
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
@@ -247,7 +252,9 @@ func GetStakeWithdawLogs() []contracts1.ZapStakeStakeWithdrawn {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		withdraws = append(withdraws, withdraw)
+		if withdraw.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			withdraws = append(withdraws, withdraw)
+		}
 	}
 
 	return withdraws
@@ -276,7 +283,6 @@ func GetMinedLogs() []contracts1.ZapLibraryNonceSubmitted {
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.ContractAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{minedID}},
 	}
@@ -293,7 +299,9 @@ func GetMinedLogs() []contracts1.ZapLibraryNonceSubmitted {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		mineds = append(mineds, mined)
+		if mined.Miner.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			mineds = append(mineds, mined)
+		}
 	}
 
 	return mineds
@@ -322,7 +330,6 @@ func GetNewDisputeLogs() []contracts1.ZapDisputeNewDispute {
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.ContractAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{disputeID}},
 	}
@@ -339,7 +346,9 @@ func GetNewDisputeLogs() []contracts1.ZapDisputeNewDispute {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		disputes = append(disputes, dispute)
+		if dispute.Miner.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			disputes = append(disputes, dispute)
+		}
 	}
 
 	return disputes
@@ -368,7 +377,6 @@ func GetVotedLogs() []contracts1.ZapDisputeVoted {
 		ToBlock: nil,
 		Addresses: []common.Address{
 			setup.CTX.Value(ZapCommon.ContractAddress).(common.Address),
-			setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
 		},
 		Topics: [][]common.Hash{{votedID}},
 	}
@@ -385,7 +393,10 @@ func GetVotedLogs() []contracts1.ZapDisputeVoted {
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
-		voteds = append(voteds, voted)
+
+		if voted.Voter.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
+			voteds = append(voteds, voted)
+		}
 	}
 
 	return voteds

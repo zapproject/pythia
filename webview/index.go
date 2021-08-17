@@ -87,9 +87,6 @@ func Start() {
 		config.SetIndexFolder("indexes")
 		config.SetDBFile("zapDB")
 		config.SetDisputeTimeDelta(600)
-
-		cfg := config.GetConfig()
-		fmt.Println("CFG: ", cfg.PublicAddress)
 	})
 
 	ex, err := os.Executable()
