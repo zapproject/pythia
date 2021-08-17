@@ -1,0 +1,30 @@
+{
+    "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
+    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "nodeURL": "http://127.0.0.1:8545/",
+    "publicAddress": "cd3B766CCDd6AE721141F452C550Ca635964ce71",
+    "privateKey": "8166f546bab6da521a8369cab06c5d2b9e46670292d85c875ee9ec20e84ffb61",
+    "serverHost": "localhost",
+    "serverPort": 5001,
+    "ethClientTimeout": 3000,
+    "trackerCycle": 10,
+    "serverWhitelist": ["0xcd3B766CCDd6AE721141F452C550Ca635964ce71"],
+    "gasMultiplier": 1,
+    "gasMax":30,
+    "useGPU":false,
+    "trackers": [
+        "balance",
+        "disputeStatus",
+        "gas",
+        "tokenBalance",
+        "indexers",
+        "newCurrentVariables",
+        "currentVariables",
+        "disputeChecker",
+        "tallyVotes"
+    ],
+    "indexFolder": "indexes",
+    "dbFile": "zapDB",
+    "disputeTimeDelta": "600s"
+}
