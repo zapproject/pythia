@@ -2,21 +2,15 @@ package webview
 
 import (
 	"fmt"
-	"math/big"
 	"os"
 	"path/filepath"
-	"strings"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/webview/webview"
 	ZapCommon "github.com/zapproject/pythia/common"
 	"github.com/zapproject/pythia/contracts"
-	"github.com/zapproject/pythia/rpc"
 	"github.com/zapproject/pythia/setup"
-	"github.com/zapproject/pythia/token"
+	"github.com/zapproject/pythia/webview/util"
 )
 
 func showWallet(w webview.WebView) {
@@ -48,100 +42,27 @@ func showWallet(w webview.WebView) {
 }
 
 func showTxs() {
-	transferLogs := getTransferLogs()
+	transferLogs := util.GetTransferLogs()
 	fmt.Println("Transfer logs: ", transferLogs)
 
-	approvalLogs := getApprovalLogs()
+	approvalLogs := util.GetApprovalLogs()
 	fmt.Println("Approval logs: ", approvalLogs)
-}
 
-func getTransferLogs() []token.ZapTokenBSCTransfer {
-	tokenABI, err := abi.JSON(strings.NewReader(token.ERC20BasicABI))
-	if err != nil {
-		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
-	}
-	contractAddress := setup.CTX.Value(ZapCommon.TokenAddress).(common.Address)
-	client := setup.CTX.Value(ZapCommon.ClientContextKey).(rpc.ETHClient)
+	newStakeLogs := util.GetNewStakeLogs()
+	fmt.Println("New Stake Logs: ", newStakeLogs)
 
-	bar := bind.NewBoundContract(contractAddress, tokenABI, nil, nil, nil)
+	stakeWithdrawRequestLogs := util.GetStakeRequestedLogs()
+	fmt.Println("Stake withdraw request logs: ", stakeWithdrawRequestLogs)
 
-	// header, err := client.HeaderByNumber(context.Background(), nil)
-	// if err != nil {
-	// 	fmt.Errorf("%v", err)
-	// }
+	stakeWithdrawnLogs := util.GetStakeWithdawLogs()
+	fmt.Println("Stake Withdrawn logs: ", stakeWithdrawnLogs)
 
-	transferID := tokenABI.Events["Transfer"].ID
-	// fmt.Println("TransferID: ", transferID)
-	transferQuery := ethereum.FilterQuery{
-		FromBlock: big.NewInt(0),
-		// ToBlock:   big.NewInt(header.Number.Int64()),
-		ToBlock: nil,
-		// setup.CTX.Value(ZapCommon.PublicAddress).(common.Address),
-		Addresses: []common.Address{setup.CTX.Value(ZapCommon.TokenAddress).(common.Address)},
-		Topics:    [][]common.Hash{{transferID}},
-	}
+	minedLogs := util.GetMinedLogs()
+	fmt.Println("Mined logs: ", minedLogs)
 
-	// fmt.Println("Block: ", header.Number)
+	newDisputeLogs := util.GetNewDisputeLogs()
+	fmt.Println("New Dispute logs: ", newDisputeLogs)
 
-	logs, err := client.FilterLogs(setup.CTX, transferQuery)
-	if err != nil {
-		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
-	}
-	// fmt.Println("transfer logs: ", logs)
-
-	transfers := []token.ZapTokenBSCTransfer{}
-	for _, l := range logs {
-		transfer := token.ZapTokenBSCTransfer{}
-		err := bar.UnpackLog(&transfer, "Transfer", l)
-		if err != nil {
-			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
-		}
-		transfers = append(transfers, transfer)
-	}
-
-	return transfers
-}
-
-func getApprovalLogs() []token.ZapTokenBSCApproval {
-	tokenABI, err := abi.JSON(strings.NewReader(token.ERC20ABI))
-	if err != nil {
-		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
-	}
-	contractAddress := setup.CTX.Value(ZapCommon.TokenAddress).(common.Address)
-	client := setup.CTX.Value(ZapCommon.ClientContextKey).(rpc.ETHClient)
-
-	bar := bind.NewBoundContract(contractAddress, tokenABI, nil, nil, nil)
-
-	// header, err := client.HeaderByNumber(context.Background(), nil)
-	// if err != nil {
-	// 	fmt.Errorf("%v", err)
-	// }
-
-	approvalID := tokenABI.Events["Approval"].ID
-
-	approvalQuery := ethereum.FilterQuery{
-		FromBlock: big.NewInt(0),
-		ToBlock:   nil,
-		Addresses: []common.Address{setup.CTX.Value(ZapCommon.TokenAddress).(common.Address)},
-		// Addresses: []common.Address{setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)},
-		Topics: [][]common.Hash{{approvalID}},
-	}
-
-	logs, err := client.FilterLogs(setup.CTX, approvalQuery)
-	if err != nil {
-		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
-	}
-
-	fmt.Println("approce logs: ", logs)
-	approvals := []token.ZapTokenBSCApproval{}
-	for _, l := range logs {
-		approval := token.ZapTokenBSCApproval{}
-		err := bar.UnpackLog(&approval, "Approval", l)
-		if err != nil {
-			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
-		}
-		approvals = append(approvals, approval)
-	}
-
-	return approvals
+	votedLogs := util.GetVotedLogs()
+	fmt.Println("Voted logs: ", votedLogs)
 }

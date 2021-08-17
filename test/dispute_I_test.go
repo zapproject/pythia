@@ -145,7 +145,7 @@ func StartMiners(t *testing.T) *big.Int {
 
 	// allocate 10000 zap for ZapMaster contract (bug - normally ZapMaster has 6000 zap initially)
 	auth, _ = ops.PrepareEthTransaction(minerCtx[5])
-	// instance1.UpdateBalanceAtNow(auth, addr1, big.NewInt(10000000))
+	instance1.UpdateBalanceAtNow(auth, addr1, big.NewInt(10000000))
 
 	instance := minerCtx[5].Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
 	// check challenge
