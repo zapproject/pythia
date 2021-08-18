@@ -1,8 +1,8 @@
 {
     "zapTokenAddress": "0x09d8AF358636D9BCC9a3e177B66EB30381a4b1a8",
-    "contractAddress": "0xC73cF8058a2171013a28F40C04EAEC6f4c01501d",
-    "vaultAddress": "0x6b0240a91dB0a759BD02B1C6C7DD792A24e6FCB4",
-    "nodeURL": "https://data-seed-prebsc-1-s1.binance.org:8545/",
+    "contractAddress": "0x785546838144349D28CDb10b16fB9188e303c62C",
+    "vaultAddress": "0x4E4c96f75a835Bea0Fabc375FDE63944496a4d43",
+    "nodeURL": "https://data-seed-prebsc-1-s2.binance.org:8545/",
     "publicAddress": "0x9d880a3F00EC51f5d98E8BFb953236ac6C472dc2",
     "privateKey": "c6ba00cc951e6116bc79e2606d70f9383e26c69b05de6db202919ee2dad1d816",
     "serverHost": "0.0.0.0",
