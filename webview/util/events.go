@@ -17,7 +17,12 @@ import (
 	"github.com/zapproject/pythia/token"
 )
 
-func GetTransferLogs() []token.ZapTokenBSCTransfer {
+type EventLog struct {
+	Timestamp uint64
+	Log       interface{}
+}
+
+func GetTransferLogs() []EventLog {
 	tokenABI, err := abi.JSON(strings.NewReader(token.ERC20BasicABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -52,7 +57,7 @@ func GetTransferLogs() []token.ZapTokenBSCTransfer {
 	}
 	// fmt.Println("transfer logs: ", logs)
 
-	transfers := []token.ZapTokenBSCTransfer{}
+	transfers := []EventLog{}
 	for _, l := range logs {
 		transfer := token.ZapTokenBSCTransfer{}
 		err := bar.UnpackLog(&transfer, "Transfer", l)
@@ -61,14 +66,16 @@ func GetTransferLogs() []token.ZapTokenBSCTransfer {
 		}
 		if transfer.From.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() ||
 			transfer.To.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			transfers = append(transfers, transfer)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, transfer}
+			transfers = append(transfers, log)
 		}
 	}
 
 	return transfers
 }
 
-func GetApprovalLogs() []token.ZapTokenBSCApproval {
+func GetApprovalLogs() []EventLog {
 	tokenABI, err := abi.JSON(strings.NewReader(token.ERC20ABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -100,7 +107,7 @@ func GetApprovalLogs() []token.ZapTokenBSCApproval {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	approvals := []token.ZapTokenBSCApproval{}
+	approvals := []EventLog{}
 	for _, l := range logs {
 		approval := token.ZapTokenBSCApproval{}
 		err := bar.UnpackLog(&approval, "Approval", l)
@@ -109,14 +116,16 @@ func GetApprovalLogs() []token.ZapTokenBSCApproval {
 		}
 		if approval.Owner.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() ||
 			approval.Spender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			approvals = append(approvals, approval)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, approval}
+			approvals = append(approvals, log)
 		}
 	}
 
 	return approvals
 }
 
-func GetNewStakeLogs() []contracts1.ZapStakeNewStake {
+func GetNewStakeLogs() []EventLog {
 	stakeABI, err := abi.JSON(strings.NewReader(contracts1.ZapStakeABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -148,7 +157,7 @@ func GetNewStakeLogs() []contracts1.ZapStakeNewStake {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	stakes := []contracts1.ZapStakeNewStake{}
+	stakes := []EventLog{}
 	for _, l := range logs {
 		stake := contracts1.ZapStakeNewStake{}
 		err := bar.UnpackLog(&stake, "NewStake", l)
@@ -156,14 +165,16 @@ func GetNewStakeLogs() []contracts1.ZapStakeNewStake {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
 		if stake.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			stakes = append(stakes, stake)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, stakes}
+			stakes = append(stakes, log)
 		}
 	}
 
 	return stakes
 }
 
-func GetStakeRequestedLogs() []contracts1.ZapStakeStakeWithdrawRequested {
+func GetStakeRequestedLogs() []EventLog {
 	requestedABI, err := abi.JSON(strings.NewReader(contracts1.ZapStakeABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -195,7 +206,7 @@ func GetStakeRequestedLogs() []contracts1.ZapStakeStakeWithdrawRequested {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	requests := []contracts1.ZapStakeStakeWithdrawRequested{}
+	requests := []EventLog{}
 	for _, l := range logs {
 		request := contracts1.ZapStakeStakeWithdrawRequested{}
 		err := bar.UnpackLog(&request, "StakeWithdrawRequested", l)
@@ -203,14 +214,16 @@ func GetStakeRequestedLogs() []contracts1.ZapStakeStakeWithdrawRequested {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
 		if request.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			requests = append(requests, request)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, requests}
+			requests = append(requests, log)
 		}
 	}
 
 	return requests
 }
 
-func GetStakeWithdawLogs() []contracts1.ZapStakeStakeWithdrawn {
+func GetStakeWithdawLogs() []EventLog {
 	withdrawABI, err := abi.JSON(strings.NewReader(contracts1.ZapStakeABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -237,15 +250,13 @@ func GetStakeWithdawLogs() []contracts1.ZapStakeStakeWithdrawn {
 		},
 		Topics: [][]common.Hash{{withdrawID}},
 	}
-	// fmt.Println("Before filter logs")
+
 	logs, err := client.FilterLogs(setup.CTX, withdrawQuery)
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	// fmt.Println("withdrawn stake logs: ", logs)
-
-	withdraws := []contracts1.ZapStakeStakeWithdrawn{}
+	withdraws := []EventLog{}
 	for _, l := range logs {
 		withdraw := contracts1.ZapStakeStakeWithdrawn{}
 		err := bar.UnpackLog(&withdraw, "StakeWithdrawn", l)
@@ -253,14 +264,16 @@ func GetStakeWithdawLogs() []contracts1.ZapStakeStakeWithdrawn {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
 		if withdraw.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			withdraws = append(withdraws, withdraw)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, withdraw}
+			withdraws = append(withdraws, log)
 		}
 	}
 
 	return withdraws
 }
 
-func GetMinedLogs() []contracts1.ZapLibraryNonceSubmitted {
+func GetMinedLogs() []EventLog {
 	minedABI, err := abi.JSON(strings.NewReader(contracts1.ZapLibraryABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -292,7 +305,7 @@ func GetMinedLogs() []contracts1.ZapLibraryNonceSubmitted {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	mineds := []contracts1.ZapLibraryNonceSubmitted{}
+	mineds := []EventLog{}
 	for _, l := range logs {
 		mined := contracts1.ZapLibraryNonceSubmitted{}
 		err := bar.UnpackLog(&mined, "NonceSubmitted", l)
@@ -300,15 +313,17 @@ func GetMinedLogs() []contracts1.ZapLibraryNonceSubmitted {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
 		if mined.Miner.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			mineds = append(mineds, mined)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, mined}
+			mineds = append(mineds, log)
 		}
 	}
 
 	return mineds
 }
 
-func GetNewDisputeLogs() []contracts1.ZapDisputeNewDispute {
-	disputeABI, err := abi.JSON(strings.NewReader(contracts1.ZapDisputeABI))
+func GetNewDisputeLogs() []EventLog {
+	disputeABI, err := abi.JSON(strings.NewReader(contracts1.ZapABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
 	}
@@ -339,22 +354,25 @@ func GetNewDisputeLogs() []contracts1.ZapDisputeNewDispute {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	disputes := []contracts1.ZapDisputeNewDispute{}
+	disputes := []EventLog{}
 	for _, l := range logs {
-		dispute := contracts1.ZapDisputeNewDispute{}
+
+		dispute := contracts1.ZapNewDispute{}
 		err := bar.UnpackLog(&dispute, "NewDispute", l)
 		if err != nil {
 			fmt.Errorf("\U0001F6AB failed to unpack into object: %v", err)
 		}
 		if dispute.Miner.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			disputes = append(disputes, dispute)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, dispute}
+			disputes = append(disputes, log)
 		}
 	}
 
 	return disputes
 }
 
-func GetVotedLogs() []contracts1.ZapDisputeVoted {
+func GetVotedLogs() []EventLog {
 	votedABI, err := abi.JSON(strings.NewReader(contracts1.ZapDisputeABI))
 	if err != nil {
 		fmt.Errorf("\U0001F6AB failed to parse abi: %v", err)
@@ -386,7 +404,7 @@ func GetVotedLogs() []contracts1.ZapDisputeVoted {
 		fmt.Errorf("\U0001F6AB failed to get nonce logs: %v", err)
 	}
 
-	voteds := []contracts1.ZapDisputeVoted{}
+	voteds := []EventLog{}
 	for _, l := range logs {
 		voted := contracts1.ZapDisputeVoted{}
 		err := bar.UnpackLog(&voted, "Voted", l)
@@ -395,7 +413,9 @@ func GetVotedLogs() []contracts1.ZapDisputeVoted {
 		}
 
 		if voted.Voter.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
-			voteds = append(voteds, voted)
+			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
+			log := EventLog{time.Time, voted}
+			voteds = append(voteds, log)
 		}
 	}
 
