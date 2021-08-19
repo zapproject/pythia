@@ -23,14 +23,20 @@ type Transaction struct {
 }
 
 func showWallet(w webview.WebView) {
-	setup.App()
-
-	w.SetTitle("Wallet")
-	w.SetSize(800, 600, webview.HintMin)
+	// w.SetTitle("Wallet")
+	// w.SetSize(800, 600, webview.HintMin)
 
 	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
 	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	zapBalance, _ := instance.BalanceOf(nil, addr)
+
+	w.Bind("showConfig", func() {
+		showConfig(w)
+	})
+
+	w.Bind("showStake", func() {
+		showStake(w)
+	})
 
 	w.Bind("balance", func() string {
 		return zapBalance.String()
@@ -47,7 +53,7 @@ func showWallet(w webview.WebView) {
 	p := filepath.Join(filepath.Dir(ex), "webview/public/wallet.html")
 	p = "file://" + p
 	w.Navigate(p)
-	w.Run()
+	// w.Run()
 }
 
 func showTxs() []Transaction {
@@ -92,12 +98,13 @@ func showTxs() []Transaction {
 
 func formatLogs(eventLogs []util.EventLog) []Transaction {
 	txs := []Transaction{}
-
+	// fmt.Println(eventLogs)
 	for _, j := range eventLogs {
 		tx := Transaction{}
 		tx.Timestamp = j.Timestamp
 
 		logType := fmt.Sprintf("%T", j.Log)
+
 		switch logType {
 		case "token.ZapTokenBSCTransfer":
 			tx.From = j.Log.(token.ZapTokenBSCTransfer).From.String()
@@ -127,6 +134,8 @@ func formatLogs(eventLogs []util.EventLog) []Transaction {
 		case "contracts1.ZapDisputeVoted":
 			tx.Event = "Voted"
 
+		default:
+			tx.Event = logType
 		}
 
 		txs = append(txs, tx)

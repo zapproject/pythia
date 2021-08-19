@@ -33,6 +33,7 @@ var configJSON = `{
     "dbFile": "zapDB"
 }
 `
+
 var configJSON0 = `{
 	"zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
     "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",

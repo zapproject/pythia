@@ -1,32 +1,44 @@
 <!doctype html>
 <html>
+<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
 
-    <body>
-        <h3>Balance: </h3>
-
-        <h3>Transactions: </h3>
-        <div class="transaction-container">
-            <ul id="txList" class="transaction-list">
-
-            </ul>
+<body>
+<script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick="showWallet()">
+                Wallet
+            </a>
+            <a class="navbar-brand" href="#" onclick="showConfig()">
+                Config
+            </a>
+            <a class="navbar-brand" href="#" onclick="showStake()">
+                Stake
+            </a>
         </div>
-    </body>
+    </nav>
 
-    <script>
-        window.onload = async function (){
-            document.body.children[0].innerHTML = await balance();
-            txs = await showTxs();
+    <h3>Balance: </h3>
 
-            // console.log(JSON.stringify(txs));
-            // console.log(txs[0]["Event"])
-            // console.log(txs[0]["To"])
-            // console.log(txs[0]["Timestamp"])
+    <h3>Transactions: </h3>
+    <div class="transaction-container">
+        <ul id="txList" class="transaction-list">
 
-            for (i=0;i<txs.length;i++){
-                const li = document.createElement("li");
-                li.innerHTML = txs[i]["From"] + " " + txs[i]["To"] + " " + txs[i]["Timestamp"] + " " + txs[i]["Event"];
-                document.getElementById("txList").appendChild(li);
-            }
-        };
-    </script>
+        </ul>
+    </div>
+</body>
+
+<script>
+    window.onload = async function () {
+        document.body.children[0].innerHTML = await balance();
+        txs = await showTxs();
+
+        for (i = 0; i < txs.length; i++) {
+            const li = document.createElement("li");
+            li.innerHTML = txs[i]["From"] + " " + txs[i]["To"] + " " + txs[i]["Timestamp"] + " " + txs[i]["Event"];
+            document.getElementById("txList").appendChild(li);
+        }
+    };
+</script>
+
 </html>

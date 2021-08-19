@@ -166,7 +166,7 @@ func GetNewStakeLogs() []EventLog {
 		}
 		if stake.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
 			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
-			log := EventLog{time.Time, stakes}
+			log := EventLog{time.Time, stake}
 			stakes = append(stakes, log)
 		}
 	}
@@ -215,7 +215,7 @@ func GetStakeRequestedLogs() []EventLog {
 		}
 		if request.Sender.Hex() == setup.CTX.Value(ZapCommon.PublicAddress).(common.Address).Hex() {
 			time, _ := client.HeaderByNumber(setup.CTX, big.NewInt(int64(l.BlockNumber)))
-			log := EventLog{time.Time, requests}
+			log := EventLog{time.Time, request}
 			requests = append(requests, log)
 		}
 	}
