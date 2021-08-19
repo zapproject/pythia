@@ -796,7 +796,263 @@ func collect(symbol string) (string, string) {
 			})
 		c.Visit("https://www.exchangerates.org.uk/Guinea-Franc-GNF-currency-table.html")
 
+	case "ALL":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "ALL/USD: "
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Albanian-Lek-ALL-currency-table.html")
+
+	case "BGN":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BGN/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Bulgarian-Lev-BGN-currency-table.html")
+
+	case "ARS":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "ARS/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Argentine-Peso-ARS-currency-table.html")
+
+	case "AWG":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "AWG/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Aruba-Florin-AWG-currency-table.html")
+
+	case "BAM":
+		c.OnHTML(".table > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BAM/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/currencies/bam-bosnia-herzegovina-convertible-mark")
+
+	case "AFN":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "AFN/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/afn-to-usd.htm")
+
+	case "AZN":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "AZN/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/azn-to-usd-rate?amount=1")
+
+	case "BYN":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "BYN/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/byn-to-usd-rate?amount=1")
+
+	case "BOB":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BOB/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Bolivian-Boliviano-BOB-currency-table.html")
+
+	case "BWP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "BWP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/bwp-to-usd-rate?amount=1")
+
+	case "BRL":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BRL/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Brazilian-Real-BRL-currency-table.html")
+
+	case "BND":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BND/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Brunei-Dollar-BND-currency-table.html")
+
+	case "KHR":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "KHR/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/khr-to-usd-rate?amount=1")
+
+	case "CLP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "CLP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Chilean-Peso-CLP-currency-table.html")
+
+	case "COP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "COP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Colombian-Peso-COP-currency-table.html")
+
+	case "CRC":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "CRC/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Costa-Rica-Colon-CRC-currency-table.html")
+
+	case "HRK":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "HRK/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Croatian-Kuna-HRK-currency-table.html")
+
+	case "CUP":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "CUP/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/cup-to-usd.htm")
+
+	case "CZK":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "CZK/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Czech-Koruna-CZK-currency-table.html")
+
+	case "DOP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "DOP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Dominican-Peso-DOP-currency-table.html")
+
+	case "EGP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "EGP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Egyptian-Pound-EGP-currency-table.html")
+
+	case "SVC":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "SVC/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/El-Salvador-Colon-SVC-currency-table.html")
+
+	case "FKP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "FKP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/fkp-to-usd-rate?amount=1")
+
+	case "FJD":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "FJD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Fiji-Dollar-FJD-currency-table.html")
+
+	case "GHS":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "GHS"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/ghs-to-usd-rate?amount=1")
+
+	case "GIP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "GIP"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/gip-to-usd-rate?amount=1")
+
+	case "GGP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "GGP"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/ggp-to-usd-rate?amount=1")
+
+	case "GYD":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "GYD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/gyd-to-usd-rate?amount=1")
 	}
+
 	return pair, value
 }
 
@@ -898,6 +1154,35 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/jod", handler)
 	router.AddRoute("/gtq", handler)
 	router.AddRoute("/gnf", handler)
+	router.AddRoute("/all", handler)
+	router.AddRoute("/bgn", handler)
+	router.AddRoute("/ars", handler)
+	router.AddRoute("/awg", handler)
+	router.AddRoute("/bam", handler)
+	router.AddRoute("/azn", handler)
+	router.AddRoute("/byn", handler)
+	router.AddRoute("/afn", handler)
+	router.AddRoute("/bob", handler)
+	router.AddRoute("/bwp", handler)
+	router.AddRoute("/brl", handler)
+	router.AddRoute("/bnd", handler)
+	router.AddRoute("/khr", handler)
+	router.AddRoute("/clp", handler)
+	router.AddRoute("/cop", handler)
+	router.AddRoute("/crc", handler)
+	router.AddRoute("/hrk", handler)
+	router.AddRoute("/cup", handler)
+	router.AddRoute("/czk", handler)
+	router.AddRoute("/dop", handler)
+	router.AddRoute("/egp", handler)
+	router.AddRoute("/svc", handler)
+	router.AddRoute("/fkp", handler)
+	router.AddRoute("/fjd", handler)
+	router.AddRoute("/ghs", handler)
+	router.AddRoute("/gip", handler)
+	router.AddRoute("/ggp", handler)
+	router.AddRoute("/gyd", handler)
+
 }
 
 //Incoming implementation for  handler

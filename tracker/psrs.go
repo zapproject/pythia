@@ -134,6 +134,34 @@ var PSRs = map[int]ValueGenerator{
 	110: &SingleSymbol{symbol: "JOD/USD", granularity: 1000000, transform: MedianAt},
 	111: &SingleSymbol{symbol: "GTQ/USD", granularity: 1000000, transform: MedianAt},
 	112: &SingleSymbol{symbol: "GNF/USD", granularity: 1000000, transform: MedianAt},
+	113:  &SingleSymbol{symbol: "ALL/USD", granularity: 1000000, transform: MedianAt},
+	114:  &SingleSymbol{symbol: "BGN/USD", granularity: 1000000, transform: MedianAt},
+	115:  &SingleSymbol{symbol: "ARS/USD", granularity: 1000000, transform: MedianAt},
+	116:  &SingleSymbol{symbol: "AWG/USD", granularity: 1000000, transform: MedianAt},
+	117:  &SingleSymbol{symbol: "BAM/USD", granularity: 1000000, transform: MedianAt},
+	118:  &SingleSymbol{symbol: "AZN/USD", granularity: 1000000, transform: MedianAt},
+	119:  &SingleSymbol{symbol: "BYN/USD", granularity: 1000000, transform: MedianAt},
+	120:  &SingleSymbol{symbol: "AFN/USD", granularity: 1000000, transform: MedianAt},
+	121:  &SingleSymbol{symbol: "BOB/USD", granularity: 1000000, transform: MedianAt},
+	122:  &SingleSymbol{symbol: "BWP/USD", granularity: 1000000, transform: MedianAt},
+	123:  &SingleSymbol{symbol: "BRL/USD", granularity: 1000000, transform: MedianAt},
+	124:  &SingleSymbol{symbol: "BND/USD", granularity: 1000000, transform: MedianAt},
+	125:  &SingleSymbol{symbol: "KHR/USD", granularity: 1000000, transform: MedianAt},
+	126:  &SingleSymbol{symbol: "CLP/USD", granularity: 1000000, transform: MedianAt},
+	127:  &SingleSymbol{symbol: "COP/USD", granularity: 1000000, transform: MedianAt},
+	128:  &SingleSymbol{symbol: "CRC/USD", granularity: 1000000, transform: MedianAt},
+	129:  &SingleSymbol{symbol: "HRK/USD", granularity: 1000000, transform: MedianAt},
+	130:  &SingleSymbol{symbol: "CUP/USD", granularity: 1000000, transform: MedianAt},
+	131:  &SingleSymbol{symbol: "CZK/USD", granularity: 1000000, transform: MedianAt},
+	132:  &SingleSymbol{symbol: "DOP/USD", granularity: 1000000, transform: MedianAt},
+	133:  &SingleSymbol{symbol: "EGP/USD", granularity: 1000000, transform: MedianAt},
+	134:  &SingleSymbol{symbol: "SVC/USD", granularity: 1000000, transform: MedianAt},
+	135:  &SingleSymbol{symbol: "FKP/USD", granularity: 1000000, transform: MedianAt},
+	136:  &SingleSymbol{symbol: "FJD/USD", granularity: 1000000, transform: MedianAt},
+	137:  &SingleSymbol{symbol: "GHS/USD", granularity: 1000000, transform: MedianAt},
+	138:  &SingleSymbol{symbol: "GIP/USD", granularity: 1000000, transform: MedianAt},
+	139:  &SingleSymbol{symbol: "GGP/USD", granularity: 1000000, transform: MedianAt},
+	140:  &SingleSymbol{symbol: "GYD/USD", granularity: 1000000, transform: MedianAt},
 }
 
 //these weight functions map values of x between 0 (brand new) and 1 (old) to weights between 0 and 1
@@ -337,3 +365,35 @@ func VolumeWeightedAvg(vals []apiOracle.PriceInfo) apiOracle.PriceInfo {
 	}
 	return apiOracle.PriceInfo{Price: priceSum / float64(len(vals)), Volume: 0}
 }
+
+
+
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
