@@ -480,6 +480,33 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Dominican-Peso-DOP-currency-table.html")
+
+	case "EGP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "EGP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Egyptian-Pound-EGP-currency-table.html")
+
+	case "SVC":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "SVC/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/El-Salvador-Colon-SVC-currency-table.html")
+
+	case "FKP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "FKP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/fkp-to-usd-rate?amount=1")
 	}
 
 	return pair, value
@@ -536,6 +563,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/cup", handler)
 	router.AddRoute("/czk", handler)
 	router.AddRoute("/dop", handler)
+	router.AddRoute("/egp", handler)
+	router.AddRoute("/svc", handler)
+	router.AddRoute("/fkp", handler)
 
 }
 
