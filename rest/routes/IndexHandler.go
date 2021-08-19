@@ -342,6 +342,23 @@ func collect(symbol string) (string, string) {
 
 		c.Visit("https://wise.com/gb/currency-converter/currencies/bam-bosnia-herzegovina-convertible-mark")
 
+	case "AZN":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "AZN/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/azn-to-usd-rate?amount=1")
+
+	case "BYN":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "BYN/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/byn-to-usd-rate?amount=1")
 	}
 
 	return pair, value
