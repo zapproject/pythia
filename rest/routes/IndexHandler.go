@@ -297,6 +297,77 @@ func collect(symbol string) (string, string) {
 
 		c.Visit("https://www.exchangerates.org.uk/South-Korean-Won-KRW-currency-table.html")
 
+	case "WST":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "WST/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Samoa-Tala-WST-currency-table.html")
+	case "SAR":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SAR/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Saudi-Riyal-SAR-currency-table.html")
+	case "SCR":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SCR/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Seychelles-Rupee-SCR-currency-table.html")
+	case "SLL":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SLL/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Sierra-Leone-Leone-SLL-currency-table.html")
+	case "SKK":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SKK/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Slovak-Koruna-SKK-currency-table.html")
+	case "SIT":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SIT/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Slovenian-Tolar-SIT-currency-table.html")
+	case "SBD":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SBD/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Solomon-Islands-Dollar-SBD-currency-table.html")
+	case "LKR":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "LKR/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Sri-Lankan-Rupee-LKR-currency-table.html")
+	case "SDD":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SDD/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Sudanese-Dinar-SDD-currency-table.html")
+	case "SZL":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "SZL/USD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Swaziland-Lilageni-SZL-currency-table.html")
+
 	case "TWD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
@@ -435,6 +506,16 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/top", handler)
 	router.AddRoute("/tzs", handler)
 	router.AddRoute("/twd", handler)
+	router.AddRoute("/wst", handler)
+	router.AddRoute("/sar", handler)
+	router.AddRoute("/scr", handler)
+	router.AddRoute("/sll", handler)
+	router.AddRoute("/skk", handler)
+	router.AddRoute("/sit", handler)
+	router.AddRoute("/sbd", handler)
+	router.AddRoute("/lkr", handler)
+	router.AddRoute("/sdd", handler)
+	router.AddRoute("/szl", handler)
 }
 
 //Incoming implementation for  handler

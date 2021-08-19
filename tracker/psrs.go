@@ -79,6 +79,16 @@ var PSRs = map[int]ValueGenerator{
 	55: &SingleSymbol{symbol: "TOP/USD", granularity: 1000000, transform: MedianAt},
 	56: &SingleSymbol{symbol: "TZS/USD", granularity: 1000000, transform: MedianAt},
 	57: &SingleSymbol{symbol: "TWD/USD", granularity: 1000000, transform: MedianAt},
+	58: &SingleSymbol{symbol: "WST/USD", granularity: 1000000, transform: MedianAt},
+	59: &SingleSymbol{symbol: "SAR/USD", granularity: 1000000, transform: MedianAt},
+	60: &SingleSymbol{symbol: "SCR/USD", granularity: 1000000, transform: MedianAt},
+	61: &SingleSymbol{symbol: "SLL/USD", granularity: 1000000, transform: MedianAt},
+	62: &SingleSymbol{symbol: "SKK/USD", granularity: 1000000, transform: MedianAt},
+	63: &SingleSymbol{symbol: "SIT/USD", granularity: 1000000, transform: MedianAt},
+	64: &SingleSymbol{symbol: "SBD/USD", granularity: 1000000, transform: MedianAt},
+	65: &SingleSymbol{symbol: "LKR/USD", granularity: 1000000, transform: MedianAt},
+	66: &SingleSymbol{symbol: "SDD/USD", granularity: 1000000, transform: MedianAt},
+	67: &SingleSymbol{symbol: "SZL/USD", granularity: 1000000, transform: MedianAt},
 }
 
 //these weight functions map values of x between 0 (brand new) and 1 (old) to weights between 0 and 1
@@ -282,3 +292,14 @@ func VolumeWeightedAvg(vals []apiOracle.PriceInfo) apiOracle.PriceInfo {
 	}
 	return apiOracle.PriceInfo{Price: priceSum / float64(len(vals)), Volume: 0}
 }
+
+// WST	https://www.exchangerates.org.uk/Samoa-Tala-WST-currency-table.html
+// SAR	https://www.exchangerates.org.uk/Saudi-Riyal-SAR-currency-table.html
+// SCR	https://www.exchangerates.org.uk/Seychelles-Rupee-SCR-currency-table.html
+// SLL	https://www.exchangerates.org.uk/Sierra-Leone-Leone-SLL-currency-table.html
+// SKK	https://www.exchangerates.org.uk/Slovak-Koruna-SKK-currency-table.html
+// SIT	https://www.exchangerates.org.uk/Slovenian-Tolar-SIT-currency-table.html
+// SBD	https://www.exchangerates.org.uk/Solomon-Islands-Dollar-SBD-currency-table.html
+// LKR	https://www.exchangerates.org.uk/Sri-Lankan-Rupee-LKR-currency-table.html
+// SDD	https://www.exchangerates.org.uk/Sudanese-Dinar-SDD-currency-table.html
+// SZL	https://www.exchangerates.org.uk/Swaziland-Lilageni-SZL-currency-table.html

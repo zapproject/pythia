@@ -94,6 +94,36 @@
 	"KRW/USD": [
 		"json(http://127.0.0.1:5002/krw).value"
 	],
+	"WST/USD": [
+		"json(http://127.0.0.1:5002/wst).value"
+	],
+	"SAR/USD": [
+		"json(http://127.0.0.1:5002/sar).value"
+	],
+	"SCR/USD": [
+		"json(http://127.0.0.1:5002/scr).value"
+	],
+	"SLL/USD": [
+		"json(http://127.0.0.1:5002/sll).value"
+	],
+	"SKK/USD": [
+		"json(http://127.0.0.1:5002/skk).value"
+	],
+	"SIT/USD": [
+		"json(http://127.0.0.1:5002/sit).value"
+	],
+	"SBD/USD": [
+		"json(http://127.0.0.1:5002/sbd).value"
+	],
+	"LKR/USD": [
+		"json(http://127.0.0.1:5002/lkr).value"
+	],
+	"SDD/USD": [
+		"json(http://127.0.0.1:5002/sdd).value"
+	],
+	"SZL/USD": [
+		"json(http://127.0.0.1:5002/szl).value"
+	],
 	"TWD/USD": [
 		"json(http://127.0.0.1:5002/twd).value"
 	],
