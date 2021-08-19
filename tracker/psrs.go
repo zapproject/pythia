@@ -61,6 +61,9 @@ var PSRs = map[int]ValueGenerator{
 	45: &SingleSymbol{symbol: "KRW/USD", granularity: 1000000, transform: MedianAt},
 	46: &SingleSymbol{symbol: "ALL/USD", granularity: 1000000, transform: MedianAt},
 	47: &SingleSymbol{symbol: "BGN/USD", granularity: 1000000, transform: MedianAt},
+	48: &SingleSymbol{symbol: "ARS/USD", granularity: 1000000, transform: MedianAt},
+	49: &SingleSymbol{symbol: "AWG/USD", granularity: 1000000, transform: MedianAt},
+	50: &SingleSymbol{symbol: "BAM/USD", granularity: 1000000, transform: MedianAt},
 }
 
 //these weight functions map values of x between 0 (brand new) and 1 (old) to weights between 0 and 1

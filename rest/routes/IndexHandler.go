@@ -314,6 +314,34 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Bulgarian-Lev-BGN-currency-table.html")
+
+	case "ARS":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "ARS/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Argentine-Peso-ARS-currency-table.html")
+
+	case "AWG":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "AWG/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Aruba-Florin-AWG-currency-table.html")
+
+	case "BAM":
+		c.OnHTML(".table > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BAM/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/currencies/bam-bosnia-herzegovina-convertible-mark")
+
 	}
 
 	return pair, value
@@ -352,6 +380,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/krw", handler)
 	router.AddRoute("/all", handler)
 	router.AddRoute("/bgn", handler)
+	router.AddRoute("/ars", handler)
+	router.AddRoute("/awg", handler)
+	router.AddRoute("/bam", handler)
 
 }
 
