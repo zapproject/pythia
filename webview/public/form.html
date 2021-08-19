@@ -1,0 +1,24 @@
+<form @submit.prevent="submitData" x-show="!connected">
+    <div class="container">
+
+      <div class="mb-3">
+        <label for="publicKey" class="form-label">Public Key</label>
+        <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.PublicAddress">
+      </div>
+      
+      <div class="mb-3">
+        <label for="privateKey" class="form-label">Private Key</label>
+        <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.PrivateKey">
+      </div>
+
+      <div class="mb-3">
+        <select class="form-select" aria-label="Default select example" x-model="configData.chain">
+          <option value="mainnet">Mainnet</option>
+          <option value="testnet">Testnet</option>
+          <option selected value="local">Local</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Connect</button>
+    </div>
+    </form>
