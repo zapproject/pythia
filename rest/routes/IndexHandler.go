@@ -411,6 +411,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/ars", handler)
 	router.AddRoute("/awg", handler)
 	router.AddRoute("/bam", handler)
+	router.AddRoute("/azn", handler)
+	router.AddRoute("/byn", handler)
+	router.AddRoute("/afn", handler)
 
 }
 
