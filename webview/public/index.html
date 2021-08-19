@@ -2,6 +2,8 @@
 <!-- <html> -->
 
 <script type='text/javascript' src="alpinejs/cdn.js" defer></script>
+<script type='text/javascript' src="alpinejs/helper.js" defer></script>
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -10,6 +12,8 @@
   <!-- Bootstrap CSS -->
   <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="home.css">
+  
   <title>Zap Wallet</title>
 
 </head>
@@ -21,6 +25,7 @@
 
   <div x-data="Components()">
 
+    <!-- HTML is defined below in strings indexed by these keys  -->
     <div x-html="nav"></div>
     <div x-html="app"></div>
 
@@ -47,6 +52,7 @@
                         "zapTokenAddress":	"0x07882ae1ecb7429a84f1d53048d35c4bb2056877",
                       }  
 
+        // This is the data returned to a html tag with an x-data directive
         return {
           configData: {
             PublicAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
@@ -74,7 +80,7 @@
 
                 app: `<div x-data="App()">
                         <div x-html="form"></div>
-                        <div x-html="stake"></div>
+                        <div x-html="home"></div>
                       </div>`,
 
               form: `<form @submit.prevent="submitData" x-show="!connected">
@@ -102,11 +108,55 @@
                       </div>
                       </form>`,
 
-                      stake: `<div x-show="connected">Hola</div>`
+                      home: `
+                            <div class='dashboard' x-show="connected">
+                                <div class="dashboard-nav" x-data>
+                                    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>ZAP</span></a></header>
+                                    <nav class="dashboard-nav-list" x-data=menu()>
+                                      
+                                        <template x-for="option in options">
+                                          <a href="#" class="dashboard-nav-item" x-text="capitalize(option)"> </a>
+                                        </template>
+                                        
+                                    </nav>
+                                </div>
+                                
+                                <div class='dashboard-app'>
+                                    <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
+                                    <div class='dashboard-content'>
+                                        <div class='container'>
+                                            <div class='card'>
+                                                  <div class='card-header'>
+                                                      <h1>Balance</h1>
+                                                      <button class="btn btn-primary">Send</button>
+                                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                                  </div>
+                                                <div class='card-body'>
+                                                    <p x-text="await getBalance"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
                     
                     }
     }
+    
+    
+    function menu(){
+      return {
+        
+        active: "wallet",
+        options: ["wallet","stake","mine"]
+      }
+    }
 
+    
+    function capitalize(string){
+      return string.replace(/^./, string[0].toUpperCase());
+    }
   </script>
   <!-- <script src="nav.js"></script> -->
 </body>

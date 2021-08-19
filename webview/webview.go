@@ -11,7 +11,7 @@ import (
 func LoadWebview(){
 
 
-	debug := true
+	debug := false
 	w := webview.New(debug)
 
 	defer w.Destroy()
@@ -23,6 +23,8 @@ func LoadWebview(){
 	})
 
 	w.Bind("configWallet",configWallet)
+	w.Bind("loadHtml",loadHtml)
+	w.Bind("getBalance",getBalance)
 
 	ex, err := os.Executable()
 	if err != nil {

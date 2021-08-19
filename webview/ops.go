@@ -5,7 +5,9 @@ import (
 	"github.com/zapproject/pythia/config"
 	"github.com/zapproject/pythia/setup"
 	// "github.com/zapproject/pythia/ops"
-
+	ZapCommon "github.com/zapproject/pythia/common"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/zapproject/pythia/contracts"
 )
 
 
@@ -17,4 +19,21 @@ func configWallet(cfg string) (bool, error){
 	} 
 
 	return setup.App()
+}
+
+
+func getBalance() (string, error) {
+	  
+	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
+	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
+	zapBalance, err := instance.BalanceOf(nil, addr)
+
+	if err != nil{
+		fmt.Print(err.Error())
+		return "",err
+	}
+
+	return zapBalance.String(),nil
+
+
 }
