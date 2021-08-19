@@ -451,6 +451,35 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Croatian-Kuna-HRK-currency-table.html")
+
+	case "CUP":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "CUP/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/cup-to-usd.htm")
+
+	case "CZK":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "CZK/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Czech-Koruna-CZK-currency-table.html")
+
+	case "DOP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "DOP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Dominican-Peso-DOP-currency-table.html")
 	}
 
 	return pair, value
@@ -504,6 +533,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/cop", handler)
 	router.AddRoute("/crc", handler)
 	router.AddRoute("/hrk", handler)
+	router.AddRoute("/cup", handler)
+	router.AddRoute("/czk", handler)
+	router.AddRoute("/dop", handler)
 
 }
 
