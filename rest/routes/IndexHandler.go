@@ -424,6 +424,33 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Chilean-Peso-CLP-currency-table.html")
+
+	case "COP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "COP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Colombian-Peso-COP-currency-table.html")
+
+	case "CRC":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "CRC/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Costa-Rica-Colon-CRC-currency-table.html")
+
+	case "HRK":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "HRK/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Croatian-Kuna-HRK-currency-table.html")
 	}
 
 	return pair, value
@@ -474,6 +501,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/bnd", handler)
 	router.AddRoute("/khr", handler)
 	router.AddRoute("/clp", handler)
+	router.AddRoute("/cop", handler)
+	router.AddRoute("/crc", handler)
+	router.AddRoute("/hrk", handler)
 
 }
 
