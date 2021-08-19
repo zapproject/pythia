@@ -109,6 +109,9 @@
 	"BAM/USD": [
 		"json(http://127.0.0.1:5002/bam).value"
 	],
+	"AFN/USD": [
+		"json(http://127.0.0.1:5002/afn).value"
+	],
 	"AZN/USD": [
 		"json(http://127.0.0.1:5002/azn).value"
 	],
