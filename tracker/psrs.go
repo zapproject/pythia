@@ -73,22 +73,67 @@ var PSRs = map[int]ValueGenerator{
 	50: &SingleSymbol{symbol: "XOF/USD", granularity: 1000000, transform: MedianAt},
 	51: &SingleSymbol{symbol: "YER/USD", granularity: 1000000, transform: MedianAt},
 
-	52: &SingleSymbol{symbol: "ZMK/USD", granularity: 1000000, transform: MedianAt},
-	53: &SingleSymbol{symbol: "UGX/USD", granularity: 1000000, transform: MedianAt},
-	54: &SingleSymbol{symbol: "TND/USD", granularity: 1000000, transform: MedianAt},
-	55: &SingleSymbol{symbol: "TOP/USD", granularity: 1000000, transform: MedianAt},
-	56: &SingleSymbol{symbol: "TZS/USD", granularity: 1000000, transform: MedianAt},
-	57: &SingleSymbol{symbol: "TWD/USD", granularity: 1000000, transform: MedianAt},
-	58: &SingleSymbol{symbol: "WST/USD", granularity: 1000000, transform: MedianAt},
-	59: &SingleSymbol{symbol: "SAR/USD", granularity: 1000000, transform: MedianAt},
-	60: &SingleSymbol{symbol: "SCR/USD", granularity: 1000000, transform: MedianAt},
-	61: &SingleSymbol{symbol: "SLL/USD", granularity: 1000000, transform: MedianAt},
-	62: &SingleSymbol{symbol: "SKK/USD", granularity: 1000000, transform: MedianAt},
-	63: &SingleSymbol{symbol: "SIT/USD", granularity: 1000000, transform: MedianAt},
-	64: &SingleSymbol{symbol: "SBD/USD", granularity: 1000000, transform: MedianAt},
-	65: &SingleSymbol{symbol: "LKR/USD", granularity: 1000000, transform: MedianAt},
-	66: &SingleSymbol{symbol: "SDD/USD", granularity: 1000000, transform: MedianAt},
-	67: &SingleSymbol{symbol: "SZL/USD", granularity: 1000000, transform: MedianAt},
+	52:  &SingleSymbol{symbol: "ZMK/USD", granularity: 1000000, transform: MedianAt},
+	53:  &SingleSymbol{symbol: "UGX/USD", granularity: 1000000, transform: MedianAt},
+	54:  &SingleSymbol{symbol: "TND/USD", granularity: 1000000, transform: MedianAt},
+	55:  &SingleSymbol{symbol: "TOP/USD", granularity: 1000000, transform: MedianAt},
+	56:  &SingleSymbol{symbol: "TZS/USD", granularity: 1000000, transform: MedianAt},
+	57:  &SingleSymbol{symbol: "TWD/USD", granularity: 1000000, transform: MedianAt},
+	58:  &SingleSymbol{symbol: "WST/USD", granularity: 1000000, transform: MedianAt},
+	59:  &SingleSymbol{symbol: "SAR/USD", granularity: 1000000, transform: MedianAt},
+	60:  &SingleSymbol{symbol: "SCR/USD", granularity: 1000000, transform: MedianAt},
+	61:  &SingleSymbol{symbol: "SLL/USD", granularity: 1000000, transform: MedianAt},
+	62:  &SingleSymbol{symbol: "SKK/USD", granularity: 1000000, transform: MedianAt},
+	63:  &SingleSymbol{symbol: "SIT/USD", granularity: 1000000, transform: MedianAt},
+	64:  &SingleSymbol{symbol: "SBD/USD", granularity: 1000000, transform: MedianAt},
+	65:  &SingleSymbol{symbol: "LKR/USD", granularity: 1000000, transform: MedianAt},
+	66:  &SingleSymbol{symbol: "SDD/USD", granularity: 1000000, transform: MedianAt},
+	67:  &SingleSymbol{symbol: "SZL/USD", granularity: 1000000, transform: MedianAt},
+	68:  &SingleSymbol{symbol: "NAD/USD", granularity: 1000000, transform: MedianAt},
+	69:  &SingleSymbol{symbol: "NPR/USD", granularity: 1000000, transform: MedianAt},
+	70:  &SingleSymbol{symbol: "ANG/USD", granularity: 1000000, transform: MedianAt},
+	71:  &SingleSymbol{symbol: "NIO/USD", granularity: 1000000, transform: MedianAt},
+	72:  &SingleSymbol{symbol: "NGN/USD", granularity: 1000000, transform: MedianAt},
+	73:  &SingleSymbol{symbol: "OMR/USD", granularity: 1000000, transform: MedianAt},
+	74:  &SingleSymbol{symbol: "XPF/USD", granularity: 1000000, transform: MedianAt},
+	75:  &SingleSymbol{symbol: "PKR/USD", granularity: 1000000, transform: MedianAt},
+	76:  &SingleSymbol{symbol: "PAB/USD", granularity: 1000000, transform: MedianAt},
+	77:  &SingleSymbol{symbol: "PGK/USD", granularity: 1000000, transform: MedianAt},
+	78:  &SingleSymbol{symbol: "PYG/USD", granularity: 1000000, transform: MedianAt},
+	79:  &SingleSymbol{symbol: "PEN/USD", granularity: 1000000, transform: MedianAt},
+	80:  &SingleSymbol{symbol: "PHP/USD", granularity: 1000000, transform: MedianAt},
+	81:  &SingleSymbol{symbol: "PLN/USD", granularity: 1000000, transform: MedianAt},
+	82:  &SingleSymbol{symbol: "QAR/USD", granularity: 1000000, transform: MedianAt},
+	83:  &SingleSymbol{symbol: "RON/USD", granularity: 1000000, transform: MedianAt},
+	84:  &SingleSymbol{symbol: "RWF/USD", granularity: 1000000, transform: MedianAt},
+	85:  &SingleSymbol{symbol: "KZT/USD", granularity: 1000000, transform: MedianAt},
+	86:  &SingleSymbol{symbol: "KES/USD", granularity: 1000000, transform: MedianAt},
+	87:  &SingleSymbol{symbol: "KWD/USD", granularity: 1000000, transform: MedianAt},
+	88:  &SingleSymbol{symbol: "LVL/USD", granularity: 1000000, transform: MedianAt},
+	89:  &SingleSymbol{symbol: "LBP/USD", granularity: 1000000, transform: MedianAt},
+	90:  &SingleSymbol{symbol: "LSL/USD", granularity: 1000000, transform: MedianAt},
+	91:  &SingleSymbol{symbol: "LTL/USD", granularity: 1000000, transform: MedianAt},
+	92:  &SingleSymbol{symbol: "MOP/USD", granularity: 1000000, transform: MedianAt},
+	93:  &SingleSymbol{symbol: "MKD/USD", granularity: 1000000, transform: MedianAt},
+	94:  &SingleSymbol{symbol: "MWK/USD", granularity: 1000000, transform: MedianAt},
+	95:  &SingleSymbol{symbol: "MYR/USD", granularity: 1000000, transform: MedianAt},
+	96:  &SingleSymbol{symbol: "MVR/USD", granularity: 1000000, transform: MedianAt},
+	97:  &SingleSymbol{symbol: "MRO/USD", granularity: 1000000, transform: MedianAt},
+	98:  &SingleSymbol{symbol: "MUR/USD", granularity: 1000000, transform: MedianAt},
+	99:  &SingleSymbol{symbol: "MXN/USD", granularity: 1000000, transform: MedianAt},
+	100: &SingleSymbol{symbol: "MDL/USD", granularity: 1000000, transform: MedianAt},
+	101: &SingleSymbol{symbol: "MNT/USD", granularity: 1000000, transform: MedianAt},
+	102: &SingleSymbol{symbol: "MAD/USD", granularity: 1000000, transform: MedianAt},
+	103: &SingleSymbol{symbol: "HNL/USD", granularity: 1000000, transform: MedianAt},
+	104: &SingleSymbol{symbol: "HUF/USD", granularity: 1000000, transform: MedianAt},
+	105: &SingleSymbol{symbol: "ISK/USD", granularity: 1000000, transform: MedianAt},
+	106: &SingleSymbol{symbol: "IDR/USD", granularity: 1000000, transform: MedianAt},
+	107: &SingleSymbol{symbol: "IRR/USD", granularity: 1000000, transform: MedianAt},
+	108: &SingleSymbol{symbol: "IQD/USD", granularity: 1000000, transform: MedianAt},
+	109: &SingleSymbol{symbol: "ILS/USD", granularity: 1000000, transform: MedianAt},
+	110: &SingleSymbol{symbol: "JOD/USD", granularity: 1000000, transform: MedianAt},
+	111: &SingleSymbol{symbol: "GTQ/USD", granularity: 1000000, transform: MedianAt},
+	112: &SingleSymbol{symbol: "GNF/USD", granularity: 1000000, transform: MedianAt},
 }
 
 //these weight functions map values of x between 0 (brand new) and 1 (old) to weights between 0 and 1
@@ -292,14 +337,3 @@ func VolumeWeightedAvg(vals []apiOracle.PriceInfo) apiOracle.PriceInfo {
 	}
 	return apiOracle.PriceInfo{Price: priceSum / float64(len(vals)), Volume: 0}
 }
-
-// WST	https://www.exchangerates.org.uk/Samoa-Tala-WST-currency-table.html
-// SAR	https://www.exchangerates.org.uk/Saudi-Riyal-SAR-currency-table.html
-// SCR	https://www.exchangerates.org.uk/Seychelles-Rupee-SCR-currency-table.html
-// SLL	https://www.exchangerates.org.uk/Sierra-Leone-Leone-SLL-currency-table.html
-// SKK	https://www.exchangerates.org.uk/Slovak-Koruna-SKK-currency-table.html
-// SIT	https://www.exchangerates.org.uk/Slovenian-Tolar-SIT-currency-table.html
-// SBD	https://www.exchangerates.org.uk/Solomon-Islands-Dollar-SBD-currency-table.html
-// LKR	https://www.exchangerates.org.uk/Sri-Lankan-Rupee-LKR-currency-table.html
-// SDD	https://www.exchangerates.org.uk/Sudanese-Dinar-SDD-currency-table.html
-// SZL	https://www.exchangerates.org.uk/Swaziland-Lilageni-SZL-currency-table.html

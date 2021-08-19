@@ -94,6 +94,57 @@
 	"KRW/USD": [
 		"json(http://127.0.0.1:5002/krw).value"
 	],
+	"NAD/USD": [
+		"json(http://127.0.0.1:5002/nad).value"
+	],
+	"NPR/USD": [
+		"json(http://127.0.0.1:5002/npr).value"
+	],
+	"ANG/USD": [
+		"json(http://127.0.0.1:5002/ang).value"
+	],
+	"NIO/USD": [
+		"json(http://127.0.0.1:5002/nio).value"
+	],
+	"NGN/USD": [
+		"json(http://127.0.0.1:5002/ngn).value"
+	],
+	"OMR/USD": [
+		"json(http://127.0.0.1:5002/omr).value"
+	],
+	"XPF/USD": [
+		"json(http://127.0.0.1:5002/xpf).value"
+	],
+	"PKR/USD": [
+		"json(http://127.0.0.1:5002/pkr).value"
+	],
+	"PAB/USD": [
+		"json(http://127.0.0.1:5002/pab).value"
+	],
+	"PGK/USD": [
+		"json(http://127.0.0.1:5002/pgk).value"
+	],
+	"PYG/USD": [
+		"json(http://127.0.0.1:5002/pyg).value"
+	],
+	"PEN/USD": [
+		"json(http://127.0.0.1:5002/pen).value"
+	],
+	"PHP/USD": [
+		"json(http://127.0.0.1:5002/php).value"
+	],
+	"PLN/USD": [
+		"json(http://127.0.0.1:5002/pln).value"
+	],
+	"QAR/USD": [
+		"json(http://127.0.0.1:5002/qar).value"
+	],
+	"RON/USD": [
+		"json(http://127.0.0.1:5002/ron).value"
+	],
+	"RWF/USD": [
+		"json(http://127.0.0.1:5002/rwf).value"
+	],
 	"WST/USD": [
 		"json(http://127.0.0.1:5002/wst).value"
 	],
@@ -159,6 +210,90 @@
 	],
 	"ZMK/USD": [
 		"json(http://127.0.0.1:5002/zmk).value"
+	],
+	"KZT/USD": [
+		"json(http://127.0.0.1:5002/kzt).value"
+	],
+	"KES/USD": [
+		"json(http://127.0.0.1:5002/kes).value"
+	],
+	"KWD/USD": [
+		"json(http://127.0.0.1:5002/kwd).value"
+	],
+	"LVL/USD": [
+		"json(http://127.0.0.1:5002/lvl).value"
+	],
+	"LBP/USD": [
+		"json(http://127.0.0.1:5002/lbp).value"
+	],
+	"LSL/USD": [
+		"json(http://127.0.0.1:5002/lsl).value"
+	],
+	"LTL/USD": [
+		"json(http://127.0.0.1:5002/ltl).value"
+	],
+	"MOP/USD": [
+		"json(http://127.0.0.1:5002/mop).value"
+	],
+	"MKD/USD": [
+		"json(http://127.0.0.1:5002/mkd).value"
+	],
+	"MWK/USD": [
+		"json(http://127.0.0.1:5002/mwk).value"
+	],
+	"MYR/USD": [
+		"json(http://127.0.0.1:5002/myr).value"
+	],
+	"MVR/USD": [
+		"json(http://127.0.0.1:5002/mvr).value"
+	],
+	"MRO/USD": [
+		"json(http://127.0.0.1:5002/mro).value"
+	],
+	"MUR/USD": [
+		"json(http://127.0.0.1:5002/mur).value"
+	],
+	"MXN/USD": [
+		"json(http://127.0.0.1:5002/mxn).value"
+	],
+	"MDL/USD": [
+		"json(http://127.0.0.1:5002/mdl).value"
+	],
+	"MNT/USD": [
+		"json(http://127.0.0.1:5002/mnt).value"
+	],
+	"MAD/USD": [
+		"json(http://127.0.0.1:5002/mad).value"
+	],
+	"HNL/USD": [
+		"json(http://127.0.0.1:5002/hnl)/value"
+	],
+	"HUF/USD": [
+		"json(http://127.0.0.1:5002/huf)/value"
+	],
+	"ISK/USD": [
+		"json(http://127.0.0.1:5002/isk)/value"
+	],
+	"IDR/USD": [
+		"json(http://127.0.0.1:5002/idr)/value"
+	],
+	"IRR/USD": [
+		"json(http://127.0.0.1:5002/irr)/value"
+	],
+	"IQD/USD": [
+		"json(http://127.0.0.1:5002/iqd)/value"
+	],
+	"ILS/USD": [
+		"json(http://127.0.0.1:5002/ils)/value"
+	],
+	"JOD/USD": [
+		"json(http://127.0.0.1:5002/jod)/value"
+	],
+	"GTQ/USD": [
+		"json(http://127.0.0.1:5002/gtq)/value"
+	],
+	"GNF/USD": [
+		"json(http://127.0.0.1:5002/gnf)/value"
 	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
