@@ -342,7 +342,7 @@ func collect(symbol string) (string, string) {
 
 		c.Visit("https://wise.com/gb/currency-converter/currencies/bam-bosnia-herzegovina-convertible-mark")
 
-	case "AFN/USD":
+	case "AFN":
 		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
 			func(e *colly.HTMLElement) {
 				end := strings.Index(e.Text, " ")
