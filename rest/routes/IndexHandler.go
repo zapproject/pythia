@@ -297,6 +297,69 @@ func collect(symbol string) (string, string) {
 
 		c.Visit("https://www.exchangerates.org.uk/South-Korean-Won-KRW-currency-table.html")
 
+	case "UGX":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "UGX/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Ugandan-Shilling-UGX-currency-table.html")
+	case "UAH":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "UAH/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Ukraine-Hryvnia-UAH-currency-table.html")
+
+	case "UYU":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "UYU/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Uruguayan-New-Peso-UYU-currency-table.html")
+
+	case "VUV":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "VUV/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Venezuelan-bolivar-VUV-currency-table.html")
+	case "VEF":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "VEF/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Venezuelan-bolivar-VEF-currency-table.html")
+
+	case "XOF":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "XOF/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/West-African-CFA-franc-XOF-currency-table.html")
+
+	case "YER":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "YER/USD: "
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Yemen-Riyal-YER-currency-table.html")
+
+	case "ZMK":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "ZMK/USD: "
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Zambian-Kwacha-ZMK-currency-table.html")
 	}
 	return pair, value
 }
@@ -332,7 +395,14 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/sgd", handler)
 	router.AddRoute("/rub", handler)
 	router.AddRoute("/krw", handler)
-
+	router.AddRoute("/uah", handler)
+	router.AddRoute("/uyu", handler)
+	router.AddRoute("/vuv", handler)
+	router.AddRoute("/vef", handler)
+	router.AddRoute("/xof", handler)
+	router.AddRoute("/yer", handler)
+	router.AddRoute("/zmk", handler)
+	router.AddRoute("/ugx", handler)
 }
 
 //Incoming implementation for  handler

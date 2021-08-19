@@ -94,6 +94,30 @@
 	"KRW/USD": [
 		"json(http://127.0.0.1:5002/krw).value"
 	],
+	"UGX/USD": [
+		"json(http://127.0.0.1:5002/ugx).value"
+	],
+	"UAH/USD": [
+		"json(http://127.0.0.1:5002/uah).value"
+	],
+	"UYU/USD": [
+		"json(http://127.0.0.1:5002/uyu).value"
+	],
+	"VUV/USD": [
+		"json(http://127.0.0.1:5002/vuv).value"
+	],
+	"VEF/USD": [
+		"json(http://127.0.0.1:5002/vef).value"
+	],
+	"XOF/USD": [
+		"json(http://127.0.0.1:5002/xof).value"
+	],
+	"YER/USD": [
+		"json(http://127.0.0.1:5002/yer).value"
+	],
+	"ZMK/USD": [
+		"json(http://127.0.0.1:5002/zmk).value"
+	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",

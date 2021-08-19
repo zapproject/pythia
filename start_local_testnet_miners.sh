@@ -6,7 +6,12 @@
 
 # sleep 3
 
+
+./pythia --config=local_testnet_miners/config1.json stake status
+./pythia --config=local_testnet_miners/config2.json stake status
 ./pythia --config=local_testnet_miners/config3.json stake status
+./pythia --config=local_testnet_miners/config4.json stake status
+./pythia --config=local_testnet_miners/config5.json stake status
 
 ./pythia --config=local_testnet_miners/config1.json stake deposit
 ./pythia --config=local_testnet_miners/config2.json stake deposit
