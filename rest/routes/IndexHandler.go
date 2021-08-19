@@ -350,6 +350,8 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/sgd", handler)
 	router.AddRoute("/rub", handler)
 	router.AddRoute("/krw", handler)
+	router.AddRoute("/all", handler)
+	router.AddRoute("/bgn", handler)
 
 }
 
