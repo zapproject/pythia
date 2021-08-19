@@ -128,6 +128,8 @@ func TestIndexHandler(t *testing.T) {
 		"/fjd",
 		"/ghs",
 		"/gip",
+		"/ggp",
+		"/gyd",
 	}
 
 	for _, pair := range pairs {
