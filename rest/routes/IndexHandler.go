@@ -397,6 +397,33 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Brazilian-Real-BRL-currency-table.html")
+
+	case "BND":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BND/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Brunei-Dollar-BND-currency-table.html")
+
+	case "KHR":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "KHR/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/khr-to-usd-rate?amount=1")
+
+	case "CLP":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "CLP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Chilean-Peso-CLP-currency-table.html")
 	}
 
 	return pair, value
@@ -444,6 +471,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/bob", handler)
 	router.AddRoute("/bwp", handler)
 	router.AddRoute("/brl", handler)
+	router.AddRoute("/bnd", handler)
+	router.AddRoute("/khr", handler)
+	router.AddRoute("/clp", handler)
 
 }
 
