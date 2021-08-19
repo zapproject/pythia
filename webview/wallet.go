@@ -15,11 +15,11 @@ import (
 	"github.com/zapproject/pythia/webview/util"
 )
 
-type transaction struct {
-	to        string
-	from      string
-	event     string
-	timestamp uint64
+type Transaction struct {
+	To        string `json:"To"`
+	From      string `json:"From"`
+	Event     string `json:"Event"`
+	Timestamp uint64 `json:"Timestamp"`
 }
 
 func showWallet(w webview.WebView) {
@@ -36,8 +36,8 @@ func showWallet(w webview.WebView) {
 		return zapBalance.String()
 	})
 
-	w.Bind("showTxs", func() {
-		showTxs()
+	w.Bind("showTxs", func() []Transaction {
+		return showTxs()
 	})
 
 	ex, err := os.Executable()
@@ -50,7 +50,7 @@ func showWallet(w webview.WebView) {
 	w.Run()
 }
 
-func showTxs() {
+func showTxs() []Transaction {
 	eventLogs := util.GetTransferLogs()
 
 	approvalLogs := util.GetApprovalLogs()
@@ -86,45 +86,46 @@ func showTxs() {
 	})
 
 	txs := formatLogs(eventLogs)
-	fmt.Println(txs)
+	// fmt.Println(txs)
+	return txs
 }
 
-func formatLogs(eventLogs []util.EventLog) []transaction {
-	txs := []transaction{}
+func formatLogs(eventLogs []util.EventLog) []Transaction {
+	txs := []Transaction{}
 
 	for _, j := range eventLogs {
-		tx := transaction{}
-		tx.timestamp = j.Timestamp
+		tx := Transaction{}
+		tx.Timestamp = j.Timestamp
 
 		logType := fmt.Sprintf("%T", j.Log)
 		switch logType {
 		case "token.ZapTokenBSCTransfer":
-			tx.from = j.Log.(token.ZapTokenBSCTransfer).From.String()
-			tx.to = j.Log.(token.ZapTokenBSCTransfer).To.String()
-			tx.event = "Transfer"
+			tx.From = j.Log.(token.ZapTokenBSCTransfer).From.String()
+			tx.To = j.Log.(token.ZapTokenBSCTransfer).To.String()
+			tx.Event = "Transfer"
 
 		case "token.ZapTokenBSCApproval":
-			tx.from = j.Log.(token.ZapTokenBSCApproval).Owner.String()
-			tx.to = j.Log.(token.ZapTokenBSCApproval).Spender.String()
-			tx.event = "Approval"
+			tx.From = j.Log.(token.ZapTokenBSCApproval).Owner.String()
+			tx.To = j.Log.(token.ZapTokenBSCApproval).Spender.String()
+			tx.Event = "Approval"
 
 		case "contracts1.ZapStakeNewStake":
-			tx.event = "NewStake"
+			tx.Event = "NewStake"
 
 		case "contracts1.ZapStakeStakeWithdrawRequested":
-			tx.event = "StakeWithdrawRequested"
+			tx.Event = "StakeWithdrawRequested"
 
 		case "contracts1.ZapStakeStakeWithdrawn":
-			tx.event = "StakeWithdrawn"
+			tx.Event = "StakeWithdrawn"
 
 		case "contracts1.ZapLibraryNonceSubmitted":
-			tx.event = "NonceSubmitted"
+			tx.Event = "NonceSubmitted"
 
 		case "contracts1.ZapNewDispute":
-			tx.event = "NewDispute"
+			tx.Event = "NewDispute"
 
 		case "contracts1.ZapDisputeVoted":
-			tx.event = "Voted"
+			tx.Event = "Voted"
 
 		}
 

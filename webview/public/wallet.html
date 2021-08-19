@@ -4,13 +4,29 @@
     <body>
         <h3>Balance: </h3>
 
-        <h4></h4>
+        <h3>Transactions: </h3>
+        <div class="transaction-container">
+            <ul id="txList" class="transaction-list">
+
+            </ul>
+        </div>
     </body>
 
     <script>
         window.onload = async function (){
-            document.body.children[1].innerHTML = await balance();
-            await showTxs();
+            document.body.children[0].innerHTML = await balance();
+            txs = await showTxs();
+
+            // console.log(JSON.stringify(txs));
+            // console.log(txs[0]["Event"])
+            // console.log(txs[0]["To"])
+            // console.log(txs[0]["Timestamp"])
+
+            for (i=0;i<txs.length;i++){
+                const li = document.createElement("li");
+                li.innerHTML = txs[i]["From"] + " " + txs[i]["To"] + " " + txs[i]["Timestamp"] + " " + txs[i]["Event"];
+                document.getElementById("txList").appendChild(li);
+            }
         };
     </script>
 </html>
