@@ -297,6 +297,34 @@ func collect(symbol string) (string, string) {
 
 		c.Visit("https://www.exchangerates.org.uk/South-Korean-Won-KRW-currency-table.html")
 
+	case "TWD":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "TWD/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Taiwan-Dollar-TWD-currency-table.html")
+	case "TZS":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "TZS/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Tanzanian-Shilling-TZS-currency-table.html")
+	case "TOP":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "TOP/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Tonga-Paanga-TOP-currency-table.html")
+	case "TND":
+		c.OnHTML(".coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "TND/USD: "
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Tunisian-Dinar-TND-currency-table.html")
 	case "UGX":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
@@ -403,6 +431,10 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/yer", handler)
 	router.AddRoute("/zmk", handler)
 	router.AddRoute("/ugx", handler)
+	router.AddRoute("/tnd", handler)
+	router.AddRoute("/top", handler)
+	router.AddRoute("/tzs", handler)
+	router.AddRoute("/twd", handler)
 }
 
 //Incoming implementation for  handler

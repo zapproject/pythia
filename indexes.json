@@ -94,6 +94,18 @@
 	"KRW/USD": [
 		"json(http://127.0.0.1:5002/krw).value"
 	],
+	"TWD/USD": [
+		"json(http://127.0.0.1:5002/twd).value"
+	],
+	"TZS/USD": [
+		"json(http://127.0.0.1:5002/tzs).value"
+	],
+	"TOP/USD": [
+		"json(http://127.0.0.1:5002/top).value"
+	],
+	"TND/USD": [
+		"json(http://127.0.0.1:5002/tnd).value"
+	],
 	"UGX/USD": [
 		"json(http://127.0.0.1:5002/ugx).value"
 	],
