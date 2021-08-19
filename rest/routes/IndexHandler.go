@@ -507,6 +507,33 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://wise.com/gb/currency-converter/fkp-to-usd-rate?amount=1")
+
+	case "FJD":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "FJD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Fiji-Dollar-FJD-currency-table.html")
+
+	case "GHS":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "GHS"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/ghs-to-usd-rate?amount=1")
+
+	case "GIP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "GIP"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/gip-to-usd-rate?amount=1")
 	}
 
 	return pair, value
@@ -566,6 +593,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/egp", handler)
 	router.AddRoute("/svc", handler)
 	router.AddRoute("/fkp", handler)
+	router.AddRoute("/fjd", handler)
+	router.AddRoute("/ghs", handler)
+	router.AddRoute("/gip", handler)
 
 }
 
