@@ -370,6 +370,33 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://wise.com/gb/currency-converter/byn-to-usd-rate?amount=1")
+
+	case "BOB":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BOB/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Bolivian-Boliviano-BOB-currency-table.html")
+
+	case "BWP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "BWP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/bwp-to-usd-rate?amount=1")
+
+	case "BRL":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BRL/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Brazilian-Real-BRL-currency-table.html")
 	}
 
 	return pair, value
@@ -414,6 +441,9 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/azn", handler)
 	router.AddRoute("/byn", handler)
 	router.AddRoute("/afn", handler)
+	router.AddRoute("/bob", handler)
+	router.AddRoute("/bwp", handler)
+	router.AddRoute("/brl", handler)
 
 }
 
