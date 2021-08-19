@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<script src="bootstrap/js/bootstrap.bundle.js"></script>
+<script type='text/javascript' src="alpinejs/cdn.js" defer></script>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick="showWallet()">
+                Wallet
+            </a>
+            <a class="navbar-brand" href="#" onclick="showConfig()">
+                Config
+            </a>
+            <a class="navbar-brand" href="#" onclick="showStake()">
+                Stake
+            </a>
+        </div>
+    </nav>
+
+    <button class="stake-button" id="newStake" onclick="newStake()">
+        Deposit Stake
+    </button>
+
+    <button class="stake-button" id="stakeWithdrawRequest" onclick="stakeWithdrawRequest()">
+        Request Stake Withdraw
+    </button>
+
+    <button class="stake-button" id="stakeWithdraw" onclick="stakeWithdraw()">
+        Withdraw Stake
+    </button>
+</body>
+
+<script>
+</script>
+
+</html>

@@ -30,13 +30,13 @@ func showWallet(w webview.WebView) {
 	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	zapBalance, _ := instance.BalanceOf(nil, addr)
 
-	w.Bind("showConfig", func() {
-		showConfig(w)
-	})
+	// w.Bind("showConfig", func() {
+	// 	showConfig(w)
+	// })
 
-	w.Bind("showStake", func() {
-		showStake(w)
-	})
+	// w.Bind("showStake", func() {
+	// 	showStake(w)
+	// })
 
 	w.Bind("balance", func() string {
 		return zapBalance.String()

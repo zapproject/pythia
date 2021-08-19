@@ -33,9 +33,11 @@ func showConfig(w webview.WebView) {
 		showStake(w)
 	})
 
-	// w.Bind("saveConfigs", func(inputs interface{}) {
+	w.Bind("showMine", func() {
+		showMine(w)
+	})
+
 	w.Bind("saveConfigs", func(inputs map[string]interface{}) {
-		// fmt.Println(fmt.Sprintf("inputs: %T", inputs["publickey"]))
 		config.NewConfig()
 		config.SetPublicAddress(fmt.Sprintf("%v", inputs["publickey"]))
 		config.SetPrivateKey(fmt.Sprintf("%v", inputs["privatekey"]))
