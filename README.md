@@ -1,8 +1,16 @@
-
 # Pythia
-<!-- Insert summary -->
 
-Currently only supports Linux and OSX systems.
+**Currently only supports Linux and OSX systems.**
+
+On windows, you can use the cli-client using WSL2.
+
+[This is a great guide for installing WSL2 on Windows 10+ by OMG!Ubuntu](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10).
+
+**If you're running on Linux or WSL2**, be sure that you have OpenCL installed using these commands before proceeding:
+```bash
+sudo apt update
+sudo apt install ocl-icd-opencl-dev
+```
 
 ## Installation
 
@@ -16,16 +24,16 @@ Currently only supports Linux and OSX systems.
    - `--logConfig` (location of logging config file; default path is Pythia root directory)
 
 **Pythia Commands**
-   - `mine` (indicates to run the miner)
-   - `mine -r` (indicates to mine utilizing a remote server)
-   - `dataserver` (indicates to run the dataServer (no mining))
-   - `transfer` (AMOUNT) (TO ADDRESS) (indicates transfer, toAddress is BSC address and the amount is number of Tributes (eg. transfer 10 0xea... (this transfers 10 tokens)))
-   - `approve` (AMOUNT) (TO ADDRESS) (amount to approve the to address to send this amount of tokens
-   - `stake deposit` (indicates to deposit tokens in the contract)
-   - `stake request` (indicates you wish to withdraw your stake)
-   - `stake withdraw` (withdraws your stake, run 1 week after request)
-   - `stake status` (shows your staking balance)
-   - `balance` (shows your balance)
+   - `mine` (start mining, will run the dataserver and miner together)
+   - `mine -r` (indicates to mine utilizing a remote/independent dataserver)
+   - `dataserver` (runs the remote/independent dataserver, it does not do any mining)
+   - `transfer [AMOUNT] [TO ADDRESS]` (transfer BSC ZAP, `TO ADDRESS` is a BSC address and the `AMOUNT` is number of ZAP (eg. `transfer 10 0xea...` (this transfers 10 ZAP BSC tokens)))
+   - `approve [AMOUNT] [TO ADDRESS]` (`AMOUNT` of BSC ZAP to approve the `TO ADDRESS` to send this amount of tokens
+   - `stake deposit` (this command will stake 500,000 BSC ZAP to the vault contract; **requirement for mining**)
+   - `stake request` (you must request to withdraw your stake before withdrawing)
+   - `stake withdraw` (withdraws your stake, can only be ran 1 week after running `stake request`)
+   - `stake status` (shows whether or not your are staked)
+   - `balance` (shows your ZAP and BNB balance)
 
 ## Execute
 
@@ -311,4 +319,3 @@ Delve is a debugger for the Go programming language. Follow the steps in this [r
 
 
 More commands here ```$GOPATH/src/github.com/go-delve/delve/tree/master/Documentation/cli/locspec.md``` or type ```help``` when in debug mode.
-

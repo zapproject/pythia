@@ -297,7 +297,25 @@ func collect(symbol string) (string, string) {
 
 		c.Visit("https://www.exchangerates.org.uk/South-Korean-Won-KRW-currency-table.html")
 
+	case "ALL":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "ALL/USD: "
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Albanian-Lek-ALL-currency-table.html")
+
+	case "BGN":
+		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "BGN/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://www.exchangerates.org.uk/Bulgarian-Lev-BGN-currency-table.html")
 	}
+
 	return pair, value
 }
 
