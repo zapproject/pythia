@@ -1275,6 +1275,8 @@ func collect(symbol string) (string, string) {
 				pair = "ZWD/USD"
 				value = strconv.FormatFloat((1 / zwd_usd), 'f', 6, 64)
 			})
+
+		c.Visit("https://www.cnbc.com/quotes/ZWD=")
 	}
 
 	return pair, value
