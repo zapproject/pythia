@@ -1251,6 +1251,16 @@ func collect(symbol string) (string, string) {
 			})
 		c.Visit("https://wise.com/gb/currency-converter/mzn-to-usd-rate?amount=1")
 
+	case "KPW":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "KPW/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/kpw-to-usd.htm")
 	}
 
 	return pair, value
@@ -1407,6 +1417,7 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/lak", handler)
 	router.AddRoute("/lrd", handler)
 	router.AddRoute("/mzn", handler)
+	router.AddRoute("/kpw", handler)
 }
 
 //Incoming implementation for  handler
