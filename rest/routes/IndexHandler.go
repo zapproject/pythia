@@ -51,7 +51,7 @@ func collect(symbol string) (string, string) {
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
 				pair = "BSD/USD: "
-				value = e.Text + ".00000"
+				value = e.Text
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Bahamian-Dollar-BSD-currency-table.html")
@@ -60,10 +60,10 @@ func collect(symbol string) (string, string) {
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
 				pair = "BBD/USD: "
-				value = e.Text + ".00000"
+				value = e.Text
 			})
 
-		c.Visit("https://www.exchangerates.org.uk/Bermuda-Dollar-BMD-currency-table.html")
+		c.Visit("https://www.exchangerates.org.uk/Barbadian-Dollar-BBD-currency-table.html")
 
 	case "TTD":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
@@ -105,7 +105,7 @@ func collect(symbol string) (string, string) {
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
 				pair = "BMD/USD: "
-				value = e.Text + ".00000"
+				value = e.Text
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/Bermuda-Dollar-BMD-currency-table.html")

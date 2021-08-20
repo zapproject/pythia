@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -52,7 +53,7 @@ func start(s *http.Server) {
 	}()
 }
 
-func TestIndexHander(t *testing.T) {
+func TestIndexHandler(t *testing.T) {
 	err := setup(t)
 	if err != nil {
 		t.Errorf("Issue with setting up test\n%s", err)
@@ -62,11 +63,6 @@ func TestIndexHander(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error with opening DB for test: %v", err)
 	}
-
-	// proxy, err := db.OpenRemoteDB(DB)
-	// if err != nil {
-	// 	t.Fatalf("Error in opening remote proxy to set up rest server: ", err)
-	// }
 
 	ctx := context.WithValue(context.Background(), common.DBContextKey, DB)
 	server := CreateLocal(ctx)
@@ -133,5 +129,88 @@ func TestIndexHander(t *testing.T) {
 	t.Logf("Winding down server...")
 	server.Stop()
 	time.Sleep(5 * time.Second)
+
+}
+
+func TestIndexParsing(t *testing.T) {
+	err := setup(t)
+	if err != nil {
+		t.Fatalf("Issue with setting up test: %s", err)
+	}
+
+	DB, err := db.Open(filepath.Join(os.TempDir(), "test_index_route"))
+	if err != nil {
+		t.Fatalf("Error with opening DB for test: %v", err)
+	}
+
+	ctx := context.WithValue(context.Background(), common.DBContextKey, DB)
+	server := CreateLocal(ctx)
+	server.Start()
+
+	t.Logf("Spinning up server...")
+	time.Sleep(5 * time.Second)
+
+	pairs := []string{
+		"/xcd",
+		"/ttd",
+		"/jmd",
+		"/bbd",
+		"/bsd",
+		"/bzd",
+		"/htg",
+		"/srd",
+		"/bmd",
+		"/kyd",
+		"/aud",
+		"/gbp",
+		"/cad",
+		"/dkk",
+		"/eur",
+		"/hkd",
+		"/jpy",
+		"/nzd",
+		"/nok",
+		"/zar",
+		"/sek",
+		"/chf",
+		"/try",
+		"/aed",
+		"/cny",
+		"/thb",
+		"/inr",
+		"/sgd",
+		"/rub",
+		"/krw",
+	}
+
+	for _, pair := range pairs {
+		endpoint := "json(http://localhost:5002" + pair + ").value"
+		url, args := util.ParseQueryString(endpoint)
+		resp, err := http.Get(url)
+		if err != nil {
+			t.Fatalf("Error in getting the %s price: %v", strings.ToUpper(pair)[1:]+"/USD", err)
+		}
+
+		defer resp.Body.Close()
+
+		input, _ := ioutil.ReadAll(resp.Body)
+
+		results, err := util.ParsePayload(input, args)
+		if err != nil {
+			t.Fatalf("Error in parsing results for query: %v", err)
+		}
+
+		// var price PriceResult
+		// t.Logf("This is the response: %v", resp.Body)
+
+		// decoder := json.NewDecoder(resp.Body)
+		// err = decoder.Decode(&price)
+
+		// if !strings.Contains(price.Pair, "0x") || !strings.Contains(price.Value, "0x") {
+		// 	testutil.Ok(t, err)
+		// }
+
+		t.Logf("Decoded Response: %v\n", results)
+	}
 
 }
