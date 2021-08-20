@@ -379,20 +379,41 @@
 	"GYD/USD": [
 		"json(http://127.0.0.1:5002/gyd).value"
 	],
-	"TVD/USD": [
-		"json(http://127.0.0.1:5002/tvd).value"
+	"DZD/USD": [
+		"json(http://127.0.0.1:5002/dzd).value"
 	],
-	"UZS/USD": [
-		"json(http://127.0.0.1:5002/uzs).value"
+	"BHD/USD": [
+		"json(http://127.0.0.1:5002/bhd).value"
 	],
-	"VND/USD": [
-		"json(http://127.0.0.1:5002/vnd).value"
+	"BDT/USD": [
+		"json(http://127.0.0.1:5002/bdt).value"
 	],
-	"SOS/USD": [
-		"json(http://127.0.0.1:5002/sos).value"
+	"BYR/USD": [
+		"json(http://127.0.0.1:5002/byr).value"
 	],
-	"SYP/USD": [
-		"json(http://127.0.0.1:5002/syp).value"
+	"BTN/USD": [
+		"json(http://127.0.0.1:5002/btn).value"
+	],
+	"BIF/USD": [
+		"json(http://127.0.0.1:5002/bif).value"
+	],
+	"XAF/USD": [
+		"json(http://127.0.0.1:5002/xaf).value"
+	],
+	"KMF/USD": [
+		"json(http://127.0.0.1:5002/kmf).value"
+	],
+	"CYP/USD": [
+		"json(http://127.0.0.1:5002/cyp).value"
+	],
+	"EEK/USD": [
+		"json(http://127.0.0.1:5002/eek).value"
+	],
+	"ETB/USD": [
+		"json(http://127.0.0.1:5002/etb).value"
+	],
+	"GMD/USD": [
+		"json(http://127.0.0.1:5002/gmd).value"
 	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",

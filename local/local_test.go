@@ -197,11 +197,18 @@ func TestIndexHandler(t *testing.T) {
 		"/gip",
 		"/ggp",
 		"/gyd",
-		"/tvd",
-		"/uzs",
-		"/vnd",
-		"/sos",
-		"/syp",
+		"/dzd",
+		"/bhd",
+		"/bdt",
+		"/byr",
+		"/btn",
+		"/bif",
+		"/xaf",
+		"/kmf",
+		"/cyp",
+		"/eek",
+		"/etb",
+		"/gmd",
 	}
 
 	for _, pair := range pairs {
@@ -348,6 +355,18 @@ func TestIndexParsing(t *testing.T) {
 		"/jod",
 		"/gtq",
 		"/gnf",
+		"/dzd",
+		"/bhd",
+		"/bdt",
+		"/byr",
+		"/btn",
+		"/bif",
+		"/xaf",
+		"/kmf",
+		"/cyp",
+		"/eek",
+		"/etb",
+		"/gmd",
 	}
 
 	for _, pair := range pairs {
