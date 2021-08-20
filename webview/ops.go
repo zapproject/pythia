@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/zapproject/pythia/config"
 	"github.com/zapproject/pythia/setup"
-	"github.com/zapproject/pythia/ops"
+	// "github.com/zapproject/pythia/ops"
 	ZapCommon "github.com/zapproject/pythia/common"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/zapproject/pythia/contracts"
@@ -37,14 +37,18 @@ func getBalance() (string, error) {
 
 }
 
-func stakeStatus() (string, error) {
+func stakeStatus() (int64, error) {
 	  
-	err := ops.ShowStatus(setup.CTX)
-	if err != nil{
-		fmt.Print(err.Error())
-		return "",err
+	tmaster := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
+
+	publicAddress := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
+	status, _, err := tmaster.GetStakerInfo(nil, publicAddress)
+	if err != nil {
+		return 0,fmt.Errorf("failed to get stake status: %s", err.Error())
 	}
 
-	return "",nil
+	fmt.Println(status)
+
+	return status.Int64(),nil
 
 }

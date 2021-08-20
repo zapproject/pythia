@@ -76,6 +76,7 @@
             configWallet(JSON.stringify({...localConfig,...JSON.parse(JSON.stringify(this.configData))}))
             .then(res => this.connected = res )
             .catch(console.log)
+
           },
           connected: false
         }
@@ -86,7 +87,7 @@
         return {nav: `<nav class="navbar navbar-light bg-light">
                   <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                      Zap
+                      Pythia
                     </a>
                   </div>
                 </nav>`,
@@ -121,12 +122,14 @@
                       </div>
                       </form>`,
 
-                      home: `<div class='dashboard' x-show="connected" x-data=menu()>
+                      home: `<div class='dashboard' x-show="connected" x-data=menu()  x-effect="connected && getStakeStatus()">
                                 <div class="dashboard-nav">
-                                    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>ZAP</span></a></header>
+                                    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>PYTHIA</span></a></header>
                                     <nav class="dashboard-nav-list" >
                                       
                                         <template x-for="option in options">
+
+
                                           <a href="#" x-on:click="setActive(option)" x-bind:class="active==option ? 'active dashboard-nav-item': 'dashboard-nav-item'" x-text="capitalize(option)"> </a>
                                         </template> 
                                         
@@ -138,10 +141,7 @@
                                     <div class='dashboard-content'>
                                         <div x-html="wallet"></div>
                                         <div x-html="stake"></div>  
-                                          <template x-if="staked">
-                                            <div x-html="mine"></div>
-                                          </template>
-
+                                        <div x-html="mine"></div>
                                     </div>
                                 </div>
                             </div>
@@ -151,12 +151,14 @@
                             wallet: `<div class='container' x-show="active=='wallet'">
                                             <div class='card'>
                                                   <div class='card-header'>
-                                                      <h1>Balance</h1>
+                                                      <h1>Wallet</h1>
                                                       <button class="btn btn-primary">Send</button>
                                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                                   </div>
                                                 <div class='card-body'>
-                                                    <div x-text="connected ? await getBalance()+'  ZAP':0" ></div>
+                                                  <h2>Balance: </h2>
+
+                                                    <div x-text="connected ? parseInt(await getBalance() / 1000000000000000000) +'  ZAP':0" ></div>
                                                 </div>
                                             </div>
                                         </div>`,
@@ -169,13 +171,13 @@
                                           <button type="submit" class="btn btn-primary">Transfer</button>
                                       </div>
                                     <div class='card-body'>
-                                        <div x-text="connected ? await getBalance()+'  ZAP':0" ></div>
+                                        <div x-text="connected ? await stakeStatus():0" ></div>
                                     </div>
                                 </div>
                             </div>`,
                             
                             
-                            mine:`<div class='container' x-show="active=='mine'">
+                            mine:`<div class='container' x-show="active=='mine' && staked">
                                     <div class='card'>
                                           <div class='card-header'>
                                               <h1>Mine</h1>
@@ -183,7 +185,7 @@
                                               <button type="submit" class="btn btn-primary">Transfer</button>
                                           </div>
                                         <div class='card-body'>
-                                            <div x-text="connected ? await getBalance()+'  ZAP':0" ></div>
+                                            <div x-text="connected ? await getBalance() +'  ZAP':0" ></div>
                                         </div>
                                     </div>
                                 </div>`
@@ -197,12 +199,27 @@
         
         active: "wallet",
         staked: false,
+        locked: ["mine"],
         options: ["wallet","stake","mine"],
         setActive(option){
           
           
-          this.active=option
           
+          this.active=option
+        },
+        getStakeStatus(){
+
+          stakeStatus()
+            .then(res => {
+              if (res == 0){ 
+                this.staked = false
+              }
+              if (res == 1){
+                this.staked = true
+              }
+            })
+            .catch(console.log)
+
         }
       }
     }

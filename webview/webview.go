@@ -13,7 +13,7 @@ func LoadWebview() {
 	w := webview.New(debug)
 
 	defer w.Destroy()
-	w.SetTitle("Minimal webview example")
+	w.SetTitle("Pythia")
 	w.SetSize(800, 600, webview.HintMin)
 
 	w.Bind("showWallet", func() {
@@ -23,6 +23,7 @@ func LoadWebview() {
 	w.Bind("configWallet",configWallet)
 	w.Bind("loadHtml",loadHtml)
 	w.Bind("getBalance",getBalance)
+	w.Bind("stakeStatus",stakeStatus)
 
 	ex, err := os.Executable()
 	if err != nil {
