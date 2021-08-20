@@ -21,6 +21,7 @@ func collect(symbol string) (string, string) {
 
 	pair := ""
 	value := ""
+	end := strings.Index(e.Text, " ")
 
 	switch symbol {
 	case "XCD":
@@ -838,8 +839,6 @@ func collect(symbol string) (string, string) {
 	case "AFN":
 		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
 			func(e *colly.HTMLElement) {
-				end := strings.Index(e.Text, " ")
-
 				pair = "AFN/USD"
 				value = e.Text[:end]
 			})
@@ -948,8 +947,6 @@ func collect(symbol string) (string, string) {
 	case "CUP":
 		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
 			func(e *colly.HTMLElement) {
-				end := strings.Index(e.Text, " ")
-
 				pair = "CUP/USD"
 				value = e.Text[:end]
 			})
