@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -1261,6 +1262,19 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.unitconverters.net/currency/kpw-to-usd.htm")
+
+	case "ZWD":
+		c.OnHTML(".QuoteStrip-lastPrice",
+			func(e *colly.HTMLElement) {
+				base := e.Text
+				zwd_usd, err := strconv.ParseFloat(base, 64)
+				if err != nil {
+					zwd_usd = 1 // just to not error out when dividing
+				}
+
+				pair = "ZWD/USD"
+				value = strconv.FormatFloat((1 / zwd_usd), 'f', 6, 64)
+			})
 	}
 
 	return pair, value
@@ -1418,6 +1432,7 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/lrd", handler)
 	router.AddRoute("/mzn", handler)
 	router.AddRoute("/kpw", handler)
+	router.AddRoute("/zwd", handler)
 }
 
 //Incoming implementation for  handler
