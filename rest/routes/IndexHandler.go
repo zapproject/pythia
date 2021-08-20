@@ -7,9 +7,6 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
-	// "github.com/zapproject/pythia/common"
-	// "github.com/zapproject/pythia/db"
-	// "github.com/zapproject/pythia/rest"
 )
 
 //BalanceHandler handles balance requests
@@ -22,9 +19,6 @@ func collect(symbol string) (string, string) {
 		colly.MaxDepth(1),
 	)
 
-	//   c.OnResponse(func(r *colly.Response){
-	// 	fmt.Println("Visited: ", r.Request.URL)
-	//   })
 	pair := ""
 	value := ""
 
