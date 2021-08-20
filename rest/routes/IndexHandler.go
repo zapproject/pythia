@@ -93,13 +93,13 @@ func collect(symbol string) (string, string) {
 		c.Visit("https://www.exchangerates.org.uk/Haiti-Gourde-HTG-currency-table.html")
 
 	case "SRD":
-		c.OnHTML("#currency-notes > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)",
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
 				pair = "SRD/USD: "
 				value = e.Text
 			})
 
-		c.Visit("https://www.centralbank.org.bz/")
+		c.Visit("https://wise.com/gb/currency-converter/srd-to-usd-rate?amount=1")
 
 	case "BMD":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
@@ -1022,7 +1022,131 @@ func collect(symbol string) (string, string) {
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Gambian-Dalasi-GMD-currency-table.html")
+	case "TVD":
+		c.OnHTML("div.portlet:nth-child(6) > div:nth-child(2) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > span:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "TVD/USD"
+				value = e.Text
+			})
 
+		c.Visit("https://www.mataf.net/en/currency/converter-TVD-USD?m1=1.00")
+
+	case "UZS":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "UZS/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/uzs-to-usd-rate?amount=1")
+
+	case "VND":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "VND/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/vnd-to-usd-rate?amount=1")
+
+	case "SYP":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "SYP/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/syp-to-usd.htm")
+
+	case "SOS":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "SOS/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/sos-to-usd.htm")
+
+	case "RSD":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "RSD/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/rsd-to-usd-rate?amount=1")
+
+	case "SHP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "SHP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/shp-to-usd-rate?amount=1")
+
+	case "IMP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "IMP/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/imp-to-usd-rate?amount=1")
+
+	case "JEP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "JEP/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/jep-to-usd-rate?amount=1")
+
+	case "KGS":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "KGS/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/kgs-to-usd-rate?amount=1")
+
+	case "LAK":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "LAK/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/lak-to-usd-rate?amount=1")
+
+	case "LRD":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "LRD/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/LRD-to-usd-rate?amount=1")
+
+	case "MZN":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "MZN/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/mzn-to-usd-rate?amount=1")
+
+	case "KPW":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "KPW/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/kpw-to-usd.htm")
 	}
 
 	return pair, value
@@ -1166,7 +1290,20 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/eek", handler)
 	router.AddRoute("/etb", handler)
 	router.AddRoute("/gmd", handler)
-
+	router.AddRoute("/tvd", handler)
+	router.AddRoute("/uzs", handler)
+	router.AddRoute("/vnd", handler)
+	router.AddRoute("/sos", handler)
+	router.AddRoute("/syp", handler)
+	router.AddRoute("/rsd", handler)
+	router.AddRoute("/shp", handler)
+	router.AddRoute("/imp", handler)
+	router.AddRoute("/jep", handler)
+	router.AddRoute("/kgs", handler)
+	router.AddRoute("/lak", handler)
+	router.AddRoute("/lrd", handler)
+	router.AddRoute("/mzn", handler)
+	router.AddRoute("/kpw", handler)
 }
 
 //Incoming implementation for  handler
