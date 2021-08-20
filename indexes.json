@@ -379,6 +379,42 @@
 	"GYD/USD": [
 		"json(http://127.0.0.1:5002/gyd).value"
 	],
+	"DZD/USD": [
+		"json(http://127.0.0.1:5002/dzd).value"
+	],
+	"BHD/USD": [
+		"json(http://127.0.0.1:5002/bhd).value"
+	],
+	"BDT/USD": [
+		"json(http://127.0.0.1:5002/bdt).value"
+	],
+	"BYR/USD": [
+		"json(http://127.0.0.1:5002/byr).value"
+	],
+	"BTN/USD": [
+		"json(http://127.0.0.1:5002/btn).value"
+	],
+	"BIF/USD": [
+		"json(http://127.0.0.1:5002/bif).value"
+	],
+	"XAF/USD": [
+		"json(http://127.0.0.1:5002/xaf).value"
+	],
+	"KMF/USD": [
+		"json(http://127.0.0.1:5002/kmf).value"
+	],
+	"CYP/USD": [
+		"json(http://127.0.0.1:5002/cyp).value"
+	],
+	"EEK/USD": [
+		"json(http://127.0.0.1:5002/eek).value"
+	],
+	"ETB/USD": [
+		"json(http://127.0.0.1:5002/etb).value"
+	],
+	"GMD/USD": [
+		"json(http://127.0.0.1:5002/gmd).value"
+	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
