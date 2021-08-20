@@ -93,13 +93,13 @@ func collect(symbol string) (string, string) {
 		c.Visit("https://www.exchangerates.org.uk/Haiti-Gourde-HTG-currency-table.html")
 
 	case "SRD":
-		c.OnHTML("#currency-notes > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)",
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
 				pair = "SRD/USD: "
 				value = e.Text
 			})
 
-		c.Visit("https://www.centralbank.org.bz/")
+		c.Visit("https://wise.com/gb/currency-converter/srd-to-usd-rate?amount=1")
 
 	case "BMD":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
