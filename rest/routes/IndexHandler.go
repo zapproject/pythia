@@ -288,120 +288,6 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.exchangerates.org.uk/South-Korean-Won-KRW-currency-table.html")
-
-	case "NAD":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "NAD/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Namibian-Dollar-NAD-currency-table.html")
-	case "NPR":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "NPR/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Nepalese-Rupee-NPR-currency-table.html")
-	case "ANG":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "ANG/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Neth-Antilles-Guilder-ANG-currency-table.html")
-
-	case "NIO":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "NIO/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Nicaragua-Cordoba-NIO-currency-table.html")
-	case "NGN":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "NGN/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Nigerian-Naira-NGN-currency-table.html")
-	case "OMR":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "OMR/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Omani-Rial-OMR-currency-table.html")
-	case "XPF":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "XPF/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Pacific-Franc-XPF-currency-table.html")
-	case "PKR":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PKR/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Pakistani-Rupee-PKR-currency-table.html")
-	case "PAB":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PAB/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Panamanian-Balboa-PAB-currency-table.html")
-	case "PGK":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PGK/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Papua-New-Guinea-Kina-PGK-currency-table.html")
-	case "PYG":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PYG/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Paraguayan-Guarani-PYG-currency-table.html")
-	case "PEN":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PEN/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Peruvian-Nuevo-Sol-PEN-currency-table.html")
-	case "PHP":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PHP/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Philippine-Peso-PHP-currency-table.html")
-	case "PLN":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "PLN/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Polish-Zloty-PLN-currency-table.html")
-	case "QAR":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "QAR/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Qatari-Riyal-QAR-currency-table.html")
-	case "RON":
-		c.OnHTML(".coltwo:nth-child(13) strong",
-			func(e *colly.HTMLElement) {
-				pair = "RON/USD"
-				value = e.Text
-			})
-		c.Visit("https://www.exchangerates.org.uk/Romanian-Leu-RON-currency-table.html")
 	case "RUB":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
@@ -412,7 +298,7 @@ func collect(symbol string) (string, string) {
 	case "RWF":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "RWF/USD"
+				pair = "RWF/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Rwanda-Franc-RWF-currency-table.html")
@@ -420,70 +306,70 @@ func collect(symbol string) (string, string) {
 	case "WST":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "WST/USD"
+				pair = "WST/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Samoa-Tala-WST-currency-table.html")
 	case "SAR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SAR/USD"
+				pair = "SAR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Saudi-Riyal-SAR-currency-table.html")
 	case "SCR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SCR/USD"
+				pair = "SCR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Seychelles-Rupee-SCR-currency-table.html")
 	case "SLL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SLL/USD"
+				pair = "SLL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Sierra-Leone-Leone-SLL-currency-table.html")
 	case "SKK":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SKK/USD"
+				pair = "SKK/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Slovak-Koruna-SKK-currency-table.html")
 	case "SIT":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SIT/USD"
+				pair = "SIT/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Slovenian-Tolar-SIT-currency-table.html")
 	case "SBD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SBD/USD"
+				pair = "SBD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Solomon-Islands-Dollar-SBD-currency-table.html")
 	case "LKR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "LKR/USD"
+				pair = "LKR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Sri-Lankan-Rupee-LKR-currency-table.html")
 	case "SDD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SDD/USD"
+				pair = "SDD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Sudanese-Dinar-SDD-currency-table.html")
 	case "SZL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "SZL/USD"
+				pair = "SZL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Swaziland-Lilageni-SZL-currency-table.html")
@@ -583,7 +469,7 @@ func collect(symbol string) (string, string) {
 	case "KZT":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "KZT/USD"
+				pair = "KZT/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Kazakhstan-Tenge-KZT-currency-table.html")
@@ -591,7 +477,7 @@ func collect(symbol string) (string, string) {
 	case "KES":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "KES/USD"
+				pair = "KES/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Kenyan-Shilling-KES-currency-table.html")
@@ -599,7 +485,7 @@ func collect(symbol string) (string, string) {
 	case "KWD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "KWD/USD"
+				pair = "KWD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Kuwaiti-Dinar-KWD-currency-table.html")
@@ -607,7 +493,7 @@ func collect(symbol string) (string, string) {
 	case "LVL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "LVL/USD"
+				pair = "LVL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Latvian-Lats-LVL-currency-table.html")
@@ -615,7 +501,7 @@ func collect(symbol string) (string, string) {
 	case "LBP":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "LBP/USD"
+				pair = "LBP/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Lebanese-Pound-LBP-currency-table.html")
@@ -623,7 +509,7 @@ func collect(symbol string) (string, string) {
 	case "LSL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "LSL/USD"
+				pair = "LSL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Lesotho-Loti-LSL-currency-table.html")
@@ -631,7 +517,7 @@ func collect(symbol string) (string, string) {
 	case "LTL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "LTL/USD"
+				pair = "LTL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Lithuanian-Litas-LTL-currency-table.html")
@@ -639,7 +525,7 @@ func collect(symbol string) (string, string) {
 	case "MOP":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MOP/USD"
+				pair = "MOP/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Macau-Pataca-MOP-currency-table.html")
@@ -647,7 +533,7 @@ func collect(symbol string) (string, string) {
 	case "MKD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MKD/USD"
+				pair = "MKD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Macedonian-Denar-MKD-currency-table.html")
@@ -655,7 +541,7 @@ func collect(symbol string) (string, string) {
 	case "MWK":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MWK/USD"
+				pair = "MWK/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Malawi-Kwacha-MWK-currency-table.html")
@@ -663,7 +549,7 @@ func collect(symbol string) (string, string) {
 	case "MYR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MYR/USD"
+				pair = "MYR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Malaysian-Ringgit-MYR-currency-table.html")
@@ -671,7 +557,7 @@ func collect(symbol string) (string, string) {
 	case "MVR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MVR/USD"
+				pair = "MVR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Maldives-Rufiyaa-MVR-currency-table.html")
@@ -679,7 +565,7 @@ func collect(symbol string) (string, string) {
 	case "MRO":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MRO/USD"
+				pair = "MRO/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Mauritania-Ougulya-MRO-currency-table.html")
@@ -687,7 +573,7 @@ func collect(symbol string) (string, string) {
 	case "MUR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MUR/USD"
+				pair = "MUR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Mauritius-Rupee-MUR-currency-table.html")
@@ -695,7 +581,7 @@ func collect(symbol string) (string, string) {
 	case "MXN":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MXN/USD"
+				pair = "MXN/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Mexican-Peso-MXN-currency-table.html")
@@ -703,7 +589,7 @@ func collect(symbol string) (string, string) {
 	case "MDL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MDL/USD"
+				pair = "MDL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Moldovan-Leu-MDL-currency-table.html")
@@ -711,7 +597,7 @@ func collect(symbol string) (string, string) {
 	case "MNT":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MNT/USD"
+				pair = "MNT/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Mongolian-Tugrik-MNT-currency-table.html")
@@ -719,7 +605,7 @@ func collect(symbol string) (string, string) {
 	case "MAD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "MAD/USD"
+				pair = "MAD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Moroccan-Dirham-MAD-currency-table.html")
@@ -727,56 +613,56 @@ func collect(symbol string) (string, string) {
 	case "HNL":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "HNL/USD"
+				pair = "HNL/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Honduras-Lempira-HNL-currency-table.html")
 	case "HUF":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "HUF/USD"
+				pair = "HUF/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Hungarian-Forint-HUF-currency-table.html")
 	case "ISK":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "ISK/USD"
+				pair = "ISK/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Icelandic-Krona-ISK-currency-table.html")
 	case "IDR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "IDR/USD"
+				pair = "IDR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Indonesian-Rupiah-IDR-currency-table.html")
 	case "IRR":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "IRR/USD"
+				pair = "IRR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Iran-Rial-IRR-currency-table.html")
 	case "IQD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "IQD/USD"
+				pair = "IQD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Iraqi-Dinar-IQD-currency-table.html")
 	case "ILS":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "ILS/USD"
+				pair = "ILS/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Israeli-Sheqel-ILS-currency-table.html")
 	case "JOD":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "JOD/USD"
+				pair = "JOD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Jordanian-Dinar-JOD-currency-table.html")
@@ -808,7 +694,7 @@ func collect(symbol string) (string, string) {
 	case "BGN":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "BGN/USD"
+				pair = "BGN/USD: "
 				value = e.Text
 			})
 
@@ -817,7 +703,7 @@ func collect(symbol string) (string, string) {
 	case "ARS":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "ARS/USD"
+				pair = "ARS/USD: "
 				value = e.Text
 			})
 
@@ -826,7 +712,7 @@ func collect(symbol string) (string, string) {
 	case "AWG":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "AWG/USD"
+				pair = "AWG/USD: "
 				value = e.Text
 			})
 
@@ -835,7 +721,7 @@ func collect(symbol string) (string, string) {
 	case "BAM":
 		c.OnHTML(".table > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "BAM/USD"
+				pair = "BAM/USD: "
 				value = e.Text
 			})
 
@@ -846,7 +732,7 @@ func collect(symbol string) (string, string) {
 			func(e *colly.HTMLElement) {
 				end := strings.Index(e.Text, " ")
 
-				pair = "AFN/USD"
+				pair = "AFN/USD: "
 				value = e.Text[:end]
 			})
 
@@ -855,7 +741,7 @@ func collect(symbol string) (string, string) {
 	case "AZN":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "AZN/USD"
+				pair = "AZN/USD: "
 				value = e.Text
 			})
 
@@ -864,7 +750,7 @@ func collect(symbol string) (string, string) {
 	case "BYN":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "BYN/USD"
+				pair = "BYN/USD: "
 				value = e.Text
 			})
 
@@ -873,7 +759,7 @@ func collect(symbol string) (string, string) {
 	case "BOB":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "BOB/USD"
+				pair = "BOB/USD: "
 				value = e.Text
 			})
 
@@ -882,7 +768,7 @@ func collect(symbol string) (string, string) {
 	case "BWP":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "BWP/USD"
+				pair = "BWP/USD: "
 				value = e.Text
 			})
 
@@ -891,7 +777,7 @@ func collect(symbol string) (string, string) {
 	case "BRL":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "BRL/USD"
+				pair = "BRL/USD: "
 				value = e.Text
 			})
 
@@ -900,7 +786,7 @@ func collect(symbol string) (string, string) {
 	case "BND":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "BND/USD"
+				pair = "BND/USD: "
 				value = e.Text
 			})
 
@@ -909,7 +795,7 @@ func collect(symbol string) (string, string) {
 	case "KHR":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "KHR/USD"
+				pair = "KHR/USD: "
 				value = e.Text
 			})
 
@@ -918,7 +804,7 @@ func collect(symbol string) (string, string) {
 	case "CLP":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "CLP/USD"
+				pair = "CLP/USD: "
 				value = e.Text
 			})
 
@@ -927,7 +813,7 @@ func collect(symbol string) (string, string) {
 	case "COP":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "COP/USD"
+				pair = "COP/USD: "
 				value = e.Text
 			})
 
@@ -936,7 +822,7 @@ func collect(symbol string) (string, string) {
 	case "CRC":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "CRC/USD"
+				pair = "CRC/USD: "
 				value = e.Text
 			})
 
@@ -945,7 +831,7 @@ func collect(symbol string) (string, string) {
 	case "HRK":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "HRK/USD"
+				pair = "HRK/USD: "
 				value = e.Text
 			})
 
@@ -956,7 +842,7 @@ func collect(symbol string) (string, string) {
 			func(e *colly.HTMLElement) {
 				end := strings.Index(e.Text, " ")
 
-				pair = "CUP/USD"
+				pair = "CUP/USD: "
 				value = e.Text[:end]
 			})
 
@@ -965,7 +851,7 @@ func collect(symbol string) (string, string) {
 	case "CZK":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "CZK/USD"
+				pair = "CZK/USD: "
 				value = e.Text
 			})
 
@@ -974,7 +860,7 @@ func collect(symbol string) (string, string) {
 	case "DOP":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "DOP/USD"
+				pair = "DOP/USD: "
 				value = e.Text
 			})
 
@@ -983,7 +869,7 @@ func collect(symbol string) (string, string) {
 	case "EGP":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "EGP/USD"
+				pair = "EGP/USD: "
 				value = e.Text
 			})
 
@@ -992,7 +878,7 @@ func collect(symbol string) (string, string) {
 	case "SVC":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "SVC/USD"
+				pair = "SVC/USD: "
 				value = e.Text
 			})
 
@@ -1001,7 +887,7 @@ func collect(symbol string) (string, string) {
 	case "FKP":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "FKP/USD"
+				pair = "FKP/USD: "
 				value = e.Text
 			})
 
@@ -1051,6 +937,92 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://wise.com/gb/currency-converter/gyd-to-usd-rate?amount=1")
+
+	case "DZD":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "DZD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Algerian-Dinar-DZD-currency-table.html")
+	case "BHD":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "BHD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Bahraini-Dinar-BHD-currency-table.html")
+	case "BDT":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "BDT"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Bangladesh-Taka-BDT-currency-table.html")
+	case "BYR":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "BYR"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Belarus-Ruble-BYR-currency-table.html")
+	case "BTN":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "BTN"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Bhutan-Ngultrum-BTN-currency-table.html")
+	case "BIF":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "BIF"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Burundi-Franc-BIF-currency-table.html")
+	case "XAF":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "XAF"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Central-African-CFA-franc-XAF-currency-table.html")
+	case "KMF":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "KMF"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Comoros-Franc-KMF-currency-table.html")
+	case "CYP":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "CYP"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Cyprus-Pound-CYP-currency-table.html")
+	case "EEK":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "EEK"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Estonian-Kroon-EEK-currency-table.html")
+	case "ETB":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "ETB"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Ethiopian-Birr-ETB-currency-table.html")
+	case "GMD":
+		c.OnHTML("tr.coltwo:nth-child(13) strong",
+			func(e *colly.HTMLElement) {
+				pair = "GMD"
+				value = e.Text
+			})
+		c.Visit("https://www.exchangerates.org.uk/Gambian-Dalasi-GMD-currency-table.html")
+
 	}
 
 	return pair, value
@@ -1182,6 +1154,18 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/gip", handler)
 	router.AddRoute("/ggp", handler)
 	router.AddRoute("/gyd", handler)
+	router.AddRoute("/dzd", handler)
+	router.AddRoute("/bhd", handler)
+	router.AddRoute("/bdt", handler)
+	router.AddRoute("/byr", handler)
+	router.AddRoute("/btn", handler)
+	router.AddRoute("/bif", handler)
+	router.AddRoute("/xaf", handler)
+	router.AddRoute("/kmf", handler)
+	router.AddRoute("/cyp", handler)
+	router.AddRoute("/eek", handler)
+	router.AddRoute("/etb", handler)
+	router.AddRoute("/gmd", handler)
 
 }
 
