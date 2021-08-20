@@ -20,20 +20,6 @@
 
 <body>
   <script src="bootstrap/js/bootstrap.bundle.js"></script>
-<!-- 
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#" onclick="showWallet()">
-        Wallet
-      </a>
-      <a class="navbar-brand" href="#" onclick="showConfig()">
-        Config
-      </a>
-      <a class="navbar-brand" href="#" onclick="showStake()">
-        Stake
-      </a>
-    </div>
-  </nav> -->
 
   <div x-data="Components()">
 
@@ -181,11 +167,19 @@
                                     <div class='card'>
                                           <div class='card-header'>
                                               <h1>Mine</h1>
-                                              <button class="btn btn-primary">Stake</button>
-                                              <button type="submit" class="btn btn-primary">Transfer</button>
                                           </div>
                                         <div class='card-body'>
-                                            <div x-text="connected ? await getBalance() +'  ZAP':0" ></div>
+                                          <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
+                                          <input id="clientTimeout" type="text" x-model="configData.clientTimeout">
+
+                                          <label for="trackerCycle" class="form-label">Tracker Cycle</label>
+                                          <input id="trackerCycle" list="cycles" x-model="configData.trackerCycle">
+                                          <datalist id="cycles">
+                                            <option value="10s">
+                                            <option value="30s" selected>
+                                            <option value="60s">
+                                            <option value="90s">
+                                          </datalist>
                                         </div>
                                     </div>
                                 </div>`
@@ -199,12 +193,10 @@
         
         active: "wallet",
         staked: false,
-        locked: ["mine"],
         options: ["wallet","stake","mine"],
+        trackerOptions: ["balance", "disputeStatus", "gas" ,  "tokenBalance",  "indexers",  "currentVariables",  "newCurrentVariables",  "disputeChecker" ,  "tallyVotes"],
+
         setActive(option){
-          
-          
-          
           this.active=option
         },
         getStakeStatus(){
@@ -233,3 +225,4 @@
 </body>
 
 <!-- </html> -->
+
