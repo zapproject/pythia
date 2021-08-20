@@ -1184,6 +1184,24 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://www.unitconverters.net/currency/sos-to-usd.htm")
+
+	case "RSD":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "RSD/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/rsd-to-usd-rate?amount=1")
+
+	case "SHP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "SHP/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/shp-to-usd-rate?amount=1")
 	}
 
 	return pair, value
@@ -1332,6 +1350,8 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/vnd", handler)
 	router.AddRoute("/sos", handler)
 	router.AddRoute("/syp", handler)
+	router.AddRoute("/rsd", handler)
+	router.AddRoute("/shp", handler)
 }
 
 //Incoming implementation for  handler
