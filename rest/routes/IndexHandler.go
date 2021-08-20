@@ -1202,6 +1202,55 @@ func collect(symbol string) (string, string) {
 			})
 
 		c.Visit("https://wise.com/gb/currency-converter/shp-to-usd-rate?amount=1")
+
+	case "IMP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "IMP/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/imp-to-usd-rate?amount=1")
+
+	case "JEP":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "JEP/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/jep-to-usd-rate?amount=1")
+
+	case "KGS":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "KGS/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/kgs-to-usd-rate?amount=1")
+
+	case "LAK":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "LAK/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/lak-to-usd-rate?amount=1")
+
+	case "LRD":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "LRD/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/LRD-to-usd-rate?amount=1")
+
+	case "MZN":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) span.text-success",
+			func(e *colly.HTMLElement) {
+				pair = "MZN/USD"
+				value = e.Text
+			})
+		c.Visit("https://wise.com/gb/currency-converter/mzn-to-usd-rate?amount=1")
+
 	}
 
 	return pair, value
@@ -1352,6 +1401,12 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/syp", handler)
 	router.AddRoute("/rsd", handler)
 	router.AddRoute("/shp", handler)
+	router.AddRoute("/imp", handler)
+	router.AddRoute("/jep", handler)
+	router.AddRoute("/kgs", handler)
+	router.AddRoute("/lak", handler)
+	router.AddRoute("/lrd", handler)
+	router.AddRoute("/mzn", handler)
 }
 
 //Incoming implementation for  handler
