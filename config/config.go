@@ -217,21 +217,21 @@ func ParseConfigBytes(data []byte) error {
 		config.VaultAddress = VaultAddressEnv
 	}
 
-	NodeUrlEnv := os.Getenv(NodeURLEnvName)
+	// NodeUrlEnv := os.Getenv(NodeURLEnvName)
 
-	if NodeUrlEnv == "" {
+	// if NodeUrlEnv == "" {
 
-		if config.NodeURL == "" {
+	// 	if config.NodeURL == "" {
 
-			return fmt.Errorf("missing the node url environment variable '%s'",
-				NodeURLEnvName)
+	// 		return fmt.Errorf("missing the node url environment variable '%s'",
+	// 			NodeURLEnvName)
 
-		}
+	// 	}
 
-	} else {
+	// } else {
 
-		config.NodeURL = NodeUrlEnv
-	}
+	// 	config.NodeURL = NodeUrlEnv
+	// }
 
 	PublicAddressEnv := os.Getenv(PublicAddress)
 

@@ -11,17 +11,29 @@
 
   <!-- Bootstrap CSS -->
   <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="./home.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="home.css">
-  
+
   <title>Zap Wallet</title>
 
 </head>
 
 <body>
   <script src="bootstrap/js/bootstrap.bundle.js"></script>
-  <script src="https://unpkg.com/browse/@webcomponents/webcomponentsjs@2.6.0/webcomponents-bundle.js"></script>
-
+<!-- 
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" onclick="showWallet()">
+        Wallet
+      </a>
+      <a class="navbar-brand" href="#" onclick="showConfig()">
+        Config
+      </a>
+      <a class="navbar-brand" href="#" onclick="showStake()">
+        Stake
+      </a>
+    </div>
+  </nav> -->
 
   <div x-data="Components()">
 
@@ -35,7 +47,7 @@
     <script>
       function App() {
 
-        var localConfig = {"ContractAddress":	"0xc582Bc0317dbb0908203541971a358c44b1F3766",
+        var localConfig = {"ContractAddress":	"0xcd8a1c3ba11cf5ecfa6267617243239504a98d90",
                         "DBFile":	"zapDB",
                         "DisputeTimeDelta":	"600s",
                         "EthClientTimeout":	3000,
@@ -48,8 +60,8 @@
                         "TrackerCycle":	"100s",
                         "Trackers": ["balance","disputeStatus","gas","tokenBalance","indexers","newCurrentVariables","currentVariables"],
                         "UseGPU":	false,
-                        "VaultAddress":	"0xB2b580ce436E6F77A5713D80887e14788Ef49c9A",
-                        "zapTokenAddress":	"0x07882ae1ecb7429a84f1d53048d35c4bb2056877",
+                        "VaultAddress":	"0x82e01223d51eb87e16a03e24687edf0f294da6f1",
+                        "zapTokenAddress":	"0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
                       }  
 
         // This is the data returned to a html tag with an x-data directive
@@ -68,6 +80,7 @@
           connected: false
         }
       }
+    
 
       function Components(){
         return {nav: `<nav class="navbar navbar-light bg-light">
@@ -108,15 +121,14 @@
                       </div>
                       </form>`,
 
-                      home: `
-                            <div class='dashboard' x-show="connected">
-                                <div class="dashboard-nav" x-data>
+                      home: `<div class='dashboard' x-show="connected" x-data=menu()>
+                                <div class="dashboard-nav">
                                     <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>ZAP</span></a></header>
-                                    <nav class="dashboard-nav-list" x-data=menu()>
+                                    <nav class="dashboard-nav-list" >
                                       
                                         <template x-for="option in options">
-                                          <a href="#" class="dashboard-nav-item" x-text="capitalize(option)"> </a>
-                                        </template>
+                                          <a href="#" x-on:click="setActive(option)" x-bind:class="active==option ? 'active dashboard-nav-item': 'dashboard-nav-item'" x-text="capitalize(option)"> </a>
+                                        </template> 
                                         
                                     </nav>
                                 </div>
@@ -124,7 +136,19 @@
                                 <div class='dashboard-app'>
                                     <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
                                     <div class='dashboard-content'>
-                                        <div class='container'>
+                                        <div x-html="wallet"></div>
+                                        <div x-html="stake"></div>  
+                                          <template x-if="staked">
+                                            <div x-html="mine"></div>
+                                          </template>
+
+                                    </div>
+                                </div>
+                            </div>
+                            `,
+                            
+                      
+                            wallet: `<div class='container' x-show="active=='wallet'">
                                             <div class='card'>
                                                   <div class='card-header'>
                                                       <h1>Balance</h1>
@@ -132,14 +156,37 @@
                                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                                   </div>
                                                 <div class='card-body'>
-                                                    <p x-text="await getBalance"></p>
+                                                    <div x-text="connected ? await getBalance()+'  ZAP':0" ></div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>`,
+                                        
+                            stake: `<div class='container' x-show="active=='stake'">
+                                <div class='card'>
+                                      <div class='card-header'>
+                                          <h1>Stake</h1>
+                                          <button class="btn btn-primary">Stake</button>
+                                          <button type="submit" class="btn btn-primary">Transfer</button>
+                                      </div>
+                                    <div class='card-body'>
+                                        <div x-text="connected ? await getBalance()+'  ZAP':0" ></div>
                                     </div>
                                 </div>
-                            </div>
-                            `
+                            </div>`,
+                            
+                            
+                            mine:`<div class='container' x-show="active=='mine'">
+                                    <div class='card'>
+                                          <div class='card-header'>
+                                              <h1>Mine</h1>
+                                              <button class="btn btn-primary">Stake</button>
+                                              <button type="submit" class="btn btn-primary">Transfer</button>
+                                          </div>
+                                        <div class='card-body'>
+                                            <div x-text="connected ? await getBalance()+'  ZAP':0" ></div>
+                                        </div>
+                                    </div>
+                                </div>`
                     
                     }
     }
@@ -149,7 +196,14 @@
       return {
         
         active: "wallet",
-        options: ["wallet","stake","mine"]
+        staked: false,
+        options: ["wallet","stake","mine"],
+        setActive(option){
+          
+          
+          this.active=option
+          
+        }
       }
     }
 

@@ -9,23 +9,35 @@ import (
 
 	"github.com/webview/webview"
 	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/setup"
 )
 
 func Start() {
 	debug := true
 	w := webview.New(debug)
-
 	defer w.Destroy()
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
+
+	showConfig(w)
+	w.Run()
+}
+
+func showConfig(w webview.WebView) {
 
 	w.Bind("showWallet", func() {
 		showWallet(w)
 	})
 
-	// w.Bind("saveConfigs", func(inputs interface{}) {
+	w.Bind("showStake", func() {
+		showStake(w)
+	})
+
+	w.Bind("showMine", func() {
+		showMine(w)
+	})
+
 	w.Bind("saveConfigs", func(inputs map[string]interface{}) {
-		// fmt.Println(fmt.Sprintf("inputs: %T", inputs["publickey"]))
 		config.NewConfig()
 		config.SetPublicAddress(fmt.Sprintf("%v", inputs["publickey"]))
 		config.SetPrivateKey(fmt.Sprintf("%v", inputs["privatekey"]))
@@ -67,6 +79,8 @@ func Start() {
 			trackers = append(trackers, "tallyVotes")
 		}
 
+		config.SetTrackers(trackers)
+
 		trackerCycle := strings.Trim(fmt.Sprintf("%v", inputs["trackerCycle"]), "s")
 		converted, _ := strconv.ParseUint(trackerCycle, 10, 32)
 		config.SetTrackerSleepCycle(uint(converted))
@@ -88,8 +102,7 @@ func Start() {
 		config.SetDBFile("zapDB")
 		config.SetDisputeTimeDelta(600)
 
-		cfg := config.GetConfig()
-		fmt.Println("CFG: ", cfg.PublicAddress)
+		setup.App()
 	})
 
 	ex, err := os.Executable()
@@ -100,5 +113,4 @@ func Start() {
 	p = "file://" + p
 
 	w.Navigate(p)
-	w.Run()
 }

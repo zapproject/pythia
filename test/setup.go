@@ -6,9 +6,9 @@ import (
 )
 
 var configJSON = `{
-	"zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+	"zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "70997970C51812dc3A010C7d01b50e0d17dc79C8",
     "privateKey": "59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",
@@ -33,10 +33,11 @@ var configJSON = `{
     "dbFile": "zapDB"
 }
 `
+
 var configJSON0 = `{
-	"zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+	"zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "f39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "privateKey": "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
@@ -63,9 +64,9 @@ var configJSON0 = `{
 `
 
 var configJSON1 = `{
-    "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "70997970C51812dc3A010C7d01b50e0d17dc79C8",
     "privateKey": "59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",
@@ -90,9 +91,9 @@ var configJSON1 = `{
 }`
 
 var configJSON2 = `{
-    "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
     "privateKey": "5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a",
@@ -117,9 +118,9 @@ var configJSON2 = `{
 }`
 
 var configJSON3 = `{
-    "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "90F79bf6EB2c4f870365E785982E1f101E93b906",
     "privateKey": "7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6",
@@ -144,9 +145,9 @@ var configJSON3 = `{
 }`
 
 var configJSON4 = `{
-    "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
     "privateKey": "47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a",
@@ -171,9 +172,9 @@ var configJSON4 = `{
 }`
 
 var configJSON5 = `{
-    "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "zapTokenAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "contractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "vaultAddress": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
     "privateKey": "8b3a350cf5c34c9194ca85829a2df0ec3153be0318b5e2d3348e872092edffba",

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/zapproject/pythia/config"
 	"github.com/zapproject/pythia/setup"
-	// "github.com/zapproject/pythia/ops"
+	"github.com/zapproject/pythia/ops"
 	ZapCommon "github.com/zapproject/pythia/common"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/zapproject/pythia/contracts"
@@ -23,7 +23,7 @@ func configWallet(cfg string) (bool, error){
 
 
 func getBalance() (string, error) {
-	  
+	// setup.App()
 	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
 	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	zapBalance, err := instance.BalanceOf(nil, addr)
@@ -35,5 +35,16 @@ func getBalance() (string, error) {
 
 	return zapBalance.String(),nil
 
+}
+
+func stakeStatus() (string, error) {
+	  
+	err := ops.ShowStatus(setup.CTX)
+	if err != nil{
+		fmt.Print(err.Error())
+		return "",err
+	}
+
+	return "",nil
 
 }

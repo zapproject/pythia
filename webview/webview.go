@@ -1,15 +1,13 @@
 package webview
 
-import ( 
+import (
 	"os"
-	"github.com/webview/webview"
-	"fmt"
 	"path/filepath"
 
+	"github.com/webview/webview"
 )
 
-func LoadWebview(){
-
+func LoadWebview() {
 
 	debug := false
 	w := webview.New(debug)
@@ -32,7 +30,7 @@ func LoadWebview(){
 	}
 	p := filepath.Join(filepath.Dir(ex), "webview/public/index.html")
 	p = "file://" + p
-	fmt.Println(p)
+
 	w.Navigate(p)
 
 	// content, _ := ioutil.ReadFile("./public/wallet.html")
