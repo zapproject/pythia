@@ -114,8 +114,6 @@
                                     <nav class="dashboard-nav-list" >
                                       
                                         <template x-for="option in options">
-
-
                                           <a href="#" x-on:click="setActive(option)" x-bind:class="active==option ? 'active dashboard-nav-item': 'dashboard-nav-item'" x-text="capitalize(option)"> </a>
                                         </template> 
                                         
@@ -163,24 +161,41 @@
                             </div>`,
                             
                             
-                            mine:`<div class='container' x-show="active=='mine' && staked">
+                            mine:`<div class='container' x-show="active=='mine'">
                                     <div class='card'>
                                           <div class='card-header'>
                                               <h1>Mine</h1>
                                           </div>
-                                        <div class='card-body'>
-                                          <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
-                                          <input id="clientTimeout" type="text" x-model="configData.clientTimeout">
 
-                                          <label for="trackerCycle" class="form-label">Tracker Cycle</label>
-                                          <input id="trackerCycle" list="cycles" x-model="configData.trackerCycle">
+                                        <div class='card-body'>
+
+                                          <div class="container">
+
+                                            <div class="mb-3">
+                                              <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
+                                              <input id="clientTimeout" type="text" x-model="configData.clientTimeout">
+                                            </div>
+
+                                            <div class="mb-3">
+                                              <label for="trackerCycle" class="form-label">Tracker Cycle</label>
+                                              <input id="trackerCycle" list="cycles" x-model="configData.trackerCycle">
+                                            </div>
+
                                           <datalist id="cycles">
                                             <option value="10s">
                                             <option value="30s" selected>
                                             <option value="60s">
                                             <option value="90s">
                                           </datalist>
+
+
+                                          <template x-for="option in trackerOptions">
+                                            <label x-bind:for="option" class="form-label" x-text="capitalize(option)"></label>
+                                            <input x-bind:id="option" type="checkbox" >
+                                          </template> 
+
                                         </div>
+
                                     </div>
                                 </div>`
                     
