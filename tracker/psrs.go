@@ -162,6 +162,23 @@ var PSRs = map[int]ValueGenerator{
 	138: &SingleSymbol{symbol: "GIP/USD", granularity: 1000000, transform: MedianAt},
 	139: &SingleSymbol{symbol: "GGP/USD", granularity: 1000000, transform: MedianAt},
 	140: &SingleSymbol{symbol: "GYD/USD", granularity: 1000000, transform: MedianAt},
+	141: &SingleSymbol{symbol: "DZD/USD", granularity: 1000000, transform: MedianAt},
+	142: &SingleSymbol{symbol: "BHD/USD", granularity: 1000000, transform: MedianAt},
+	143: &SingleSymbol{symbol: "BDT/USD", granularity: 1000000, transform: MedianAt},
+	144: &SingleSymbol{symbol: "BYR/USD", granularity: 1000000, transform: MedianAt},
+	145: &SingleSymbol{symbol: "BTN/USD", granularity: 1000000, transform: MedianAt},
+	146: &SingleSymbol{symbol: "BIF/USD", granularity: 1000000, transform: MedianAt},
+	147: &SingleSymbol{symbol: "XAF/USD", granularity: 1000000, transform: MedianAt},
+	148: &SingleSymbol{symbol: "KMF/USD", granularity: 1000000, transform: MedianAt},
+	149: &SingleSymbol{symbol: "CYP/USD", granularity: 1000000, transform: MedianAt},
+	150: &SingleSymbol{symbol: "EEK/USD", granularity: 1000000, transform: MedianAt},
+	151: &SingleSymbol{symbol: "ETB/USD", granularity: 1000000, transform: MedianAt},
+	152: &SingleSymbol{symbol: "GMD/USD", granularity: 1000000, transform: MedianAt},
+	153: &SingleSymbol{symbol: "TVD/USD", granularity: 1000000, transform: MedianAt},
+	154: &SingleSymbol{symbol: "UZS/USD", granularity: 1000000, transform: MedianAt},
+	155: &SingleSymbol{symbol: "VND/USD", granularity: 1000000, transform: MedianAt},
+	156: &SingleSymbol{symbol: "SOS/USD", granularity: 1000000, transform: MedianAt},
+	157: &SingleSymbol{symbol: "SYP/USD", granularity: 1000000, transform: MedianAt},
 }
 
 //these weight functions map values of x between 0 (brand new) and 1 (old) to weights between 0 and 1

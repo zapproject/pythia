@@ -1136,7 +1136,54 @@ func collect(symbol string) (string, string) {
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Gambian-Dalasi-GMD-currency-table.html")
+	case "TVD":
+		c.OnHTML("div.portlet:nth-child(6) > div:nth-child(2) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2) > span:nth-child(1)",
+			func(e *colly.HTMLElement) {
+				pair = "TVD/USD"
+				value = e.Text
+			})
 
+		c.Visit("https://www.mataf.net/en/currency/converter-TVD-USD?m1=1.00")
+
+	case "UZS":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "UZS/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/uzs-to-usd-rate?amount=1")
+
+	case "VND":
+		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
+			func(e *colly.HTMLElement) {
+				pair = "VND/USD"
+				value = e.Text
+			})
+
+		c.Visit("https://wise.com/gb/currency-converter/vnd-to-usd-rate?amount=1")
+
+	case "SYP":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "SYP/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/syp-to-usd.htm")
+
+	case "SOS":
+		c.OnHTML(".datatable > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
+			func(e *colly.HTMLElement) {
+				end := strings.Index(e.Text, " ")
+
+				pair = "SOS/USD"
+				value = e.Text[:end]
+			})
+
+		c.Visit("https://www.unitconverters.net/currency/sos-to-usd.htm")
 	}
 
 	return pair, value
@@ -1280,7 +1327,11 @@ func BuildEndpoints(router *Router, handler *IndexHandler) {
 	router.AddRoute("/eek", handler)
 	router.AddRoute("/etb", handler)
 	router.AddRoute("/gmd", handler)
-
+	router.AddRoute("/tvd", handler)
+	router.AddRoute("/uzs", handler)
+	router.AddRoute("/vnd", handler)
+	router.AddRoute("/sos", handler)
+	router.AddRoute("/syp", handler)
 }
 
 //Incoming implementation for  handler

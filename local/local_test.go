@@ -209,6 +209,11 @@ func TestIndexHandler(t *testing.T) {
 		"/eek",
 		"/etb",
 		"/gmd",
+		"/tvd",
+		"/uzs",
+		"/vnd",
+		"/sos",
+		"/syp",
 	}
 
 	for _, pair := range pairs {
@@ -367,6 +372,11 @@ func TestIndexParsing(t *testing.T) {
 		"/eek",
 		"/etb",
 		"/gmd",
+		"/tvd",
+		"/uzs",
+		"/vnd",
+		"/sos",
+		"/syp",
 	}
 
 	for _, pair := range pairs {

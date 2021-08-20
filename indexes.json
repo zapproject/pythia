@@ -415,6 +415,21 @@
 	"GMD/USD": [
 		"json(http://127.0.0.1:5002/gmd).value"
 	],
+	"TVD/USD": [
+		"json(http://127.0.0.1:5002/tvd).value"
+	],
+	"UZS/USD": [
+		"json(http://127.0.0.1:5002/uzs).value"
+	],
+	"VND/USD": [
+		"json(http://127.0.0.1:5002/vnd).value"
+	],
+	"SOS/USD": [
+		"json(http://127.0.0.1:5002/sos).value"
+	],
+	"SYP/USD": [
+		"json(http://127.0.0.1:5002/syp).value"
+	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
