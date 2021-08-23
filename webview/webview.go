@@ -24,6 +24,7 @@ func LoadWebview() {
 	w.Bind("loadHtml",loadHtml)
 	w.Bind("getBalance",getBalance)
 	w.Bind("stakeStatus",stakeStatus)
+	w.Bind("startMine",startMine)
 
 	ex, err := os.Executable()
 	if err != nil {

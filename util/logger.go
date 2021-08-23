@@ -40,7 +40,6 @@ type Logger struct {
 var loggersToInit []*Logger
 var loggerMutex sync.Mutex
 
-
 //NewLogger creates a log instance for the given component with the given log level enabled
 func NewLogger(pkg string, component string) *Logger {
 	loggerMutex.Lock()
@@ -65,8 +64,8 @@ func initLogger(levels *LogConfig, l *Logger) {
 	l.log = log.WithFields(logrus.Fields{"component": l.component, "package": l.pkg})
 }
 
-func initLoggers(levels *LogConfig) {
-	for _,l := range loggersToInit {
+func InitLoggers(levels *LogConfig) {
+	for _, l := range loggersToInit {
 		initLogger(levels, l)
 	}
 }

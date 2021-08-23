@@ -33,7 +33,9 @@
     <script>
       function App() {
 
-        var localConfig = {"ContractAddress":	"0xcd8a1c3ba11cf5ecfa6267617243239504a98d90",
+        configs = {
+          "local":{
+                        "ContractAddress":	"0xcd8a1c3ba11cf5ecfa6267617243239504a98d90",
                         "DBFile":	"zapDB",
                         "DisputeTimeDelta":	"600s",
                         "EthClientTimeout":	3000,
@@ -49,6 +51,9 @@
                         "VaultAddress":	"0x82e01223d51eb87e16a03e24687edf0f294da6f1",
                         "zapTokenAddress":	"0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
                       }  
+          
+        }
+
 
         // This is the data returned to a html tag with an x-data directive
         return {
@@ -59,7 +64,7 @@
           },
           submitData(){
             // console.log(this.configData,JSON.parse(JSON.stringify(this.configData)))
-            configWallet(JSON.stringify({...localConfig,...JSON.parse(JSON.stringify(this.configData))}))
+            configWallet(JSON.stringify({...configs[this.configData.chain],...JSON.parse(JSON.stringify(this.configData))}))
             .then(res => this.connected = res )
             .catch(console.log)
 
@@ -165,35 +170,57 @@
                                     <div class='card'>
                                           <div class='card-header'>
                                               <h1>Mine</h1>
+                                              
                                           </div>
 
                                         <div class='card-body'>
 
                                           <div class="container">
+                                            <div class="row">
 
-                                            <div class="mb-3">
-                                              <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
-                                              <input id="clientTimeout" type="text" x-model="configData.clientTimeout">
+                                              <button x-on:click="start()" x-bind:disabled="!staked" class="btn btn-primary col-6">Start</button>
+                                              <template x-if="!staked">
+                                                  <div class="col-6">You must be staked in order to mine</div>
+                                              </template>
                                             </div>
 
-                                            <div class="mb-3">
+                                              <div class="mining-log">
+                                                  <h3>Mining Logs</h3>
+                                                  <!-- <p id="logs"></p> -->
+                                                  <p><iframe src="miningLogs.html"></iframe></p>
+                                              </div>
+                                            
+                                            <div x-show="!mining">
+                                              <h3 class="pt-4"> Options:  </h3>
+
+                                              <div class="mb-3">
+                                                <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
+                                                <input id="clientTimeout" type="number" x-model="minerDefaults.ethClientTimeout">
+                                              </div>
+
+
                                               <label for="trackerCycle" class="form-label">Tracker Cycle</label>
-                                              <input id="trackerCycle" list="cycles" x-model="configData.trackerCycle">
+                                              <select class="form-select" aria-label="Default select example" x-model="minerDefaults.trackerCycle">
+                                                <option value="10s">10s</option>
+                                                <option value="30s">30s</option>
+                                                <option value="60s">60s</option>
+                                                <option value="90s">90s</option>
+                                              </select>
+
+                                              <div class="pt-4"> </div>
+
+                                              <label class="form-label">Tracker Options</label>
+                                              <div class="row">
+                                              <template x-for="option in trackerOptions">
+                                                <div class="col-6 form-check">
+                                                  <label x-bind:for="option" class="form-check-label" x-text="capitalize(option)"></label>
+                                                  <input x-bind:id="option" class="form-check-input" type="checkbox" x-model="minerDefaults[option]">
+                                                </div>
+                                              </template> 
+                                              </div>
                                             </div>
 
-                                          <datalist id="cycles">
-                                            <option value="10s">
-                                            <option value="30s" selected>
-                                            <option value="60s">
-                                            <option value="90s">
-                                          </datalist>
-
-
-                                          <template x-for="option in trackerOptions">
-                                            <label x-bind:for="option" class="form-label" x-text="capitalize(option)"></label>
-                                            <input x-bind:id="option" type="checkbox" >
-                                          </template> 
-
+                                            
                                         </div>
 
                                     </div>
@@ -204,12 +231,45 @@
     
     
     function menu(){
+
+      var configs = {
+                      "local": 
+                      {"ContractAddress":	"0xcd8a1c3ba11cf5ecfa6267617243239504a98d90",
+                        "DBFile":	"zapDB",
+                        "DisputeTimeDelta":	"600s",
+                        "GasMax":	30,
+                        "GasMultiplier":	1,
+                        "NodeURL":	"http://localhost:8545/",
+                        "ServerHost":	"0.0.0.0",
+                        "ServerPort":	5001,
+                        "ServerWhitelist":["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
+                        "UseGPU":	false,
+                        "VaultAddress":	"0x82e01223d51eb87e16a03e24687edf0f294da6f1",
+                        "zapTokenAddress":	"0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
+                      }  
+      }             
+
       return {
         
         active: "wallet",
         staked: false,
+        mining: false,
         options: ["wallet","stake","mine"],
         trackerOptions: ["balance", "disputeStatus", "gas" ,  "tokenBalance",  "indexers",  "currentVariables",  "newCurrentVariables",  "disputeChecker" ,  "tallyVotes"],
+
+        minerDefaults:{
+          trackerCycle: "30s",
+          ethClientTimeout:	3000,
+          balance: true,
+          disputeStatus: true,
+          gas: true,
+          tokenBalance: true,
+          indexers: true,
+          currentVariables: true,
+          newCurrentVariables: true,
+          disputeChecker: true,
+          tallyVotes: true,
+        },
 
         setActive(option){
           this.active=option
@@ -227,6 +287,24 @@
             })
             .catch(console.log)
 
+        },
+        start(){
+
+          minerOps = JSON.parse(JSON.stringify(this.minerDefaults))
+          trackers = []
+          for(var key in minerOps){
+              if (minerOps[key] === true){
+                trackers.push(key)
+              }
+          }
+          console.log({...JSON.parse(JSON.stringify(App().configData)), ...JSON.parse(JSON.stringify(this.minerDefaults)),...configs[App().configData.chain],trackers})
+        
+
+          startMine().then(() =>{
+            this.mining=true
+          })
+        
+        
         }
       }
     }
