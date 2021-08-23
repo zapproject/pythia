@@ -232,7 +232,7 @@ func App() {
 // 		cfg := config.GetConfig()
 // 		var ds *ops.DataServerOps
 // 		if !cfg.EnablePoolWorker {
-// 			ErrorHandler(AddDBToCtx(*remoteDS), "\U0001F5C4 initializing database \U0001F5C4")
+// 			ErrorHandler((*remoteDS), "\U0001F5C4 initializing database \U0001F5C4")
 // 			if !*remoteDS {
 // 				ch := make(chan os.Signal)
 // 				exitChannels = append(exitChannels, &ch)

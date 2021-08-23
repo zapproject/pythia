@@ -19,6 +19,10 @@ func Start() {
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintMin)
 
+	w.Bind("showConfig", func() {
+		showConfig(w)
+	})
+
 	showConfig(w)
 	w.Run()
 }
