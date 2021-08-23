@@ -1,14 +1,11 @@
 package webview
 
 import (
-	"bytes"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"os/signal"
 	"path/filepath"
-	"sync"
 	"syscall"
 	"time"
 
@@ -16,25 +13,26 @@ import (
 	"github.com/zapproject/pythia/config"
 	"github.com/zapproject/pythia/ops"
 	"github.com/zapproject/pythia/setup"
+	"github.com/zapproject/pythia/util"
 )
 
-var out chan string
-var wg *sync.WaitGroup
-var reader *os.File
+// var out chan string
+// var wg *sync.WaitGroup
+// var reader *os.File
 
 func showMine(w webview.WebView) {
 
 	w.Bind("startMine", func() {
-		startMine()
+		go startMine()
 	})
 
-	w.Bind("showLogs", func() string {
-		return showLogs()
-	})
-
-	// w.Bind("stopMine", func() {
-	// 	stopMine()
+	// w.Bind("showLogs", func() string {
+	// 	return showLogs()
 	// })
+
+	w.Bind("stopMine", func() {
+		stopMine()
+	})
 
 	ex, err := os.Executable()
 	if err != nil {
@@ -46,17 +44,25 @@ func showMine(w webview.WebView) {
 }
 
 func startMine() {
-	var writer *os.File
-	var err error
-	reader, writer, err = os.Pipe()
-	if err != nil {
-		panic(err)
-	}
+	file, _ := os.OpenFile("./webview/public/miningLogs.html", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 
-	os.Stdout = writer
-	os.Stderr = writer
-	log.SetOutput(writer)
-	// out = make(chan string)
+	// var writer *os.File
+	// var err error
+	// reader, writer, err := os.Pipe()
+	// if err != nil {
+	// 	panic(err)
+	// }
+
+	// os.Stdout = writer
+	// os.Stderr = writer
+	// log.SetOutput(writer)
+	os.Stdout = file
+	os.Stderr = file
+	log.SetOutput(file)
+	loggingCfgs := util.GetLoggingConfig()
+	util.InitLoggers(loggingCfgs)
+	// fmt.Println("LOGGING STARTED")
+	// out := make(chan string)
 
 	// wg = new(sync.WaitGroup)
 	// wg.Add(1)
@@ -138,15 +144,15 @@ func stopMine() {
 	syscall.Kill(syscall.Getpid(), syscall.SIGINT)
 }
 
-func showLogs() string {
-	// wg = new(sync.WaitGroup)
-	// wg.Add(1)
-	// go func() {
-	var buf bytes.Buffer
-	// wg.Done()
-	io.Copy(&buf, reader)
-	// out <- buf.String()
-	// }()
-	// wg.Wait()
-	return buf.String()
-}
+// func showLogs() string {
+// wg = new(sync.WaitGroup)
+// wg.Add(1)
+// go func() {
+// var buf bytes.Buffer
+// wg.Done()
+// io.Copy(&buf, reader)
+// out <- buf.String()
+// }()
+// wg.Wait()
+// return buf.String()
+// }

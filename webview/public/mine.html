@@ -2,6 +2,7 @@
 <html>
 <script src="bootstrap/js/bootstrap.bundle.js"></script>
 <script type='text/javascript' src="alpinejs/cdn.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 <body>
     <nav class="navbar navbar-light bg-light">
@@ -21,7 +22,7 @@
         </div>
     </nav>
 
-    <button class="mine-button" id="startMine" onclick="startMine()">
+    <button class="mine-button" id="startMine" onclick="handleMine()">
         Start Mining
     </button>
 
@@ -31,13 +32,32 @@
 
     <div class="mining-log">
         <h3>Mining Logs</h3>
-        <p id="logs"></p>
+        <!-- <p id="logs"></p> -->
+        <p><iframe src="miningLogs.html"></iframe></p>
     </div>
 </body>
 
 <script>
-    window.onload = async function () {
-        document.getElementById("logs").innerHTML = await showLogs();
+    async function handleMine() {
+        startMine();
+
+        // while (true) {
+        //     await new Promise(r => setTimeout(r, 2000));
+        //     document.getElementById("logs").innerHTML = await showLogs();
+        // }
+
+
+        // var path = window.location.pathname;
+        // var fullPath = path.substring(0, path.lastIndexOf("/")+1);
+
+        // $.get('miningLogs.txt',
+        //     function(text) {
+        //         console.log(text);
+        //         $("#logs").text(text);
+        //         setTimeout(getLog, 1000); // refresh every 30 seconds
+        //     },
+        //    'text'
+        // );
     }
 </script>
 

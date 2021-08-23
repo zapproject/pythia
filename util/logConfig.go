@@ -58,7 +58,7 @@ func ParseLoggingConfig(file string) error {
 		sharedConfig = &LogConfig{make(map[string]LogLevel)}
 	}
 	//initialize all the loggers that have already been declared as global vars
-	initLoggers(sharedConfig)
+	InitLoggers(sharedConfig)
 	return nil
 }
 
