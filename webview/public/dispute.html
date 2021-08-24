@@ -21,37 +21,24 @@
         </div>
     </nav>
 
-    <button class="mine-button" id="startMine" onclick="handleMine()">
-        Start Mining
+    <button class="dispute-button" id="startDispute" onclick="newDispute()">
+        New Dispute
     </button>
 
-    <button class="mine-button" id="stopMine" onclick="stopMine()">
-        Stop Mining
+    <button class="dispute-button" id="vote" onclick="vote()">
+        Vote
     </button>
 
-    <div class="mining-log">
-        <h3>Mining Logs</h3>
+    <div class="dispute-status">
+        <h3>Dispute Status</h3>
         <textarea id="logs"></textarea>
-        <!-- <p><iframe src="miningLogs.html"></iframe></p> -->
     </div>
 </body>
 
 <script>
-    var index = 0;
-
-    async function handleMine() {
-        startMine();
-        logs();
-    }
-
-    async function logs() {
-        while (true) {
-            await new Promise(r => setTimeout(r, 2000));
-            var content = await showLogs(index);
-            index += content.split(/\r\n|\r|\n/).length;
-            document.getElementById("logs").innerHTML = document.getElementById("logs").innerHTML + "\n" + content;
-        }
-    }
+    window.onload = async function () {
+        document.getElementById("logs").innerHTML = await showStatus();
+    };
 </script>
 
 </html>
