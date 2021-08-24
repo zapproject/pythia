@@ -178,7 +178,8 @@
                                           <div class="container">
                                             <div class="row">
 
-                                              <button x-on:click="start()" x-bind:disabled="!staked" class="btn btn-primary col-6">Start</button>
+                                              <button x-on:click="start()" x-bind:disabled="!staked || mining" class="btn btn-primary col-6">Start</button>
+                                              <button x-on:click="stop()" x-bind:disabled="!mining" class="btn btn-primary col-6">Start</button>
                                               <template x-if="!staked">
                                                   <div class="col-6">You must be staked in order to mine</div>
                                               </template>
@@ -305,6 +306,12 @@
           })
         
         
+        }
+        ,
+        stop(){
+          stopMine().then(() =>{
+            // this.mining=true
+          })
         }
       }
     }

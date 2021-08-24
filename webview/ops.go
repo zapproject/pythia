@@ -13,11 +13,13 @@ import (
 
 	"log"
 	"os"
-	"os/signal"
+	// "os/signal"
 	// "syscall"
 	"time"
 )
 
+
+var mineCh chan string
 
 func configWallet(cfg string) (bool, error){
 	// fmt.Println(req.TokenAddress )
@@ -62,102 +64,87 @@ func stakeStatus() (int64, error) {
 }
 
 func startMine() {
-	file, _ := os.OpenFile("./webview/public/miningLogs.html", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 
-	// var writer *os.File
-	// var err error
-	// reader, writer, err := os.Pipe()
-	// if err != nil {
-	// 	panic(err)
-	// }
+	go func(){
+		file, _ := os.OpenFile("./webview/public/miningLogs.html", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 
-	// os.Stdout = writer
-	// os.Stderr = writer
-	// log.SetOutput(writer)
-	os.Stdout = file
-	os.Stderr = file
-	log.SetOutput(file)
-	loggingCfgs := util.GetLoggingConfig()
-	util.InitLoggers(loggingCfgs)
-	// fmt.Println("LOGGING STARTED")
-	// out := make(chan string)
+		os.Stdout = file
+		os.Stderr = file
+		log.SetOutput(file)
+		loggingCfgs := util.GetLoggingConfig()
+		util.InitLoggers(loggingCfgs)
 
-	// wg = new(sync.WaitGroup)
-	// wg.Add(1)
-	// go func() {
-	// 	var buf bytes.Buffer
-	// 	wg.Done()
-	// 	io.Copy(&buf, reader)
-	// 	out <- buf.String()
-	// }()
-	// wg.Wait()
-
-	//create os kill sig listener
-	c := make(chan os.Signal)
-	signal.Notify(c, os.Interrupt)
-	exitChannels := make([]*chan os.Signal, 0)
-
-	cfg := config.GetConfig()
-	var ds *ops.DataServerOps
-	if !cfg.EnablePoolWorker {
-		setup.AddDBToCtx(false)
+		
+		//create os kill sig listener
+		mineCh = make(chan string)
+		// signal.Notify(c, os.Interrupt)
+		exitChannels := make([]*chan os.Signal, 0)
+	
+		cfg := config.GetConfig()
+		var ds *ops.DataServerOps
+		if !cfg.EnablePoolWorker {
+			setup.AddDBToCtx(false)
+			ch := make(chan os.Signal)
+			exitChannels = append(exitChannels, &ch)
+	
+			var err error
+			ds, err = ops.CreateDataServerOps(setup.CTX, ch)
+			if err != nil {
+				log.Fatal(err)
+			}
+			//start and wait for it to be ready
+			ds.Start(setup.CTX)
+			<-ds.Ready()
+		}
+		//start miner
 		ch := make(chan os.Signal)
 		exitChannels = append(exitChannels, &ch)
-
-		var err error
-		ds, err = ops.CreateDataServerOps(setup.CTX, ch)
+		miner, err := ops.CreateMiningManager(setup.CTX, ch, ops.NewSubmitter())
 		if err != nil {
 			log.Fatal(err)
 		}
-		//start and wait for it to be ready
-		ds.Start(setup.CTX)
-		<-ds.Ready()
-	}
-	//start miner
-	ch := make(chan os.Signal)
-	exitChannels = append(exitChannels, &ch)
-	miner, err := ops.CreateMiningManager(setup.CTX, ch, ops.NewSubmitter())
-	if err != nil {
-		log.Fatal(err)
-	}
-	miner.Start(setup.CTX)
-
-	//now we wait for kill sig
-	<-c
-	//and then notify exit channels
-	for _, ch := range exitChannels {
-		*ch <- os.Interrupt
-	}
-	cnt := 0
-	start := time.Now()
-	for {
-		cnt++
-		dsStopped := false
-		minerStopped := false
-
-		if ds != nil {
-			dsStopped = !ds.Running
-		} else {
-			dsStopped = true
+		miner.Start(setup.CTX)
+	
+		//now we wait for kill sig
+		<-mineCh
+		//and then notify exit channels
+		for _, ch := range exitChannels {
+			*ch <- os.Interrupt
 		}
-
-		if miner != nil {
-			minerStopped = !miner.Running
-		} else {
-			minerStopped = true
+		cnt := 0
+		start := time.Now()
+		for {
+			cnt++
+			dsStopped := false
+			minerStopped := false
+	
+			if ds != nil {
+				dsStopped = !ds.Running
+			} else {
+				dsStopped = true
+			}
+	
+			if miner != nil {
+				minerStopped = !miner.Running
+			} else {
+				minerStopped = true
+			}
+	
+			if !dsStopped && !minerStopped && cnt > 60 {
+				fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
+			} else if dsStopped && minerStopped {
+				break
+			}
+			time.Sleep(500 * time.Millisecond)
 		}
-
-		if !dsStopped && !minerStopped && cnt > 60 {
-			fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
-		} else if dsStopped && minerStopped {
-			break
-		}
-		time.Sleep(500 * time.Millisecond)
-	}
-	fmt.Printf("Main shutdown complete \U00002622\n")
+		fmt.Printf("Main shutdown complete \U00002622\n")
+	}()
+	
 
 }
 
-// func stopMine() {
-// 	syscall.Kill(syscall.Getpid(), syscall.SIGINT)
-// }
+func stopMine() {
+	
+	mineCh <- "Stahp it"
+
+}
