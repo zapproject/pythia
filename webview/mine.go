@@ -1,6 +1,7 @@
 package webview
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -16,22 +17,18 @@ import (
 	"github.com/zapproject/pythia/util"
 )
 
-// var out chan string
-// var wg *sync.WaitGroup
-// var reader *os.File
-
 func showMine(w webview.WebView) {
 
 	w.Bind("startMine", func() {
 		go startMine()
 	})
 
-	// w.Bind("showLogs", func() string {
-	// 	return showLogs()
-	// })
+	w.Bind("showLogs", func(index int) string {
+		return showLogs(index)
+	})
 
 	w.Bind("stopMine", func() {
-		stopMine()
+		go stopMine()
 	})
 
 	ex, err := os.Executable()
@@ -44,35 +41,13 @@ func showMine(w webview.WebView) {
 }
 
 func startMine() {
-	file, _ := os.OpenFile("./webview/public/miningLogs.html", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
+	file, _ := os.OpenFile("./webview/public/miningLogs.log", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 
-	// var writer *os.File
-	// var err error
-	// reader, writer, err := os.Pipe()
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// os.Stdout = writer
-	// os.Stderr = writer
-	// log.SetOutput(writer)
 	os.Stdout = file
 	os.Stderr = file
 	log.SetOutput(file)
 	loggingCfgs := util.GetLoggingConfig()
 	util.InitLoggers(loggingCfgs)
-	// fmt.Println("LOGGING STARTED")
-	// out := make(chan string)
-
-	// wg = new(sync.WaitGroup)
-	// wg.Add(1)
-	// go func() {
-	// 	var buf bytes.Buffer
-	// 	wg.Done()
-	// 	io.Copy(&buf, reader)
-	// 	out <- buf.String()
-	// }()
-	// wg.Wait()
 
 	//create os kill sig listener
 	c := make(chan os.Signal)
@@ -141,18 +116,30 @@ func startMine() {
 }
 
 func stopMine() {
+	e := os.Remove("./webview/public/miningLogs.log")
+	if e != nil {
+		panic(e)
+	}
 	syscall.Kill(syscall.Getpid(), syscall.SIGINT)
 }
 
-// func showLogs() string {
-// wg = new(sync.WaitGroup)
-// wg.Add(1)
-// go func() {
-// var buf bytes.Buffer
-// wg.Done()
-// io.Copy(&buf, reader)
-// out <- buf.String()
-// }()
-// wg.Wait()
-// return buf.String()
-// }
+func showLogs(index int) string {
+	var content string
+	file, _ := os.Open("./webview/public/miningLogs.log")
+	reader := bufio.NewScanner(file)
+
+	reader.Split(bufio.ScanLines)
+
+	ind := 0
+	for reader.Scan() {
+		ind = ind + 1
+
+		if ind <= index {
+			continue
+		}
+
+		content = content + reader.Text() + "\n"
+	}
+
+	return content
+}
