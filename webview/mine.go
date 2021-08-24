@@ -17,6 +17,9 @@ import (
 	"github.com/zapproject/pythia/util"
 )
 
+var stdout *os.File
+var stderr *os.File
+
 func showMine(w webview.WebView) {
 
 	w.Bind("startMine", func() {
@@ -43,6 +46,8 @@ func showMine(w webview.WebView) {
 func startMine() {
 	file, _ := os.OpenFile("./webview/public/miningLogs.log", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 
+	stdout = os.Stdout
+	stderr = os.Stderr
 	os.Stdout = file
 	os.Stderr = file
 	log.SetOutput(file)
@@ -120,6 +125,14 @@ func stopMine() {
 	if e != nil {
 		panic(e)
 	}
+
+	// return to original outputs
+	os.Stderr = stderr
+	os.Stdout = stdout
+	log.SetOutput(stdout)
+	loggingCfgs := util.GetLoggingConfig()
+	util.InitLoggers(loggingCfgs)
+
 	syscall.Kill(syscall.Getpid(), syscall.SIGINT)
 }
 
