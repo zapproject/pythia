@@ -1,6 +1,6 @@
 FROM golang:stretch
 
-WORKDIR /go/delivery
+WORKDIR /go/delivery 
 
 RUN apt -y update
 RUN apt -y install ocl-icd-opencl-dev
