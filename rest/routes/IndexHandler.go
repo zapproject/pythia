@@ -348,11 +348,6 @@ func (h *IndexHandler) Incoming(ctx context.Context, req *http.Request) (int, st
 
 	p, v := collect(strings.ToUpper(symbol))
 
-	// v, err := DB.Get(db.GasKey)
-	// if err != nil {
-	// 	log.Printf("Problem reading Gas from DB: %v\n", err)
-	// 	return 500, `{"error": "Could not read Gas from DB"}`
-	// }
 	return 200, fmt.Sprintf(
 		`{
 			"pair": "%s",
