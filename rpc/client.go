@@ -76,6 +76,7 @@ func NewClient(url string) (ETHClient, error) {
 	timeout := time.Duration(ethClientTimeout) * time.Second
 	client, err := ethclient.Dial(url)
 	if err != nil {
+		fmt.Println("err")
 		return nil, err
 	}
 	return &clientInstance{ethClient: client, timeout: timeout, log: util.NewLogger("rpc", "client")}, nil
@@ -86,7 +87,7 @@ func (c *clientInstance) withTimeout(ctx context.Context, fn func(*context.Conte
 	defer cancel()
 	tryCount := 0
 	nextTick := time.Now().Add(errorPrintTick)
-	for tryCount < 20 {
+	for tryCount < 2 {
 		err := fn(&wTo)
 		if err == nil {
 			return nil

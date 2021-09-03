@@ -26,6 +26,15 @@ func LoadWebview() {
 	w.Bind("stakeStatus",stakeStatus)
 	w.Bind("startMine",startMine)
 	w.Bind("stopMine",stopMine)
+	w.Bind("isMining",isMining)
+	w.Bind("isInit",isInit)
+	w.Bind("showLogs",showLogs)
+	w.Bind("requestWithdraw",requestWithdraw)
+	w.Bind("withdraw",withdraw)
+	w.Bind("canWithdraw",canWithdraw)
+	w.Bind("withdrawMsg",withdrawMsg)
+	w.Bind("depositStake",depositStake)
+	w.Bind("transfer",transfer)
 
 	ex, err := os.Executable()
 	if err != nil {
@@ -36,9 +45,5 @@ func LoadWebview() {
 
 	w.Navigate(p)
 
-	// content, _ := ioutil.ReadFile("./public/wallet.html")
-	// w.Navigate(string(content))
-
-	// w.Navigate("./public/wallet.html")
 	w.Run()
 }

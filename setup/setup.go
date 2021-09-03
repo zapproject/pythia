@@ -39,7 +39,8 @@ func buildContext() error {
 		//create an rpc client
 		client, err := rpc.NewClient(cfg.NodeURL)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
+			return err
 		}
 
 		//create an instance of the Zap master contract for on-chain interactions
@@ -131,12 +132,12 @@ func App() (bool,error) {
 
 	err := util.ParseLoggingConfig("./loggingConfig.json")
 	if err != nil{
-		log.Fatal(err) 
+		fmt.Errorf(err.Error()) 
 		return false,err
 	}
 	err = buildContext()
 	if err != nil{
-		log.Fatal(err) 
+		fmt.Errorf(err.Error()) 
 		return false,err
 	}
 

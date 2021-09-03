@@ -84,6 +84,9 @@ func Balance(ctx context.Context, addr common.Address) error {
 		log.Fatal(err)
 		return err
 	}
+	fmt.Println(zapBalance)
+	fmt.Println(ethBalance)
+
 	fmt.Printf("Lets \U0001F440 how much \U0001F4B0\U0001F4B0\U0001F4B0 %s has...\n", addr.String())
 	fmt.Printf("%10s BNB\n", util.FormatERC20Balance(ethBalance))
 	fmt.Printf("%10s ZAP\n", util.FormatERC20Balance(zapBalance))

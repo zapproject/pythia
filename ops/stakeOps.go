@@ -172,6 +172,7 @@ func WithdrawStake(ctx context.Context) error {
 	target := time.Unix(startedRound, 0)
 	timePassed := time.Now().Sub(target)
 	delta := timePassed - (time.Hour * 24 * 7)
+
 	if delta > 0 {
 		fmt.Printf("Stake has been eligbile to withdraw for %s\n", delta)
 		auth, err := PrepareEthTransaction(ctx)
