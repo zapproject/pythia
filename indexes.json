@@ -94,6 +94,372 @@
 	"KRW/USD": [
 		"json(http://127.0.0.1:5002/krw).value"
 	],
+	"NAD/USD": [
+		"json(http://127.0.0.1:5002/nad).value"
+	],
+	"NPR/USD": [
+		"json(http://127.0.0.1:5002/npr).value"
+	],
+	"ANG/USD": [
+		"json(http://127.0.0.1:5002/ang).value"
+	],
+	"NIO/USD": [
+		"json(http://127.0.0.1:5002/nio).value"
+	],
+	"NGN/USD": [
+		"json(http://127.0.0.1:5002/ngn).value"
+	],
+	"OMR/USD": [
+		"json(http://127.0.0.1:5002/omr).value"
+	],
+	"XPF/USD": [
+		"json(http://127.0.0.1:5002/xpf).value"
+	],
+	"PKR/USD": [
+		"json(http://127.0.0.1:5002/pkr).value"
+	],
+	"PAB/USD": [
+		"json(http://127.0.0.1:5002/pab).value"
+	],
+	"PGK/USD": [
+		"json(http://127.0.0.1:5002/pgk).value"
+	],
+	"PYG/USD": [
+		"json(http://127.0.0.1:5002/pyg).value"
+	],
+	"PEN/USD": [
+		"json(http://127.0.0.1:5002/pen).value"
+	],
+	"PHP/USD": [
+		"json(http://127.0.0.1:5002/php).value"
+	],
+	"PLN/USD": [
+		"json(http://127.0.0.1:5002/pln).value"
+	],
+	"QAR/USD": [
+		"json(http://127.0.0.1:5002/qar).value"
+	],
+	"RON/USD": [
+		"json(http://127.0.0.1:5002/ron).value"
+	],
+	"RWF/USD": [
+		"json(http://127.0.0.1:5002/rwf).value"
+	],
+	"WST/USD": [
+		"json(http://127.0.0.1:5002/wst).value"
+	],
+	"SAR/USD": [
+		"json(http://127.0.0.1:5002/sar).value"
+	],
+	"SCR/USD": [
+		"json(http://127.0.0.1:5002/scr).value"
+	],
+	"SLL/USD": [
+		"json(http://127.0.0.1:5002/sll).value"
+	],
+	"SKK/USD": [
+		"json(http://127.0.0.1:5002/skk).value"
+	],
+	"SIT/USD": [
+		"json(http://127.0.0.1:5002/sit).value"
+	],
+	"SBD/USD": [
+		"json(http://127.0.0.1:5002/sbd).value"
+	],
+	"LKR/USD": [
+		"json(http://127.0.0.1:5002/lkr).value"
+	],
+	"SDD/USD": [
+		"json(http://127.0.0.1:5002/sdd).value"
+	],
+	"SZL/USD": [
+		"json(http://127.0.0.1:5002/szl).value"
+	],
+	"TWD/USD": [
+		"json(http://127.0.0.1:5002/twd).value"
+	],
+	"TZS/USD": [
+		"json(http://127.0.0.1:5002/tzs).value"
+	],
+	"TOP/USD": [
+		"json(http://127.0.0.1:5002/top).value"
+	],
+	"TND/USD": [
+		"json(http://127.0.0.1:5002/tnd).value"
+	],
+	"UGX/USD": [
+		"json(http://127.0.0.1:5002/ugx).value"
+	],
+	"UAH/USD": [
+		"json(http://127.0.0.1:5002/uah).value"
+	],
+	"UYU/USD": [
+		"json(http://127.0.0.1:5002/uyu).value"
+	],
+	"VUV/USD": [
+		"json(http://127.0.0.1:5002/vuv).value"
+	],
+	"VEF/USD": [
+		"json(http://127.0.0.1:5002/vef).value"
+	],
+	"XOF/USD": [
+		"json(http://127.0.0.1:5002/xof).value"
+	],
+	"YER/USD": [
+		"json(http://127.0.0.1:5002/yer).value"
+	],
+	"ZMK/USD": [
+		"json(http://127.0.0.1:5002/zmk).value"
+	],
+	"KZT/USD": [
+		"json(http://127.0.0.1:5002/kzt).value"
+	],
+	"KES/USD": [
+		"json(http://127.0.0.1:5002/kes).value"
+	],
+	"KWD/USD": [
+		"json(http://127.0.0.1:5002/kwd).value"
+	],
+	"LVL/USD": [
+		"json(http://127.0.0.1:5002/lvl).value"
+	],
+	"LBP/USD": [
+		"json(http://127.0.0.1:5002/lbp).value"
+	],
+	"LSL/USD": [
+		"json(http://127.0.0.1:5002/lsl).value"
+	],
+	"LTL/USD": [
+		"json(http://127.0.0.1:5002/ltl).value"
+	],
+	"MOP/USD": [
+		"json(http://127.0.0.1:5002/mop).value"
+	],
+	"MKD/USD": [
+		"json(http://127.0.0.1:5002/mkd).value"
+	],
+	"MWK/USD": [
+		"json(http://127.0.0.1:5002/mwk).value"
+	],
+	"MYR/USD": [
+		"json(http://127.0.0.1:5002/myr).value"
+	],
+	"MVR/USD": [
+		"json(http://127.0.0.1:5002/mvr).value"
+	],
+	"MRO/USD": [
+		"json(http://127.0.0.1:5002/mro).value"
+	],
+	"MUR/USD": [
+		"json(http://127.0.0.1:5002/mur).value"
+	],
+	"MXN/USD": [
+		"json(http://127.0.0.1:5002/mxn).value"
+	],
+	"MDL/USD": [
+		"json(http://127.0.0.1:5002/mdl).value"
+	],
+	"MNT/USD": [
+		"json(http://127.0.0.1:5002/mnt).value"
+	],
+	"MAD/USD": [
+		"json(http://127.0.0.1:5002/mad).value"
+	],
+	"HNL/USD": [
+		"json(http://127.0.0.1:5002/hnl).value"
+	],
+	"HUF/USD": [
+		"json(http://127.0.0.1:5002/huf).value"
+	],
+	"ISK/USD": [
+		"json(http://127.0.0.1:5002/isk).value"
+	],
+	"IDR/USD": [
+		"json(http://127.0.0.1:5002/idr).value"
+	],
+	"IRR/USD": [
+		"json(http://127.0.0.1:5002/irr).value"
+	],
+	"IQD/USD": [
+		"json(http://127.0.0.1:5002/iqd).value"
+	],
+	"ILS/USD": [
+		"json(http://127.0.0.1:5002/ils).value"
+	],
+	"JOD/USD": [
+		"json(http://127.0.0.1:5002/jod).value"
+	],
+	"GTQ/USD": [
+		"json(http://127.0.0.1:5002/gtq).value"
+	],
+	"GNF/USD": [
+		"json(http://127.0.0.1:5002/gnf).value"
+	],
+	"ALL/USD": [
+		"json(http://127.0.0.1:5002/all).value"
+	],
+	"BGN/USD": [
+		"json(http://127.0.0.1:5002/bgn).value"
+	],
+	"ARS/USD": [
+		"json(http://127.0.0.1:5002/ars).value"
+	],
+	"AWG/USD": [
+		"json(http://127.0.0.1:5002/awg).value"
+	],
+	"BAM/USD": [
+		"json(http://127.0.0.1:5002/bam).value"
+	],
+	"AFN/USD": [
+		"json(http://127.0.0.1:5002/afn).value"
+	],
+	"AZN/USD": [
+		"json(http://127.0.0.1:5002/azn).value"
+	],
+	"BYN/USD": [
+		"json(http://127.0.0.1:5002/byn).value"
+	],
+	"BOB/USD": [
+		"json(http://127.0.0.1:5002/bob).value"
+	],
+	"BWP/USD": [
+		"json(http://127.0.0.1:5002/bwp).value"
+	],
+	"BRL/USD": [
+		"json(http://127.0.0.1:5002/brl).value"
+	],
+	"BND/USD": [
+		"json(http://127.0.0.1:5002/bnd).value"
+	],
+	"KHR/USD": [
+		"json(http://127.0.0.1:5002/khr).value"
+	],
+	"CLP/USD": [
+		"json(http://127.0.0.1:5002/clp).value"
+	],
+	"COP/USD": [
+		"json(http://127.0.0.1:5002/cop).value"
+	],
+	"CRC/USD": [
+		"json(http://127.0.0.1:5002/crc).value"
+	],
+	"HRK/USD": [
+		"json(http://127.0.0.1:5002/hrk).value"
+	],
+	"CUP/USD": [
+		"json(http://127.0.0.1:5002/cup).value"
+	],
+	"CZK/USD": [
+		"json(http://127.0.0.1:5002/czk).value"
+	],
+	"DOP/USD": [
+		"json(http://127.0.0.1:5002/dop).value"
+	],
+	"EGP/USD": [
+		"json(http://127.0.0.1:5002/egp).value"
+	],
+	"SVC/USD": [
+		"json(http://127.0.0.1:5002/svc).value"
+	],
+	"FKP/USD": [
+		"json(http://127.0.0.1:5002/fkp).value"
+	],
+	"FJD/USD": [
+		"json(http://127.0.0.1:5002/fjd).value"
+	],
+	"GHS/USD": [
+		"json(http://127.0.0.1:5002/ghs).value"
+	],
+	"GIP/USD": [
+		"json(http://127.0.0.1:5002/gip).value"
+	],
+	"GGP/USD": [
+		"json(http://127.0.0.1:5002/ggp).value"
+	],
+	"GYD/USD": [
+		"json(http://127.0.0.1:5002/gyd).value"
+	],
+	"DZD/USD": [
+		"json(http://127.0.0.1:5002/dzd).value"
+	],
+	"BHD/USD": [
+		"json(http://127.0.0.1:5002/bhd).value"
+	],
+	"BDT/USD": [
+		"json(http://127.0.0.1:5002/bdt).value"
+	],
+	"BYR/USD": [
+		"json(http://127.0.0.1:5002/byr).value"
+	],
+	"BTN/USD": [
+		"json(http://127.0.0.1:5002/btn).value"
+	],
+	"BIF/USD": [
+		"json(http://127.0.0.1:5002/bif).value"
+	],
+	"XAF/USD": [
+		"json(http://127.0.0.1:5002/xaf).value"
+	],
+	"KMF/USD": [
+		"json(http://127.0.0.1:5002/kmf).value"
+	],
+	"CYP/USD": [
+		"json(http://127.0.0.1:5002/cyp).value"
+	],
+	"EEK/USD": [
+		"json(http://127.0.0.1:5002/eek).value"
+	],
+	"ETB/USD": [
+		"json(http://127.0.0.1:5002/etb).value"
+	],
+	"GMD/USD": [
+		"json(http://127.0.0.1:5002/gmd).value"
+	],
+	"TVD/USD": [
+		"json(http://127.0.0.1:5002/tvd).value"
+	],
+	"UZS/USD": [
+		"json(http://127.0.0.1:5002/uzs).value"
+	],
+	"VND/USD": [
+		"json(http://127.0.0.1:5002/vnd).value"
+	],
+	"SOS/USD": [
+		"json(http://127.0.0.1:5002/sos).value"
+	],
+	"SYP/USD": [
+		"json(http://127.0.0.1:5002/syp).value"
+	],
+	"RSD/USD": [
+		"json(http://127.0.0.1:5002/rsd).value"
+	],
+	"SHP/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"IMP/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"JEP/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"KGS/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"LAK/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"LRD/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"MZN/USD": [
+		"json(http://127.0.0.1:5002/shp).value"
+	],
+	"KPW/USD": [
+		"json(http://127.0.0.1:5002/kpw).value"
+	],
+	"ZWD/USD": [
+		"json(http://127.0.0.1:5002/zwd).value"
+	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",
 		"json(https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd).bitcoin.usd",
