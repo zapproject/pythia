@@ -670,7 +670,7 @@ func collect(symbol string) (string, string) {
 	case "GTQ":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "GTQ"
+				pair = "GTQ/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Guatemala-Quetzal-GTQ-currency-table.html")
@@ -678,7 +678,7 @@ func collect(symbol string) (string, string) {
 	case "GNF":
 		c.OnHTML(".coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "GNF"
+				pair = "GNF/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Guinea-Franc-GNF-currency-table.html")
@@ -897,7 +897,7 @@ func collect(symbol string) (string, string) {
 	case "FJD":
 		c.OnHTML("tr.coltwo:nth-child(13) > td:nth-child(4) > strong:nth-child(1)",
 			func(e *colly.HTMLElement) {
-				pair = "FJD"
+				pair = "FJD/USD: "
 				value = e.Text
 			})
 
@@ -906,7 +906,7 @@ func collect(symbol string) (string, string) {
 	case "GHS":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "GHS"
+				pair = "GHS/USD: "
 				value = e.Text
 			})
 
@@ -915,7 +915,7 @@ func collect(symbol string) (string, string) {
 	case "GIP":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "GIP"
+				pair = "GIP/USD: "
 				value = e.Text
 			})
 
@@ -924,7 +924,7 @@ func collect(symbol string) (string, string) {
 	case "GGP":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "GGP"
+				pair = "GGP/USD: "
 				value = e.Text
 			})
 
@@ -933,7 +933,7 @@ func collect(symbol string) (string, string) {
 	case "GYD":
 		c.OnHTML("h3.cc__source-to-target:nth-child(1) > span:nth-child(3)",
 			func(e *colly.HTMLElement) {
-				pair = "GYD"
+				pair = "GYD/USD: "
 				value = e.Text
 			})
 
@@ -942,84 +942,84 @@ func collect(symbol string) (string, string) {
 	case "DZD":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "DZD"
+				pair = "DZD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Algerian-Dinar-DZD-currency-table.html")
 	case "BHD":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "BHD"
+				pair = "BHD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Bahraini-Dinar-BHD-currency-table.html")
 	case "BDT":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "BDT"
+				pair = "BDT/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Bangladesh-Taka-BDT-currency-table.html")
 	case "BYR":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "BYR"
+				pair = "BYR/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Belarus-Ruble-BYR-currency-table.html")
 	case "BTN":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "BTN"
+				pair = "BTN/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Bhutan-Ngultrum-BTN-currency-table.html")
 	case "BIF":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "BIF"
+				pair = "BIF/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Burundi-Franc-BIF-currency-table.html")
 	case "XAF":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "XAF"
+				pair = "XAF/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Central-African-CFA-franc-XAF-currency-table.html")
 	case "KMF":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "KMF"
+				pair = "KMF/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Comoros-Franc-KMF-currency-table.html")
 	case "CYP":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "CYP"
+				pair = "CYP/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Cyprus-Pound-CYP-currency-table.html")
 	case "EEK":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "EEK"
+				pair = "EEK/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Estonian-Kroon-EEK-currency-table.html")
 	case "ETB":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "ETB"
+				pair = "ETB/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Ethiopian-Birr-ETB-currency-table.html")
 	case "GMD":
 		c.OnHTML("tr.coltwo:nth-child(13) strong",
 			func(e *colly.HTMLElement) {
-				pair = "GMD"
+				pair = "GMD/USD: "
 				value = e.Text
 			})
 		c.Visit("https://www.exchangerates.org.uk/Gambian-Dalasi-GMD-currency-table.html")

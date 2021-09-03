@@ -266,34 +266,34 @@
 		"json(http://127.0.0.1:5002/mad).value"
 	],
 	"HNL/USD": [
-		"json(http://127.0.0.1:5002/hnl)/value"
+		"json(http://127.0.0.1:5002/hnl).value"
 	],
 	"HUF/USD": [
-		"json(http://127.0.0.1:5002/huf)/value"
+		"json(http://127.0.0.1:5002/huf).value"
 	],
 	"ISK/USD": [
-		"json(http://127.0.0.1:5002/isk)/value"
+		"json(http://127.0.0.1:5002/isk).value"
 	],
 	"IDR/USD": [
-		"json(http://127.0.0.1:5002/idr)/value"
+		"json(http://127.0.0.1:5002/idr).value"
 	],
 	"IRR/USD": [
-		"json(http://127.0.0.1:5002/irr)/value"
+		"json(http://127.0.0.1:5002/irr).value"
 	],
 	"IQD/USD": [
-		"json(http://127.0.0.1:5002/iqd)/value"
+		"json(http://127.0.0.1:5002/iqd).value"
 	],
 	"ILS/USD": [
-		"json(http://127.0.0.1:5002/ils)/value"
+		"json(http://127.0.0.1:5002/ils).value"
 	],
 	"JOD/USD": [
-		"json(http://127.0.0.1:5002/jod)/value"
+		"json(http://127.0.0.1:5002/jod).value"
 	],
 	"GTQ/USD": [
-		"json(http://127.0.0.1:5002/gtq)/value"
+		"json(http://127.0.0.1:5002/gtq).value"
 	],
 	"GNF/USD": [
-		"json(http://127.0.0.1:5002/gnf)/value"
+		"json(http://127.0.0.1:5002/gnf).value"
 	],
 	"ALL/USD": [
 		"json(http://127.0.0.1:5002/all).value"
