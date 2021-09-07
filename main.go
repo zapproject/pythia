@@ -60,6 +60,7 @@ func buildContext() error {
 
 		ctx = context.WithValue(context.Background(), ZapCommon.ClientContextKey, client)
 		ctx = context.WithValue(ctx, ZapCommon.ContractAddress, contractAddress)
+		ctx = context.WithValue(ctx, ZapCommon.VaultAddress, vaultAddress)
 		ctx = context.WithValue(ctx, ZapCommon.MasterContractContextKey, masterInstance)
 		ctx = context.WithValue(ctx, ZapCommon.TransactorContractContextKey, transactorInstance)
 		ctx = context.WithValue(ctx, ZapCommon.TokenTransactorContractContextKey, tokenInstance)
