@@ -11,5 +11,3 @@ fi
 
 
 ./pythia mine -r
-
-while true; do  sleep 1; done
