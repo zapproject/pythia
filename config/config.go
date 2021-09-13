@@ -85,6 +85,7 @@ type Config struct {
 	DisputeTimeDelta             Duration              `json:"disputeTimeDelta"` //ignore data further than this away from the value we are checking
 	DisputeThreshold             float64               `json:"disputeThreshold"` //maximum allowed relative difference between observed and submitted value
 	UseGPU                       bool                  `json:"useGPU"`
+	LocalPort                    uint                  `json:"localPort"`
 
 	//config parameters excluded from the json config file
 	PrivateKey string `json:"privateKey"`
@@ -125,6 +126,8 @@ const PrivateKeyEnvName = "ETH_PRIVATE_KEY"
 const ServerHost = "SERVER_HOST"
 
 const ServerPort = "SERVER_PORT"
+
+const LocalPort = "LOCAL_PORT"
 
 const EthClientTimeout = "ETH_CLIENT_TIMEOUT"
 
@@ -293,6 +296,27 @@ func ParseConfigBytes(data []byte) error {
 		}
 		config.ServerPort = uint(parsedUint)
 	}
+
+
+	LocalPortEnv := os.Getenv(LocalPort)
+
+	if LocalPortEnv == "" {
+
+		if config.LocalPort == 0 {
+			
+			config.LocalPort = 6363
+		}
+
+	} else {
+		parsedUint, err := strconv.ParseUint(LocalPortEnv, 10, 32)
+
+		if err != nil {
+
+			return fmt.Errorf("error in parsing LocalPort from os.env: %s", err)
+		}
+		config.LocalPort = uint(parsedUint)
+	}
+
 
 	EthClientTimeoutEnv := os.Getenv(EthClientTimeout)
 
