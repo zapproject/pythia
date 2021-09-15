@@ -4,8 +4,7 @@ LDFLAGS="-X main.GitHash=$(git rev-parse --short HEAD)"
 
 
 #linux
-go run ./pow/generate_opencl.go
-mv kernelSource.go pow/
+
 go build -ldflags "$LDFLAGS"
 
-zip -r pythia.zip pythia indexes.json loggingConfig.json
+zip -r pythia_linux.zip pythia indexes.json loggingConfig.json
