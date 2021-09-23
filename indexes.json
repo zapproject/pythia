@@ -5,94 +5,460 @@
 		"json(https://cex.io/api/ticker/ZAP/USD).last"
 	],
 	"XCD/USD": [
-		"json(http://127.0.0.1:5002/xcd).value"
+		"local/xcd"
 	],
 	"TTD/USD": [
-		"json(http://127.0.0.1:5002/ttd).value"
+		"local/ttd"
 	],
 	"JMD/USD": [
-		"json(http://127.0.0.1:5002/jmd).value"
+		"local/jmd"
 	],
 	"BBD/USD": [
-		"json(http://127.0.0.1:5002/bbd).value"
+		"local/bbd"
 	],
 	"BSD/USD": [
-		"json(http://127.0.0.1:5002/bsd).value"
+		"local/bsd"
 	],
 	"KYD/USD": [
-		"json(http://127.0.0.1:5002/kyd).value"
+		"local/kyd"
 	],
 	"BZD/USD": [
-		"json(http://127.0.0.1:5002/bzd).value"
+		"local/bzd"
 	],
 	"HTG/USD": [
-		"json(http://127.0.0.1:5002/htg).value"
+		"local/htg"
 	],
 	"SRD/USD": [
-		"json(http://127.0.0.1:5002/srd).value"
+		"local/srd"
 	],
 	"BMD/USD": [
-		"json(http://127.0.0.1:5002/bmd).value"
+		"local/bmd"
 	],
 	"AUD/USD": [
-		"json(http://127.0.0.1:5002/aud).value"
+		"local/aud"
 	],
 	"GBP/USD": [
-		"json(http://127.0.0.1:5002/gbp).value"
+		"local/gbp"
 	],
 	"CAD/USD": [
-		"json(http://127.0.0.1:5002/cad).value"
+		"local/cad"
 	],
 	"DKK/USD": [
-		"json(http://127.0.0.1:5002/dkk).value"
+		"local/dkk"
 	],
 	"EUR/USD": [
-		"json(http://127.0.0.1:5002/eur).value"
+		"local/eur"
 	],
 	"HKD/USD": [
-		"json(http://127.0.0.1:5002/hkd).value"
+		"local/hkd"
 	],
 	"JPY/USD": [
-		"json(http://127.0.0.1:5002/jpy).value"
+		"local/jpy"
 	],
 	"NZD/USD": [
-		"json(http://127.0.0.1:5002/nzd).value"
+		"local/nzd"
 	],
 	"NOK/USD": [
-		"json(http://127.0.0.1:5002/nok).value"
+		"local/nok"
 	],
 	"ZAR/USD": [
-		"json(http://127.0.0.1:5002/zar).value"
+		"local/zar"
 	],
 	"SEK/USD": [
-		"json(http://127.0.0.1:5002/sek).value"
+		"local/sek"
 	],
 	"CHF/USD": [
-		"json(http://127.0.0.1:5002/chf).value"
+		"local/chf"
 	],
 	"TRY/USD": [
-		"json(http://127.0.0.1:5002/try).value"
+		"local/try"
 	],
 	"AED/USD": [
-		"json(http://127.0.0.1:5002/aed).value"
+		"local/aed"
 	],
 	"CNY/USD": [
-		"json(http://127.0.0.1:5002/cny).value"
+		"local/cny"
 	],
 	"THB/USD": [
-		"json(http://127.0.0.1:5002/thb).value"
+		"local/thb"
 	],
 	"INR/USD": [
-		"json(http://127.0.0.1:5002/inr).value"
+		"local/inr"
 	],
 	"SGD/USD": [
-		"json(http://127.0.0.1:5002/sgd).value"
+		"local/sgd"
 	],
 	"RUB/USD": [
-		"json(http://127.0.0.1:5002/rub).value"
+		"local/rub"
 	],
 	"KRW/USD": [
-		"json(http://127.0.0.1:5002/krw).value"
+		"local/krw"
+	],
+	"NAD/USD": [
+		"local/nad"
+	],
+	"NPR/USD": [
+		"local/npr"
+	],
+	"ANG/USD": [
+		"local/ang"
+	],
+	"NIO/USD": [
+		"local/nio"
+	],
+	"NGN/USD": [
+		"local/ngn"
+	],
+	"OMR/USD": [
+		"local/omr"
+	],
+	"XPF/USD": [
+		"local/xpf"
+	],
+	"PKR/USD": [
+		"local/pkr"
+	],
+	"PAB/USD": [
+		"local/pab"
+	],
+	"PGK/USD": [
+		"local/pgk"
+	],
+	"PYG/USD": [
+		"local/pyg"
+	],
+	"PEN/USD": [
+		"local/pen"
+	],
+	"PHP/USD": [
+		"local/php"
+	],
+	"PLN/USD": [
+		"local/pln"
+	],
+	"QAR/USD": [
+		"local/qar"
+	],
+	"RON/USD": [
+		"local/ron"
+	],
+	"RWF/USD": [
+		"local/rwf"
+	],
+	"WST/USD": [
+		"local/wst"
+	],
+	"SAR/USD": [
+		"local/sar"
+	],
+	"SCR/USD": [
+		"local/scr"
+	],
+	"SLL/USD": [
+		"local/sll"
+	],
+	"SKK/USD": [
+		"local/skk"
+	],
+	"SIT/USD": [
+		"local/sit"
+	],
+	"SBD/USD": [
+		"local/sbd"
+	],
+	"LKR/USD": [
+		"local/lkr"
+	],
+	"SDD/USD": [
+		"local/sdd"
+	],
+	"SZL/USD": [
+		"local/szl"
+	],
+	"TWD/USD": [
+		"local/twd"
+	],
+	"TZS/USD": [
+		"local/tzs"
+	],
+	"TOP/USD": [
+		"local/top"
+	],
+	"TND/USD": [
+		"local/tnd"
+	],
+	"UGX/USD": [
+		"local/ugx"
+	],
+	"UAH/USD": [
+		"local/uah"
+	],
+	"UYU/USD": [
+		"local/uyu"
+	],
+	"VUV/USD": [
+		"local/vuv"
+	],
+	"VEF/USD": [
+		"local/vef"
+	],
+	"XOF/USD": [
+		"local/xof"
+	],
+	"YER/USD": [
+		"local/yer"
+	],
+	"ZMK/USD": [
+		"local/zmk"
+	],
+	"KZT/USD": [
+		"local/kzt"
+	],
+	"KES/USD": [
+		"local/kes"
+	],
+	"KWD/USD": [
+		"local/kwd"
+	],
+	"LVL/USD": [
+		"local/lvl"
+	],
+	"LBP/USD": [
+		"local/lbp"
+	],
+	"LSL/USD": [
+		"local/lsl"
+	],
+	"LTL/USD": [
+		"local/ltl"
+	],
+	"MOP/USD": [
+		"local/mop"
+	],
+	"MKD/USD": [
+		"local/mkd"
+	],
+	"MWK/USD": [
+		"local/mwk"
+	],
+	"MYR/USD": [
+		"local/myr"
+	],
+	"MVR/USD": [
+		"local/mvr"
+	],
+	"MRO/USD": [
+		"local/mro"
+	],
+	"MUR/USD": [
+		"local/mur"
+	],
+	"MXN/USD": [
+		"local/mxn"
+	],
+	"MDL/USD": [
+		"local/mdl"
+	],
+	"MNT/USD": [
+		"local/mnt"
+	],
+	"MAD/USD": [
+		"local/mad"
+	],
+	"HNL/USD": [
+		"local/hnl"
+	],
+	"HUF/USD": [
+		"local/huf"
+	],
+	"ISK/USD": [
+		"local/isk"
+	],
+	"IDR/USD": [
+		"local/idr"
+	],
+	"IRR/USD": [
+		"local/irr"
+	],
+	"IQD/USD": [
+		"local/iqd"
+	],
+	"ILS/USD": [
+		"local/ils"
+	],
+	"JOD/USD": [
+		"local/jod"
+	],
+	"GTQ/USD": [
+		"local/gtq"
+	],
+	"GNF/USD": [
+		"local/gnf"
+	],
+	"ALL/USD": [
+		"local/all"
+	],
+	"BGN/USD": [
+		"local/bgn"
+	],
+	"ARS/USD": [
+		"local/ars"
+	],
+	"AWG/USD": [
+		"local/awg"
+	],
+	"BAM/USD": [
+		"local/bam"
+	],
+	"AFN/USD": [
+		"local/afn"
+	],
+	"AZN/USD": [
+		"local/azn"
+	],
+	"BYN/USD": [
+		"local/byn"
+	],
+	"BOB/USD": [
+		"local/bob"
+	],
+	"BWP/USD": [
+		"local/bwp"
+	],
+	"BRL/USD": [
+		"local/brl"
+	],
+	"BND/USD": [
+		"local/bnd"
+	],
+	"KHR/USD": [
+		"local/khr"
+	],
+	"CLP/USD": [
+		"local/clp"
+	],
+	"COP/USD": [
+		"local/cop"
+	],
+	"CRC/USD": [
+		"local/crc"
+	],
+	"HRK/USD": [
+		"local/hrk"
+	],
+	"CUP/USD": [
+		"local/cup"
+	],
+	"CZK/USD": [
+		"local/czk"
+	],
+	"DOP/USD": [
+		"local/dop"
+	],
+	"EGP/USD": [
+		"local/egp"
+	],
+	"SVC/USD": [
+		"local/svc"
+	],
+	"FKP/USD": [
+		"local/fkp"
+	],
+	"FJD/USD": [
+		"local/fjd"
+	],
+	"GHS/USD": [
+		"local/ghs"
+	],
+	"GIP/USD": [
+		"local/gip"
+	],
+	"GGP/USD": [
+		"local/ggp"
+	],
+	"GYD/USD": [
+		"local/gyd"
+	],
+	"DZD/USD": [
+		"local/dzd"
+	],
+	"BHD/USD": [
+		"local/bhd"
+	],
+	"BDT/USD": [
+		"local/bdt"
+	],
+	"BYR/USD": [
+		"local/byr"
+	],
+	"BTN/USD": [
+		"local/btn"
+	],
+	"BIF/USD": [
+		"local/bif"
+	],
+	"XAF/USD": [
+		"local/xaf"
+	],
+	"KMF/USD": [
+		"local/kmf"
+	],
+	"CYP/USD": [
+		"local/cyp"
+	],
+	"EEK/USD": [
+		"local/eek"
+	],
+	"ETB/USD": [
+		"local/etb"
+	],
+	"GMD/USD": [
+		"local/gmd"
+	],
+	"TVD/USD": [
+		"local/tvd"
+	],
+	"UZS/USD": [
+		"local/uzs"
+	],
+	"VND/USD": [
+		"local/vnd"
+	],
+	"SOS/USD": [
+		"local/sos"
+	],
+	"SYP/USD": [
+		"local/syp"
+	],
+	"RSD/USD": [
+		"local/rsd"
+	],
+	"SHP/USD": [
+		"local/shp"
+	],
+	"IMP/USD": [
+		"local/shp"
+	],
+	"JEP/USD": [
+		"local/shp"
+	],
+	"KGS/USD": [
+		"local/shp"
+	],
+	"LAK/USD": [
+		"local/shp"
+	],
+	"LRD/USD": [
+		"local/shp"
+	],
+	"MZN/USD": [
+		"local/shp"
+	],
+	"KPW/USD": [
+		"local/kpw"
+	],
+	"ZWD/USD": [
+		"local/zwd"
 	],
 	"BTC/USD": [
 		"json(https://api.kraken.com/0/public/Ticker?pair=BTCUSD).result.XXBTZUSD.c.0",

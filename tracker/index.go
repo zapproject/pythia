@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/benbjohnson/clock"
@@ -63,6 +64,13 @@ func BuildIndexTrackers() ([]Tracker, error) {
 			//did we already have a tracker for this API string?
 			_, ok := indexers[api]
 			if !ok {
+				// If it's a local forex pair with the format local/<symbol>,
+				// build the api path from the symbol and local server port
+				if strings.HasPrefix(api, "local"){
+					split := strings.Split(api, "/")
+					sym := split[1]
+					api = "json(http://127.0.0.1:"  + strconv.FormatInt(int64(cfg.LocalPort),10) + "/"+ sym + ").value"
+				}
 				pathStr, args := util.ParseQueryString(api)
 				var name string
 				var source DataSource

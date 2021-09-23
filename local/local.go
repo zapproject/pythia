@@ -24,7 +24,8 @@ func CreateLocal(ctx context.Context) *LocalServer {
 	DB := ctx.Value(common.DBContextKey).(db.DB)
 
 	router := routes.NewRouter(DB)
-	srv := &http.Server{Addr: fmt.Sprintf("%s:%d", cfg.ServerHost, (cfg.ServerPort + 1))}
+
+	srv := &http.Server{Addr: fmt.Sprintf("%s:%d", cfg.ServerHost, cfg.LocalPort)}
 	srv.Handler = router
 
 	serverLog.Info("Defined server on %s:%v", cfg.ServerHost, cfg.ServerPort)

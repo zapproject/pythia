@@ -13,6 +13,7 @@ import (
 	"github.com/zapproject/pythia/rpc"
 	token "github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
+	"github.com/zapproject/pythia/vault"
 )
 
 /**
@@ -72,6 +73,11 @@ func Approve(_spender common.Address, amt *big.Int, ctx context.Context) error {
 
 func Balance(ctx context.Context, addr common.Address) error {
 	client := ctx.Value(zapCommon.ClientContextKey).(rpc.ETHClient)
+	vaultAddress := ctx.Value((zapCommon.VaultAddress)).(common.Address)
+	vault, err := vault.NewVaultCaller(vaultAddress, client)
+	if err != nil {
+		return fmt.Errorf("Error with initialising vault instance to get vault balance: %+v", err)
+	}
 
 	ethBalance, err := client.BalanceAt(context.Background(), addr, nil)
 	if err != nil {
@@ -84,8 +90,16 @@ func Balance(ctx context.Context, addr common.Address) error {
 		log.Fatal(err)
 		return err
 	}
+
+	vaultBalance, err := vault.UserBalance(nil, addr)
+	if err != nil {
+		log.Fatal(err)
+		return err
+	}
+
 	fmt.Printf("Lets \U0001F440 how much \U0001F4B0\U0001F4B0\U0001F4B0 %s has...\n", addr.String())
 	fmt.Printf("%10s BNB\n", util.FormatERC20Balance(ethBalance))
 	fmt.Printf("%10s ZAP\n", util.FormatERC20Balance(zapBalance))
+	fmt.Printf("Vault Balance: %10s\n", util.FormatERC20Balance(vaultBalance))
 	return nil
 }

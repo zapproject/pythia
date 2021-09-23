@@ -60,6 +60,7 @@ func buildContext() error {
 
 		ctx = context.WithValue(context.Background(), ZapCommon.ClientContextKey, client)
 		ctx = context.WithValue(ctx, ZapCommon.ContractAddress, contractAddress)
+		ctx = context.WithValue(ctx, ZapCommon.VaultAddress, vaultAddress)
 		ctx = context.WithValue(ctx, ZapCommon.MasterContractContextKey, masterInstance)
 		ctx = context.WithValue(ctx, ZapCommon.TransactorContractContextKey, transactorInstance)
 		ctx = context.WithValue(ctx, ZapCommon.TokenTransactorContractContextKey, tokenInstance)
@@ -252,6 +253,20 @@ func mineCmd(cmd *cli.Cmd) {
 			}
 		}
 		//start miner
+		// DB := ctx.Value(ZapCommon.DataProxyKey).(db.DataServerProxy)
+		//DB := ctx.Value(ZapCommon.DBContextKey).(db.DB)
+		// needs to be tested out further
+		// if *remoteDS {
+		// 	time.Sleep(cfg.TrackerSleepCycle.Duration * 7)
+		// }
+		// v, err := DB.Get(db.DisputeStatusKey)
+		// if err != nil {
+		// 	fmt.Println("ignoring --- could not get dispute status.  Check if staked")
+		// }
+		// status, _ := hexutil.DecodeBig(string(v))
+		// if status.Cmp(big.NewInt(1)) != 0 {
+		// 	log.Printf("\U0001F6AB Miner is not able to mine with status %v. Stopping all mining immediately \U00002622", status)
+		// }
 		ch := make(chan os.Signal)
 		exitChannels = append(exitChannels, &ch)
 		miner, err := ops.CreateMiningManager(ctx, ch, ops.NewSubmitter())
