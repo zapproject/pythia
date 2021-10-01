@@ -17,25 +17,15 @@ sudo apt install ocl-icd-opencl-dev
 1) Install go-lang https://golang.org/doc/install
 2) You should now be able to run the commands in the [execute section](#Execute) 
 
-
-## Supported Commands
-**Pythia Flags**
-   - `--config` (path to your config file, default is `config.json` in same Pythia root directory)
-   - `--logConfig` (location of logging config file; default path is Pythia root directory)
-
-**Pythia Commands**
-   - `mine` (start mining, will run the dataserver and miner together)
-   - `mine -r` (indicates to mine utilizing a remote/independent dataserver)
-   - `dataserver` (runs the remote/independent dataserver, it does not do any mining)
-   - `transfer [AMOUNT] [TO ADDRESS]` (transfer BSC ZAP, `TO ADDRESS` is a BSC address and the `AMOUNT` is number of ZAP (eg. `transfer 10 0xea...` (this transfers 10 ZAP BSC tokens)))
-   - `approve [AMOUNT] [TO ADDRESS]` (`AMOUNT` of BSC ZAP to approve the `TO ADDRESS` to send this amount of tokens
-   - `stake deposit` (this command will stake 500,000 BSC ZAP to the vault contract; **requirement for mining**)
-   - `stake request` (you must request to withdraw your stake before withdrawing)
-   - `stake withdraw` (withdraws your stake, can only be ran 1 week after running `stake request`)
-   - `stake status` (shows whether or not your are staked)
-   - `balance` (shows your ZAP and BNB balance)
-
 ## Execute
+
+First of all, be sure to clone this repo
+
+```bash
+git clone https://github.com/zapproject/pythia
+```
+
+Then, create a file in the root of the cloned project and call it `config.json`.
 
 ### Configuring your miner
 Before running the miner, edit your `config.json` file so that you can add your publicAddress, privateKey and **Contract Addresses**:
@@ -52,6 +42,7 @@ Before running the miner, edit your `config.json` file so that you can add your 
         "privateKey": "",
         "serverHost": "0.0.0.0",
         "serverPort": 5001,
+        "localPort": 6363,
         "ethClientTimeout": 3000,
         "trackerCycle": 100,
         "gasMultiplier": 1,
@@ -73,53 +64,57 @@ Before running the miner, edit your `config.json` file so that you can add your 
     }
 ```
 
+**Note**
+**You have the choice of using environment variables instead of editing the `config.json`**.
+[You can see the available environment variables here](.env.example)
+
 You can find an explanation of each field [here](#configjson).
 
 3) Pay special attention to the `contractAddress` and `vaultAddress` fields, update them with the ones in [this file](contracts.md).
 
-4) Be sure to also add your `publicAddress` and `privateKey` to the new file as well. **Remember, this public address is the BSC wallet address that should contain Testnet BNB and BSC ZAP**.
+4) Again, be sure to also add your `publicAddress` and `privateKey` to the new file as well. **Remember, this public address is the BSC wallet address that should contain Testnet BNB and BSC ZAP**.
 
-5) Add the same `publicAddress` to the `serverWhitelist` field like this
+You can get test Zap from here http://faucet.zap.org/, BSC Testnet faucet: https://testnet.binance.org/faucet-smart.
+
+5) Add your `publicAddress` to the `serverWhitelist` field like this
 ```json
 {
-    ...
-    serverWhitelist: [
-        YOUR_PUBLIC_ADDRESS_HERE,
+    // ...
+    "gasMax":30,
+    "serverWhitelist": [
+        "YOUR_PUBLIC_ADDRESS_HERE",
     ],
-    ...
+    "useGPU":false,
+    // ...
 }
 ```
 
-6) Save this file in the **root of this project's folder** as **config.json**. Meaning, it should be in the same folder as [main.go](main.go).
+6) Save `config.json`.
 
 **If you would like to test on a localhost BSC Testnet node**, be sure have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/.
 
 Then, replace the `nodeURL` in the config.json with `http://localhost:8545`.
 
-### Single Miner/Thread
+### Run a Single Miner Client
 
-**Running the commands**
+**Run the following commands**
 1) `./release_build.sh`
-2) `./pythia [cmd]`
-
-replace `[cmd]` with one of the [supported commands](#supported-commands) based on what you would like to do, for example:
-
-```bash
-./pythia mine
-```
+2) `./pythia mine`
 
 Will get your miner running.
 
-In this setup, your client will act as a datasever, getting blockchain information, and a miner, solving problems and writing data to blockchain.
+In this setup, your client will also act as a datasever, and a miner.
+
+The data server is set on port 5001. There is also a forex data server on port 6363.
+
+These are default ports, but you can change if you so wish.
 
 ### Remote Mining/Multiple Miners
 **This setup will allow you to run multiple miners on a single host address.**
 
 The Zap oracle network enables users to have a single data server provide data for multiple miner clients.
 
-This data server will get data on the latest challenge to mine and provide it to every miner client you want it to be connected to.
-
-Here is an idea of how your setup can be (note that you can have more or less miner clients than this):
+Here is an idea of how your setup can look like with this option:
 
 ```
 Client A: Data Server
@@ -131,26 +126,26 @@ Client E: Miner Client
 Client F: Miner Client
 ```
 
-Your data server, Client A, can have the same `config.json` [you configured in this step](#configuring-your-miner).
+Your data server, Client A, can have the same `config.json` [you configured earlier](#configuring-your-miner).
 
-On Clients B to F, change the serverAddress in `config.json` to the IP address or host address of Client A. **This may not be the same as the `0.0.0.0` address set for Client A.**
+On Clients B to F, change the `serverAddress` in your `config.json` to the IP address or host address of Client A.
 
-On Clients B to F, change their serverPort in `config.json` to the serverPort set in Client A's `config.json`. So by default, you can set it to `5001`.
+On Clients B to F, change their serverPort in `config.json` to the serverPort set in Client A's `config.json`. So by default, you can set it to `5001`. Do the same for localPort, which is 6363 by default.
 
-Next, go on Client A's `config.json` and update the `serverWhitelist` field with the `publicAddresses` of Clients B to F. **Remember, these public addresses are the BSC wallet addresses that should contain Testnet BNB and BSC ZAP**.
+Next, go on Client A's `config.json` and update the `serverWhitelist` field with the public addresses of Clients B to F. **Remember, these public addresses are the BSC wallet addresses that should contain Testnet BNB and BSC ZAP**.
 
 Here is an example of how your `serverWhitelist` should look like:
 ```json
 {
-    ...
-    serverWhitelist: [
-        PUBLIC_ADDRESS_B_HERE,
-        PUBLIC_ADDRESS_C_HERE,
-        PUBLIC_ADDRESS_D_HERE,
-        PUBLIC_ADDRESS_E_HERE,
-        PUBLIC_ADDRESS_F_HERE
+    "gasMax":30,
+    "serverWhitelist": [
+        "PUBLIC_ADDRESS_B_HERE",
+        "PUBLIC_ADDRESS_C_HERE",
+        "PUBLIC_ADDRESS_D_HERE",
+        "PUBLIC_ADDRESS_E_HERE",
+        "PUBLIC_ADDRESS_F_HERE"
     ],
-    ...
+    "useGPU":false,
 }
 ```
 
@@ -160,6 +155,25 @@ Now, follow these steps to get your miners running.
 2) Go on Clients B to F and run `./release_build.sh` then `./pythia mine -r`
 
 Your miners should now be running.
+
+## Supported Commands
+Besides `mine` and `dataserver` you can also run the following commands based on your needs:
+
+**Pythia Commands**
+   - `mine` (start mining, will run the dataserver and miner together)
+   - `mine -r` (indicates to mine utilizing a remote/independent dataserver)
+   - `dataserver` (runs the remote/independent dataserver, it does not do any mining)
+   - `transfer [AMOUNT] [TO ADDRESS]` (transfer BSC ZAP, `TO ADDRESS` is a BSC address and the `AMOUNT` is number of ZAP (eg. `transfer 10 0xea...` (this transfers 10 ZAP BSC tokens)))
+   - `approve [AMOUNT] [TO ADDRESS]` (`AMOUNT` of BSC ZAP to approve the `TO ADDRESS` to send this amount of tokens
+   - `stake deposit` (this command will stake 500,000 BSC ZAP to the vault contract; **requirement for mining**)
+   - `stake request` (you must request to withdraw your stake before withdrawing)
+   - `stake withdraw` (withdraws your stake, can only be ran 1 week after running `stake request`)
+   - `stake status` (shows whether or not your are staked)
+   - `balance` (shows your ZAP and BNB balance)
+
+**Pythia Flags**
+   - `--config` (path to your config file, default is `config.json` in same Pythia root directory)
+   - `--logConfig` (location of logging config file; default path is Pythia root directory)
 
 ## Running Disputes
 ### from cli
@@ -220,7 +234,7 @@ trackers (required)         - which pieces of the database you update
 
 dbFile (required)           - where you want to store your local database (if self-hosting)
 
-serverHost (required)       - location to host server
+serverHost (required)       - ip address of dataserver
 
 serverWhitelist (required)  - whitelists which publicAddress can access the data server.
                                 Please have at least one in the array - your own publicAddress. See example below.
