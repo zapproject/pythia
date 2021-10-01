@@ -30,8 +30,7 @@ Then, create a file in the root of the cloned project and call it `config.json`.
 ### Configuring your miner
 Before running the miner, edit your `config.json` file so that you can add your publicAddress, privateKey and **Contract Addresses**:
 
-1) Open a text editor (nano, VSCode, vim, or your OS's **text editor**) and create a new document/file.
-2) paste this template in the file:
+1) paste this template in the file:
 ```json
     {
         "zapTokenAddress": "0x09d8af358636d9bcc9a3e177b66eb30381a4b1a8",
@@ -68,15 +67,13 @@ Before running the miner, edit your `config.json` file so that you can add your 
 **You have the choice of using environment variables instead of editing the `config.json`**.
 [You can see the available environment variables here](.env.example)
 
-You can find an explanation of each field [here](#configjson).
+2) Pay special attention to the `contractAddress` and `vaultAddress` fields, update them with the ones in [this file](contracts.md).
 
-3) Pay special attention to the `contractAddress` and `vaultAddress` fields, update them with the ones in [this file](contracts.md).
-
-4) Again, be sure to also add your `publicAddress` and `privateKey` to the new file as well. **Remember, this public address is the BSC wallet address that should contain Testnet BNB and BSC ZAP**.
+3) Again, be sure to also add your `publicAddress` and `privateKey` to the new file as well. **Remember, this public address is the BSC wallet address that should contain Testnet BNB and BSC ZAP**.
 
 You can get test Zap from here http://faucet.zap.org/, BSC Testnet faucet: https://testnet.binance.org/faucet-smart.
 
-5) Add your `publicAddress` to the `serverWhitelist` field like this
+4) Add your `publicAddress` to the `serverWhitelist` field like this
 ```json
 {
     // ...
@@ -89,11 +86,13 @@ You can get test Zap from here http://faucet.zap.org/, BSC Testnet faucet: https
 }
 ```
 
-6) Save `config.json`.
+5) Save `config.json`.
 
 **If you would like to test on a localhost BSC Testnet node**, be sure have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/.
 
 Then, replace the `nodeURL` in the config.json with `http://localhost:8545`.
+
+You can find an explanation of each field [here](#configjson).
 
 ### Run a Single Miner Client
 
