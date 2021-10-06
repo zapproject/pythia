@@ -14,7 +14,6 @@ import (
 	zap1 "github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
-	"github.com/zapproject/pythia/vault"
 )
 
 /**
@@ -83,8 +82,8 @@ func Deposit(ctx context.Context) error {
 	}
 
 	// call vault locksmith
-	instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
-	auth, err := PrepareEthTransaction(ctx)
+	// instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
+	_, err = PrepareEthTransaction(ctx)
 	if err != nil {
 		return err
 	}
@@ -92,7 +91,7 @@ func Deposit(ctx context.Context) error {
 	// instanceV.LockSmith(auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
 
 	instance2 := ctx.Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
-	auth, _ = PrepareEthTransaction(ctx)
+	auth, _ := PrepareEthTransaction(ctx)
 	tx, err := token.Approve(auth, contractAddress, stakeAmt)
 	if err != nil {
 		return fmt.Errorf("unable to approve zapMaster: %v", err)
