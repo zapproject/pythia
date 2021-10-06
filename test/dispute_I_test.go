@@ -129,7 +129,7 @@ func StartMiners(t *testing.T) *big.Int {
 
 		auth, _ = ops.PrepareEthTransaction((minerCtx[i]))
 		instanceV := minerCtx[i].Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
-		instanceV.LockSmith(auth, minerCtx[i].Value(zapCommon.PublicAddress).(common.Address), minerCtx[i].Value(zapCommon.ContractAddress).(common.Address))
+		// instanceV.LockSmith(auth, minerCtx[i].Value(zapCommon.PublicAddress).(common.Address), minerCtx[i].Value(zapCommon.ContractAddress).(common.Address))
 
 		auth, _ = ops.PrepareEthTransaction((minerCtx[i]))
 		instanceZ := minerCtx[i].Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)

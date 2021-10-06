@@ -88,8 +88,8 @@ func Deposit(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Auth: %v\nPublicAddress: %s\nContract Address: %s\n", auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
-	instanceV.LockSmith(auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
+	// fmt.Printf("Auth: %v\nPublicAddress: %s\nContract Address: %s\n", auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
+	// instanceV.LockSmith(auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
 
 	instance2 := ctx.Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
 	auth, _ = PrepareEthTransaction(ctx)
