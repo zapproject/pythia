@@ -10,7 +10,7 @@ require (
 	github.com/benbjohnson/clock v1.0.3
 	github.com/btcsuite/btcd v0.22.0-beta // indirect
 	github.com/cespare/cp v1.1.1 // indirect
-	github.com/charliehorse55/go-opencl v0.0.0-20200116145223-eb5421c9755d
+	github.com/charliehorse55/go-opencl v0.0.0-20210425190053-aa8867ec9b78
 	github.com/deckarep/golang-set v1.7.1 // indirect
 	github.com/ethereum/go-ethereum v1.10.6
 	github.com/gobwas/glob v0.2.3 // indirect
