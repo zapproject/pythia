@@ -50,7 +50,7 @@ func Deposit(t *testing.T) {
 	// call vault locksmith
 	instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
 	auth, _ = ops.PrepareEthTransaction(ctx)
-	instanceV.LockSmith(auth, publicAddress, common.HexToAddress(cfg.ContractAddress))
+	// instanceV.LockSmith(auth, publicAddress, common.HexToAddress(cfg.ContractAddress))
 
 	// approve zap master for stake amount
 	auth, _ = ops.PrepareEthTransaction(ctx)

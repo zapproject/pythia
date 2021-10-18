@@ -12,6 +12,34 @@ sudo apt update
 sudo apt install ocl-icd-opencl-dev
 ```
 
+**Note**
+If you ever get an error like this
+```
+# pkg-config --cflags  -- OpenCL
+Package 'OpenCL' has no Version: field
+pkg-config: exit status 1
+```
+Then follow these steps:
+
+1) run this command to open `/opt/intel/opencl/OpenCL.pc`
+```
+sudo nano /opt/intel/opencl/OpenCL.pc
+```
+
+2) replace the content of the file with this
+```
+prefix=/opt/intel/opencl
+libdir=${prefix}
+includedir=${prefix}/include
+
+Name: OpenCL
+Description: Open Computing Language generic Installable Client Driver loader
+Version: 2.1
+Libs: -L${libdir} -lOpenCL
+Cflags: -I${includedir}
+```
+3) save the file, and then run `release_build.sh`
+
 ## Installation
 
 1) Install go-lang https://golang.org/doc/install
