@@ -424,7 +424,7 @@ Delve is a debugger for the Go programming language. Follow the steps in this [r
 
 ### **Basic Debug Commands**
 [continue](#continue) | Run until breakpoint or program termination.  
-[break](#break) | Sets a breakpoint. (EX. ```break tracker/index.go:39``` That will set a breakpoint on line 39 in tracker.index.go file.)  
+[break](#break) | Sets a breakpoint. (EX. ```break tracker/index.go:39``` That will set a breakpoint on line 39 in tracker.index.go file.)
 [breakpoints](#breakpoints) | Print out info for active breakpoints.  
 [step](#step) | Single step through program.  
 [stepout](#stepout) | Step out of the current function.  
