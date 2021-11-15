@@ -131,7 +131,7 @@
                         <a href="#" x-on:click="setActive(option)" x-bind:class="active==option ? 'active dashboard-nav-item': 'dashboard-nav-item'" x-text="capitalize(option)"> </a>
                       </template> 
                     </nav>
-                        <div class='dashboard-content' style="position:absolute;bottom:0" x-text="state ==  'connected' ? await getPubKey() : ''"></div>
+                    <div class='dashboard-content' style="position:absolute;bottom:0" x-text="state ==  'connected' ? await getPubKey() : ''"></div>
                   </div>
                   
                   <div class='dashboard-app'>
@@ -141,7 +141,6 @@
                           <div x-html="stake"></div>  
                           <div x-html="mine"></div>
                       </div>
-                      
                   </div>
               </div>
         `,
@@ -162,6 +161,25 @@
                           <div class="col-6"> </div>
                         </div>
                       </div>
+                    </div>
+                    <div class='card' x-data="transactions">
+                      <table x-init="showTransactions()">
+                        <tr>
+                          <th>Timestamp</th>
+                          <th>Event</th>
+                          <th>To</th>
+                          <th>From</th>
+                        </tr>
+                        
+                      </table>
+                      <template x-for="tx in transactions">
+                        <tr>
+                          <td x-text="tx.Timestamp"></td>
+                          <td x-text="tx.Event"></td>
+                          <td x-text="tx.To"></td>
+                          <td x-text="tx.From"></td>
+                        </tr>
+                      </template>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -320,6 +338,8 @@
           tallyVotes: true,
         },
 
+        transactions: [],
+
         setActive(option) {
           this.active = option
         },
@@ -333,7 +353,6 @@
 
         },
         start() {
-
           minerOps = JSON.parse(JSON.stringify(this.minerDefaults))
           trackers = []
           for (var key in minerOps) {
@@ -351,8 +370,6 @@
               })
             })
             .catch(console.log)
-
-
         },
         stop() {
           stopMine()
@@ -406,26 +423,24 @@
           }
         },
         transferAmt() {
-
           const container = document.getElementById("staticBackdrop");
           const modal = bootstrap.Modal.getInstance(container);
 
           transfer(this.recipient, this.transferAmount)
             .then(console.log)
             .catch(console.log)
-
           modal.hide()
+        },
+        showTransactions() {
+          this.transactions = setInterval(async () => {
+            showTxs()
+          }, 3000)
         }
-
       }
     }
-
 
     function capitalize(string) {
       return string.replace(/^./, string[0].toUpperCase());
     }
   </script>
-  <!-- <script src="nav.js"></script> -->
 </body>
-
-<!-- </html> -->
