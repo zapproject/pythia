@@ -1,94 +1,93 @@
-package  webview
+package webview
+
 import (
-	// "time"
+	"bufio"
+	"errors"
 	"fmt"
-	"github.com/zapproject/pythia/config"
-	"github.com/zapproject/pythia/setup"
-	"github.com/zapproject/pythia/ops"
-	ZapCommon "github.com/zapproject/pythia/common"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/zapproject/pythia/contracts"
-	"github.com/zapproject/pythia/util"
-	"math/big"
-    "errors"
 	"log"
+	"math/big"
 	"os"
-	// "os/signal"
-	// "syscall"
 	"time"
 
-	"bufio"
-
+	"github.com/ethereum/go-ethereum/common"
+	ZapCommon "github.com/zapproject/pythia/common"
+	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/contracts"
+	"github.com/zapproject/pythia/ops"
+	"github.com/zapproject/pythia/setup"
+	"github.com/zapproject/pythia/util"
 )
 
-
-
-func configWallet(cfg string) (bool, error){
+func configWallet(cfg string) (bool, error) {
 	// fmt.Println(req.TokenAddress )
 	err := config.ParseConfigBytes([]byte(cfg))
-	if err != nil{
+	if err != nil {
 		fmt.Println(err.Error())
-	} 
+	}
 
 	return setup.App()
 }
 
+func getPubKey() string {
+	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
+
+	return addr.String()[0:10]
+}
 
 func getBalance() (string, error) {
-	// setup.App()
 	addr := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
 	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	zapBalance, err := instance.BalanceOf(nil, addr)
 
 	fmt.Println(zapBalance)
 
-	if err != nil{
+	if err != nil {
 		fmt.Print(err.Error())
-		return "",err
+		return "", err
 	}
 
-	return zapBalance.String(),nil
+	return zapBalance.String(), nil
 
 }
 
 func stakeStatus() (int64, error) {
-	  
+
 	tmaster := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 
 	publicAddress := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
 	status, _, err := tmaster.GetStakerInfo(nil, publicAddress)
 	if err != nil {
-		return 0,fmt.Errorf("failed to get stake status: %s", err.Error())
+		return 0, fmt.Errorf("failed to get stake status: %s", err.Error())
 	}
 
 	fmt.Println(status)
 
-	return status.Int64(),nil
+	return status.Int64(), nil
 
 }
 
-func depositStake() (bool,error){
+func depositStake() (bool, error) {
 	err := ops.Deposit(setup.CTX)
-	if err != nil{
-		return false,err
+	if err != nil {
+		return false, err
 	}
-	return true,nil
+	return true, nil
 }
 
-func requestWithdraw() (bool,error) {
+func requestWithdraw() (bool, error) {
 	err := ops.RequestStakingWithdraw(setup.CTX)
-	if err != nil{
-		return false,err
+	if err != nil {
+		return false, err
 	}
-	return true,nil
+	return true, nil
 }
 
-func withdrawStatus() (string,bool,error){
+func withdrawStatus() (string, bool, error) {
 	tmaster := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	publicAddress := setup.CTX.Value(ZapCommon.PublicAddress).(common.Address)
 	_, startTime, err := tmaster.GetStakerInfo(nil, publicAddress)
 	if err != nil {
-		return "",false,err
+		return "", false, err
 	}
 	startedRound := startTime.Int64()
 	startedRound = ((startedRound + 86399) / 86400) * 86400
@@ -98,39 +97,39 @@ func withdrawStatus() (string,bool,error){
 	// delta := 1
 
 	if delta > 0 {
-		return "Stake has been eligbile to withdraw for " +  fmt.Sprint(delta),true,nil
+		return "Stake has been eligbile to withdraw for " + fmt.Sprint(delta), true, nil
 	} else {
-		return "Stake will be eligible to withdraw in " + fmt.Sprint(-delta),false,nil
+		return "Stake will be eligible to withdraw in " + fmt.Sprint(-delta), false, nil
 	}
 
 }
 
-func canWithdraw() (bool,error){
+func canWithdraw() (bool, error) {
 
-	_,canWithdraw,err := withdrawStatus()
+	_, canWithdraw, err := withdrawStatus()
 	if err != nil {
-		return false,err
+		return false, err
 	}
-	return canWithdraw,nil
+	return canWithdraw, nil
 
 }
 
-func withdrawMsg() (string,error){
+func withdrawMsg() (string, error) {
 
-	msg,_,err := withdrawStatus()
+	msg, _, err := withdrawStatus()
 	if err != nil {
-		return "",err
+		return "", err
 	}
-	return msg,nil
+	return msg, nil
 
 }
 
-func withdraw()(bool,error) {
+func withdraw() (bool, error) {
 	err := ops.WithdrawStake(setup.CTX)
-	if err != nil{
-		return false,err
+	if err != nil {
+		return false, err
 	}
-	return true,nil
+	return true, nil
 }
 
 var mineCh chan string
@@ -139,8 +138,8 @@ var initializing bool = false
 
 func startMine() {
 
-	if(mining == false && initializing == false){
-		go func(){
+	if mining == false && initializing == false {
+		go func() {
 			initializing = true
 			file, _ := os.OpenFile("./webview/public/miningLogs.log", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 
@@ -149,20 +148,19 @@ func startMine() {
 			log.SetOutput(file)
 			loggingCfgs := util.GetLoggingConfig()
 			util.InitLoggers(loggingCfgs)
-	
-			
+
 			//create os kill sig listener
 			mineCh = make(chan string)
 			// signal.Notify(c, os.Interrupt)
 			exitChannels := make([]*chan os.Signal, 0)
-		
+
 			cfg := config.GetConfig()
 			var ds *ops.DataServerOps
 			if !cfg.EnablePoolWorker {
 				setup.AddDBToCtx(false)
 				ch := make(chan os.Signal)
 				exitChannels = append(exitChannels, &ch)
-		
+
 				var err error
 				ds, err = ops.CreateDataServerOps(setup.CTX, ch)
 				if err != nil {
@@ -194,19 +192,19 @@ func startMine() {
 				cnt++
 				dsStopped := false
 				minerStopped := false
-		
+
 				if ds != nil {
 					dsStopped = !ds.Running
 				} else {
 					dsStopped = true
 				}
-		
+
 				if miner != nil {
 					minerStopped = !miner.Running
 				} else {
 					minerStopped = true
 				}
-		
+
 				if !dsStopped && !minerStopped && cnt > 60 {
 					fmt.Printf("\U000026A0 Taking longer than expected to stop operations. Waited %v so far\n", time.Now().Sub(start))
 				} else if dsStopped && minerStopped {
@@ -215,17 +213,15 @@ func startMine() {
 				time.Sleep(500 * time.Millisecond)
 			}
 			fmt.Printf("Main shutdown complete \U00002622\n")
-			mining=false
+			mining = false
 		}()
 	}
-	
-	
 
 }
 
 func stopMine() bool {
-	
-	if(mining==true){
+
+	if mining == true {
 		mineCh <- "Stopping miner"
 		return true
 	}
@@ -233,14 +229,13 @@ func stopMine() bool {
 
 }
 
-func isMining() bool{
+func isMining() bool {
 	return mining
-} 
+}
 
-func isInit() bool{
+func isInit() bool {
 	return initializing
-} 
-
+}
 
 func showLogs(index int) string {
 	var content string
@@ -263,16 +258,15 @@ func showLogs(index int) string {
 	return content
 }
 
-
-func transfer(address string,  amount string) (bool, error){
+func transfer(address string, amount string) (bool, error) {
 
 	n := new(big.Int)
-    n, ok := n.SetString(amount, 10)
-    if !ok {
-        fmt.Println("SetString: error")
-        return false, errors.New("SetString: error")
-    }
-    fmt.Println(n)
+	n, ok := n.SetString(amount, 10)
+	if !ok {
+		fmt.Println("SetString: error")
+		return false, errors.New("SetString: error")
+	}
+	fmt.Println(n)
 	addr := common.HexToAddress("70997970C51812dc3A010C7d01b50e0d17dc79C8")
 
 	err := ops.Transfer(addr, n, setup.CTX)
@@ -280,8 +274,8 @@ func transfer(address string,  amount string) (bool, error){
 	if err != nil {
 
 		fmt.Println(err.Error())
-		return false, err 
-		
+		return false, err
+
 	}
 	return true, nil
 

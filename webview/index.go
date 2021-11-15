@@ -89,9 +89,9 @@ func showConfig(w webview.WebView) {
 		config.SetEthClientTimeout(uint(converted))
 
 		// other static configs
-		config.SetContractAddress("0xb7278a61aa25c888815afc32ad3cc52ff24fe575")
+		config.SetContractAddress("0x7a2088a1bFc9d81c55368AE168C2C02570cB814F")
 		config.SetTokenAddress("0x5fbdb2315678afecb367f032d93f642f64180aa3")
-		config.SetVaultAddress("0xCD8a1C3ba11CF5ECfa6267617243239504a98d90")
+		config.SetVaultAddress("0x09635f643e140090a9a8dcd712ed6285858cebef")
 		config.SetNodeURL("http://127.0.0.1:8545/")
 		config.SetServerHost("localhost")
 		config.SetServerPort(5001)

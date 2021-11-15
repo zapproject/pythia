@@ -29,288 +29,286 @@
 
 
   </div>
-  
-    <script>
-      function App() {
 
-        configs = {
-          "local":{
-                        "ContractAddress":	"0xcd8a1c3ba11cf5ecfa6267617243239504a98d90",
-                        "DBFile":	"zapDB",
-                        "DisputeTimeDelta":	"600s",
-                        "EthClientTimeout":	1500,
-                        "GasMax":	30,
-                        "GasMultiplier":	1,
-                        "NodeURL":	"http://localhost:8545/",
-                        "ServerHost":	"0.0.0.0",
-                        "ServerPort":	5001,
-                        "ServerWhitelist":["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-                        "TrackerCycle":	"100s",
-                        "Trackers": ["balance","disputeStatus","gas","tokenBalance","indexers","newCurrentVariables","currentVariables"],
-                        "UseGPU":	false,
-                        "VaultAddress":	"0x82e01223d51eb87e16a03e24687edf0f294da6f1",
-                        "zapTokenAddress":	"0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
-                      }  
-          
+  <script>
+    function App() {
+
+      configs = {
+        "local": {
+          "ContractAddress": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+          "DBFile": "zapDB",
+          "DisputeTimeDelta": "600s",
+          "EthClientTimeout": 1500,
+          "GasMax": 30,
+          "GasMultiplier": 1,
+          "NodeURL": "http://localhost:8545/",
+          "ServerHost": "0.0.0.0",
+          "ServerPort": 5001,
+          "ServerWhitelist": ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
+          "TrackerCycle": "100s",
+          "Trackers": ["balance", "disputeStatus", "gas", "tokenBalance", "indexers", "newCurrentVariables", "currentVariables"],
+          "UseGPU": false,
+          "VaultAddress": "0x09635f643e140090a9a8dcd712ed6285858cebef",
+          "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
         }
 
-
-        // This is the data returned to a html tag with an x-data directive
-        return {
-          configData: {
-            PublicAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
-            PrivateKey: 'ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
-            chain: 'local',
-          },
-          submitData(){
-            // console.log(this.configData,JSON.parse(JSON.stringify(this.configData)))
-            this.state = "connecting"
-            configWallet(JSON.stringify({...configs[this.configData.chain],...JSON.parse(JSON.stringify(this.configData))}))
-            .then(res => {res ? this.state = "connected" : this.state="error"} )
-            .catch(err => {console.log(err); this.state = "error"})
-
-          },
-          state: 'idle'
-        }
       }
-    
-
-      function Components(){
-                //Login Screen Navbar
-        return {nav: `<nav class="navbar navbar-light bg-light">
-                  <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                      Pythia
-                    </a>
-                  </div>
-                </nav>`,
-
-                //Main app components
-                app: `<div x-data="App()">
-                        <div x-html="form"></div>
-                        <div x-html="home"></div>
-                      </div>`,
-
-              // Login form
-              form: `<form @submit.prevent="submitData" x-show="state != 'connected'">
-                      <div class="container">
-
-                        <div class="mb-3">
-                          <label for="publicKey" class="form-label">Public Key</label>
-                          <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.PublicAddress">
-                        </div>
-                        
-                        <div class="mb-3">
-                          <label for="privateKey" class="form-label">Private Key</label>
-                          <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.PrivateKey">
-                        </div>
-
-                        <div class="mb-3">
-                          <select class="form-select" aria-label="Default select example" x-model="configData.chain">
-                            <option value="mainnet">Mainnet</option>
-                            <option value="testnet">Testnet</option>
-                            <option selected value="local">Local</option>
-                          </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Connect</button>
-                        <div x-show="state == 'connecting'"> Loading...</div>
-                        <div x-show="state == 'error'"> Could not connected to the ETH node</div>
-
-                      </div>
-                      </form>`,
-
-                      //The home component contains the sidebar and tabs switcher
-                      home: `<div class='dashboard' x-show="state == 'connected'" x-data=menu() x-effect="state == 'connected' && getStakeStatus()">
-                                <div class="dashboard-nav">
-                                    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>PYTHIA</span></a></header>
-                                    <nav class="dashboard-nav-list" >
-                                      
-                                        <template x-for="option in options">
-                                          <a href="#" x-on:click="setActive(option)" x-bind:class="active==option ? 'active dashboard-nav-item': 'dashboard-nav-item'" x-text="capitalize(option)"> </a>
-                                        </template> 
-                                        
-                                    </nav>
-                                </div>
-                                
-                                <div class='dashboard-app'>
-                                    <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
-                                    <div class='dashboard-content'>
-                                        <div x-html="wallet"></div>
-                                        <div x-html="stake"></div>  
-                                        <div x-html="mine"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            `,
-                            
-                      
-                            // Shows balances and transfer
-                            wallet: `<div class='container' x-show="active=='wallet'">
-                                            <div class='card'>
-                                                  <div class='card-header'>
-                                                      <h1>Wallet</h1>
-                                                      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Transfer</button>
-                                                  </div>
-                                                <div class='card-body'>
-                                                  <h2>Balance: </h2>
-
-                                                  <div class="row">
-                                                    <div class="col-6" x-text="state == 'connected' ? parseInt(await getBalance()) +'  ZAP':0" ></div>
-                                                    <div class="col-6"> </div>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                          <!-- Modal -->
-                                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="staticBackdropLabel">Transfer Balance</h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                  
-                                                  <div class="mb-3">
-                                                    <label for="recipient" class="form-label">Recipient Address</label>
-                                                    <input id="recipient" type="text" x-model="recipient">
-                                                  </div>
-                                                  
-                                                  <div class="mb-3">
-                                                    <label for="transferAmt" class="form-label">Amount To Send</label>
-                                                    <input id="transferAmt" type="number" x-model="transferAmount">
-                                                  </div>
-                                                  
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                  <button type="button" x-on:click="transferAmt()"  class="btn btn-primary">Send</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>`,
-                                        
-                            //Stake view
-                            stake: `<div class='container' x-show="active=='stake'">
-                                <div class='card'>
-                                      <div class='card-header'>
-                                          <h1>Stake</h1>
-                                          <button x-show="staked == 0"  x-on:click="await deposit()" class="btn btn-primary">Stake</button>
-                                          <button x-on:click="await request();" x-show="staked == 1" class="btn btn-primary">Request Withdraw</button>
-                                          <button x-on:click="await withdrawStake();" x-bind:disabled="state == 'connected' ? !await canWithdraw() : false" x-show="staked == 2 " class="btn btn-primary">Withdraw</button>
-                                          <div x-show="stakeError" x-text="stakeError"> </div>
-                                      </div>
-                                    <div class='card-body'>
-                                        <div x-show="staked == 0"> Please stake ZAP to Mine </div>
-                                        <div x-show="staked == 1"> You are currently staked </div>
-                                        <div x-show="staked == 2" x-text="state == 'connected' ? await withdrawMsg() : ''"></div>
-                                    </div>
-                                </div>
-                            </div>`,
-                            
-                            
-                            mine:`<div class='container' x-show="active=='mine'" x-init="isMine(); isInitial(); logs()">
-                                    <div class='card'>
-                                          <div class='card-header'>
-                                              <h1>Mine</h1>
-                                              
-                                          </div>
-
-                                        <div class='card-body'>
-
-                                          <div class="container">
-                                            <div class="row">
-
-                                              <button x-on:click="start()" x-bind:disabled="staked != 1 || mining || initializing" class="btn btn-primary col-6">Start</button>
-                                              <button x-on:click="stop()" x-bind:disabled="!mining || initializing" class="btn btn-danger col-6">Stop</button>
-                                              <template x-if="staked != 1">
-                                                  <div class="col-6">You must be staked in order to mine</div>
-                                              </template>
-                                            </div>
-
-                                            <textarea x-model="content" class="mining-log col-12" x-show="mining || initializing"></textarea>
-                                            
-                                            <div x-show="!mining && !initializing">
-                                              <h3 class="pt-4"> Options:  </h3>
-
-                                              <div class="mb-3">
-                                                <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
-                                                <input id="clientTimeout" type="number" x-model="minerDefaults.ethClientTimeout">
-                                              </div>
 
 
-                                              <label for="trackerCycle" class="form-label">Tracker Cycle</label>
-                                              <select class="form-select" aria-label="Default select example" x-model="minerDefaults.trackerCycle">
-                                                <option value="10s">10s</option>
-                                                <option value="30s">30s</option>
-                                                <option value="60s">60s</option>
-                                                <option value="90s">90s</option>
-                                              </select>
+      // This is the data returned to a html tag with an x-data directive
+      return {
+        configData: {
+          PublicAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+          PrivateKey: 'ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
+          chain: 'local',
+        },
+        submitData() {
+          // console.log(this.configData,JSON.parse(JSON.stringify(this.configData)))
+          this.state = "connecting"
+          configWallet(JSON.stringify({ ...configs[this.configData.chain], ...JSON.parse(JSON.stringify(this.configData)) }))
+            .then(res => { res ? this.state = "connected" : this.state = "error" })
+            .catch(err => { console.log(err); this.state = "error" })
 
-                                              <div class="pt-4"> </div>
-
-                                              <label class="form-label">Tracker Options</label>
-                                              <div class="row">
-                                              <template x-for="option in trackerOptions">
-                                                <div class="col-6 form-check">
-                                                  <label x-bind:for="option" class="form-check-label" x-text="capitalize(option)"></label>
-                                                  <input x-bind:id="option" class="form-check-input" type="checkbox" x-model="minerDefaults[option]">
-                                                </div>
-                                              </template> 
-                                              </div>
-                                            </div>
-
-                                            
-                                        </div>
-
-                                    </div>
-                                </div>`
-                    
-                    }
+        },
+        state: 'idle'
+      }
     }
-    
-    
-    function menu(){
+
+
+    function Components() {
+      //Login Screen Navbar
+      return {
+        nav: `<nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    Pythia
+                  </a>
+                </div>
+              </nav>`,
+
+        //Main app components
+        app: `<div x-data="App()">
+                <div x-html="form"></div>
+                <div x-html="home"></div>
+              </div>`,
+
+        // Login form
+        form: `<form @submit.prevent="submitData" x-show="state != 'connected'">
+                <div class="container">
+
+                  <div class="mb-3">
+                    <label for="publicKey" class="form-label">Public Key</label>
+                    <input type="text" class="form-control" id="publicKey" aria-describedby="publicKeyHelp" x-model="configData.PublicAddress">
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="privateKey" class="form-label">Private Key</label>
+                    <input type="text" class="form-control" id="privateKey" aria-describedby="privateKeyHelp"  x-model="configData.PrivateKey">
+                  </div>
+
+                  <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" x-model="configData.chain">
+                      <option value="mainnet">Mainnet</option>
+                      <option value="testnet">Testnet</option>
+                      <option selected value="local">Local</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Connect</button>
+                  <div x-show="state == 'connecting'"> Loading...</div>
+                  <div x-show="state == 'error'"> Could not connected to the ETH node</div>
+
+                </div>
+              </form>`,
+
+        //The home component contains the sidebar and tabs switcher
+        home: `<div class='dashboard' x-show="state == 'connected'" x-data=menu() x-effect="state == 'connected' && getStakeStatus()">
+                  <div class="dashboard-nav">
+                    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>PYTHIA</span></a></header>
+                    <nav class="dashboard-nav-list" >
+                      
+                      <template x-for="option in options">
+                        <a href="#" x-on:click="setActive(option)" x-bind:class="active==option ? 'active dashboard-nav-item': 'dashboard-nav-item'" x-text="capitalize(option)"> </a>
+                      </template> 
+                    </nav>
+                        <div class='dashboard-content' style="position:absolute;bottom:0" x-text="state ==  'connected' ? await getPubKey() : ''"></div>
+                  </div>
+                  
+                  <div class='dashboard-app'>
+                      <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
+                      <div class='dashboard-content'>
+                          <div x-html="wallet"></div>
+                          <div x-html="stake"></div>  
+                          <div x-html="mine"></div>
+                      </div>
+                      
+                  </div>
+              </div>
+        `,
+
+
+        // Shows balances and transfer
+        wallet: `<div class='container' x-show="active=='wallet'">
+                    <div class='card'>
+                      <div class='card-header'>
+                        <h1>Wallet</h1>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Transfer</button>
+                      </div>
+                      <div class='card-body'>
+                        <h2>Balance: </h2>
+
+                        <div class="row">
+                          <div class="col-6" x-text="state == 'connected' ? parseInt(await getBalance()) +'  ZAP':0" ></div>
+                          <div class="col-6"> </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Transfer Balance</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            
+                            <div class="mb-3">
+                              <label for="recipient" class="form-label">Recipient Address</label>
+                              <input id="recipient" type="text" x-model="recipient">
+                            </div>
+                            
+                            <div class="mb-3">
+                              <label for="transferAmt" class="form-label">Amount To Send</label>
+                              <input id="transferAmt" type="number" x-model="transferAmount">
+                            </div>
+                            
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" x-on:click="transferAmt()"  class="btn btn-primary">Send</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`,
+
+        //Stake view
+        stake: `<div class='container' x-show="active=='stake'">
+                    <div class='card'>
+                      <div class='card-header'>
+                        <h1>Stake</h1>
+                        <button x-show="staked == 0"  x-on:click="await deposit()" class="btn btn-primary">Stake</button>
+                        <button x-on:click="await request();" x-show="staked == 1" class="btn btn-primary">Request Withdraw</button>
+                        <button x-on:click="await withdrawStake();" x-bind:disabled="state == 'connected' ? !await canWithdraw() : false" x-show="staked == 2 " class="btn btn-primary">Withdraw</button>
+                        <div x-show="stakeError" x-text="stakeError"> </div>
+                      </div>
+                      <div class='card-body'>
+                          <div x-show="staked == 0"> Please stake ZAP to Mine </div>
+                          <div x-show="staked == 1"> You are currently staked </div>
+                          <div x-show="staked == 2" x-text="state == 'connected' ? await withdrawMsg() : ''"></div>
+                      </div>
+                    </div>
+                </div>`,
+
+
+        mine: `<div class='container' x-show="active=='mine'" x-init="isMine(); isInitial(); logs()">
+                <div class='card'>
+                  <div class='card-header'>
+                      <h1>Mine</h1>
+                      
+                  </div>
+
+                  <div class='card-body'>
+
+                    <div class="container">
+                      <div class="row">
+
+                        <button x-on:click="start()" x-bind:disabled="staked != 1 || mining || initializing" class="btn btn-primary col-6">Start</button>
+                        <button x-on:click="stop()" x-bind:disabled="!mining || initializing" class="btn btn-danger col-6">Stop</button>
+                        <template x-if="staked != 1">
+                            <div class="col-6">You must be staked in order to mine</div>
+                        </template>
+                      </div>
+
+                      <textarea x-model="content" class="mining-log col-12" x-show="mining || initializing"></textarea>
+                      
+                      <div x-show="!mining && !initializing">
+                        <h3 class="pt-4"> Options:  </h3>
+
+                        <div class="mb-3">
+                          <label for="clientTimeout" class="form-label">ETH Client Timeout</label>
+                          <input id="clientTimeout" type="number" x-model="minerDefaults.ethClientTimeout">
+                        </div>
+
+                        <label for="trackerCycle" class="form-label">Tracker Cycle</label>
+                        <select class="form-select" aria-label="Default select example" x-model="minerDefaults.trackerCycle">
+                          <option value="10s">10s</option>
+                          <option value="30s">30s</option>
+                          <option value="60s">60s</option>
+                          <option value="90s">90s</option>
+                        </select>
+
+                        <div class="pt-4"> </div>
+
+                        <label class="form-label">Tracker Options</label>
+                        <div class="row">
+                          <template x-for="option in trackerOptions">
+                            <div class="col-6 form-check">
+                              <label x-bind:for="option" class="form-check-label" x-text="capitalize(option)"></label>
+                              <input x-bind:id="option" class="form-check-input" type="checkbox" x-model="minerDefaults[option]">
+                            </div>
+                          </template> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>`
+      }
+    }
+
+
+    function menu() {
 
       var configs = {
-                      "local": 
-                      {"ContractAddress":	"0xcd8a1c3ba11cf5ecfa6267617243239504a98d90",
-                        "DBFile":	"zapDB",
-                        "DisputeTimeDelta":	"600s",
-                        "GasMax":	30,
-                        "GasMultiplier":	1,
-                        "NodeURL":	"http://localhost:8545/",
-                        "ServerHost":	"0.0.0.0",
-                        "ServerPort":	5001,
-                        "ServerWhitelist":["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-                        "UseGPU":	false,
-                        "VaultAddress":	"0x82e01223d51eb87e16a03e24687edf0f294da6f1",
-                        "zapTokenAddress":	"0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
-                      }  
-      }             
+        "local":
+        {
+          "ContractAddress": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+          "DBFile": "zapDB",
+          "DisputeTimeDelta": "600s",
+          "GasMax": 30,
+          "GasMultiplier": 1,
+          "NodeURL": "http://localhost:8545/",
+          "ServerHost": "0.0.0.0",
+          "ServerPort": 5001,
+          "ServerWhitelist": ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
+          "UseGPU": false,
+          "VaultAddress": "0x09635f643e140090a9a8dcd712ed6285858cebef",
+          "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        }
+      }
 
       return {
-        
+
         active: "wallet",
-        options: ["wallet","stake","mine"],
-        
+        options: ["wallet", "stake", "mine"],
+
         transferAmount: 0,
         recipient: "",
 
         stakeError: false,
         staked: false,
-        
+
         mining: false,
         index: 0,
         content: "",
-        initializing:false,
-        
-        trackerOptions: ["balance", "disputeStatus", "gas" ,  "tokenBalance",  "indexers",  "currentVariables",  "newCurrentVariables",  "disputeChecker" ,  "tallyVotes"],
+        initializing: false,
 
-        minerDefaults:{
+        trackerOptions: ["balance", "disputeStatus", "gas", "tokenBalance", "indexers", "currentVariables", "newCurrentVariables", "disputeChecker", "tallyVotes"],
+
+        minerDefaults: {
           trackerCycle: "30s",
-          ethClientTimeout:	1500,
+          ethClientTimeout: 1500,
           balance: true,
           disputeStatus: true,
           gas: true,
@@ -322,107 +320,108 @@
           tallyVotes: true,
         },
 
-        setActive(option){
-          this.active=option
+        setActive(option) {
+          this.active = option
         },
-        getStakeStatus(){
+        getStakeStatus() {
 
           stakeStatus()
             .then(res => {
-              this.staked=res
+              this.staked = res
             })
             .catch(console.log)
 
         },
-        start(){
+        start() {
 
           minerOps = JSON.parse(JSON.stringify(this.minerDefaults))
           trackers = []
-          for(var key in minerOps){
-              if (minerOps[key] === true){
-                trackers.push(key)
-              }
+          for (var key in minerOps) {
+            if (minerOps[key] === true) {
+              trackers.push(key)
+            }
           }
           console.log()
 
-          configWallet(JSON.stringify({...JSON.parse(JSON.stringify(App().configData)), ...JSON.parse(JSON.stringify(this.minerDefaults)),...configs[App().configData.chain],trackers}))
-          .then(() => {
-            startMine().then(()=> {
-            this.initializing=true
-            this.logs()
-          })
-          })
-          .catch(console.log)
+          configWallet(JSON.stringify({ ...JSON.parse(JSON.stringify(App().configData)), ...JSON.parse(JSON.stringify(this.minerDefaults)), ...configs[App().configData.chain], trackers }))
+            .then(() => {
+              startMine().then(() => {
+                this.initializing = true
+                this.logs()
+              })
+            })
+            .catch(console.log)
 
-        
+
         },
-        stop(){
+        stop() {
           stopMine()
         },
-        isMine(){
+        isMine() {
           setInterval(async () => {
             this.mining = await isMining()
-          },500)
+          }, 500)
         },
-        isInitial(){
+        isInitial() {
           setInterval(async () => {
             this.initializing = await isInit()
-          },500)
+          }, 500)
         },
         logs() {
-            setInterval(async () => {
-              this.content = this.content + await showLogs(this.index);
-              console.log(this.content)
-              this.index += this.content.split(/\r\n|\r|\n/).length;
-            },3000)
+          setInterval(async () => {
+            this.content = this.content + await showLogs(this.index);
+            console.log(this.content)
+            this.index += this.content.split(/\r\n|\r|\n/).length;
+          }, 3000)
         },
-        async deposit(){
-          try{
+        async deposit() {
+          try {
             await depositStake()
             await this.getStakeStatus()
             this.stakeError = false
-          }catch(err){
+          } catch (err) {
             console.log(err)
             this.stakeError = err
           }
         },
-        async request(){
-          try{
+        async request() {
+          try {
             await requestWithdraw()
             await this.getStakeStatus()
             this.stakeError = false
 
-          }catch(err){
+          } catch (err) {
             console.log(err)
             this.stakeError = err
           }
         },
-        async withdrawStake(){
-          try{
+        async withdrawStake() {
+          try {
             await withdraw()
             await this.getStakeStatus()
             this.stakeError = false
-          }catch(err){
+          } catch (err) {
             console.log(err)
             this.stakeError = err
-          }},
-          transferAmt(){
+          }
+        },
+        transferAmt() {
 
-            const container = document.getElementById("staticBackdrop");
-            const modal = bootstrap.Modal.getInstance(container);
+          const container = document.getElementById("staticBackdrop");
+          const modal = bootstrap.Modal.getInstance(container);
 
-            transfer(this.recipient, this.transferAmount)
+          transfer(this.recipient, this.transferAmount)
             .then(console.log)
             .catch(console.log)
 
-            modal.hide()
+          modal.hide()
         }
 
       }
     }
 
-    
-    function capitalize(string){
+
+    function capitalize(string) {
       return string.replace(/^./, string[0].toUpperCase());
     }
   </script>
@@ -430,4 +429,3 @@
 </body>
 
 <!-- </html> -->
-
