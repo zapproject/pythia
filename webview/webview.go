@@ -9,16 +9,14 @@ import (
 
 func LoadWebview() {
 
-	debug := false
+	debug := true
 	w := webview.New(debug)
 
 	defer w.Destroy()
 	w.SetTitle("Pythia")
 	w.SetSize(800, 600, webview.HintMin)
 
-	w.Bind("showWallet", func() {
-		showWallet(w)
-	})
+	w.Bind("showTxs", showTxs)
 
 	w.Bind("getPubKey", getPubKey)
 	w.Bind("configWallet", configWallet)

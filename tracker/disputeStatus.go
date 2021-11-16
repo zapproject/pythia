@@ -57,8 +57,6 @@ func (b *DisputeTracker) Exec(ctx context.Context) error {
 
 	status, _, err := instance.GetStakerInfo(nil, fromAddress)
 
-	fmt.Println(status)
-
 	if err != nil {
 		fmt.Println("instance Error, disputeStatus")
 		return err

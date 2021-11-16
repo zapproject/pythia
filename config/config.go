@@ -637,7 +637,6 @@ func SetPrivateKey(address string) {
 }
 
 func SetEthClientTimeout(timeout uint) {
-	fmt.Println(config)
 	config.EthClientTimeout = timeout
 }
 

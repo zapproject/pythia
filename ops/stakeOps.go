@@ -62,7 +62,6 @@ func Deposit(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to get stake status: %s", err.Error())
 	}
-	fmt.Println("AFTER GETSTAKEINFO")
 	if status.Uint64() != 0 && status.Uint64() != 2 {
 		printStakeStatus(status, startTime)
 		return nil
@@ -96,7 +95,6 @@ func Deposit(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("couldn't prepare ethereum transaction: %s", err.Error())
 	}
-	fmt.Println(auth)
 	tx, err = instance2.DepositStake(auth)
 	if err != nil {
 		return fmt.Errorf("contract failed: %s", err.Error())

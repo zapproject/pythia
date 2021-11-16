@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/webview/webview"
@@ -19,7 +20,7 @@ type Transaction struct {
 	To        string `json:"To"`
 	From      string `json:"From"`
 	Event     string `json:"Event"`
-	Timestamp uint64 `json:"Timestamp"`
+	Timestamp string `json:"Timestamp"`
 }
 
 func showWallet(w webview.WebView) {
@@ -93,7 +94,7 @@ func showTxs() []Transaction {
 	})
 
 	txs := formatLogs(eventLogs)
-	// fmt.Println(txs)
+	fmt.Println(txs)
 	return txs
 }
 
@@ -102,7 +103,8 @@ func formatLogs(eventLogs []util.EventLog) []Transaction {
 	// fmt.Println(eventLogs)
 	for _, j := range eventLogs {
 		tx := Transaction{}
-		tx.Timestamp = j.Timestamp
+		// time.Unix() takes in seconds of int64 type but the event provides uin64
+		tx.Timestamp = strconv.FormatUint(j.Timestamp, 10)
 
 		logType := fmt.Sprintf("%T", j.Log)
 

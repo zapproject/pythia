@@ -162,25 +162,27 @@
                         </div>
                       </div>
                     </div>
-                    <div class='card' x-data="transactions">
-                      <table x-init="showTransactions()">
-                        <tr>
-                          <th>Timestamp</th>
-                          <th>Event</th>
-                          <th>To</th>
-                          <th>From</th>
-                        </tr>
-                        
-                      </table>
-                      <template x-for="tx in transactions">
-                        <tr>
-                          <td x-text="tx.Timestamp"></td>
-                          <td x-text="tx.Event"></td>
-                          <td x-text="tx.To"></td>
-                          <td x-text="tx.From"></td>
-                        </tr>
-                      </template>
+                    <div class="container mt-5" x-data="transactions" x-init="showTransactions()">
+                      <div class="table" style="display: table">
+
+                        <div style="display: table-row">
+                          <div style="display: table-cell"><strong>Timestamp</strong></div>
+                          <div style="display: table-cell"><strong>Event</strong></div>
+                          <div style="display: table-cell"><strong>To</strong></div>
+                          <div style="display: table-cell"><strong>From</strong></div>
+                        </div>
+                          
+                        <template x-for="tx in transactions">
+                          <div style="display: table-row">
+                            <div style="display: table-cell" x-text="tx.Timestamp"></div>
+                            <div style="display: table-cell" x-text="tx.Event"></div>
+                            <div style="display: table-cell" x-text="tx.To"></div>
+                            <div style="display: table-cell" x-text="tx.From"></div>
+                          </div>
+                        </template>
+                      </div>
                     </div>
+
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog">
@@ -387,7 +389,6 @@
         logs() {
           setInterval(async () => {
             this.content = this.content + await showLogs(this.index);
-            console.log(this.content)
             this.index += this.content.split(/\r\n|\r|\n/).length;
           }, 3000)
         },
@@ -432,8 +433,10 @@
           modal.hide()
         },
         showTransactions() {
-          this.transactions = setInterval(async () => {
-            showTxs()
+          setInterval(async () => {
+            tx = await showTxs()
+            console.log(tx)
+            this.transactions = tx
           }, 3000)
         }
       }

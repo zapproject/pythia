@@ -39,8 +39,6 @@ func getBalance() (string, error) {
 	instance := setup.CTX.Value(ZapCommon.MasterContractContextKey).(*contracts.ZapMaster)
 	zapBalance, err := instance.BalanceOf(nil, addr)
 
-	fmt.Println(zapBalance)
-
 	if err != nil {
 		fmt.Print(err.Error())
 		return "", err
@@ -59,8 +57,6 @@ func stakeStatus() (int64, error) {
 	if err != nil {
 		return 0, fmt.Errorf("failed to get stake status: %s", err.Error())
 	}
-
-	fmt.Println(status)
 
 	return status.Int64(), nil
 
@@ -266,7 +262,6 @@ func transfer(address string, amount string) (bool, error) {
 		fmt.Println("SetString: error")
 		return false, errors.New("SetString: error")
 	}
-	fmt.Println(n)
 	addr := common.HexToAddress("70997970C51812dc3A010C7d01b50e0d17dc79C8")
 
 	err := ops.Transfer(addr, n, setup.CTX)
