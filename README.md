@@ -159,7 +159,8 @@ On Clients B to F, change the `serverAddress` in your `config.json` to the IP ad
 
 On Clients B to F, change their serverPort in `config.json` to the serverPort set in Client A's `config.json`. So by default, you can set it to `5001`. Do the same for localPort, which is 6363 by default.
 
-Next, go on Client A's `config.json` and update the `serverWhitelist` field with the public addresses of Clients B to F. **Remember, these public addresses are the BSC wallet addresses that should contain Testnet BNB and BSC ZAP**.
+Next, go on Client A's `config.json` and update the `serverWhitelist` field with the public addresses of Clients B to F.
+**Remember, these public addresses are the BSC wallet addresses that should contain Testnet BNB and BSC ZAP**.
 
 Here is an example of how your `serverWhitelist` should look like:
 ```json
