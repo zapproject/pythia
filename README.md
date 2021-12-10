@@ -402,7 +402,7 @@ go help testflag
 ## Local testnet
 **If you would like to test on a localhost BSC Testnet node**, be sure have ZapHardhat running. https://github.com/zapproject/hardhat-bsc/.
 
-Then, replace the `nodeURL` in the config.json with `http://localhost:8545`.  
+Then, replace the `nodeURL` in the config.json with `http://localhost:8545`.
 
  ***
 
