@@ -328,7 +328,7 @@ Next, go on Client A's `config.json` and update the `serverWhitelist` field with
 
 Here is an example of how your `serverWhitelist` should look like:
 ```json
-{ 
+{
     "gasMax":30,
     "serverWhitelist": [
         "PUBLIC_ADDRESS_B_HERE",
