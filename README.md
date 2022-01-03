@@ -229,7 +229,7 @@ sudo apt install ocl-icd-opencl-dev
 
 ***
 
-## BSC Testnet Miner Contract Addresses
+## BSC Testnet Miner Contract Addresses 
 [See here to see all of the Pythia contract addresses](contracts.md)
 
 ***
