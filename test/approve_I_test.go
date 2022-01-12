@@ -17,7 +17,7 @@ func TestApprove(t *testing.T) {
 
 	auth, _ := ops.PrepareEthTransaction(ctx)
 	owner := ctx.Value(zapCommon.PublicAddress).(common.Address)
-	addr1 := common.HexToAddress("0x70997970C51812dc3A010C7d01b50e0d17dc79C8")
+	addr1 := common.HexToAddress("0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC")
 	amt1 := big.NewInt(1000)
 	instance := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
 	instance.Approve(auth, addr1, amt1)
