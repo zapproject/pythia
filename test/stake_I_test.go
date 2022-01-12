@@ -13,7 +13,6 @@ import (
 	zap1 "github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/ops"
 	"github.com/zapproject/pythia/token"
-	"github.com/zapproject/pythia/vault"
 )
 
 func TestStake(t *testing.T) {
@@ -46,11 +45,6 @@ func Deposit(t *testing.T) {
 	copy(dat32[:], dat)
 	stakeAmt, _ := tmaster.GetUintVar(nil, dat32)
 	assert.Greater(t, balance.Cmp(stakeAmt), 0, "Account 0 does not have enough Zap to stake")
-
-	// call vault locksmith
-	instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
-	auth, _ = ops.PrepareEthTransaction(ctx)
-	// instanceV.LockSmith(auth, publicAddress, common.HexToAddress(cfg.ContractAddress))
 
 	// approve zap master for stake amount
 	auth, _ = ops.PrepareEthTransaction(ctx)

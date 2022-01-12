@@ -107,7 +107,7 @@ func (b *NewCurrentVariablesTracker) Exec(ctx context.Context) error {
 		}
 	}
 
-	err = DB.Put(db.DifficultyKey, []byte(hexutil.EncodeBig(returnNewVariables.Difficutly)))
+	err = DB.Put(db.DifficultyKey, []byte(hexutil.EncodeBig(returnNewVariables.Difficulty)))
 	if err != nil {
 		fmt.Println("New Current Variables Put Error")
 		return err

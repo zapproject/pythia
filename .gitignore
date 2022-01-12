@@ -71,7 +71,7 @@ libOpenCL.a
 
 .env
 /.env
-ZapDB*
+*ZapDB*
 logs/
 
 # Test binary, built with `go test -c`
