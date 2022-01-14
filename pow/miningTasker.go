@@ -76,8 +76,8 @@ func (mt *MiningTasker) GetWork(input chan *Work) (*Work, bool) {
 		mt.log.Error("Could not get data from data proxy, cannot continue at all")
 		log.Fatal(err)
 	}
-
-	mt.log.Debug("Received data: %v", m)
+	fmt.Println("Check Dispute: ", m[dispKey])
+	mt.log.Debug("Received data: %v", m[dispKey])
 
 	if stat := mt.checkDispute(m[dispKey]); stat == statusWaitNext {
 		return nil, false
@@ -191,6 +191,8 @@ func (mt *MiningTasker) checkDispute(disp []byte) int {
 		}
 		return stat
 	}
+	fmt.Println("Mining Tasker: ", mt)
+	fmt.Println("Dispute status: ", disputed, " Stat: ", stat)
 
 	if disputed.Cmp(big.NewInt(1)) != 0 {
 		mt.log.Error("Miner is in dispute, cannot continue")

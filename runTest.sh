@@ -14,4 +14,4 @@ if [ -z "${PKG}" ]; then
 fi
 
 echo "Running test ${NAME} from package  ${PKG}..."
-go test -v -run "${NAME}" "./${PKG}" 
+go test -v -run "${NAME}" "../${PKG}" 

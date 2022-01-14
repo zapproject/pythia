@@ -41,10 +41,10 @@ func BuildIndexTrackers() ([]Tracker, error) {
 	byteValue, err := ioutil.ReadFile(indexPath)
 	if err != nil {
 		//testing purposes
-		byteValue, err = ioutil.ReadFile(filepath.Join("..", indexPath))
-		if err != nil {
-			return nil, fmt.Errorf("failed to read index file @ %s: %v", indexPath, err)
-		}
+		// byteValue, err = ioutil.ReadFile(filepath.Join("..", indexPath))
+		// if err != nil {
+		return nil, fmt.Errorf("failed to read index file @ %s: %v", indexPath, err)
+		// }
 	}
 	var baseIndexes map[string][]string
 	err = json.Unmarshal(byteValue, &baseIndexes)
@@ -66,10 +66,10 @@ func BuildIndexTrackers() ([]Tracker, error) {
 			if !ok {
 				// If it's a local forex pair with the format local/<symbol>,
 				// build the api path from the symbol and local server port
-				if strings.HasPrefix(api, "local"){
+				if strings.HasPrefix(api, "local") {
 					split := strings.Split(api, "/")
 					sym := split[1]
-					api = "json(http://127.0.0.1:"  + strconv.FormatInt(int64(cfg.LocalPort),10) + "/"+ sym + ").value"
+					api = "json(http://127.0.0.1:" + strconv.FormatInt(int64(cfg.LocalPort), 10) + "/" + sym + ").value"
 				}
 				pathStr, args := util.ParseQueryString(api)
 				var name string

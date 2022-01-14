@@ -256,9 +256,9 @@ func mineCmd(cmd *cli.Cmd) {
 		// DB := ctx.Value(ZapCommon.DataProxyKey).(db.DataServerProxy)
 		//DB := ctx.Value(ZapCommon.DBContextKey).(db.DB)
 		// needs to be tested out further
-		// if *remoteDS {
-		// 	time.Sleep(cfg.TrackerSleepCycle.Duration * 7)
-		// }
+		if *remoteDS {
+			time.Sleep(cfg.TrackerSleepCycle.Duration)
+		}
 		// v, err := DB.Get(db.DisputeStatusKey)
 		// if err != nil {
 		// 	fmt.Println("ignoring --- could not get dispute status.  Check if staked")
