@@ -121,3 +121,11 @@ submitSolution tx sent: 0x04614bd7a1e874752307e1f8fdb173c917d9bbbea81280fadf4b75
 [33mWARN[0m[0258] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
 [33mWARN[0m[0258] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
 [33mWARN[0m[0258] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0259] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0259] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0259] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0259] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0260] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0260] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[31mERRO[0m[0260] Timeout expired, not retrying query and passing error up  [31mcomponent[0m=HTTPFetchWithRetries [31mpackage[0m=util
+2022/01/18 02:35:25 Could not retrieve data after retries. Cannot do anything without access to data server: Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused
