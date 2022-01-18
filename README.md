@@ -375,7 +375,7 @@ This will run the given `<TEST_NAME>` as long as it is inside a `*_test.go` file
 You could of course also `cd` into the package of choice and run the standard `go test [test flags...]` e.g.
 ```bash
 cd pow
-go test -v -cover  # Test with increased verbosity and give a coverage analysis
+go test -v -cover# Test with increased verbosity and give a coverage analysis
 ```
 
 You can also run individual test just like when running the `./runTest.sh` script
@@ -423,9 +423,9 @@ Delve is a debugger for the Go programming language. Follow the steps in this [r
 
 
 ### **Basic Debug Commands**
-[continue](#continue) | Run until breakpoint or program termination.  
+[continue](#continue) | Run until breakpoint or program termination.
 [break](#break) | Sets a breakpoint. (EX. ```break tracker/index.go:39``` That will set a breakpoint on line 39 in tracker.index.go file.)
-[breakpoints](#breakpoints) | Print out info for active breakpoints.  
+[breakpoints](#breakpoints) | Print out info for active breakpoints.
 [step](#step) | Single step through program.  
 [stepout](#stepout) | Step out of the current function.  
 [locals](#locals) | Print local variables.  
