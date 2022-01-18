@@ -77,7 +77,7 @@ func (mt *MiningTasker) GetWork(input chan *Work) (*Work, bool) {
 		log.Fatal(err)
 	}
 
-	mt.log.Debug("Received data: %v", m)
+	mt.log.Debug("Received data: %v", m[dispKey])
 
 	if stat := mt.checkDispute(m[dispKey]); stat == statusWaitNext {
 		return nil, false

@@ -1,7 +1,7 @@
 {
     "zapTokenAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-    "contractAddress": "0xb7278a61aa25c888815afc32ad3cc52ff24fe575",
-    "vaultAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "contractAddress": "0x0165878a594ca255338adfa4d48449f69242eb8f",
+    "vaultAddress": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
     "nodeURL": "http://127.0.0.1:8545/",
     "publicAddress": "90F79bf6EB2c4f870365E785982E1f101E93b906",
     "privateKey": "7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6",
