@@ -193,9 +193,16 @@ func (mt *MiningTasker) checkDispute(disp []byte) int {
 	}
 
 	if disputed.Cmp(big.NewInt(1)) != 0 {
-		mt.log.Error("Miner is in dispute, cannot continue")
-		log.Fatal("Miner in dispute")
-		return statusFailure //never gets here but just for completeness
+		if disputed.Cmp(big.NewInt(3)) == 0 {
+			mt.log.Error("Miner is in dispute, cannot continue")
+			log.Fatal("Miner in dispute")
+		} else if disputed.Cmp(big.NewInt(0)) == 0 {
+			mt.log.Error("Miner is not staked, cannot continue")
+			log.Fatal("Miner not staked")
+		} else {
+			mt.log.Error("Miner requested stake withdrawal, cannot continue")
+			log.Fatal("Miner has requested stake withdraw")
+		}
 	}
 	mt.log.Info("Miner is not in dispute, continuing")
 	return statusSuccess

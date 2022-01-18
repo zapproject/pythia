@@ -53,39 +53,37 @@ type GPUConfig struct {
 
 //Config holds global config info derived from config.json
 type Config struct {
-	TokenAddress                 string                `json:"zapTokenAddress"`
-	ContractAddress              string                `json:"contractAddress"`
-	VaultAddress                 string                `json:"vaultAddress"`
-	NodeURL                      string                `json:"nodeURL"`
-	DatabaseURL                  string                `json:"databaseURL"`
-	PublicAddress                string                `json:"publicAddress"`
-	EthClientTimeout             uint                  `json:"ethClientTimeout"`
-	TrackerSleepCycle            Duration              `json:"trackerCycle"`
-	Trackers                     []string              `json:"trackers"`
-	DBFile                       string                `json:"dbFile"`
-	ServerHost                   string                `json:"serverHost"`
-	ServerPort                   uint                  `json:"serverPort"`
-	FetchTimeout                 Duration              `json:"fetchTimeout"`
-	RequestData                  uint                  `json:"requestData"`
-	MinConfidence                float64               `json:"minConfidence"`
-	RequestDataInterval          Duration              `json:"requestDataInterval"`
-	RequestTips                  int64                 `json:"requestTips"`
-	MiningInterruptCheckInterval Duration              `json:"miningInterruptCheckInterval"`
-	GasMultiplier                float32               `json:"gasMultiplier"`
-	GasMax                       uint                  `json:"gasMax"`
-	NumProcessors                int                   `json:"numProcessors"`
-	Heartbeat                    Duration              `json:"heartbeat"`
-	ServerWhitelist              []string              `json:"serverWhitelist"`
-	GPUConfig                    map[string]*GPUConfig `json:"gpuConfig"`
-	EnablePoolWorker             bool                  `json:"enablePoolWorker"`
-	Worker                       string                `json:"worker"`
-	Password                     string                `json:"password"`
-	PoolURL                      string                `json:"poolURL"`
-	IndexFolder                  string                `json:"indexFolder"`
-	DisputeTimeDelta             Duration              `json:"disputeTimeDelta"` //ignore data further than this away from the value we are checking
-	DisputeThreshold             float64               `json:"disputeThreshold"` //maximum allowed relative difference between observed and submitted value
-	UseGPU                       bool                  `json:"useGPU"`
-	LocalPort                    uint                  `json:"localPort"`
+	TokenAddress                 string   `json:"zapTokenAddress"`
+	ContractAddress              string   `json:"contractAddress"`
+	VaultAddress                 string   `json:"vaultAddress"`
+	NodeURL                      string   `json:"nodeURL"`
+	DatabaseURL                  string   `json:"databaseURL"`
+	PublicAddress                string   `json:"publicAddress"`
+	EthClientTimeout             uint     `json:"ethClientTimeout"`
+	TrackerSleepCycle            Duration `json:"trackerCycle"`
+	Trackers                     []string `json:"trackers"`
+	DBFile                       string   `json:"dbFile"`
+	ServerHost                   string   `json:"serverHost"`
+	ServerPort                   uint     `json:"serverPort"`
+	FetchTimeout                 Duration `json:"fetchTimeout"`
+	RequestData                  uint     `json:"requestData"`
+	MinConfidence                float64  `json:"minConfidence"`
+	RequestDataInterval          Duration `json:"requestDataInterval"`
+	RequestTips                  int64    `json:"requestTips"`
+	MiningInterruptCheckInterval Duration `json:"miningInterruptCheckInterval"`
+	GasMultiplier                float32  `json:"gasMultiplier"`
+	GasMax                       uint     `json:"gasMax"`
+	NumProcessors                int      `json:"numProcessors"`
+	Heartbeat                    Duration `json:"heartbeat"`
+	ServerWhitelist              []string `json:"serverWhitelist"`
+	EnablePoolWorker             bool     `json:"enablePoolWorker"`
+	Worker                       string   `json:"worker"`
+	Password                     string   `json:"password"`
+	PoolURL                      string   `json:"poolURL"`
+	IndexFolder                  string   `json:"indexFolder"`
+	DisputeTimeDelta             Duration `json:"disputeTimeDelta"` //ignore data further than this away from the value we are checking
+	DisputeThreshold             float64  `json:"disputeThreshold"` //maximum allowed relative difference between observed and submitted value
+	LocalPort                    uint     `json:"localPort"`
 
 	//config parameters excluded from the json config file
 	PrivateKey string `json:"privateKey"`
@@ -180,7 +178,7 @@ func ParseConfigBytes(data []byte) error {
 
 	if ZapTokenEnv == "" {
 		if config.TokenAddress == "" {
-
+			fmt.Println(config)
 			return fmt.Errorf(
 				"missing the zapToken contract address environment variable'%s'", ZapTokenAddress)
 
@@ -297,13 +295,12 @@ func ParseConfigBytes(data []byte) error {
 		config.ServerPort = uint(parsedUint)
 	}
 
-
 	LocalPortEnv := os.Getenv(LocalPort)
 
 	if LocalPortEnv == "" {
 
 		if config.LocalPort == 0 {
-			
+
 			config.LocalPort = 6363
 		}
 
@@ -316,7 +313,6 @@ func ParseConfigBytes(data []byte) error {
 		}
 		config.LocalPort = uint(parsedUint)
 	}
-
 
 	EthClientTimeoutEnv := os.Getenv(EthClientTimeout)
 
@@ -430,19 +426,6 @@ func ParseConfigBytes(data []byte) error {
 			return fmt.Errorf("error parsing requestDataInterval from os.env: %s", err)
 		}
 		config.RequestDataInterval = Duration{parsedDuration}
-	}
-
-	UseGpuEnv := os.Getenv(UseGPU)
-
-	if UseGpuEnv == "" {
-
-		config.UseGPU = false
-
-	} else {
-
-		useGpu, _ := strconv.ParseBool(UseGpuEnv)
-
-		config.UseGPU = useGpu
 	}
 
 	TrackersEnv := os.Getenv(Trackers)
@@ -606,21 +589,6 @@ func validateConfig(cfg *Config) error {
 
 		if gasMultiplier < 0 || gasMultiplier > 20 {
 			return fmt.Errorf("gas multiplier out of range [0, 20] %f", cfg.GasMultiplier)
-		}
-	}
-
-	for name, gpuConfig := range cfg.GPUConfig {
-		if gpuConfig.Disabled {
-			continue
-		}
-		if gpuConfig.Count == 0 {
-			return fmt.Errorf("gpu '%s' requires 'count' > 0", name)
-		}
-		if gpuConfig.GroupSize == 0 {
-			return fmt.Errorf("gpu '%s' requires 'groupSize' > 0", name)
-		}
-		if gpuConfig.Groups == 0 {
-			return fmt.Errorf("gpu '%s' requires 'groups' > 0", name)
 		}
 	}
 
