@@ -3,6 +3,7 @@ package test
 // withdraw test fails because of time lock
 
 import (
+	"fmt"
 	"math/big"
 	"testing"
 
@@ -22,11 +23,11 @@ func TestStake(t *testing.T) {
 	setupOwner()
 
 	// lines 25*26 and lines 28&29 depend on whether the test file is ran or the package test is ran
-	RequestWithdraw(t)
-	Withdraw(t)
-	Deposit(t)
 	// RequestWithdraw(t)
 	// Withdraw(t)
+	Deposit(t)
+	RequestWithdraw(t)
+	Withdraw(t)
 }
 
 func Deposit(t *testing.T) {
@@ -73,6 +74,7 @@ func Withdraw(t *testing.T) {
 	assert.Equal(t, big.NewInt(2).Uint64(), status.Uint64(), "Staker has not requested for withdrawal - status should be 2")
 
 	balance, _ := tmaster.BalanceOf(nil, publicAddress)
+	fmt.Println("Before withdraw balance: ", balance)
 
 	// withdraw stake
 	auth, _ := ops.PrepareEthTransaction(ctx)

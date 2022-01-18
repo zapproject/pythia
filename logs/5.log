@@ -1,17 +1,17 @@
 AFTER GETSTAKEINFO
-TX SENT CLIENT &{c0003f16e0 {c071e342d1a93456 1c2e35c3 125baa0} {<nil>} {<nil>} {<nil>}}
-ZapMaster Approved with txn 0x9dda9a78732d298972eb9e8241eb095c1341409fede55107ee27d169e68b1a21
-&{0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 1 0x8210e0 0 1004191125 <nil> <nil> 4000000 context.Background false}
-TX SENT CLIENT &{c0003f1c80 {c071e342d6594726 20de488d 125baa0} {<nil>} {<nil>} {<nil>}}
-Stake depositied with txn 0xb30ae91b1b9eeef7d38dc534696d56263680ba9b52c428e7a85c1d89a88a00be
+TX SENT CLIENT &{c00039d800 {c071ecc61f86247a cabe28e 1264ee0} {<nil>} {<nil>} {<nil>}}
+ZapMaster Approved with txn 0x8790ab9af729b2c7c0a3e270ea5c3c6f13b9d49ce73044bccea70c7730cc1b4a
+&{0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 1 0x820e80 0 1005474121 <nil> <nil> 4000000 context.Background false}
+TX SENT CLIENT &{c00039dda0 {c071ecc622bd1ce1 fe2daf6 1264ee0} {<nil>} {<nil>} {<nil>}}
+Stake depositied with txn 0x52e664c2e7d0f49c8d0867358d657326d069006b3385b071a44964c03cb88dd6
 [36mINFO[0m[0000] Created Remote data proxy connector for localhost:5001  [36mcomponent[0m=RemoteDB [36mpackage[0m=db
-No GPUs enabled, falling back to CPU mining, using 2 threads
+Using 2 threads
 [36mINFO[0m[0010] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0010] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 using gas multiplier :  1
-Using gas price 1001440111
-TX SENT CLIENT &{c000412d20 {c071e346343a6095 2565c50a4 125baa0} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x3ff77c70677729e10ec414548d068aec728226b63db8fdf3b39a29b807ae39c7
+Using gas price 1001645841
+TX SENT CLIENT &{c00007b3e0 {c071ecc994a4ec52 256327387 1264ee0} {<nil>} {<nil>} {<nil>}}
+submitSolution tx sent: 0x9516306327a7cbd557683fcbc2901304353d360de1e2e90c8dc307e3516d0a03
 [36mINFO[0m[0010] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0010] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0025] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
@@ -20,51 +20,51 @@ Total hashrate 0  H/s
 	  0  H/s (50.0%): CPU 1 
 [36mINFO[0m[0025] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 using gas multiplier :  1
-Using gas price 1000290067
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Error: VM Exception while processing transaction: reverted with reason string 'Miner is not staked'  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
-TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
-[31mERRO[0m[0025] Problem submitting solution: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=SolutionHandler [31mpackage[0m=pow
-Unspecified Request Data  Error  Nonce too low. Expected nonce to be 4 but got 3.
+Using gas price 1000331505
+TX SENT CLIENT &{c00007baa0 {c071eccd54c29ca3 5d461f9da 1264ee0} {<nil>} {<nil>} {<nil>}}
+submitSolution tx sent: 0x0df139f37faed64daca26e28960a7571837fb817f2629dfcd03e6f5fe7f518db
 [36mINFO[0m[0025] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0025] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[31mERRO[0m[0040] Miner is in dispute, cannot continue          [31mcomponent[0m=MiningTasker [31mpackage[0m=pow
-2022/01/18 14:32:06 Miner in dispute
+[33mWARN[0m[0040] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0040] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0040] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0041] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0041] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0041] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0041] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0042] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0042] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0042] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0042] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0043] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0043] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0043] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0043] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0044] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0044] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0044] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0044] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0045] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0045] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0045] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0045] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0046] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0046] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0046] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0046] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0047] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0047] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0047] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0047] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0048] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0048] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0048] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0048] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0049] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0049] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0049] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0049] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0050] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0050] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[31mERRO[0m[0050] Timeout expired, not retrying query and passing error up  [31mcomponent[0m=HTTPFetchWithRetries [31mpackage[0m=util
+2022/01/18 17:14:38 Could not retrieve data after retries. Cannot do anything without access to data server: Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused

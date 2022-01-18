@@ -33,7 +33,6 @@ var configJSON = `{
     ],
     "gasMultiplier": 1,
     "gasMax":30,
-    
     "trackers": ["indexers", "balance", "currentVariables", "disputeStatus", "gas", "disputeChecker"],
 	"IndexFolder": "..",
     "dbFile": "zapDB",

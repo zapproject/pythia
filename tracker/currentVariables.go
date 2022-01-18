@@ -13,10 +13,8 @@ import (
 	zapCommon "github.com/zapproject/pythia/common"
 	"github.com/zapproject/pythia/config"
 	"github.com/zapproject/pythia/contracts"
-	"github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/db"
 	"github.com/zapproject/pythia/rpc"
-	"github.com/zapproject/pythia/token"
 	"github.com/zapproject/pythia/util"
 )
 
@@ -69,13 +67,6 @@ func PrepareEthTransaction(ctx context.Context) (*bind.TransactOpts, error) {
 
 //Exec implementation for tracker
 func (b *CurrentVariablesTracker) Exec(ctx context.Context) error {
-	auth, _ := PrepareEthTransaction(ctx)
-	instanceZ := ctx.Value(zapCommon.TransactorContractContextKey).(*contracts1.ZapTransactor)
-	instanceM := ctx.Value(zapCommon.ContractAddress).(common.Address)
-	instanceT := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
-	instanceT.IncreaseApproval(auth, instanceM, new(big.Int).SetInt64(1000000))
-	auth, _ = PrepareEthTransaction(ctx)
-	instanceZ.RequestData(auth, "json(https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd).ethereum.usd", "ETH/USD", new(big.Int).SetInt64(1000000), new(big.Int).SetInt64(1))
 	//cast client using type assertion since context holds generic interface{}
 	DB := ctx.Value(zapCommon.DBContextKey).(db.DB)
 
