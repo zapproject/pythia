@@ -1,5 +1,5 @@
 ./pythia approve 500000000 0x0165878a594ca255338adfa4d48449f69242eb8f
-./pythia transfer 100000000 0x0165878a594ca255338adfa4d48449f69242eb8f
+./pythia transfer 50000000 0x0165878a594ca255338adfa4d48449f69242eb8f
 
 gnome-terminal -e "./pythia dataserver"
 
