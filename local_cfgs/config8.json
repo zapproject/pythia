@@ -12,7 +12,6 @@
     "serverWhitelist": ["0x90F79bf6EB2c4f870365E785982E1f101E93b906"],
     "gasMultiplier": 1,
     "gasMax":30,
-    "useGPU":false,
     "trackers": [
         "balance",
         "disputeStatus",

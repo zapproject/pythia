@@ -19,7 +19,6 @@
     ],
     "gasMultiplier": 1,
     "gasMax":30,
-    "useGPU":false,
     "trackers": [
         "balance",
         "disputeStatus",

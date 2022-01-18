@@ -40,17 +40,6 @@ func (d *Duration) UnmarshalJSON(b []byte) error {
 	}
 }
 
-type GPUConfig struct {
-	//number of threads in a workgroup
-	GroupSize int `json:"groupSize"`
-	//total number of threads
-	Groups int `json:"groups"`
-	//number of iterations within a thread
-	Count uint32 `json:"count"`
-
-	Disabled bool `json:"disabled"`
-}
-
 //Config holds global config info derived from config.json
 type Config struct {
 	TokenAddress                 string   `json:"zapTokenAddress"`
@@ -100,8 +89,6 @@ var (
 	config *Config
 )
 
-const defaultMaxParallelPSR = 4
-
 const defaultTrackerInterval = 30 * time.Second
 
 const DefaultMaxCheckTimeDelta = 5 * time.Minute
@@ -134,8 +121,6 @@ const TrackerCycle = "TRACKER_CYCLE"
 const GasMultiplier = "GAS_MULTIPLIER"
 
 const GasMax = "GAS_MAX"
-
-const UseGPU = "USE_GPU"
 
 const DBFile = "DB_FILE"
 
@@ -388,11 +373,7 @@ func ParseConfigBytes(data []byte) error {
 
 	RequestDataEnv := os.Getenv(RequestData)
 
-	if RequestDataEnv == "" {
-		if config.RequestData == 0 {
-
-		}
-	} else {
+	if RequestDataEnv != "" {
 		parsedUint, err := strconv.ParseUint(RequestDataEnv, 10, 32)
 		if err != nil {
 			return fmt.Errorf("error in parsing RequestData from os.env: %s", err)
@@ -405,7 +386,6 @@ func ParseConfigBytes(data []byte) error {
 	if RequestTipsEnv == "" {
 		if config.RequestTips == 0 && config.RequestData != 0 {
 			config.RequestTips = 1
-		} else if config.RequestData == 0 {
 		}
 	} else {
 		parsedUint, err := strconv.ParseUint(RequestTipsEnv, 10, 32)
@@ -417,10 +397,7 @@ func ParseConfigBytes(data []byte) error {
 
 	RequestDataIntervalEnv := os.Getenv(RequestDataInterval)
 
-	if RequestDataIntervalEnv == "" {
-		if config.RequestDataInterval == nilDuration {
-		}
-	} else {
+	if RequestDataIntervalEnv != "" {
 		parsedDuration, err := time.ParseDuration(RequestDataIntervalEnv)
 		if err != nil {
 			return fmt.Errorf("error parsing requestDataInterval from os.env: %s", err)

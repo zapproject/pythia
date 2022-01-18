@@ -77,7 +77,7 @@ In the root folder, edit your `config.json` file by adding your publicAddress an
         "gasMax":30,
         "serverWhitelist": [
         ],
-        "useGPU":false,
+        
         "trackers": [
             "balance",
             "disputeStatus",
@@ -104,7 +104,7 @@ In the root folder, edit your `config.json` file by adding your publicAddress an
     "serverWhitelist": [
         "YOUR_PUBLIC_ADDRESS_HERE",
     ],
-    "useGPU":false,
+    
     // ...
 }
 ```
@@ -337,7 +337,7 @@ Here is an example of how your `serverWhitelist` should look like:
         "PUBLIC_ADDRESS_E_HERE",
         "PUBLIC_ADDRESS_F_HERE"
     ],
-    "useGPU":false,
+    
 }
 ```
 

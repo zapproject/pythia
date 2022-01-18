@@ -14,7 +14,6 @@
         "0xdD2FD4581271e230360230F9337D5c0430Bf44C0"
     ],
     "gasMax":30,
-    "useGPU":false,
     "trackers": [
         "balance",
         "disputeStatus",
