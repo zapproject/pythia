@@ -1,17 +1,17 @@
 AFTER GETSTAKEINFO
-TX SENT CLIENT &{c0003a96e0 {c071b90d939a076b 15f87fdb 125ba80} {<nil>} {<nil>} {<nil>}}
-ZapMaster Approved with txn 0x86bca55518c4e5e694d71c9c84dde354ad8fcd27882c4740360184da1d34062a
-&{0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 1 0x8210e0 0 1008171281 <nil> <nil> 4000000 context.Background false}
-TX SENT CLIENT &{c0003a9c80 {c071b90d97b5c7bd 1a14402b 125ba80} {<nil>} {<nil>} {<nil>}}
-Stake depositied with txn 0xe9250c97f5e75005f4a336d525cb3d11d718b55abdae57247ba41ef3efbfbe24
+TX SENT CLIENT &{c0003f16e0 {c071e342d1a93456 1c2e35c3 125baa0} {<nil>} {<nil>} {<nil>}}
+ZapMaster Approved with txn 0x9dda9a78732d298972eb9e8241eb095c1341409fede55107ee27d169e68b1a21
+&{0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 1 0x8210e0 0 1004191125 <nil> <nil> 4000000 context.Background false}
+TX SENT CLIENT &{c0003f1c80 {c071e342d6594726 20de488d 125baa0} {<nil>} {<nil>} {<nil>}}
+Stake depositied with txn 0xb30ae91b1b9eeef7d38dc534696d56263680ba9b52c428e7a85c1d89a88a00be
 [36mINFO[0m[0000] Created Remote data proxy connector for localhost:5001  [36mcomponent[0m=RemoteDB [36mpackage[0m=db
 No GPUs enabled, falling back to CPU mining, using 2 threads
 [36mINFO[0m[0010] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0010] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 using gas multiplier :  1
-Using gas price 1002456763
-TX SENT CLIENT &{c00007b4a0 {c071b910faf0354e 25616c303 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x92afacfa01ffa6942fc4d01b1a2f338792c5a03c928c87222fd37cb4112d450a
+Using gas price 1001440111
+TX SENT CLIENT &{c000412d20 {c071e346343a6095 2565c50a4 125baa0} {<nil>} {<nil>} {<nil>}}
+submitSolution tx sent: 0x3ff77c70677729e10ec414548d068aec728226b63db8fdf3b39a29b807ae39c7
 [36mINFO[0m[0010] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0010] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0025] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
@@ -20,51 +20,51 @@ Total hashrate 0  H/s
 	  0  H/s (50.0%): CPU 1 
 [36mINFO[0m[0025] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 using gas multiplier :  1
-Using gas price 1000494838
-TX SENT CLIENT &{c00007bb60 {c071b914bb1ddaf1 5d4563eab 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xf6ea632bbcf765ab142f01b99c7a361517cc134bb82652af206a90c8cacb3ff3
+Using gas price 1000290067
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Error: VM Exception while processing transaction: reverted with reason string 'Miner is not staked'  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem calling ethClient: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=client [31mpackage[0m=rpc
+TX SENT CLIENT &{c0004133e0 {c071e349f440661a 5d4742c2b 125baa0} {<nil>} {<nil>} {<nil>}}
+[31mERRO[0m[0025] Problem submitting solution: Nonce too low. Expected nonce to be 4 but got 3.  [31mcomponent[0m=SolutionHandler [31mpackage[0m=pow
+Unspecified Request Data  Error  Nonce too low. Expected nonce to be 4 but got 3.
 [36mINFO[0m[0025] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0025] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0040] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0040] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-using gas multiplier :  1
-Using gas price 1000253809
-TX SENT CLIENT &{c0004e01e0 {c071b9187af576bc 9523fb076 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xeedb22913906acf62b54b131ab32fcb44418b93b4aaf37080dad5d70998b4935
-[36mINFO[0m[0040] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0040] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0055] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-Total hashrate 4  H/s
-	  0  H/s ( 9.3%): CPU 0 
-	  3  H/s (90.7%): CPU 1 
-[36mINFO[0m[0055] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-using gas multiplier :  1
-Using gas price 1000044735
-TX SENT CLIENT &{c0004e07e0 {c071b91c3ae3db72 cd03feb27 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x1714be21790db87cdfb7091e6f92644e20118bd6d450033e89edd9e9c11f6739
-[36mINFO[0m[0055] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0055] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0070] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-Total hashrate 39  H/s
-[36mINFO[0m[0070] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-	 35  H/s (88.7%): CPU 0 
-	  4  H/s (11.3%): CPU 1 
-using gas multiplier :  1
-Using gas price 1000022947
-TX SENT CLIENT &{c0003f04e0 {c071b91ffb10d3c3 104e7eb979 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xd3ec8dcaa287bf8932139a4557d9dc6cd57eec2a13d110eba68ee4315f261978
-[36mINFO[0m[0070] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0070] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0085] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0085] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-Total hashrate 184  H/s
-	 72  H/s (38.8%): CPU 0 
-	113  H/s (61.2%): CPU 1 
-using gas multiplier :  1
-Using gas price 1000003101
-TX SENT CLIENT &{c000126cc0 {c071b923bab8d1d2 13cc388d86 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x1aef608212adc1f6b0bbaf2bbc8f9ed6bbde4170cc847121eebf844ae45f81cd
-[36mINFO[0m[0085] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0085] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[31mERRO[0m[0100] Miner is in dispute, cannot continue          [31mcomponent[0m=MiningTasker [31mpackage[0m=pow
-2022/01/18 02:32:45 Miner in dispute
+[31mERRO[0m[0040] Miner is in dispute, cannot continue          [31mcomponent[0m=MiningTasker [31mpackage[0m=pow
+2022/01/18 14:32:06 Miner in dispute

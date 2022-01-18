@@ -1,16 +1,16 @@
 AFTER GETSTAKEINFO
-TX SENT CLIENT &{c0003f1620 {c071b90d87d73bbd ab83320 125ba80} {<nil>} {<nil>} {<nil>}}
-ZapMaster Approved with txn 0x4a3a489e7fd266d0aaac39a541d3e622fb7b0d16b884868096d6e0073fc7be25
-&{0xcd3B766CCDd6AE721141F452C550Ca635964ce71 1 0x8210e0 0 1010672692 <nil> <nil> 4000000 context.Background false}
-TX SENT CLIENT &{c0003f1bc0 {c071b90d8eddf547 11beecaa 125ba80} {<nil>} {<nil>} {<nil>}}
-Stake depositied with txn 0x74a8be508831a2c83e8d8cadb4bea9fbdbe2301b22d0cbc03c55ca92b1a7347a
+TX SENT CLIENT &{c0003b3620 {c071e342b77d36fb 72241d1 125baa0} {<nil>} {<nil>} {<nil>}}
+ZapMaster Approved with txn 0x453110312a68a119d300df6384c33f494acd542d4bbc237fe06a52f50e861a49
+&{0xcd3B766CCDd6AE721141F452C550Ca635964ce71 1 0x8210e0 0 1006256138 <nil> <nil> 4000000 context.Background false}
+TX SENT CLIENT &{c0003b3bc0 {c071e342c84f44bc 138f198c 125baa0} {<nil>} {<nil>} {<nil>}}
+Stake depositied with txn 0x3471594bbd84a1c28554e2c8c82fe9c5d8408ff309e4df843f49e7e014b6eca9
 No GPUs enabled, falling back to CPU mining, using 2 threads
 [36mINFO[0m[0010] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0010] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 using gas multiplier :  1
-Using gas price 1002456763
-TX SENT CLIENT &{c000148900 {c071b91004e6f07c 25b1c2bb5 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xbeb53b7ea7558766c3c3c8052a0c122605f0479d389b37777c0652e4d4a7fac1
+Using gas price 1001440111
+TX SENT CLIENT &{c0003a9140 {c071e34536bfce9a 25aac2edc 125baa0} {<nil>} {<nil>} {<nil>}}
+submitSolution tx sent: 0x98591e0e331e5a4e084cbb4ae1b886e6cb6176d07dd2d02372b49903c11059b3
 [36mINFO[0m[0010] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0010] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0025] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
@@ -19,112 +19,15 @@ Total hashrate 0  H/s
 	  0  H/s (50.0%): CPU 1 
 [36mINFO[0m[0025] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 using gas multiplier :  1
-Using gas price 1000964763
-TX SENT CLIENT &{c000148fc0 {c071b913c43ffb46 5d8870c7c 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xea72ff50418d4f2e7f6154d9bc573d879115bddff1460296c1ce2a1ff3fb7899
+Using gas price 1000565529
+TX SENT CLIENT &{c0003a9800 {c071e348f66f7687 5d86daccc 125baa0} {<nil>} {<nil>} {<nil>}}
+submitSolution tx sent: 0xd7ed84c9f0002e8d68f0d4e30056f98714c7f84ac44721fef04cb7965d7f7fc6
 [36mINFO[0m[0025] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0025] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0040] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-Total hashrate 1  H/s
-	  0  H/s (43.8%): CPU 0 
-	  1  H/s (56.2%): CPU 1 
-[36mINFO[0m[0040] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-using gas multiplier :  1
-Using gas price 1000253809
-TX SENT CLIENT &{c00007b080 {c071b9178495cb18 956eeb253 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x9d6afc6525dc81dc7330beada5f6a0144665b4467bf8533cc27ee2e98f558a84
-[36mINFO[0m[0040] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0040] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0055] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0055] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-using gas multiplier :  1
-Using gas price 1000087214
-TX SENT CLIENT &{c000149e00 {c071b91b445fa53d cd4ca6280 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xff5ce6da8dc8ca82065c3d07784d43ab3d544ffe26ea73d68f19a88420ad7695
-[36mINFO[0m[0055] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0055] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0070] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-Total hashrate 27  H/s
-	 24  H/s (87.5%): CPU 0 
-	  3  H/s (12.5%): CPU 1 
-[36mINFO[0m[0070] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-using gas multiplier :  1
-Using gas price 1000022947
-TX SENT CLIENT &{c0003a65a0 {c071b91f04d283e8 10534f1721 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0xceedc602d7ff72ffb956731dcd6bb0fb7275b8289faaceb5d22b20def354c1c2
-[36mINFO[0m[0070] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0070] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0085] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-Total hashrate 132  H/s
-	116  H/s (87.7%): CPU 0 
-	 16  H/s (12.3%): CPU 1 
-[36mINFO[0m[0085] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-using gas multiplier :  1
-Using gas price 1000006903
-TX SENT CLIENT &{c0003a6780 {c071b922c58cb837 13d21b2172 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x5311ca689eebe059b5d22168c1a4bcd787887bea9b3f4acff3d1800d73d8ab50
-[36mINFO[0m[0085] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
 [36mINFO[0m[0085] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
 [36mINFO[0m[0100] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-Total hashrate 897  H/s
-[36mINFO[0m[0100] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-	885  H/s (98.6%): CPU 0 
-	 12  H/s ( 1.4%): CPU 1 
-using gas multiplier :  1
-Using gas price 1000001394
-TX SENT CLIENT &{c00007a4e0 {c071b92687b39928 175253d861 125ba80} {<nil>} {<nil>} {<nil>}}
-submitSolution tx sent: 0x8c5fed03cb8563f3b82fc12935264c65207a615efcca6ec151f988018d63ee84
-[36mINFO[0m[0100] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
-[36mINFO[0m[0100] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0115] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0130] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0145] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0160] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0175] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0190] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0205] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0220] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[36mINFO[0m[0235] Miner is not in dispute, continuing           [36mcomponent[0m=MiningTasker [36mpackage[0m=pow
-[33mWARN[0m[0250] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0250] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0250] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0251] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0251] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0251] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0251] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0252] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0252] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0252] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0252] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0253] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0253] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0253] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0253] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0254] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0254] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0254] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0254] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0255] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0255] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0255] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0255] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0256] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0256] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0256] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0256] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0257] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0257] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0257] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0257] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0258] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0258] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0258] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0258] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0259] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0259] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0259] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0259] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0260] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[33mWARN[0m[0260] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
-[31mERRO[0m[0260] Timeout expired, not retrying query and passing error up  [31mcomponent[0m=HTTPFetchWithRetries [31mpackage[0m=util
-2022/01/18 02:35:22 Could not retrieve data after retries. Cannot do anything without access to data server: Post "http://localhost:5001": dial tcp 127.0.0.1:5001: connect: connection refused
+[31mERRO[0m[0115] Could not get data from data proxy, cannot continue at all  [31mcomponent[0m=MiningTasker [31mpackage[0m=pow
+2022/01/18 14:33:17 unexpected EOF

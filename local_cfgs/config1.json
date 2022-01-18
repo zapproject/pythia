@@ -24,7 +24,6 @@
         "disputeChecker",
         "tallyVotes"
     ],
-    "indexFolder": "indexes",
     "dbFile": "zapDB",
     "disputeTimeDelta": "600s"
 }
