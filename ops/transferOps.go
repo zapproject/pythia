@@ -76,7 +76,7 @@ func Balance(ctx context.Context, addr common.Address) error {
 	vaultAddress := ctx.Value((zapCommon.VaultAddress)).(common.Address)
 	vault, err := vault.NewVaultCaller(vaultAddress, client)
 	if err != nil {
-		return fmt.Errorf("Error with initialising vault instance to get vault balance: %+v", err)
+		return fmt.Errorf("error with initialising vault instance to get vault balance: %+v", err)
 	}
 
 	ethBalance, err := client.BalanceAt(context.Background(), addr, nil)
@@ -99,7 +99,7 @@ func Balance(ctx context.Context, addr common.Address) error {
 
 	fmt.Printf("Lets \U0001F440 how much \U0001F4B0\U0001F4B0\U0001F4B0 %s has...\n", addr.String())
 	fmt.Printf("%10s BNB\n", util.FormatERC20Balance(ethBalance))
-	fmt.Printf("%10s ZAP\n", util.FormatERC20Balance(zapBalance))
-	fmt.Printf("Vault Balance: %10s\n", util.FormatERC20Balance(vaultBalance))
+	fmt.Printf("%10s ZAP (Wallet)\n", util.FormatERC20Balance(zapBalance))
+	fmt.Printf("%10s Zap (Vault)\n", util.FormatERC20Balance(vaultBalance))
 	return nil
 }
