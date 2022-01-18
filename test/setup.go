@@ -57,7 +57,7 @@ var configJSON0 = `{
         "newCurrentVariables",
         "currentVariables"
     ],
-    "indexFolder": "..",
+    "indexFolder": "../",
     "dbFile": "zapDB"
 }
 `
@@ -85,7 +85,7 @@ var configJSON1 = `{
         "newCurrentVariables",
         "currentVariables"
     ],
-    "indexFolder": "indexes",
+    "indexFolder": "../",
     "dbFile": "zapDB"
 }`
 
@@ -112,7 +112,7 @@ var configJSON2 = `{
         "newCurrentVariables",
         "currentVariables"
     ],
-    "indexFolder": "indexes",
+    "indexFolder": "../",
     "dbFile": "zapDB"
 }`
 
@@ -139,7 +139,7 @@ var configJSON3 = `{
         "newCurrentVariables",
         "currentVariables"
     ],
-    "indexFolder": "indexes",
+    "indexFolder": "../",
     "dbFile": "zapDB"
 }`
 
@@ -166,7 +166,7 @@ var configJSON4 = `{
         "newCurrentVariables",
         "currentVariables"
     ],
-    "indexFolder": "indexes",
+    "indexFolder": "../",
     "dbFile": "zapDB"
 }`
 
@@ -193,14 +193,14 @@ var configJSON5 = `{
         "newCurrentVariables",
         "currentVariables"
     ],
-    "indexFolder": "indexes",
+    "indexFolder": "../",
     "dbFile": "zapDB"
 }`
 
 func setup() {
 	config.ParseConfigBytes([]byte(configJSON))
 
-	util.ParseLoggingConfig("./testConfig.json")
+	util.ParseLoggingConfig("../testConfig.json")
 
 	buildContext()
 }
