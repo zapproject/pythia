@@ -132,7 +132,7 @@ func (mt *MiningTasker) GetWork(input chan *Work) (*Work, bool) {
 		reqIDs[0] = r
 
 		if reqIDs[0].Uint64() == 0 {
-			mt.log.Info("Request ID is zero")
+			mt.log.Debug("Request ID is zero")
 			return nil, false
 		}
 	}

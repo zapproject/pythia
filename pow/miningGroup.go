@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 type HashSettings struct {
@@ -63,6 +64,7 @@ const rateInitialGuess = 100e3
 type MiningGroup struct {
 	Backends    []*Backend
 	LastPrinted time.Time
+	log         *util.Logger
 }
 
 func NewMiningGroup(hashers []Hasher) *MiningGroup {
@@ -145,7 +147,7 @@ func (g *MiningGroup) PrintHashRateSummary() {
 	now := time.Now()
 	delta := now.Sub(g.LastPrinted).Seconds()
 	totalHashrate := float64(totalHashes) / delta
-	fmt.Printf("Total hashrate %s\n", formatHashRate(totalHashrate))
+	g.log.Info("Total hashrate %s\n", formatHashRate(totalHashrate))
 	for _, b := range g.Backends {
 		hashRate := float64(b.HashSincePrint) / delta
 		fmt.Printf("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100, b.Name())
