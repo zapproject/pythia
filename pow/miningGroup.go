@@ -152,7 +152,7 @@ func (g *MiningGroup) PrintHashRateSummary() {
 	g.log.Info("Total hashrate %s\n", formatHashRate(totalHashrate))
 	for _, b := range g.Backends {
 		hashRate := float64(b.HashSincePrint) / delta
-		fmt.Printf("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100, b.Name())
+		g.log.Info("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100, b.Name())
 		b.HashSincePrint = 0
 	}
 	g.LastPrinted = now
