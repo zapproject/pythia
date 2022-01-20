@@ -204,7 +204,7 @@ func (mt *MiningTasker) checkDispute(disp []byte) int {
 			log.Fatal("Miner has requested stake withdraw")
 		}
 	}
-	mt.log.Info("Miner is not in dispute, continuing")
+	mt.log.Debug("Miner is not in dispute, continuing")
 	return statusSuccess
 }
 
