@@ -76,6 +76,8 @@ func NewMiningGroup(hashers []Hasher) *MiningGroup {
 		group.Backends[i] = &Backend{Hasher: hasher, HashRateEstimate: rateInitialGuess}
 	}
 
+	group.log = util.NewLogger("pow", "MiningGroup")
+
 	return group
 }
 
