@@ -100,6 +100,7 @@ func AddDBToCtx(remote bool) error {
 	os.RemoveAll(cfg.DBFile)
 	DB, err := db.Open(cfg.DBFile)
 	if err != nil {
+		fmt.Println("Failing DB open")
 		return err
 	}
 
@@ -107,12 +108,14 @@ func AddDBToCtx(remote bool) error {
 	if remote {
 		proxy, err := db.OpenRemoteDB(DB)
 		if err != nil {
+			fmt.Println("Failing Remote DB open")
 			log.Fatal(err)
 		}
 		dataProxy = proxy
 	} else {
 		proxy, err := db.OpenLocalProxy(DB)
 		if err != nil {
+			fmt.Println("Failing local proxy open")
 			log.Fatal(err)
 		}
 		dataProxy = proxy
