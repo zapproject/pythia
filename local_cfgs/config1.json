@@ -23,6 +23,6 @@
         "disputeChecker",
         "tallyVotes"
     ],
-    "dbFile": "zapDB",
+    "dbFile": "remoteDB/rDB1",
     "disputeTimeDelta": "600s"
 }
