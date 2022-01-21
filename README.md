@@ -4,7 +4,7 @@ This is a miner system that run on POW (Proof-Of-Work) built using Go. It is par
 
 To take part in mining, first configure your account in `config.json` with the deployed mining contracts and your wallet info. You can then stake 500,000 Zap Tokens and immediately start mining.
 
-Pythia CLI is available on Linux/OSX systems and Windows. Although not required, it is recommended for Windows users to utilize WSL2. Please check out *[Prerequisites For Windows](#prerequisites-for-windows)*.
+Pythia CLI is available on Linux/OSX systems and Windows. Please check out *[Prerequisites For Windows](#prerequisites-for-windows)*.
 
 
 ## Get Started
@@ -194,20 +194,6 @@ The commands `dispute` and `mine` are only reserved for staked users and non-sta
 A bash shell must be installed to run shell files/scripts.
 If none are installed, Git bash has a simple [installation] (https://git-scm.com/downloads) process.
 
-**Recommended**
-It is recommended to install WSL2 and to run Pythia in that enviornment.
-Click here and [Install WSL2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10).
-
-*If you already have WSL installed, upgrade to WSL2 by following the instructions near the bottom of that page.*
- 
-Then [install Go through WSL](https://sal.as/post/install-golan-on-wsl/).
-
-Finally using WSL, download OpenCL using the commands below:
-```bash
-sudo apt update
-sudo apt install ocl-icd-opencl-dev
-```
-
 ***
 
 ## BSC Testnet Miner Contract Addresses 
@@ -318,6 +304,26 @@ Here is an example of how your `serverWhitelist` should look like:
         "PUBLIC_ADDRESS_F_HERE"
     ],
     
+}
+```
+
+**For Windows Users**
+For each individual config file you plan on using for the multiple miners, you must specify a unique database path in the `dbFile` property.
+For example, this is what the `dbFile` property should look like for 2 miners:
+`Config1.json`
+```json
+{
+    ...
+    "dbFile": "path-to-unique-database/unique-database1"
+    ...
+}
+```
+`Config2.json`
+```json
+{
+    ...
+    "dbFile": "path-to-unique-database/unique-database2"
+    ...
 }
 ```
 
