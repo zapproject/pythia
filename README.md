@@ -306,10 +306,13 @@ Here is an example of how your `serverWhitelist` should look like:
     
 }
 ```
-
+\
+\
 **For Windows Users**
+\
 For each individual config file you plan on using for the multiple miners, you must specify a unique database path in the `dbFile` property.
-For example, this is what the `dbFile` property should look like for 2 miners:
+\
+For example, this is what the `dbFile` property should look like for 2 miners:\
 `Config1.json`
 ```json
 {
@@ -326,7 +329,7 @@ For example, this is what the `dbFile` property should look like for 2 miners:
     ...
 }
 ```
-
+\
 Now, follow these steps to get your miners running.
 
 1) Go on Client A and build Pythia based on your machine (Windows or Linux/OSX) then run `./pythia dataserver`
@@ -409,14 +412,14 @@ Delve is a debugger for the Go programming language. Follow the steps in this [r
 
 
 ### **Basic Debug Commands**
-[continue](#continue) | Run until breakpoint or program termination.
-[break](#break) | Sets a breakpoint. (EX. ```break tracker/index.go:39``` That will set a breakpoint on line 39 in tracker.index.go file.)
-[breakpoints](#breakpoints) | Print out info for active breakpoints.
-[step](#step) | Single step through program.  
-[stepout](#stepout) | Step out of the current function.  
-[locals](#locals) | Print local variables.  
-[print](#print) | Evaluate an expression.  
-[restart](#restart) | Restart process.  
+[continue](#continue) | Run until breakpoint or program termination.\
+[break](#break) | Sets a breakpoint. (EX. ```break tracker/index.go:39``` That will set a breakpoint on line 39 in tracker.index.go file.)\
+[breakpoints](#breakpoints) | Print out info for active breakpoints.\
+[step](#step) | Single step through program.\
+[stepout](#stepout) | Step out of the current function.\
+[locals](#locals) | Print local variables.\
+[print](#print) | Evaluate an expression.\
+[restart](#restart) | Restart process.\
 
 
 More commands here ```$GOPATH/src/github.com/go-delve/delve/tree/master/Documentation/cli/locspec.md``` or type ```help``` when in debug mode.
