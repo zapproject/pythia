@@ -4,7 +4,7 @@ This is a miner system that run on POW (Proof-Of-Work) built using Go. It is par
 
 To take part in mining, first configure your account in `config.json` with the deployed mining contracts and your wallet info. You can then stake 500,000 Zap Tokens and immediately start mining.
 
-Pythia CLI is available on Linux/OSX systems and also available for Windows through WSL2. Please check out *[Prerequisites For Windows](#prerequisites-for-windows)*.
+Pythia CLI is available on Linux/OSX systems and Windows. Although not required, it is recommended for Windows users to utilize WSL2. Please check out *[Prerequisites For Windows](#prerequisites-for-windows)*.
 
 
 ## Get Started
@@ -77,7 +77,6 @@ In the root folder, edit your `config.json` file by adding your publicAddress an
         "gasMax":30,
         "serverWhitelist": [
         ],
-        
         "trackers": [
             "balance",
             "disputeStatus",
@@ -127,36 +126,8 @@ Running the build command will take a brief moment and once completed, there sho
 **Run the following command**
 
 ```bash
-    ./release_build_win.sh`
+    `./release_build_win.sh`
 ```
-
-**Note**
-When trying to build Pythia on Windows and you get the error below:
-```
-# pkg-config --cflags  -- OpenCL
-Package 'OpenCL' has no Version: field
-pkg-config: exit status 1
-```
-Then follow these steps:
-
-1) run this command to open `/opt/intel/opencl/OpenCL.pc`
-```
-sudo nano /opt/intel/opencl/OpenCL.pc
-```
-
-2) replace the content of the file with this
-```
-prefix=/opt/intel/opencl
-libdir=${prefix}
-includedir=${prefix}/include
-
-Name: OpenCL
-Description: Open Computing Language generic Installable Client Driver loader
-Version: 2.1
-Libs: -L${libdir} -lOpenCL
-Cflags: -I${includedir}
-```
-3) save the file, and then run `release_build_win.sh` 
 
 - #### For Linux OSX: 
 **Run the following command**  
@@ -214,7 +185,17 @@ Besides `mine` and `dataserver` you can also run the following commands based on
 
 ***
 
+**Note**
+The commands `dispute` and `mine` are only reserved for staked users and non-staked users will be errored out.
+
+
 ## Prerequisites for Windows
+**Minimum requirements**
+A bash shell must be installed to run shell files/scripts.
+If none are installed, Git bash has a simple [installation] (https://git-scm.com/downloads) process.
+
+**Recommended**
+It is recommended to install WSL2 and to run Pythia in that enviornment.
 Click here and [Install WSL2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10).
 
 *If you already have WSL installed, upgrade to WSL2 by following the instructions near the bottom of that page.*
@@ -263,8 +244,6 @@ serverWhitelist (required)  - whitelists which publicAddress can access the data
 
 fetchTimeout                - timeout for requesting data from an API
 
-useGPU                      - turn GPU usage on or off (DEFAULT, PLEASE DO NOT UNSET)
-
 requestDataInterval         - min frequency at which to request data at (in seconds, default 30)
 
 gasMultiplier               - Multiplies the submitted gasPrice
@@ -303,7 +282,8 @@ If you wish to use environmental variables instead of config.json for some or al
 ### Running Multiple Miners
 **This setup will allow you to run multiple miners on a single host address.**
 
-The Zap oracle network enables users to have a single data server provide data for multiple miner clients.  
+The Zap oracle network enables users to have a single data server provide data for multiple miner clients. 
+This option is currently only available for Linux, OSx, and Windows with WSL2 users.
 **Clients in this case refers to your Command Window or Terminal.**
 
 Here is an idea of how your setup can look like with this option:
