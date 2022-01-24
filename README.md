@@ -98,13 +98,12 @@ In the root folder, edit your `config.json` file by adding your publicAddress an
 5) Also add your `publicAddress` to the `serverWhitelist` field like this
 ```json
 {
-    // ...
+    ...
     "gasMax":30,
     "serverWhitelist": [
         "YOUR_PUBLIC_ADDRESS_HERE",
     ],
-    
-    // ...
+    ...
 }
 ```
 
@@ -295,6 +294,7 @@ Next, go on Client A's `config.json` and update the `serverWhitelist` field with
 Here is an example of how your `serverWhitelist` should look like:
 ```json
 {
+    ...
     "gasMax":30,
     "serverWhitelist": [
         "PUBLIC_ADDRESS_B_HERE",
@@ -303,7 +303,7 @@ Here is an example of how your `serverWhitelist` should look like:
         "PUBLIC_ADDRESS_E_HERE",
         "PUBLIC_ADDRESS_F_HERE"
     ],
-    
+    ...
 }
 ```
 \
