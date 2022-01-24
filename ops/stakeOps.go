@@ -80,12 +80,17 @@ func Deposit(ctx context.Context) error {
 			util.FormatERC20Balance(stakeAmt))
 	}
 
-	auth, err := PrepareEthTransaction(ctx)
+	// call vault locksmith
+	// instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
+	_, err = PrepareEthTransaction(ctx)
 	if err != nil {
 		return err
 	}
+	// fmt.Printf("Auth: %v\nPublicAddress: %s\nContract Address: %s\n", auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
+	// instanceV.LockSmith(auth, publicAddress, ctx.Value(zapCommon.ContractAddress).(common.Address))
 
 	instance2 := ctx.Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
+	auth, _ := PrepareEthTransaction(ctx)
 	tx, err := token.Approve(auth, contractAddress, stakeAmt)
 	if err != nil {
 		return fmt.Errorf("unable to approve zapMaster: %v", err)

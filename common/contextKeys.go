@@ -14,6 +14,9 @@ var (
 	//Zap Contract Address
 	ContractAddress = util.NewKey("common", "contractAddress")
 
+	// Vault Contract Addres
+	VaultAddress = util.NewKey("common", "vaultAddress")
+
 	//MasterContractContextKey is the shared context key to get shared master zap contract instance
 	MasterContractContextKey = util.NewKey("common", "masterContract")
 

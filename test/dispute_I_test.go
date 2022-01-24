@@ -17,7 +17,6 @@ import (
 	"github.com/zapproject/pythia/ops"
 	"github.com/zapproject/pythia/rpc"
 	token "github.com/zapproject/pythia/token"
-	"github.com/zapproject/pythia/vault"
 )
 
 func TestDispute(t *testing.T) {
@@ -57,20 +56,23 @@ func Vote(t *testing.T) {
 }
 
 func MakeNew(t *testing.T, timestamp *big.Int) {
+	contractAddress := minerCtx[0].Value(zapCommon.ContractAddress).(common.Address)
 	auth, _ := ops.PrepareEthTransaction(minerCtx[0])
 	instance2 := minerCtx[0].Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
-	addr1 := common.HexToAddress("0xb7278a61aa25c888815afc32ad3cc52ff24fe575")
-	addr2 := common.HexToAddress("0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154")
-	amt1 := big.NewInt(1000000000)
-	instance := minerCtx[0].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
-	instance.IncreaseApproval(auth, addr1, amt1)
 
-	auth, _ = ops.PrepareEthTransaction(minerCtx[0])
-	instance.IncreaseApproval(auth, addr2, amt1)
+	zm, _ := minerCtx[0].Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
+	dat := crypto.Keccak256([]byte("disputeFee"))
+	var dat32 [32]byte
+	copy(dat32[:], dat)
+	amt1, _ := zm.GetUintVar(nil, dat32)
+
+	instance := minerCtx[0].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+	instance.IncreaseApproval(auth, contractAddress, amt1)
+
 	// allocate some funds for dispute fee
 	auth, _ = ops.PrepareEthTransaction((minerCtx[5]))
 	instance = minerCtx[5].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
-	instance.Allocate(auth, minerCtx[0].Value(zapCommon.PublicAddress).(common.Address), big.NewInt(1000000000))
+	instance.Allocate(auth, minerCtx[0].Value(zapCommon.PublicAddress).(common.Address), amt1)
 
 	auth, _ = ops.PrepareEthTransaction(minerCtx[0])
 	// dispute miner 5 as miner 1
@@ -93,7 +95,7 @@ func Show() int {
 	contractAddress := ctx.Value(zapCommon.ContractAddress).(common.Address)
 	client := ctx.Value(zapCommon.ClientContextKey).(rpc.ETHClient)
 	header, _ := client.HeaderByNumber(ctx, nil)
-	startBlock := big.NewInt(54) //big.NewInt(10e3 * 14)
+	startBlock := big.NewInt(9) //big.NewInt(10e3 * 14)
 	startBlock.Sub(header.Number, startBlock)
 	newDisputeID := tokenAbi.Events["NewDispute"].ID
 	query := ethereum.FilterQuery{
@@ -121,19 +123,31 @@ func StartMiners(t *testing.T) *big.Int {
 	instanceT := minerCtx[5].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
 	instanceT.Allocate(auth, minerCtx[5].Value(zapCommon.ContractAddress).(common.Address), big.NewInt(100000000000))
 
+	// allocate miner rewards funds to ZM
+	auth, _ = ops.PrepareEthTransaction(minerCtx[5])
+	zmFunds := new(big.Int)
+	zmFunds.SetString("10000000000000000000000000", 10)
+	instanceT.Allocate(auth, minerCtx[5].Value(zapCommon.ContractAddress).(common.Address), zmFunds)
+
 	// deposit stake for each miner
 	for i := 0; i < 5; i++ {
-		auth, _ = ops.PrepareEthTransaction((minerCtx[i]))
-		instancet = minerCtx[i].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
-		instancet.IncreaseApproval(auth, minerCtx[i].Value(zapCommon.ContractAddress).(common.Address), big.NewInt(100000000000))
+		allocateAmt := new(big.Int)
+		allocateAmt.SetString("500000000000000000000000", 10)
+		auth, _ = ops.PrepareEthTransaction(minerCtx[5])
+		instanceT = minerCtx[5].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+		instanceT.Allocate(auth, minerCtx[i].Value(zapCommon.PublicAddress).(common.Address), allocateAmt)
 
 		auth, _ = ops.PrepareEthTransaction((minerCtx[i]))
-		instanceV := minerCtx[i].Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
-		instanceV.LockSmith(auth, minerCtx[i].Value(zapCommon.PublicAddress).(common.Address), minerCtx[i].Value(zapCommon.ContractAddress).(common.Address))
+		instancet = minerCtx[i].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+		instancet.IncreaseApproval(auth, minerCtx[i].Value(zapCommon.ContractAddress).(common.Address), allocateAmt)
 
 		auth, _ = ops.PrepareEthTransaction((minerCtx[i]))
 		instanceZ := minerCtx[i].Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
 		instanceZ.DepositStake(auth)
+
+		zm, _ := minerCtx[i].Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
+		stakeStatus, _, _ := zm.GetStakerInfo(nil, minerCtx[i].Value(zapCommon.PublicAddress).(common.Address))
+		assert.Equal(t, stakeStatus, big.NewInt(1))
 	}
 
 	// requestData with tip
@@ -144,8 +158,8 @@ func StartMiners(t *testing.T) *big.Int {
 		new(big.Int).SetInt64(10000), new(big.Int).SetInt64(1))
 
 	// allocate 10000 zap for ZapMaster contract (bug - normally ZapMaster has 6000 zap initially)
-	auth, _ = ops.PrepareEthTransaction(minerCtx[5])
-	instance1.UpdateBalanceAtNow(auth, addr1, big.NewInt(10000000))
+	// auth, _ = ops.PrepareEthTransaction(minerCtx[5])
+	// instance1.UpdateBalanceAtNow(auth, addr1, big.NewInt(10000000))
 
 	instance := minerCtx[5].Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
 	// check challenge

@@ -67,7 +67,6 @@ func PrepareEthTransaction(ctx context.Context) (*bind.TransactOpts, error) {
 
 //Exec implementation for tracker
 func (b *CurrentVariablesTracker) Exec(ctx context.Context) error {
-
 	//cast client using type assertion since context holds generic interface{}
 	DB := ctx.Value(zapCommon.DBContextKey).(db.DB)
 

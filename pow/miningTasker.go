@@ -77,7 +77,7 @@ func (mt *MiningTasker) GetWork(input chan *Work) (*Work, bool) {
 		log.Fatal(err)
 	}
 
-	mt.log.Debug("Received data: %v", m)
+	mt.log.Debug("Received data: %v", m[dispKey])
 
 	if stat := mt.checkDispute(m[dispKey]); stat == statusWaitNext {
 		return nil, false
@@ -132,7 +132,7 @@ func (mt *MiningTasker) GetWork(input chan *Work) (*Work, bool) {
 		reqIDs[0] = r
 
 		if reqIDs[0].Uint64() == 0 {
-			mt.log.Info("Request ID is zero")
+			mt.log.Debug("Request ID is zero")
 			return nil, false
 		}
 	}
@@ -193,11 +193,18 @@ func (mt *MiningTasker) checkDispute(disp []byte) int {
 	}
 
 	if disputed.Cmp(big.NewInt(1)) != 0 {
-		mt.log.Error("Miner is in dispute, cannot continue")
-		log.Fatal("Miner in dispute")
-		return statusFailure //never gets here but just for completeness
+		if disputed.Cmp(big.NewInt(3)) == 0 {
+			mt.log.Error("Miner is in dispute, cannot continue")
+			log.Fatal("Miner in dispute")
+		} else if disputed.Cmp(big.NewInt(0)) == 0 {
+			mt.log.Error("Miner is not staked, cannot continue")
+			log.Fatal("Miner not staked")
+		} else {
+			mt.log.Error("Miner requested stake withdrawal, cannot continue")
+			log.Fatal("Miner has requested stake withdraw")
+		}
 	}
-	mt.log.Info("Miner is not in dispute, continuing")
+	mt.log.Debug("Miner is not in dispute, continuing")
 	return statusSuccess
 }
 

@@ -97,7 +97,6 @@ func showConfig(w webview.WebView) {
 		config.SetServerPort(5001)
 		config.SetGasMultiplier(1)
 		config.SetGasMax(30)
-		config.SetUseGPU(false)
 		config.SetIndexFolder("indexes")
 		config.SetDBFile("zapDB")
 		config.SetDisputeTimeDelta(600)

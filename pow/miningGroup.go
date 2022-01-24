@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/zapproject/pythia/config"
+	"github.com/zapproject/pythia/util"
 )
 
 type HashSettings struct {
@@ -63,6 +64,7 @@ const rateInitialGuess = 100e3
 type MiningGroup struct {
 	Backends    []*Backend
 	LastPrinted time.Time
+	log         *util.Logger
 }
 
 func NewMiningGroup(hashers []Hasher) *MiningGroup {
@@ -73,6 +75,8 @@ func NewMiningGroup(hashers []Hasher) *MiningGroup {
 		//start with a small estimate for hash rate, much faster to increase the gusses rather than decrease
 		group.Backends[i] = &Backend{Hasher: hasher, HashRateEstimate: rateInitialGuess}
 	}
+
+	group.log = util.NewLogger("pow", "MiningGroup")
 
 	return group
 }
@@ -145,10 +149,10 @@ func (g *MiningGroup) PrintHashRateSummary() {
 	now := time.Now()
 	delta := now.Sub(g.LastPrinted).Seconds()
 	totalHashrate := float64(totalHashes) / delta
-	fmt.Printf("Total hashrate %s\n", formatHashRate(totalHashrate))
+	g.log.Info("Total hashrate %s\n", formatHashRate(totalHashrate))
 	for _, b := range g.Backends {
 		hashRate := float64(b.HashSincePrint) / delta
-		fmt.Printf("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100, b.Name())
+		g.log.Info("\t%8s (%4.1f%%): %s \n", formatHashRate(hashRate), (hashRate/totalHashrate)*100, b.Name())
 		b.HashSincePrint = 0
 	}
 	g.LastPrinted = now

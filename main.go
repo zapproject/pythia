@@ -31,7 +31,6 @@ import (
 	// "github.com/zapproject/pythia/util"
 	"github.com/zapproject/pythia/vault"
 	"github.com/zapproject/pythia/webview"
-
 )
 
 var ctx context.Context
@@ -65,6 +64,7 @@ func buildContext() error {
 
 		ctx = context.WithValue(context.Background(), ZapCommon.ClientContextKey, client)
 		ctx = context.WithValue(ctx, ZapCommon.ContractAddress, contractAddress)
+		ctx = context.WithValue(ctx, ZapCommon.VaultAddress, vaultAddress)
 		ctx = context.WithValue(ctx, ZapCommon.MasterContractContextKey, masterInstance)
 		ctx = context.WithValue(ctx, ZapCommon.TransactorContractContextKey, transactorInstance)
 		ctx = context.WithValue(ctx, ZapCommon.TokenTransactorContractContextKey, tokenInstance)
@@ -104,6 +104,7 @@ func AddDBToCtx(remote bool) error {
 	os.RemoveAll(cfg.DBFile)
 	DB, err := db.Open(cfg.DBFile)
 	if err != nil {
+		fmt.Println("Failing DB open")
 		return err
 	}
 
@@ -111,12 +112,14 @@ func AddDBToCtx(remote bool) error {
 	if remote {
 		proxy, err := db.OpenRemoteDB(DB)
 		if err != nil {
+			fmt.Println("Failing Remote DB open")
 			log.Fatal(err)
 		}
 		dataProxy = proxy
 	} else {
 		proxy, err := db.OpenLocalProxy(DB)
 		if err != nil {
+			fmt.Println("Failing local proxy open")
 			log.Fatal(err)
 		}
 		dataProxy = proxy
@@ -384,7 +387,6 @@ func main() {
 	// if err != nil {
 	// 	fmt.Fprintf(os.Stderr, "\U0001F6AB app.Run failed: %v\n", err)
 	// }
-
 
 	webview.LoadWebview()
 
