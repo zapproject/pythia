@@ -4,7 +4,7 @@ This is a miner system that run on POW (Proof-Of-Work) built using Go. It is par
 
 To take part in mining, first configure your account in `config.json` with the deployed mining contracts and your wallet info. You can then stake 500,000 Zap Tokens and immediately start mining.
 
-Pythia CLI is available on Linux/OSX systems and Windows. Please check out *[Prerequisites For Windows](#prerequisites-for-windows)*. 
+Pythia CLI is available on Linux/OSX systems and Windows. Please check out *[Prerequisites For Windows](#prerequisites-for-windows)*.
 
 
 ## Get Started
