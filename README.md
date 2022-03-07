@@ -63,7 +63,7 @@ In the root folder, edit your `config.json` file by adding your publicAddress an
 ```json
     {
         "zapTokenAddress": "0x09d8af358636d9bcc9a3e177b66eb30381a4b1a8",
-        "contractAddress": "",
+        "contractAddress": " ",
         "vaultAddress": "",
         "nodeURL": "https://data-seed-prebsc-1-s2.binance.org:8545",
         "publicAddress": "",
