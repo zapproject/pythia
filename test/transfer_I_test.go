@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"math/big"
 	"testing"
 
@@ -13,16 +14,30 @@ import (
 )
 
 func TestTransfer(t *testing.T) {
-	setup()
-	auth, _ := ops.PrepareEthTransaction(ctx)
-	addr1 := common.HexToAddress("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")
+	setupMiners()
+	setupOwner()
+
+	addr1 := minerCtx[1].Value(zapCommon.PublicAddress).(common.Address)
 	amt1 := big.NewInt(1000)
 
-	master := ctx.Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
+	// allocate 1000 zap to owner
+	auth, _ := ops.PrepareEthTransaction(minerCtx[5])
+	instance := minerCtx[5].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+	instance.Allocate(auth, minerCtx[0].Value(zapCommon.PublicAddress).(common.Address), amt1)
+
+	// recipient previous balance
+	master := minerCtx[1].Value(zapCommon.MasterContractContextKey).(*zap.ZapMaster)
 	prevBalance, _ := master.BalanceOf(nil, addr1)
-	instance := ctx.Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
+	fmt.Println(prevBalance)
+
+	// transfer to recipient
+	auth, _ = ops.PrepareEthTransaction(minerCtx[0])
+	instance = minerCtx[0].Value(zapCommon.TokenTransactorContractContextKey).(*token.ZapTokenBSCTransactor)
 	instance.Transfer(auth, addr1, amt1)
+
+	// recipient new balance
 	newBalance, _ := master.BalanceOf(nil, addr1)
+	fmt.Println(newBalance)
 
 	assert.Equal(t, prevBalance.Add(prevBalance, amt1), newBalance, "Transfer was not successful")
 }
