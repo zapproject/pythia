@@ -1,0 +1,89 @@
+[36mINFO[0m[0000] Created Remote data proxy connector for localhost:5001  [36mcomponent[0m=RemoteDB [36mpackage[0m=db
+Using 2 threads
+[36mINFO[0m[0010] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1002456763
+[36mINFO[0m[0010] Sending txn on-chain: &{0xc0003eede0 {13867390043337804352 10346456501 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0xdca86dc1342ed52e9e1086662a845c49920388ffacbec84cf2ffb9a87c7ba5c2
+[36mINFO[0m[0010] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0025] Total hashrate 0  H/s                         [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0025] 	  0  H/s (50.0%): CPU 0                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0025] 	  0  H/s (50.0%): CPU 1                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0025] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000964763
+[36mINFO[0m[0025] Sending txn on-chain: &{0xc00009dda0 {13867390059162868312 25065393101 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0x71c7b4746f8c336b811b88f919c3d3172ad926c2c1e12805458748c23f78ac02
+[36mINFO[0m[0025] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0040] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000290067
+[36mINFO[0m[0040] Sending txn on-chain: &{0xc0001b51a0 {13867390075258054872 40054452301 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0x94ad7426aadc212f4dd1451c75dc06a57096b8e7f338185b4f15ee9952f53c7a
+[36mINFO[0m[0040] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0055] Total hashrate 1  H/s                         [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0055] 	  0  H/s (10.0%): CPU 0                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0055] 	  1  H/s (90.0%): CPU 1                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0055] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000113910
+[36mINFO[0m[0055] Sending txn on-chain: &{0xc0003efaa0 {13867390091361720132 55051990201 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0xf8b3839f2115e40256ed60c21b99fe91d28f3f671f4ad7105995312aa822d834
+[36mINFO[0m[0055] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0070] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000026225
+[36mINFO[0m[0070] Sending txn on-chain: &{0xc00028aa80 {13867390107467759592 70051902301 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0xe69a27b12bd1b6e2e395718c2539bb977853a8245093f7f2b8382f4da1e977cd
+[36mINFO[0m[0070] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0085] Total hashrate 13  H/s                        [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0085] 	  5  H/s (43.0%): CPU 0                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0085] 	  7  H/s (57.0%): CPU 1                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0085] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000010301
+[36mINFO[0m[0085] Sending txn on-chain: &{0xc00028a540 {13867390123574889552 85052904901 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0xef2c62b3d37f7c2d619ec764ef655c80e50be2f003d1cc10316439d2e75b6714
+[36mINFO[0m[0085] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0100] Total hashrate 315  H/s                       [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0100] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0100] 	314  H/s (99.7%): CPU 0                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0100] 	  1  H/s ( 0.3%): CPU 1                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000002714
+[36mINFO[0m[0100] Sending txn on-chain: &{0xc0003eea80 {13867390139687006612 100058894601 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0xba0dfee29330698a289027693fa04bd4bfcfbc5f71c0c40fcd1e345a321b6f03
+[36mINFO[0m[0100] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0127] Total hashrate 262  H/s                       [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0127] 	  0  H/s ( 0.0%): CPU 0                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0127] 	262  H/s (100.0%): CPU 1                     [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0127] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000001068
+[36mINFO[0m[0127] Sending txn on-chain: &{0xc00009cde0 {13867390168772784760 127153643501 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0x8bf591b51d14c638259dffdce5e45359283d22cdd4d44486027020832eac941d
+[36mINFO[0m[0127] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0130] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000001068
+[36mINFO[0m[0130] Sending txn on-chain: &{0xc00028a900 {13867390171952881732 130112515001 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0xafdc7ed2758ddf99e245de92c21788c5d760f424d0f9f1580f71f512df70a974
+[36mINFO[0m[0130] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[36mINFO[0m[0145] Total hashrate 8152  H/s                      [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0145] 	4971  H/s (61.0%): CPU 0                     [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0145] 	3181  H/s (39.0%): CPU 1                     [36mcomponent[0m=MiningGroup [36mpackage[0m=pow
+[36mINFO[0m[0145] Getting pending txn and value from data server...  [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+using gas multiplier :  1
+Using gas price 1000000148
+[36mINFO[0m[0145] Sending txn on-chain: &{0xc0003ef980 {13867390188024699292 145078205201 0x11fecc0} {<nil>} {<nil>} {<nil>}}  [36mcomponent[0m=client [36mpackage[0m=rpc
+submitSolution tx sent: 0x1592a32b2a20c11d43b5b0512fc7501914eb9173a6509a51771db83036542ddb
+[36mINFO[0m[0145] Successfully submitted solution               [36mcomponent[0m=SolutionHandler [36mpackage[0m=pow
+[33mWARN[0m[0762] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it.  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0762] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0765] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it.  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0765] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0768] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it.  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0768] Trying fetch again...                         [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[33mWARN[0m[0770] Problem fetching data from: http://localhost:5001. Post "http://localhost:5001": dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it.  [33mcomponent[0m=HTTPFetchWithRetries [33mpackage[0m=util
+[31mERRO[0m[0770] Timeout expired, not retrying query and passing error up  [31mcomponent[0m=HTTPFetchWithRetries [31mpackage[0m=util
+2022/01/21 13:59:27 Could not retrieve data after retries. Cannot do anything without access to data server: Post "http://localhost:5001": dial tcp [::1]:5001: connectex: No connection could be made because the target machine actively refused it.

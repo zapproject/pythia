@@ -62,7 +62,7 @@ func Deposit(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to get stake status: %s", err.Error())
 	}
-	fmt.Println("AFTER GETSTAKEINFO")
+
 	if status.Uint64() != 0 && status.Uint64() != 2 {
 		printStakeStatus(status, startTime)
 		return nil

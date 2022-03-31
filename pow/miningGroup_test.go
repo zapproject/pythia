@@ -89,21 +89,6 @@ func TestCpuMiner(t *testing.T) {
 	DoCompleteMiningLoop(t, impl, 100)
 }
 
-func TestGpuMiner(t *testing.T) {
-	gpus, err := GetOpenCLGPUs()
-	if err != nil {
-		fmt.Println(gpus)
-		t.Fatal(err)
-	}
-	cfg := config.GetConfig()
-
-	impl, err := NewGpuMiner(gpus[0], cfg.GPUConfig[gpus[0].Name()], false)
-	if err != nil {
-		t.Fatal(err)
-	}
-	DoCompleteMiningLoop(t, impl, 1000)
-}
-
 func TestMulti(t *testing.T) {
 	if testing.Short() {
 		t.Skip()
@@ -114,18 +99,7 @@ func TestMulti(t *testing.T) {
 	for i := 0; i < 4; i++ {
 		hashers = append(hashers, NewCpuMiner(int64(i)))
 	}
-	gpus, err := GetOpenCLGPUs()
-	if err != nil {
-		fmt.Println(gpus)
-		t.Fatal(err)
-	}
-	for _, gpu := range gpus {
-		impl, err := NewGpuMiner(gpu, cfg.GPUConfig[gpu.Name()], true)
-		if err != nil {
-			t.Fatal(err)
-		}
-		hashers = append(hashers, impl)
-	}
+
 	fmt.Printf("Using %d hashers\n", len(hashers))
 
 	group := NewMiningGroup(hashers)

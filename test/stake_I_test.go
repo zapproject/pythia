@@ -1,6 +1,9 @@
 package test
 
+// withdraw test fails because of time lock
+
 import (
+	"fmt"
 	"math/big"
 	"testing"
 
@@ -13,18 +16,18 @@ import (
 	zap1 "github.com/zapproject/pythia/contracts1"
 	"github.com/zapproject/pythia/ops"
 	"github.com/zapproject/pythia/token"
-	"github.com/zapproject/pythia/vault"
 )
 
 func TestStake(t *testing.T) {
 	setup()
 	setupOwner()
 
-	RequestWithdraw(t)
-	Withdraw(t)
-	Deposit(t)
+	// lines 25*26 and lines 28&29 depend on whether the test file is ran or the package test is ran
 	// RequestWithdraw(t)
 	// Withdraw(t)
+	Deposit(t)
+	RequestWithdraw(t)
+	Withdraw(t)
 }
 
 func Deposit(t *testing.T) {
@@ -47,16 +50,11 @@ func Deposit(t *testing.T) {
 	stakeAmt, _ := tmaster.GetUintVar(nil, dat32)
 	assert.Greater(t, balance.Cmp(stakeAmt), 0, "Account 0 does not have enough Zap to stake")
 
-	// call vault locksmith
-	instanceV := ctx.Value(zapCommon.VaultTransactorContractContextKey).(*vault.VaultTransactor)
-	auth, _ = ops.PrepareEthTransaction(ctx)
-	// instanceV.LockSmith(auth, publicAddress, common.HexToAddress(cfg.ContractAddress))
-
 	// approve zap master for stake amount
 	auth, _ = ops.PrepareEthTransaction(ctx)
 	instanceT.IncreaseApproval(auth, common.HexToAddress(cfg.ContractAddress), stakeAmt)
 
-	// deposit stake
+	// deposit stakePrepareEthTransaction
 	instance2 := ctx.Value(zapCommon.TransactorContractContextKey).(*zap1.ZapTransactor)
 	auth, _ = ops.PrepareEthTransaction(ctx)
 	instance2.DepositStake(auth)
@@ -76,6 +74,7 @@ func Withdraw(t *testing.T) {
 	assert.Equal(t, big.NewInt(2).Uint64(), status.Uint64(), "Staker has not requested for withdrawal - status should be 2")
 
 	balance, _ := tmaster.BalanceOf(nil, publicAddress)
+	fmt.Println("Before withdraw balance: ", balance)
 
 	// withdraw stake
 	auth, _ := ops.PrepareEthTransaction(ctx)
@@ -91,9 +90,8 @@ func Withdraw(t *testing.T) {
 	copy(dat32[:], dat)
 	stakeAmt, _ := tmaster.GetUintVar(nil, dat32)
 
-	balance = balance.Sub(balance, stakeAmt)
-	balance = balance.Add(balance, big.NewInt(5))
-	assert.Equal(t, newBalance, balance.Add(balance, big.NewInt(1000000)), "Stake amount was not transfered from vault to user")
+	balance = balance.Add(balance, stakeAmt)
+	assert.Equal(t, newBalance, balance, "Stake amount was not transfered from vault to user")
 }
 
 func RequestWithdraw(t *testing.T) {
